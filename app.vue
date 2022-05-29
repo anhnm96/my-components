@@ -11,34 +11,34 @@ function click() {
 <template>
   <div>
     <h1 class="text-red-400">Hello world</h1>
-    <BaseBButton
+    <BaseButton
       class="px-2 py-1 text-white bg-purple-600 rounded"
       loading
       @click="click"
     >
       Button
-    </BaseBButton>
-    <BaseBButton
+    </BaseButton>
+    <BaseButton
       class="px-2 py-1 text-white bg-purple-600 rounded"
       disabled
       @click="click"
     >
       Disabled
-    </BaseBButton>
-    <BaseBButton
+    </BaseButton>
+    <BaseButton
       class="px-2 py-1 text-white bg-purple-600 rounded"
       aria-disabled="true"
       @click="click"
     >
       aira-disabled
-    </BaseBButton>
-    <BaseBButton
+    </BaseButton>
+    <BaseButton
       class="px-2 py-1 text-white bg-purple-600 rounded"
       @click="click"
     >
       Normal
-    </BaseBButton>
-    <BaseBButton
+    </BaseButton>
+    <BaseButton
       class="items-center justify-between px-2 py-1 text-white bg-purple-600 rounded"
       :loading="loading"
       @click="click"
@@ -50,6 +50,6 @@ function click() {
           d="M10 20v-6h4v6h5v-8h3L12 3L2 12h3v8h5Z"
         ></path>
       </svg>
-    </BaseBButton>
+    </BaseButton>
   </div>
 </template>
