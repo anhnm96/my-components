@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import Spinner from './Spinner.vue'
+import Spinner from '../Spinner.vue'
 
 const props = withDefaults(
   defineProps<{
