@@ -1,7 +1,55 @@
 <script lang="ts" setup>
-// const props = defineProps()
+import Spinner from './Spinner.vue'
+
+const props = withDefaults(
+  defineProps<{
+    loading?: boolean
+    loadingMsg?: string
+  }>(),
+  {
+    loading: false,
+  }
+)
+const emit = defineEmits<{
+  (e: 'click', ev: MouseEvent): void
+}>()
+
+const btnRef = ref<HTMLButtonElement>()
+function click(event: MouseEvent) {
+  const isBtnDisabled = btnRef.value?.getAttribute('aria-disabled') === 'true'
+  if (isBtnDisabled || props.loading) {
+    return
+  }
+  emit('click', event)
+}
 </script>
 
 <template>
-  <div>Test</div>
+  <button
+    ref="btnRef"
+    :class="[loading && '!pointer-events-none !text-transparent']"
+    @click="click"
+  >
+    <slot />
+    <div
+      v-if="loading"
+      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+    >
+      <span v-if="loadingMsg" class="sr-only" aria-live="assertive">
+        {{ loadingMsg }}
+      </span>
+      <Spinner />
+    </div>
+  </button>
 </template>
+
+<style scoped>
+button {
+  @apply relative inline-flex;
+}
+
+button:disabled,
+button[aria-disabled='true'] {
+  @apply opacity-70 cursor-not-allowed;
+}
+</style>
