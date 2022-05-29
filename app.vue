@@ -12,34 +12,34 @@ function click() {
   <div>
     <h1 class="text-red-400">Hello world</h1>
     <BaseBButton
-      class="bg-purple-600 text-white px-2 py-1 rounded"
+      class="px-2 py-1 text-white bg-purple-600 rounded"
       loading
       @click="click"
     >
       Button
     </BaseBButton>
     <BaseBButton
-      class="bg-purple-600 text-white px-2 py-1 rounded"
+      class="px-2 py-1 text-white bg-purple-600 rounded"
       disabled
       @click="click"
     >
       Disabled
     </BaseBButton>
     <BaseBButton
-      class="bg-purple-600 text-white px-2 py-1 rounded"
+      class="px-2 py-1 text-white bg-purple-600 rounded"
       aria-disabled="true"
       @click="click"
     >
       aira-disabled
     </BaseBButton>
     <BaseBButton
-      class="bg-purple-600 text-white px-2 py-1 rounded"
+      class="px-2 py-1 text-white bg-purple-600 rounded"
       @click="click"
     >
       Normal
     </BaseBButton>
     <BaseBButton
-      class="bg-purple-600 text-white px-2 py-1 rounded justify-between items-center"
+      class="items-center justify-between px-2 py-1 text-white bg-purple-600 rounded"
       :loading="loading"
       @click="click"
     >
