@@ -27,6 +27,7 @@ function click(event: MouseEvent) {
 <template>
   <button
     ref="btnRef"
+    class="btn"
     :class="[loading && '!pointer-events-none !text-transparent']"
     @click="click"
   >
@@ -45,7 +46,7 @@ function click(event: MouseEvent) {
 
 <style scoped>
 button {
-  @apply relative inline-flex;
+  @apply relative;
 }
 
 button:disabled,

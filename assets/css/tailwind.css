@@ -1,3 +1,68 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --info: #1890ff;
+  --success: #52c41a;
+  --warning: #faad14;
+  --error: #ff4d4f;
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex shadow-sm items-center select-none border border-transparent focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-indigo-500 text-white transition;
+    /* default btn */
+    & {
+      @apply px-4 py-2 text-sm rounded-md bg-neutral-500;
+    }
+    &-sm {
+      @apply px-3 py-2 text-sm leading-4 rounded-sm;
+    }
+    &-lg {
+      @apply px-4 py-2 text-base rounded-md;
+    }
+    &-xl {
+      @apply px-6 py-3 text-base rounded-md;
+    }
+     /* btn variants */
+    &-ghost {
+      @apply bg-transparent text-neutral-500 shadow-none focus:ring-current;
+      &:hover,
+      &.btn-active {
+        @apply bg-neutral-500 bg-opacity-20;
+      }
+    }
+
+    &-link {
+      @apply bg-transparent text-indigo-500 hover:underline shadow-none;
+    }
+
+    &-outline {
+      @apply border-current bg-transparent text-neutral-400 focus:ring-current;
+      &:hover {
+        @apply border-neutral-400 bg-neutral-400 text-white;
+      }
+      /* &.btn-primary {
+        @apply text-primary;
+        &:hover {
+          @apply border-primary bg-primary text-white;
+        }
+      } */
+      &.btn-info {
+        @apply text-info;
+        &:hover {
+          @apply border-info bg-info text-white;
+        }
+      }
+
+      &.btn-success {
+        @apply text-success;
+        &:hover {
+          @apply border-success bg-success text-white;
+        }
+      }
+    }
+
+  }
+}
