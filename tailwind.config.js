@@ -33,6 +33,7 @@ module.exports = {
         success: 'var(--success)',
         warning: 'var(--warning)',
         danger: 'var(--danger)',
+        primary: 'var(--primary)',
       },
     },
   },

@@ -7,6 +7,11 @@
   --success: #52c41a;
   --warning: #faad14;
   --error: #ff4d4f;
+  --primary: #3A21BA;
+}
+
+[data-theme="light"] {
+  --primary: #FDFCFF;
 }
 
 @layer components {
@@ -43,12 +48,14 @@
       &:hover {
         @apply border-neutral-400 bg-neutral-400 text-white;
       }
-      /* &.btn-primary {
+
+      &.btn-primary {
         @apply text-primary;
         &:hover {
           @apply border-primary bg-primary text-white;
         }
-      } */
+      }
+      
       &.btn-info {
         @apply text-info;
         &:hover {
@@ -64,5 +71,48 @@
       }
     }
 
+  }
+
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+
+    & {
+      @apply bg-gray-100 text-gray-800;
+      & > button {
+        @apply text-gray-400 hover:bg-gray-200 hover:text-gray-500 focus:outline-none focus:bg-gray-500 focus:text-white
+      }
+    }
+
+    &-info {
+      @apply bg-blue-100 text-blue-800;
+      & > button {
+        @apply text-blue-400 hover:bg-blue-200 hover:text-blue-500 focus:outline-none focus:bg-blue-500 focus:text-white
+      }
+    }
+
+    &-success {
+      @apply bg-green-100 text-green-800;
+      & > button {
+        @apply text-green-400 hover:bg-green-200 hover:text-green-500 focus:outline-none focus:bg-green-500 focus:text-white
+      }
+    }
+
+    &-warning {
+      @apply bg-yellow-100 text-yellow-800;
+      & > button {
+        @apply text-yellow-400 hover:bg-yellow-200 hover:text-yellow-500 focus:outline-none focus:bg-yellow-500 focus:text-white
+      }
+    }
+
+    &-error {
+      @apply bg-red-100 text-red-800;
+      & > button {
+        @apply text-red-400 hover:bg-red-200 hover:text-red-500 focus:outline-none focus:bg-red-500 focus:text-white
+      }
+    }
+
+    &-icon {
+      @apply pl-2 pr-0.5
+    }
   }
 }

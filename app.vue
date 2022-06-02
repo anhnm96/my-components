@@ -62,6 +62,9 @@ function click() {
       <button class="btn btn-outline btn-info">Test</button>
       <button class="btn btn-outline btn-success">Test</button>
       <button class="btn btn-ghost">Ghost</button>
+      <BaseBadge>Badge</BaseBadge>
+      <BaseBadge icon>Badge</BaseBadge>
+      <BaseBadge class="badge-success" icon>Badge</BaseBadge>
     </div>
   </div>
 </template>
