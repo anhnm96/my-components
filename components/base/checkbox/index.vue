@@ -3,7 +3,6 @@ const props = withDefaults(
   defineProps<{
     rootClasses?: string
     modelValue?: string | number | boolean | any[]
-    nativeValue?: string | number | boolean | any[]
   }>(),
   {
     modelValue: false,
@@ -56,7 +55,6 @@ export default {
       ref="inputRef"
       v-model="computedValue"
       type="checkbox"
-      :value="nativeValue"
       @click.stop
     />
     <slot />
