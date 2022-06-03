@@ -79,14 +79,19 @@ const checkboxGroup = ref(['Silver'])
         {{ c2 }}
       </BaseCheckbox>
       <div>
-        <BaseCheckbox v-model="checkboxGroup" native-value="Silver">
+        <BaseCheckbox v-model="checkboxGroup" value="Silver">
           Silver
         </BaseCheckbox>
-        <BaseCheckbox v-model="checkboxGroup" native-value="Flint">
+        <BaseCheckbox v-model="checkboxGroup" value="Flint">
           Flint
         </BaseCheckbox>
         {{ checkboxGroup }}
       </div>
+    </div>
+    <div>
+      <label><input type="radio" name="e" /> First</label>
+      <label><input type="radio" name="e" /> Second</label>
+      <label><input type="radio" name="e" disabled /> Disabled</label>
     </div>
   </div>
 </template>
