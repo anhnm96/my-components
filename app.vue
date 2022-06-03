@@ -6,6 +6,10 @@ function click() {
     loading.value = false
   }, 1000)
 }
+
+const c1 = ref(false)
+const c2 = ref('Yes')
+const checkboxGroup = ref(['Silver'])
 </script>
 
 <template>
@@ -65,6 +69,24 @@ function click() {
       <BaseBadge>Badge</BaseBadge>
       <BaseBadge icon>Badge</BaseBadge>
       <BaseBadge class="badge-success" icon>Badge</BaseBadge>
+    </div>
+    <div class="space-x-5">
+      <BaseCheckbox :model-value="true">Basic</BaseCheckbox>
+      <BaseCheckbox indeterminate>Indeterminate</BaseCheckbox>
+      <BaseCheckbox disabled>Disabled</BaseCheckbox>
+      <BaseCheckbox v-model="c1">{{ c1 }}</BaseCheckbox>
+      <BaseCheckbox v-model="c2" true-value="Yes" false-value="No">
+        {{ c2 }}
+      </BaseCheckbox>
+      <div>
+        <BaseCheckbox v-model="checkboxGroup" native-value="Silver">
+          Silver
+        </BaseCheckbox>
+        <BaseCheckbox v-model="checkboxGroup" native-value="Flint">
+          Flint
+        </BaseCheckbox>
+        {{ checkboxGroup }}
+      </div>
     </div>
   </div>
 </template>
