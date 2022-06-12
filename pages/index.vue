@@ -98,14 +98,30 @@ const colors = ['red', 'green', 'blue', 'gray']
       <label><input type="radio" name="e" disabled /> Disabled</label>
     </div>
     <div>
-      <Carousel>
+      <Carousel v-slot="{ scrollTo, activeIndex }" class="relative">
         <CarouselItem
           v-for="(color, index) in colors"
           :key="color"
           :class="[`item-${color} text-center py-4 text-white`]"
         >
-          {{ index }}
+          {{ index }} - {{ activeIndex }}
         </CarouselItem>
+        <div
+          class="absolute top-1/2 w-full -translate-y-1/2 flex justify-between pointer-events-none"
+        >
+          <button
+            class="w-10 h-10 rounded-full bg-gray-300 bg-opacity-50 pointer-events-auto"
+            @click="scrollTo(activeIndex - 1)"
+          >
+            &lt;
+          </button>
+          <button
+            class="w-10 h-10 rounded-full bg-gray-300 bg-opacity-50 pointer-events-auto"
+            @click="scrollTo(activeIndex + 1)"
+          >
+            >
+          </button>
+        </div>
       </Carousel>
     </div>
   </div>
