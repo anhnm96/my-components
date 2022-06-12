@@ -9,7 +9,7 @@ const elRef = ref()
 const startX = ref()
 const slideX = ref()
 const delta = ref(0)
-
+// provide setup
 const items = ref<HTMLDivElement[]>([])
 function addItem(item: any) {
   items.value.push(item)
@@ -18,12 +18,14 @@ function addItem(item: any) {
 function updateActiveIndex(value: number) {
   activeIndex.value = value
 }
+
 provide(CarouselKey, {
   items,
   addItem,
   updateActiveIndex,
 })
 
+// functions
 function pointerStart(e: PointerEvent) {
   elRef.value.classList.remove('scroll-snap')
   slideX.value = elRef.value.scrollLeft
@@ -41,24 +43,30 @@ function pointerMove(e: PointerEvent) {
 }
 
 function pointerUp() {
-  elRef.value.classList.add('scroll-snap')
+  window.removeEventListener('pointermove', pointerMove)
+  window.removeEventListener('pointerup', pointerUp)
+  if (!delta.value) return
   const signCheck = Math.sign(delta.value)
   const itemWidth = elRef.value.getBoundingClientRect().width
   const results = Math.round(Math.abs(delta.value / itemWidth) + 0.15) // Hack
-  const newIndex = activeIndex.value + signCheck * results
-  if (newIndex === items.value.length) {
-    if (props.repeat) scrollTo(0)
-  } else if (newIndex < 0) {
-    if (props.repeat) scrollTo(items.value.length - 1)
-  } else {
-    scrollTo(newIndex)
-  }
+  scrollTo(activeIndex.value + signCheck * results)
 
-  window.removeEventListener('pointermove', pointerMove)
-  window.removeEventListener('pointerup', pointerUp)
+  delta.value = 0
+  // scroll-snap may break animation
+  // so we need to wait until animation end
+  setTimeout(() => {
+    elRef.value.classList.add('scroll-snap')
+  }, 0)
 }
 
 function scrollTo(index: number) {
+  if (index === items.value.length) {
+    if (props.repeat) index = 0
+    else return
+  } else if (index < 0) {
+    if (props.repeat) index = items.value.length - 1
+    else return
+  }
   items.value[index].scrollIntoView({ behavior: 'smooth' })
   activeIndex.value = index
 }
@@ -70,8 +78,10 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div ref="elRef" class="carousel scroll-snap" @pointerdown="pointerStart">
-    <slot />
+  <div>
+    <div ref="elRef" class="carousel scroll-snap" @pointerdown="pointerStart">
+      <slot :active-index="activeIndex" :scroll-to="scrollTo" />
+    </div>
   </div>
 </template>
 
