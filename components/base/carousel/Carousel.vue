@@ -1,8 +1,16 @@
 <script lang="ts" setup>
+import type { Pausable } from '@vueuse/core'
 import { CarouselKey } from './keys'
-const props = defineProps<{
-  repeat?: boolean
-}>()
+const props = defineProps({
+  repeat: Boolean,
+  autoplay: {
+    type: Number,
+    required: false,
+    validator(value: number) {
+      return value >= 0
+    },
+  },
+})
 
 const activeIndex = ref(0)
 const elRef = ref()
@@ -61,15 +69,38 @@ function pointerUp() {
 
 function scrollTo(index: number) {
   if (index === items.value.length) {
-    if (props.repeat) index = 0
+    if (props.repeat || props.autoplay) index = 0
     else return
   } else if (index < 0) {
-    if (props.repeat) index = items.value.length - 1
+    if (props.repeat || props.autoplay) index = items.value.length - 1
     else return
   }
   items.value[index].scrollIntoView({ behavior: 'smooth' })
   activeIndex.value = index
 }
+
+let intervalFn: Pausable
+if (props.autoplay) {
+  intervalFn = useIntervalFn(() => {
+    scrollTo(activeIndex.value + 1)
+  }, props.autoplay)
+}
+
+function mouseEnter() {
+  if (props.autoplay) {
+    intervalFn!.pause()
+  }
+}
+
+function mouseLeave() {
+  if (props.autoplay) {
+    intervalFn!.resume()
+  }
+}
+
+onMounted(() => {
+  scrollTo(0)
+})
 
 onBeforeUnmount(() => {
   window.removeEventListener('pointermove', pointerMove)
@@ -78,7 +109,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div>
+  <div @mouseenter="mouseEnter" @mouseleave="mouseLeave">
     <div ref="elRef" class="carousel scroll-snap" @pointerdown="pointerStart">
       <slot :active-index="activeIndex" :scroll-to="scrollTo" />
     </div>
