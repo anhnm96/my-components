@@ -53,13 +53,14 @@ function pointerMove(e: PointerEvent) {
 function pointerUp() {
   window.removeEventListener('pointermove', pointerMove)
   window.removeEventListener('pointerup', pointerUp)
-  if (!delta.value) return
-  const signCheck = Math.sign(delta.value)
-  const itemWidth = elRef.value.getBoundingClientRect().width
-  const results = Math.round(Math.abs(delta.value / itemWidth) + 0.15) // Hack
-  scrollTo(activeIndex.value + signCheck * results)
+  if (delta.value > 0) {
+    const signCheck = Math.sign(delta.value)
+    const itemWidth = elRef.value.getBoundingClientRect().width
+    const results = Math.round(Math.abs(delta.value / itemWidth) + 0.15) // Hack
+    scrollTo(activeIndex.value + signCheck * results)
+    delta.value = 0
+  }
 
-  delta.value = 0
   // scroll-snap may break animation
   // so we need to wait until animation end
   setTimeout(() => {
