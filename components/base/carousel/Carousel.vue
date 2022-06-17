@@ -53,7 +53,7 @@ function pointerMove(e: PointerEvent) {
 function pointerUp() {
   window.removeEventListener('pointermove', pointerMove)
   window.removeEventListener('pointerup', pointerUp)
-  if (delta.value > 0) {
+  if (delta.value !== 0) {
     const signCheck = Math.sign(delta.value)
     const itemWidth = elRef.value.getBoundingClientRect().width
     const results = Math.round(Math.abs(delta.value / itemWidth) + 0.15) // Hack
