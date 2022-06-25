@@ -6,10 +6,14 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "lint:fix": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-    "test:unit": "vitest"
+    "test:unit": "vitest",
+    "story:dev": "histoire dev",
+    "story:build": "histoire build",
+    "story:preview": "histoire preview"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.25.1",
+    "@histoire/plugin-nuxt": "^0.7.8",
     "@nuxt/test-utils-edge": "3.0.0-rc.4-27585508.c9d4b2e",
     "@nuxtjs/tailwindcss": "^5.1.2",
     "@vue/eslint-config-prettier": "^7.0.0",
@@ -18,6 +22,7 @@
     "@vueuse/nuxt": "^8.6.0",
     "eslint": "^8.17.0",
     "happy-dom": "^5.3.0",
+    "histoire": "^0.7.8",
     "nuxt": "3.0.0-rc.4",
     "prettier": "^2.7.0",
     "prettier-plugin-tailwindcss": "^0.1.11",
