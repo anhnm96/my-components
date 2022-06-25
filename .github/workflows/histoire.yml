@@ -15,9 +15,16 @@ jobs:
           npm install
           npm run story:build
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4.3.3
+        uses: crazy-max/ghaction-github-pages@v3
         with:
+          target_branch: gh-pages
+          build_dir: public
+        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: docs # The folder that the histoire script generates files.
-          CLEAN: true
+
+        # uses: JamesIves/github-pages-deploy-action@v4.3.3
+        # with:
+        #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        #   BRANCH: gh-pages # The branch the action should deploy to.
+        #   FOLDER: docs # The folder that the histoire script generates files.
+        #   CLEAN: true
