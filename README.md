@@ -2,6 +2,7 @@
 
 Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
 
+## [Demo](https://xiaosasori.github.io/my-components/)
 ## Setup
 
 Make sure to install the dependencies:
