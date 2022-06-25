@@ -11,10 +11,19 @@ jobs:
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
+
+      - uses: pnpm/action-setup@v2.0.1
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 7
+          run_install: false
+
       - name: Install and Build 🔧
         run: |
-          npm install
-          npm run story:build
+          pnpm install
+          pnpm story:build
+
       - name: Deploy 🚀
         uses: crazy-max/ghaction-github-pages@v3
         with:
