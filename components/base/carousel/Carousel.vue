@@ -2,7 +2,10 @@
 import type { Pausable } from '@vueuse/core'
 import { CarouselKey } from './keys'
 const props = defineProps({
-  repeat: Boolean,
+  repeat: {
+    type: Boolean,
+    default: false,
+  },
   autoplay: {
     type: Number,
     required: false,
@@ -77,7 +80,12 @@ function scrollTo(index: number) {
     else return
   }
   items.value[index].scrollIntoView({ behavior: 'smooth' })
-  activeIndex.value = index
+  // make sure activeIndex is updated last
+  // because sometimes updateActiveIndex may
+  // update it accidentally
+  setTimeout(() => {
+    activeIndex.value = index
+  }, 100)
 }
 
 let intervalFn: Pausable
