@@ -4,6 +4,7 @@ on:
     branches:
       - main
     paths: ["src/components/**"] # Trigger the action only when files change in the folders defined here
+    workflow_dispatch: # Put here!!
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
