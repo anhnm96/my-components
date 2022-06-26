@@ -603,7 +603,7 @@ function getSandboxUrl(story, variant) {
   const url = new URLSearchParams();
   url.append("storyId", story.id);
   url.append("variantId", variant.id);
-  return `../__sandbox.html?${url.toString()}`;
+  return `../sandbox.html?${url.toString()}`;
 }
 const _hoisted_1$l = ["href"];
 const _sfc_main$n = /* @__PURE__ */ defineComponent({
