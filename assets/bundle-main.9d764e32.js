@@ -299,7 +299,7 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const base = "./";
+const base = "/";
 function createRouterHistory() {
   switch (histoireConfig.routerMode) {
     case "hash":
