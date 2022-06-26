@@ -1,41 +1,34 @@
-name: Build and Deploy
-on: 
-  push:
-    branches:
-      - main
-    paths: ["src/components/**"] # Trigger the action only when files change in the folders defined here
-  workflow_dispatch: # Put here!!
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout 🛎️
-        uses: actions/checkout@v3
+# name: Build and Deploy
+# on: 
+#   push:
+#     branches:
+#       - main
+#     paths: ["src/components/**"] # Trigger the action only when files change in the folders defined here
+#   workflow_dispatch: # Put here!!
+# jobs:
+#   build-and-deploy:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout 🛎️
+#         uses: actions/checkout@v3
 
-      - uses: pnpm/action-setup@v2.0.1
-        name: Install pnpm
-        id: pnpm-install
-        with:
-          version: 7
-          run_install: false
+#       - uses: pnpm/action-setup@v2.0.1
+#         name: Install pnpm
+#         id: pnpm-install
+#         with:
+#           version: 7
+#           run_install: false
 
-      - name: Install and Build 🔧
-        run: |
-          pnpm install
-          pnpm build
-          pnpm story:build
+#       - name: Install and Build 🔧
+#         run: |
+#           pnpm install
+#           pnpm build
+#           pnpm story:build
 
-      - name: Deploy 🚀
-        uses: crazy-max/ghaction-github-pages@v3
-        with:
-          target_branch: gh-pages
-          build_dir: docs
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-        # uses: JamesIves/github-pages-deploy-action@v4.3.3
-        # with:
-        #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        #   BRANCH: gh-pages # The branch the action should deploy to.
-        #   FOLDER: docs # The folder that the histoire script generates files.
-        #   CLEAN: true
+#       - name: Deploy 🚀
+#         uses: crazy-max/ghaction-github-pages@v3
+#         with:
+#           target_branch: gh-pages
+#           build_dir: docs
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
