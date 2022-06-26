@@ -1,5 +1,5 @@
 import { d as defineComponent, u as useMediaQuery, r as ref, w as watch, c as computed, o as onUnmounted, a as openBlock, b as createElementBlock, e as createBaseVNode, f as renderSlot, n as normalizeClass, g as withModifiers, h as normalizeStyle, i as unref, j as createBlock, k as withCtx, t as toDisplayString, l as createVNode, I as Icon, m as createCommentVNode, T as Transition, s as scrollIntoView, p as onMounted, q as resolveComponent, v as withKeys, x as mergeProps, y as createRouter, z as defineStore, A as createWebHistory, B as createWebHashHistory, C as useTitle, _ as _sfc_main$c, F as Fragment, D as createApp, E as createPinia, G as plugin, H as useStorage, J as renderList, K as useEventListener, L as resolveDirective, M as withDirectives, N as defineAsyncComponent, O as vShow, P as isRef, Q as useCssVars, R as createTextVNode, S as reactive, U as useRoute, V as pushScopeId, W as popScopeId } from "./vendor.fa68f3c4.js";
-import { _ as __vitePreload, h as histoireConfig, f as files, m as mapFile, i as isDark, t as toggleDark, a as tree, c as customLogos } from "./mapping.a828a78c.js";
+import { _ as __vitePreload, h as histoireConfig, f as files, m as mapFile, i as isDark, t as toggleDark, a as tree, c as customLogos } from "./mapping.0f14dfb3.js";
 var style = /* @__PURE__ */ (() => ".bind-tree-margin[data-v-3bb05a26]{margin-left:var(--335c8a9c)}.bind-icon-color[data-v-3bb05a26]{color:var(--10044424)}.bind-tree-padding[data-v-1a78012e]{padding-left:var(--27f98670)}.bind-icon-color[data-v-5fe505b0]{color:var(--7fa476a0)}.landscape>div>.dragger[data-v-4cd3cd6c]{width:.625rem}.portrait>div>.dragger[data-v-4cd3cd6c]{height:.625rem}.landscape>div>.dragger.dragger-offset-before[data-v-4cd3cd6c]{right:0}.portrait>div>.dragger.dragger-offset-before[data-v-4cd3cd6c]{bottom:0}.landscape>div>.dragger.dragger-offset-center[data-v-4cd3cd6c]{right:-.3125rem}.portrait>div>.dragger.dragger-offset-center[data-v-4cd3cd6c]{bottom:-.3125rem}.landscape>div>.dragger.dragger-offset-after[data-v-4cd3cd6c]{right:-.625rem}.portrait>div>.dragger.dragger-offset-after[data-v-4cd3cd6c]{bottom:-.625rem}.bind-icon-color[data-v-2cdc2ac0]{color:var(--3c4190ff)}.bind-icon-color[data-v-265ac8e3]{color:var(--7d3aedf8)}.bind-preview-bg[data-v-bde73868]{background-color:var(--b797c7ca)}.__histoire-hatched-pattern[data-v-250960ac]{background:repeating-linear-gradient(135deg,transparent,transparent 32px,currentColor 0,currentColor 64px)}.bind-preview-bg[data-v-769a585e]{background-color:var(--700caecc)}.bind-icon-color[data-v-39eaa600]{color:var(--22451fc3)}.bind-icon-color[data-v-3c153cb8]{color:var(--d1b61db4)}.__histoire-code-placeholder[data-v-8b318638]{color:inherit;font-size:inherit}.htw-base-empty[data-v-552cc113]:not(.no-animation){-webkit-animation:htw-base-empty-552cc113 .3s 1s both;animation:htw-base-empty-552cc113 .3s 1s both}@-webkit-keyframes htw-base-empty-552cc113{0%{opacity:0}to{opacity:1}}@keyframes htw-base-empty-552cc113{0%{opacity:0}to{opacity:1}}.bind-icon-color[data-v-7856c5b0]{color:var(--0e1c785e)}")();
 var $histoireThemeResolved = /* @__PURE__ */ (() => "*,:after,:before{--_histoire-color-primary-50:236 253 245;--_histoire-color-primary-100:209 250 229;--_histoire-color-primary-200:167 243 208;--_histoire-color-primary-300:110 231 183;--_histoire-color-primary-400:52 211 153;--_histoire-color-primary-500:16 185 129;--_histoire-color-primary-600:5 150 105;--_histoire-color-primary-700:4 120 87;--_histoire-color-primary-800:6 95 70;--_histoire-color-primary-900:6 78 59;--_histoire-color-gray-50:250 250 250;--_histoire-color-gray-100:244 244 245;--_histoire-color-gray-200:228 228 231;--_histoire-color-gray-300:212 212 216;--_histoire-color-gray-400:161 161 170;--_histoire-color-gray-500:113 113 122;--_histoire-color-gray-600:82 82 91;--_histoire-color-gray-700:63 63 70;--_histoire-color-gray-750:50 50 56;--_histoire-color-gray-800:39 39 42;--_histoire-color-gray-850:31 31 33;--_histoire-color-gray-900:24 24 27;--_histoire-color-gray-950:16 16 18}")();
 var _export_sfc = (sfc, props) => {
@@ -299,7 +299,7 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const base = "/";
+const base = "/my-components/";
 function createRouterHistory() {
   switch (histoireConfig.routerMode) {
     case "hash":
@@ -315,12 +315,12 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
-      component: () => __vitePreload(() => import("./HomeView.181ddd33.js"), true ? ["assets/HomeView.181ddd33.js","assets/vendor.fa68f3c4.js","assets/mapping.a828a78c.js"] : void 0)
+      component: () => __vitePreload(() => import("./HomeView.df925ed0.js"), true ? ["assets/HomeView.df925ed0.js","assets/vendor.fa68f3c4.js","assets/mapping.0f14dfb3.js"] : void 0)
     },
     {
       path: "/story/:storyId",
       name: "story",
-      component: () => __vitePreload(() => import("./StoryView.a24be572.js"), true ? ["assets/StoryView.a24be572.js","assets/vendor.fa68f3c4.js","assets/BaseEmpty.87a4b6f1.js","assets/mapping.a828a78c.js","assets/state.c5341bd7.js"] : void 0)
+      component: () => __vitePreload(() => import("./StoryView.e4098c19.js"), true ? ["assets/StoryView.e4098c19.js","assets/vendor.fa68f3c4.js","assets/BaseEmpty.34535c66.js","assets/mapping.0f14dfb3.js","assets/state.c5341bd7.js"] : void 0)
     }
   ]
 });
@@ -959,7 +959,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
   },
   setup(__props, { emit }) {
     const SearchPane = defineAsyncComponent({
-      loader: () => __vitePreload(() => import("./SearchPane.58cc8ec0.js"), true ? ["assets/SearchPane.58cc8ec0.js","assets/mapping.a828a78c.js","assets/vendor.fa68f3c4.js","assets/BaseEmpty.87a4b6f1.js"] : void 0),
+      loader: () => __vitePreload(() => import("./SearchPane.abcc5ad1.js"), true ? ["assets/SearchPane.abcc5ad1.js","assets/mapping.0f14dfb3.js","assets/vendor.fa68f3c4.js","assets/BaseEmpty.34535c66.js"] : void 0),
       loadingComponent: _sfc_main$3,
       delay: 0
     });
