@@ -313,14 +313,14 @@ const router = createRouter({
   history: createRouterHistory(),
   routes: [
     {
-      path: "/",
+      path: "./",
       name: "home",
-      component: () => __vitePreload(() => import("./HomeView.ab41ada3.js"), true ? ["assets/HomeView.ab41ada3.js","assets/vendor.fa68f3c4.js","assets/mapping.c8b9b36d.js"] : void 0)
+      component: () => __vitePreload(() => import("./HomeView.ab41ada3.js"), true ? [".assets/HomeView.ab41ada3.js","./assets/vendor.fa68f3c4.js","./assets/mapping.c8b9b36d.js"] : void 0)
     },
     {
-      path: "/story/:storyId",
+      path: "./story/:storyId",
       name: "story",
-      component: () => __vitePreload(() => import("./StoryView.130ceae7.js"), true ? ["assets/StoryView.130ceae7.js","assets/vendor.fa68f3c4.js","assets/BaseEmpty.ff51e819.js","assets/mapping.c8b9b36d.js","assets/state.c5341bd7.js"] : void 0)
+      component: () => __vitePreload(() => import("./StoryView.130ceae7.js"), true ? [".assets/StoryView.130ceae7.js","./assets/vendor.fa68f3c4.js","./assets/BaseEmpty.ff51e819.js","./assets/mapping.c8b9b36d.js","./assets/state.c5341bd7.js"] : void 0)
     }
   ]
 });
