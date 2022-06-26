@@ -10,7 +10,7 @@
     "story:dev": "histoire dev",
     "story:build": "histoire build",
     "story:preview": "histoire preview",
-    "deploy": "npm run story:build && gh-pages -d .histoire/dist"
+    "deploy": "gh-pages -d .histoire/dist"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.25.1",
