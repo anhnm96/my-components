@@ -16,7 +16,7 @@ const props = defineProps({
 })
 
 const activeIndex = ref(0)
-const elRef = ref()
+const elRef = ref<HTMLElement>()
 const startX = ref()
 const slideX = ref()
 const delta = ref(0)
@@ -27,6 +27,7 @@ function addItem(item: any) {
 }
 
 function updateActiveIndex(value: number) {
+  console.log('update', value)
   activeIndex.value = value
 }
 
@@ -38,8 +39,8 @@ provide(CarouselKey, {
 
 // functions
 function pointerStart(e: PointerEvent) {
-  elRef.value.classList.remove('scroll-snap')
-  slideX.value = elRef.value.scrollLeft
+  elRef.value?.classList.remove('scroll-snap')
+  slideX.value = elRef.value?.scrollLeft
   startX.value = e.clientX
   window.addEventListener('pointermove', pointerMove)
   window.addEventListener('pointerup', pointerUp)
@@ -50,7 +51,7 @@ function pointerMove(e: PointerEvent) {
 
   const x = e.clientX
   const displaceX = x - startX.value
-  elRef.value.scrollLeft = slideX.value - displaceX
+  elRef.value!.scrollLeft = slideX.value - displaceX
 }
 
 function pointerUp() {
@@ -58,7 +59,7 @@ function pointerUp() {
   window.removeEventListener('pointerup', pointerUp)
   if (delta.value !== 0) {
     const signCheck = Math.sign(delta.value)
-    const itemWidth = elRef.value.getBoundingClientRect().width
+    const itemWidth = elRef.value!.getBoundingClientRect().width
     const results = Math.round(Math.abs(delta.value / itemWidth) + 0.15) // Hack
     scrollTo(activeIndex.value + signCheck * results)
     delta.value = 0
@@ -67,7 +68,7 @@ function pointerUp() {
   // scroll-snap may break animation
   // so we need to wait until animation end
   setTimeout(() => {
-    elRef.value.classList.add('scroll-snap')
+    elRef.value!.classList.add('scroll-snap')
   }, 0)
 }
 
@@ -85,7 +86,7 @@ function scrollTo(index: number) {
   // update it accidentally
   setTimeout(() => {
     activeIndex.value = index
-  }, 100)
+  }, 0)
 }
 
 let intervalFn: Pausable
@@ -107,13 +108,28 @@ function mouseLeave() {
   }
 }
 
+let scrollTimeout: NodeJS.Timeout
+function scrollFinished() {
+  clearTimeout(scrollTimeout)
+  scrollTimeout = setTimeout(() => {
+    const newIndex = Math.round(
+      elRef.value!.scrollLeft /
+        elRef.value!.children[0].getBoundingClientRect().width
+    )
+    activeIndex.value = newIndex
+  }, 100)
+}
+
 onMounted(() => {
   scrollTo(0)
+  // this is used to update activeIndex when scrolling horizontally
+  elRef.value?.addEventListener('scroll', scrollFinished)
 })
 
 onBeforeUnmount(() => {
   window.removeEventListener('pointermove', pointerMove)
   window.removeEventListener('pointerup', pointerUp)
+  elRef.value?.removeEventListener('scroll', scrollFinished)
 })
 </script>
 
