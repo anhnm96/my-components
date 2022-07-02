@@ -1,9 +1,13 @@
-import { d as defineComponent, r as ref, av as provide, aw as useIntervalFn, p as onMounted, as as onBeforeUnmount, ax as _export_sfc, a as openBlock, b as createElementBlock, e as createBaseVNode, f as renderSlot, ay as inject, az as getCurrentInstance, q as resolveComponent, j as createBlock, k as withCtx, l as createVNode, J as renderList, F as Fragment, n as normalizeClass, R as createTextVNode, t as toDisplayString } from "./vendor.fa68f3c4.js";
+import { d as defineComponent, r as ref, av as provide, aw as useIntervalFn, p as onMounted, as as onBeforeUnmount, ax as _export_sfc, a as openBlock, b as createElementBlock, e as createBaseVNode, f as renderSlot, ay as inject, az as getCurrentInstance, q as resolveComponent, j as createBlock, k as withCtx, l as createVNode, J as renderList, F as Fragment, n as normalizeClass, R as createTextVNode, t as toDisplayString } from "./vendor.15320b94.js";
 const CarouselKey = Symbol("Carousel");
 var Carousel_vue_vue_type_style_index_0_scoped_true_lang = /* @__PURE__ */ (() => ".carousel[data-v-3fd3d40c]{-ms-overflow-style:none;display:flex;overflow-x:auto;scrollbar-width:none;width:100%}.carousel[data-v-3fd3d40c]::-webkit-scrollbar{display:none}.scroll-snap[data-v-3fd3d40c]{-ms-scroll-snap-type:x mandatory;scroll-snap-type:x mandatory}")();
 const _sfc_main$2 = /* @__PURE__ */ defineComponent({
   __name: "Carousel",
   props: {
+    initialIndex: {
+      type: Number,
+      default: 0
+    },
     repeat: {
       type: Boolean,
       default: false
@@ -19,7 +23,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
   setup(__props, { expose }) {
     expose();
     const props = __props;
-    const activeIndex = ref(0);
+    const activeIndex = ref(props.initialIndex);
     const elRef = ref();
     const startX = ref();
     const slideX = ref();
@@ -37,8 +41,9 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
       updateActiveIndex
     });
     function pointerStart(e) {
-      elRef.value.classList.remove("scroll-snap");
-      slideX.value = elRef.value.scrollLeft;
+      var _a, _b;
+      (_a = elRef.value) == null ? void 0 : _a.classList.remove("scroll-snap");
+      slideX.value = (_b = elRef.value) == null ? void 0 : _b.scrollLeft;
       startX.value = e.clientX;
       window.addEventListener("pointermove", pointerMove);
       window.addEventListener("pointerup", pointerUp);
@@ -78,7 +83,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
       items.value[index].scrollIntoView({ behavior: "smooth" });
       setTimeout(() => {
         activeIndex.value = index;
-      }, 100);
+      }, 0);
     }
     let intervalFn;
     if (props.autoplay) {
@@ -96,14 +101,26 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
         intervalFn.resume();
       }
     }
+    let scrollTimeout;
+    function scrollFinished() {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        const newIndex = Math.round(elRef.value.scrollLeft / elRef.value.children[0].getBoundingClientRect().width);
+        activeIndex.value = newIndex;
+      }, 100);
+    }
     onMounted(() => {
-      scrollTo(0);
+      var _a;
+      scrollTo(activeIndex.value);
+      (_a = elRef.value) == null ? void 0 : _a.addEventListener("scroll", scrollFinished);
     });
     onBeforeUnmount(() => {
+      var _a;
       window.removeEventListener("pointermove", pointerMove);
       window.removeEventListener("pointerup", pointerUp);
+      (_a = elRef.value) == null ? void 0 : _a.removeEventListener("scroll", scrollFinished);
     });
-    const __returned__ = { props, activeIndex, elRef, startX, slideX, delta, items, addItem, updateActiveIndex, pointerStart, pointerMove, pointerUp, scrollTo, intervalFn, mouseEnter, mouseLeave };
+    const __returned__ = { props, activeIndex, elRef, startX, slideX, delta, items, addItem, updateActiveIndex, pointerStart, pointerMove, pointerUp, scrollTo, intervalFn, mouseEnter, mouseLeave, scrollTimeout, scrollFinished };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
