@@ -2,6 +2,10 @@
 import type { Pausable } from '@vueuse/core'
 import { CarouselKey } from './keys'
 const props = defineProps({
+  initialIndex: {
+    type: Number,
+    default: 0,
+  },
   repeat: {
     type: Boolean,
     default: false,
@@ -15,7 +19,7 @@ const props = defineProps({
   },
 })
 
-const activeIndex = ref(0)
+const activeIndex = ref(props.initialIndex)
 const elRef = ref<HTMLElement>()
 const startX = ref()
 const slideX = ref()
@@ -27,7 +31,6 @@ function addItem(item: any) {
 }
 
 function updateActiveIndex(value: number) {
-  console.log('update', value)
   activeIndex.value = value
 }
 
@@ -121,7 +124,7 @@ function scrollFinished() {
 }
 
 onMounted(() => {
-  scrollTo(0)
+  scrollTo(activeIndex.value)
   // this is used to update activeIndex when scrolling horizontally
   elRef.value?.addEventListener('scroll', scrollFinished)
 })
