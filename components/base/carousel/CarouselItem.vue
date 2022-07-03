@@ -10,7 +10,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="carousel-item initial:basis-full">
+  <div class="carousel-item">
     <slot />
   </div>
 </template>
