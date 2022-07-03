@@ -18,6 +18,10 @@ const props = defineProps({
     },
   },
   itemsClass: String,
+  itemsToList: {
+    type: Number,
+    default: -1,
+  },
 })
 
 const activeIndex = ref(props.initialIndex)
@@ -25,6 +29,7 @@ const elRef = ref<HTMLElement>()
 const startX = ref()
 const slideX = ref()
 const delta = ref(0)
+const itemWidth = ref(0)
 // provide setup
 const items = ref<HTMLDivElement[]>([])
 function addItem(item: any) {
@@ -55,8 +60,7 @@ function pointerUp() {
   window.removeEventListener('pointerup', pointerUp)
   if (delta.value !== 0) {
     const signCheck = Math.sign(delta.value)
-    const itemWidth = elRef.value!.getBoundingClientRect().width
-    const results = Math.round(Math.abs(delta.value / itemWidth) + 0.15) // Hack
+    const results = Math.round(Math.abs(delta.value / itemWidth.value) + 0.15) // Hack
     scrollTo(activeIndex.value + signCheck * results)
     delta.value = 0
   }
@@ -65,23 +69,6 @@ function pointerUp() {
   // so we need to wait until animation end
   setTimeout(() => {
     elRef.value!.classList.add('scroll-snap')
-  }, 0)
-}
-
-function scrollTo(index: number) {
-  if (index === items.value.length) {
-    if (props.repeat || props.autoplay) index = 0
-    else return
-  } else if (index < 0) {
-    if (props.repeat || props.autoplay) index = items.value.length - 1
-    else return
-  }
-  items.value[index].scrollIntoView({ behavior: 'smooth' })
-  // make sure activeIndex is updated last
-  // because sometimes updateActiveIndex may
-  // update it accidentally
-  setTimeout(() => {
-    activeIndex.value = index
   }, 0)
 }
 
@@ -127,10 +114,97 @@ onBeforeUnmount(() => {
   window.removeEventListener('pointerup', pointerUp)
   elRef.value?.removeEventListener('scroll', scrollFinished)
 })
+
+const itemsToShow = computed(() => {
+  if (!elRef.value) return 0
+  return Math.round(elRef.value.getBoundingClientRect().width / itemWidth.value)
+})
+
+function scrollTo(index: number) {
+  if (index === items.value.length) {
+    if (props.repeat || props.autoplay) index = 0
+    else return
+  } else if (index < 0) {
+    if (props.repeat || props.autoplay) index = items.value.length - 1
+    else return
+  }
+  if (itemsToShow.value > 1)
+    elRef.value?.scrollTo({
+      left: index * itemWidth.value,
+      behavior: 'smooth',
+    })
+  else items.value[index].scrollIntoView({ behavior: 'smooth' })
+  activeIndex.value = index
+}
+
+const hasPrev = computed(() => {
+  return activeIndex.value > 0
+})
+
+const hasNext = computed(() => {
+  return activeIndex.value < items.value.length - itemsToShow.value
+})
+
+function prev() {
+  // check if items are enough to slide
+  if (items.value.length < itemsToShow.value) return
+  if (!hasPrev.value && props.repeat) {
+    scrollTo(items.value.length - itemsToShow.value)
+    return
+  }
+
+  const gap = props.itemsToList === -1 ? itemsToShow.value : props.itemsToList
+  activeIndex.value -= gap
+  if (activeIndex.value < 0) activeIndex.value = 0
+  scrollTo(activeIndex.value)
+}
+
+function next() {
+  // check if items are enough to slide
+  if (items.value.length < itemsToShow.value) return
+  if (!hasNext.value && props.repeat) {
+    activeIndex.value = 0
+    scrollTo(activeIndex.value)
+    return
+  }
+
+  const lastAllowIndex = items.value.length - itemsToShow.value
+  const gap = props.itemsToList === -1 ? itemsToShow.value : props.itemsToList
+  const nextActiveIndex = activeIndex.value + gap
+  // make sure we don't over translateX
+  if (nextActiveIndex > lastAllowIndex) {
+    activeIndex.value = lastAllowIndex
+    scrollTo(activeIndex.value)
+    return
+  }
+  activeIndex.value = nextActiveIndex
+  scrollTo(activeIndex.value)
+}
+
+function refresh() {
+  // console.log('refresh', items.value[0])
+  itemWidth.value = items.value[0].getBoundingClientRect().width
+  // make sure we don't over translateX
+  if (activeIndex.value > items.value.length - itemsToShow.value)
+    activeIndex.value = items.value.length - itemsToShow.value
+  // fallback check in case of carouselItems.length < itemsToShow
+  if (activeIndex.value < 0) activeIndex.value = 0
+  scrollTo(activeIndex.value)
+}
+let observer: ResizeObserver
+onMounted(() => {
+  observer = new ResizeObserver(refresh)
+  observer.observe(elRef.value!)
+})
+
+onBeforeUnmount(() => {
+  observer.disconnect()
+})
 </script>
 
 <template>
   <div @mouseenter="mouseEnter" @mouseleave="mouseLeave">
+    <slot name="header" :prev="prev" :next="next" />
     <div
       ref="elRef"
       class="carousel scroll-snap"

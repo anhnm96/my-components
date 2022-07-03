@@ -17,7 +17,11 @@ onMounted(() => {
 
 <style scoped>
 .carousel-item {
-  scroll-snap-align: center;
+  scroll-snap-align: start;
   flex-shrink: 0;
+}
+
+:slotted(.carousel-item img) {
+  pointer-events: none;
 }
 </style>
