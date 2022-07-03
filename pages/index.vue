@@ -14,6 +14,37 @@ const c2 = ref('Yes')
 const checkboxGroup = ref(['Silver'])
 
 const colors = ['red', 'green', 'blue', 'gray']
+
+const items = [
+  {
+    title: 'Slide 1',
+    image: 'https://picsum.photos/id/1/1230/500',
+  },
+  {
+    title: 'Slide 2',
+    image: 'https://picsum.photos/id/2/1230/500',
+  },
+  {
+    title: 'Slide 3',
+    image: 'https://picsum.photos/id/3/1230/500',
+  },
+  {
+    title: 'Slide 4',
+    image: 'https://picsum.photos/id/4/1230/500',
+  },
+  {
+    title: 'Slide 5',
+    image: 'https://picsum.photos/id/5/1230/500',
+  },
+  {
+    title: 'Slide 6',
+    image: 'https://picsum.photos/id/6/1230/500',
+  },
+  {
+    title: 'Slide 7',
+    image: 'https://picsum.photos/id/7/1230/500',
+  },
+]
 </script>
 
 <template>
@@ -98,11 +129,15 @@ const colors = ['red', 'green', 'blue', 'gray']
       <label><input type="radio" name="e" disabled /> Disabled</label>
     </div>
     <div>
-      <Carousel v-slot="{ scrollTo, activeIndex }" class="relative">
+      <Carousel
+        v-slot="{ scrollTo, activeIndex }"
+        :initial-index="2"
+        class="relative"
+      >
         <CarouselItem
           v-for="(color, index) in colors"
           :key="color"
-          :class="[`item-${color} text-center py-4 text-white`]"
+          :class="[`item-${color} text-center py-4 text-white basis-full`]"
         >
           {{ index }} - {{ activeIndex }}
         </CarouselItem>
@@ -122,6 +157,45 @@ const colors = ['red', 'green', 'blue', 'gray']
             >
           </button>
         </div>
+      </Carousel>
+    </div>
+    <div>
+      <Carousel>
+        <template #header="{ prev, next }">
+          <div class="flex justify-between">
+            <h2 class="text-lg font-bold text-primary">Top 100 hits</h2>
+            <div class="flex items-center space-x-2">
+              <button
+                class="inline-flex items-center p-1 focus:outline-none"
+                aria-label="Previous List"
+                @click="prev"
+              >
+                Prev
+              </button>
+              <button
+                class="inline-flex items-center p-1 focus:outline-none"
+                aria-label="Next List"
+                @click="next"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        </template>
+        <template #default="{ activeIndex }">
+          <CarouselItem
+            v-for="(item, index) in items"
+            :key="item.title"
+            class="basis-[25%] w-1/4 relative"
+          >
+            <img :src="item.image" />
+            <span
+              class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-4xl text-red-500 font-bold"
+            >
+              {{ `${index} - ${activeIndex}` }}
+            </span>
+          </CarouselItem>
+        </template>
       </Carousel>
     </div>
   </div>
