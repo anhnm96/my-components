@@ -1,4 +1,4 @@
-import { N as defineAsyncComponent, X as useDark, Y as useToggle, Z as markRaw } from "./vendor.15320b94.js";
+import { N as defineAsyncComponent, X as useDark, Y as useToggle, Z as markRaw } from "./vendor.161336e4.js";
 const scriptRel = "modulepreload";
 const seen = {};
 const base = "/my-components/";
@@ -32,12 +32,12 @@ const __vitePreload = function preload(baseModule, deps) {
     }
   })).then(() => baseModule());
 };
-const Comp0 = defineAsyncComponent(() => __vitePreload(() => import("./Carousel.story.b6f7fc90.js"), true ? ["assets/Carousel.story.b6f7fc90.js","assets/vendor.15320b94.js"] : void 0));
-const Comp1 = defineAsyncComponent(() => __vitePreload(() => import("./vendor.15320b94.js").then(function(n) {
+const Comp0 = defineAsyncComponent(() => __vitePreload(() => import("./Carousel.story.86598321.js"), true ? ["assets/Carousel.story.86598321.js","assets/vendor.161336e4.js"] : void 0));
+const Comp1 = defineAsyncComponent(() => __vitePreload(() => import("./vendor.161336e4.js").then(function(n) {
   return n.aA;
 }), true ? [] : void 0));
 let files = [
-  { "id": "components-base-carousel-carousel-story-vue", "path": ["Carousel"], "story": { "id": "components-base-carousel-carousel-story-vue", "title": "Carousel", "group": null, "layout": { "type": "single", "iframe": true }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "_default", "title": "default" }] }, "framework": "vue3", "index": 0, component: Comp0 },
+  { "id": "components-base-carousel-carousel-story-vue", "path": ["Carousel"], "story": { "id": "components-base-carousel-carousel-story-vue", "title": "Carousel", "group": null, "layout": { "type": "single", "iframe": true }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "components-base-carousel-carousel-story-vue-0", "title": "common", "icon": null, "iconColor": null }, { "id": "components-base-carousel-carousel-story-vue-1", "title": "list", "icon": null, "iconColor": null }] }, "framework": "vue3", "index": 0, component: Comp0 },
   { "id": "tailwind", "path": ["Tailwind"], "story": { "id": "tailwind", "title": "Tailwind", "group": "design-system", "layout": { "type": "single", "iframe": false }, "icon": "mdi:tailwind", "iconColor": null, "docsOnly": false, "variants": [{ "id": "background-color", "title": "Background Color", "icon": "carbon:color-palette", "iconColor": null }, { "id": "text-color", "title": "Text Color", "icon": "carbon:text-color", "iconColor": null }, { "id": "border-color", "title": "Border Color", "icon": "carbon:color-palette", "iconColor": null }, { "id": "padding", "title": "Padding", "icon": "carbon:area", "iconColor": null }, { "id": "margin", "title": "Margin", "icon": "carbon:area", "iconColor": null }, { "id": "font-size", "title": "Font Size", "icon": "carbon:text-font", "iconColor": null }, { "id": "font-weight", "title": "Font Weight", "icon": "carbon:text-font", "iconColor": null }, { "id": "font-family", "title": "Font Family", "icon": "carbon:text-font", "iconColor": null }, { "id": "letter-spacing", "title": "Letter Spacing", "icon": "carbon:text-font", "iconColor": null }, { "id": "line-height", "title": "Line Height", "icon": "carbon:text-font", "iconColor": null }, { "id": "drop-shadow", "title": "Drop Shadow", "icon": "carbon:shape-except", "iconColor": null }, { "id": "border-radius", "title": "Border Radius", "icon": "carbon:condition-wait-point", "iconColor": null }, { "id": "border-width", "title": "Border Width", "icon": "carbon:checkbox", "iconColor": null }, { "id": "width", "title": "Width", "icon": "carbon:pan-horizontal", "iconColor": null }, { "id": "height", "title": "Height", "icon": "carbon:pan-vertical", "iconColor": null }, { "id": "full-config", "title": "Full Config", "icon": "carbon:code", "iconColor": null }] }, "framework": "vue3", "index": 1, component: Comp1 }
 ];
 let tree = [{ "group": true, "id": "design-system", "title": "Design System", "children": [{ "title": "Tailwind", "index": 1 }] }, { "title": "Carousel", "index": 0 }];
