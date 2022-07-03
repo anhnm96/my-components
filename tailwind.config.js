@@ -37,5 +37,17 @@ module.exports = {
       },
     },
   },
-  plugins: [gridAutoFit],
+  plugins: [
+    gridAutoFit,
+    /**
+     * The `initial` variant modifies the selector to `html :where(.initial\:rounded)`,
+     * reducing the specificity from `010` to `001`,
+     * so that a regular class will "win".
+     * https://twitter.com/adamwathan/status/1496663833980686338
+     * Or we can use tailwind-merge instead
+     */
+    function ({ addVariant }) {
+      addVariant('initial', 'html :where(&)')
+    },
+  ],
 }
