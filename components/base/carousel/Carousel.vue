@@ -8,7 +8,7 @@ const props = defineProps({
   },
   repeat: {
     type: Boolean,
-    default: false,
+    default: true,
   },
   autoplay: {
     type: Number,
@@ -17,6 +17,7 @@ const props = defineProps({
       return value >= 0
     },
   },
+  itemsClass: String,
 })
 
 const activeIndex = ref(props.initialIndex)
@@ -30,15 +31,7 @@ function addItem(item: any) {
   items.value.push(item)
 }
 
-function updateActiveIndex(value: number) {
-  activeIndex.value = value
-}
-
-provide(CarouselKey, {
-  items,
-  addItem,
-  updateActiveIndex,
-})
+provide(CarouselKey, { addItem })
 
 // functions
 function pointerStart(e: PointerEvent) {
@@ -138,7 +131,12 @@ onBeforeUnmount(() => {
 
 <template>
   <div @mouseenter="mouseEnter" @mouseleave="mouseLeave">
-    <div ref="elRef" class="carousel scroll-snap" @pointerdown="pointerStart">
+    <div
+      ref="elRef"
+      class="carousel scroll-snap"
+      :class="itemsClass"
+      @pointerdown="pointerStart"
+    >
       <slot :active-index="activeIndex" :scroll-to="scrollTo" />
     </div>
   </div>
