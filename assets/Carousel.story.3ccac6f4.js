@@ -1,4 +1,4 @@
-import { d as defineComponent, r as ref, av as provide, aw as useIntervalFn, p as onMounted, as as onBeforeUnmount, c as computed, ax as _export_sfc, a as openBlock, b as createElementBlock, f as renderSlot, e as createBaseVNode, n as normalizeClass, ay as inject, az as getCurrentInstance, q as resolveComponent, j as createBlock, k as withCtx, l as createVNode, J as renderList, F as Fragment, R as createTextVNode, t as toDisplayString } from "./vendor.161336e4.js";
+import { d as defineComponent, r as ref, av as provide, aw as useIntervalFn, p as onMounted, as as onBeforeUnmount, c as computed, ax as _export_sfc, a as openBlock, b as createElementBlock, f as renderSlot, e as createBaseVNode, n as normalizeClass, ay as inject, az as getCurrentInstance, q as resolveComponent, j as createBlock, k as withCtx, l as createVNode, J as renderList, F as Fragment, R as createTextVNode, t as toDisplayString } from "./vendor.58c10dad.js";
 const CarouselKey = Symbol("Carousel");
 var Carousel_vue_vue_type_style_index_0_scoped_true_lang = /* @__PURE__ */ (() => ".carousel[data-v-3fd3d40c]{-ms-overflow-style:none;display:flex;overflow-x:auto;scrollbar-width:none;width:100%}.carousel[data-v-3fd3d40c]::-webkit-scrollbar{display:none}.scroll-snap[data-v-3fd3d40c]{-ms-scroll-snap-type:x mandatory;scroll-snap-type:x mandatory}")();
 const _sfc_main$2 = /* @__PURE__ */ defineComponent({
@@ -369,7 +369,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
               (openBlock(), createElementBlock(Fragment, null, renderList($setup.items, (item, index) => {
                 return createVNode($setup["CarouselItem"], {
                   key: item.title,
-                  class: "w-1/4 px-3 lg:w-1/5 xl:w-1/6"
+                  class: "w-1/3 md:w-1/4 px-3 lg:w-1/5 xl:w-1/6"
                 }, {
                   default: withCtx(() => [
                     createBaseVNode("div", _hoisted_9, [
