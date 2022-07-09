@@ -118,7 +118,10 @@ const itemsToShow = computed(() => {
 })
 
 function scrollTo(index: number) {
-  if (index === items.value.length) {
+  if (
+    index === items.value.length ||
+    (itemsToShow.value > 1 && index > items.value.length - itemsToShow.value)
+  ) {
     if (props.repeat || props.autoplay) index = 0
     else return
   } else if (index < 0) {
@@ -160,8 +163,7 @@ function next() {
   // check if items are enough to slide
   if (items.value.length < itemsToShow.value) return
   if (!hasNext.value && props.repeat) {
-    activeIndex.value = 0
-    scrollTo(activeIndex.value)
+    scrollTo(0)
     return
   }
 
