@@ -83,23 +83,23 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
       }
     }
     let scrollTimeout;
-    function scrollFinished() {
+    function onScrollFinished() {
       clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(() => {
-        const newIndex = Math.round(elRef.value.scrollLeft / elRef.value.children[0].getBoundingClientRect().width);
+        const newIndex = Math.round(elRef.value.scrollLeft / itemWidth.value);
         activeIndex.value = newIndex;
       }, 100);
     }
     onMounted(() => {
       var _a;
       scrollTo(activeIndex.value);
-      (_a = elRef.value) == null ? void 0 : _a.addEventListener("scroll", scrollFinished);
+      (_a = elRef.value) == null ? void 0 : _a.addEventListener("scroll", onScrollFinished);
     });
     onBeforeUnmount(() => {
       var _a;
       window.removeEventListener("pointermove", pointerMove);
       window.removeEventListener("pointerup", pointerUp);
-      (_a = elRef.value) == null ? void 0 : _a.removeEventListener("scroll", scrollFinished);
+      (_a = elRef.value) == null ? void 0 : _a.removeEventListener("scroll", onScrollFinished);
     });
     const itemsToShow = computed(() => {
       if (!elRef.value)
@@ -108,7 +108,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
     });
     function scrollTo(index) {
       var _a;
-      if (index === items.value.length) {
+      if (index === items.value.length || itemsToShow.value > 1 && index > items.value.length - itemsToShow.value) {
         if (props.repeat || props.autoplay)
           index = 0;
         else
@@ -151,8 +151,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
       if (items.value.length < itemsToShow.value)
         return;
       if (!hasNext.value && props.repeat) {
-        activeIndex.value = 0;
-        scrollTo(activeIndex.value);
+        scrollTo(0);
         return;
       }
       const lastAllowIndex = items.value.length - itemsToShow.value;
@@ -182,7 +181,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
     onBeforeUnmount(() => {
       observer.disconnect();
     });
-    const __returned__ = { props, activeIndex, elRef, startX, slideX, delta, itemWidth, items, addItem, pointerStart, pointerMove, pointerUp, intervalFn, mouseEnter, mouseLeave, scrollTimeout, scrollFinished, itemsToShow, scrollTo, hasPrev, hasNext, prev, next, refresh, observer };
+    const __returned__ = { props, activeIndex, elRef, startX, slideX, delta, itemWidth, items, addItem, pointerStart, pointerMove, pointerUp, intervalFn, mouseEnter, mouseLeave, scrollTimeout, onScrollFinished, itemsToShow, scrollTo, hasPrev, hasNext, prev, next, refresh, observer };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }

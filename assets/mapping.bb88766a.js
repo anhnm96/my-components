@@ -32,7 +32,7 @@ const __vitePreload = function preload(baseModule, deps) {
     }
   })).then(() => baseModule());
 };
-const Comp0 = defineAsyncComponent(() => __vitePreload(() => import("./Carousel.story.3ccac6f4.js"), true ? ["assets/Carousel.story.3ccac6f4.js","assets/vendor.58c10dad.js"] : void 0));
+const Comp0 = defineAsyncComponent(() => __vitePreload(() => import("./Carousel.story.92d43130.js"), true ? ["assets/Carousel.story.92d43130.js","assets/vendor.58c10dad.js"] : void 0));
 const Comp1 = defineAsyncComponent(() => __vitePreload(() => import("./vendor.58c10dad.js").then(function(n) {
   return n.aA;
 }), true ? [] : void 0));
