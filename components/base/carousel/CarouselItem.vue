@@ -2,15 +2,15 @@
 import { CarouselKey } from './keys'
 
 const { addItem } = inject(CarouselKey)!
-const instance = getCurrentInstance()
+const itemRef = ref()
 
 onMounted(() => {
-  addItem(instance?.proxy?.$el)
+  addItem(itemRef.value)
 })
 </script>
 
 <template>
-  <div class="carousel-item">
+  <div ref="itemRef" class="carousel-item">
     <slot />
   </div>
 </template>
