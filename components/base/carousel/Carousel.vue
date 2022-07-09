@@ -92,13 +92,10 @@ function mouseLeave() {
 }
 
 let scrollTimeout: NodeJS.Timeout
-function scrollFinished() {
+function onScrollFinished() {
   clearTimeout(scrollTimeout)
   scrollTimeout = setTimeout(() => {
-    const newIndex = Math.round(
-      elRef.value!.scrollLeft /
-        elRef.value!.children[0].getBoundingClientRect().width
-    )
+    const newIndex = Math.round(elRef.value!.scrollLeft / itemWidth.value)
     activeIndex.value = newIndex
   }, 100)
 }
@@ -106,13 +103,13 @@ function scrollFinished() {
 onMounted(() => {
   scrollTo(activeIndex.value)
   // this is used to update activeIndex when scrolling horizontally
-  elRef.value?.addEventListener('scroll', scrollFinished)
+  elRef.value?.addEventListener('scroll', onScrollFinished)
 })
 
 onBeforeUnmount(() => {
   window.removeEventListener('pointermove', pointerMove)
   window.removeEventListener('pointerup', pointerUp)
-  elRef.value?.removeEventListener('scroll', scrollFinished)
+  elRef.value?.removeEventListener('scroll', onScrollFinished)
 })
 
 const itemsToShow = computed(() => {
