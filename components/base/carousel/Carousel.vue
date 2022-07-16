@@ -39,25 +39,35 @@ function addItem(item: any) {
 provide(CarouselKey, { addItem })
 
 // functions
+const eventMoveType = ref('')
+const eventEndType = ref('')
 function pointerStart(e: PointerEvent) {
+  if (e.pointerType === 'mouse') {
+    eventMoveType.value = 'pointermove'
+    eventEndType.value = 'pointerup'
+  } else {
+    eventMoveType.value = 'touchmove'
+    eventEndType.value = 'touchend'
+  }
   elRef.value?.classList.remove('scroll-snap')
   slideX.value = elRef.value?.scrollLeft
   startX.value = e.clientX
-  window.addEventListener('pointermove', pointerMove)
-  window.addEventListener('pointerup', pointerUp)
+  window.addEventListener(eventMoveType.value, pointerMove)
+  window.addEventListener(eventEndType.value, pointerUp)
 }
 
-function pointerMove(e: PointerEvent) {
-  delta.value = startX.value - e.clientX
+function pointerMove(e: any) {
+  const x = e.touches
+    ? (e.changedTouches[0] || e.touches[0]).clientX
+    : e.clientX
+  delta.value = startX.value - x
 
-  const x = e.clientX
-  const displaceX = x - startX.value
-  elRef.value!.scrollLeft = slideX.value - displaceX
+  elRef.value!.scrollLeft = slideX.value + delta.value
 }
 
 function pointerUp() {
-  window.removeEventListener('pointermove', pointerMove)
-  window.removeEventListener('pointerup', pointerUp)
+  window.removeEventListener(eventMoveType.value, pointerMove)
+  window.removeEventListener(eventEndType.value, pointerUp)
   if (delta.value !== 0) {
     const signCheck = Math.sign(delta.value)
     const results = Math.round(Math.abs(delta.value / itemWidth.value) + 0.15) // Hack
@@ -107,8 +117,8 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
-  window.removeEventListener('pointermove', pointerMove)
-  window.removeEventListener('pointerup', pointerUp)
+  window.removeEventListener(eventMoveType.value, pointerMove)
+  window.removeEventListener(eventEndType.value, pointerUp)
   elRef.value?.removeEventListener('scroll', onScrollFinished)
 })
 
