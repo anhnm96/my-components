@@ -138,12 +138,10 @@ function scrollTo(index: number) {
     if (props.repeat || props.autoplay) index = items.value.length - 1
     else return
   }
-  if (itemsToShow.value > 1)
     elRef.value?.scrollTo({
       left: index * itemWidth.value,
       behavior: 'smooth',
     })
-  else items.value[index].scrollIntoView({ behavior: 'smooth' })
   activeIndex.value = index
 }
 
