@@ -1,4 +1,4 @@
-import { N as defineAsyncComponent, X as useDark, Y as useToggle, Z as markRaw } from "./vendor.58c10dad.js";
+import { N as defineAsyncComponent, X as useDark, Y as useToggle, Z as markRaw } from "./vendor.d2da194d.js";
 const scriptRel = "modulepreload";
 const seen = {};
 const base = "/my-components/";
@@ -32,9 +32,9 @@ const __vitePreload = function preload(baseModule, deps) {
     }
   })).then(() => baseModule());
 };
-const Comp0 = defineAsyncComponent(() => __vitePreload(() => import("./Carousel.story.92d43130.js"), true ? ["assets/Carousel.story.92d43130.js","assets/vendor.58c10dad.js"] : void 0));
-const Comp1 = defineAsyncComponent(() => __vitePreload(() => import("./vendor.58c10dad.js").then(function(n) {
-  return n.aA;
+const Comp0 = defineAsyncComponent(() => __vitePreload(() => import("./Carousel.story.44504a96.js"), true ? ["assets/Carousel.story.44504a96.js","assets/vendor.d2da194d.js"] : void 0));
+const Comp1 = defineAsyncComponent(() => __vitePreload(() => import("./vendor.d2da194d.js").then(function(n) {
+  return n.az;
 }), true ? [] : void 0));
 let files = [
   { "id": "components-base-carousel-carousel-story-vue", "path": ["Carousel"], "story": { "id": "components-base-carousel-carousel-story-vue", "title": "Carousel", "group": null, "layout": { "type": "single", "iframe": true }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "components-base-carousel-carousel-story-vue-0", "title": "common", "icon": null, "iconColor": null }, { "id": "components-base-carousel-carousel-story-vue-1", "title": "list", "icon": null, "iconColor": null }] }, "framework": "vue3", "index": 0, component: Comp0 },

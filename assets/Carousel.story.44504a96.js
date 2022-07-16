@@ -1,4 +1,4 @@
-import { d as defineComponent, r as ref, av as provide, aw as useIntervalFn, p as onMounted, as as onBeforeUnmount, c as computed, ax as _export_sfc, a as openBlock, b as createElementBlock, f as renderSlot, e as createBaseVNode, n as normalizeClass, ay as inject, az as getCurrentInstance, q as resolveComponent, j as createBlock, k as withCtx, l as createVNode, J as renderList, F as Fragment, R as createTextVNode, t as toDisplayString } from "./vendor.58c10dad.js";
+import { d as defineComponent, r as ref, av as provide, aw as useIntervalFn, p as onMounted, as as onBeforeUnmount, c as computed, ax as _export_sfc, a as openBlock, b as createElementBlock, f as renderSlot, e as createBaseVNode, n as normalizeClass, ay as inject, q as resolveComponent, j as createBlock, k as withCtx, l as createVNode, J as renderList, F as Fragment, R as createTextVNode, t as toDisplayString } from "./vendor.d2da194d.js";
 const CarouselKey = Symbol("Carousel");
 var Carousel_vue_vue_type_style_index_0_scoped_true_lang = /* @__PURE__ */ (() => ".carousel[data-v-3fd3d40c]{-ms-overflow-style:none;display:flex;overflow-x:auto;scrollbar-width:none;width:100%}.carousel[data-v-3fd3d40c]::-webkit-scrollbar{display:none}.scroll-snap[data-v-3fd3d40c]{-ms-scroll-snap-type:x mandatory;scroll-snap-type:x mandatory}")();
 const _sfc_main$2 = /* @__PURE__ */ defineComponent({
@@ -28,6 +28,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
   setup(__props, { expose }) {
     expose();
     const props = __props;
+    const dragging = ref(false);
     const activeIndex = ref(props.initialIndex);
     const elRef = ref();
     const startX = ref();
@@ -39,23 +40,33 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
       items.value.push(item);
     }
     provide(CarouselKey, { addItem });
+    const eventMoveType = ref("");
+    const eventEndType = ref("");
     function pointerStart(e) {
       var _a, _b;
+      dragging.value = true;
+      if (e.pointerType === "mouse") {
+        eventMoveType.value = "pointermove";
+        eventEndType.value = "pointerup";
+      } else {
+        eventMoveType.value = "touchmove";
+        eventEndType.value = "touchend";
+      }
       (_a = elRef.value) == null ? void 0 : _a.classList.remove("scroll-snap");
       slideX.value = (_b = elRef.value) == null ? void 0 : _b.scrollLeft;
       startX.value = e.clientX;
-      window.addEventListener("pointermove", pointerMove);
-      window.addEventListener("pointerup", pointerUp);
+      window.addEventListener(eventMoveType.value, pointerMove);
+      window.addEventListener(eventEndType.value, pointerUp);
     }
     function pointerMove(e) {
-      delta.value = startX.value - e.clientX;
-      const x = e.clientX;
-      const displaceX = x - startX.value;
-      elRef.value.scrollLeft = slideX.value - displaceX;
+      const x = e.touches ? (e.changedTouches[0] || e.touches[0]).clientX : e.clientX;
+      delta.value = startX.value - x;
+      elRef.value.scrollLeft = slideX.value + delta.value;
     }
     function pointerUp() {
-      window.removeEventListener("pointermove", pointerMove);
-      window.removeEventListener("pointerup", pointerUp);
+      dragging.value = false;
+      window.removeEventListener(eventMoveType.value, pointerMove);
+      window.removeEventListener(eventEndType.value, pointerUp);
       if (delta.value !== 0) {
         const signCheck = Math.sign(delta.value);
         const results = Math.round(Math.abs(delta.value / itemWidth.value) + 0.15);
@@ -84,6 +95,8 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
     }
     let scrollTimeout;
     function onScrollFinished() {
+      if (dragging.value)
+        return;
       clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(() => {
         const newIndex = Math.round(elRef.value.scrollLeft / itemWidth.value);
@@ -97,8 +110,8 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
     });
     onBeforeUnmount(() => {
       var _a;
-      window.removeEventListener("pointermove", pointerMove);
-      window.removeEventListener("pointerup", pointerUp);
+      window.removeEventListener(eventMoveType.value, pointerMove);
+      window.removeEventListener(eventEndType.value, pointerUp);
       (_a = elRef.value) == null ? void 0 : _a.removeEventListener("scroll", onScrollFinished);
     });
     const itemsToShow = computed(() => {
@@ -119,13 +132,10 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
         else
           return;
       }
-      if (itemsToShow.value > 1)
-        (_a = elRef.value) == null ? void 0 : _a.scrollTo({
-          left: index * itemWidth.value,
-          behavior: "smooth"
-        });
-      else
-        items.value[index].scrollIntoView({ behavior: "smooth" });
+      (_a = elRef.value) == null ? void 0 : _a.scrollTo({
+        left: index * itemWidth.value,
+        behavior: "smooth"
+      });
       activeIndex.value = index;
     }
     const hasPrev = computed(() => {
@@ -181,7 +191,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
     onBeforeUnmount(() => {
       observer.disconnect();
     });
-    const __returned__ = { props, activeIndex, elRef, startX, slideX, delta, itemWidth, items, addItem, pointerStart, pointerMove, pointerUp, intervalFn, mouseEnter, mouseLeave, scrollTimeout, onScrollFinished, itemsToShow, scrollTo, hasPrev, hasNext, prev, next, refresh, observer };
+    const __returned__ = { props, dragging, activeIndex, elRef, startX, slideX, delta, itemWidth, items, addItem, eventMoveType, eventEndType, pointerStart, pointerMove, pointerUp, intervalFn, mouseEnter, mouseLeave, scrollTimeout, onScrollFinished, itemsToShow, scrollTo, hasPrev, hasNext, prev, next, refresh, observer };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
@@ -215,21 +225,23 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
   setup(__props, { expose }) {
     expose();
     const { addItem } = inject(CarouselKey);
-    const instance = getCurrentInstance();
+    const itemRef = ref();
     onMounted(() => {
-      var _a;
-      addItem((_a = instance == null ? void 0 : instance.proxy) == null ? void 0 : _a.$el);
+      addItem(itemRef.value);
     });
-    const __returned__ = { addItem, instance };
+    const __returned__ = { addItem, itemRef };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
 });
-const _hoisted_1$1 = { class: "carousel-item" };
+const _hoisted_1$1 = {
+  ref: "itemRef",
+  class: "carousel-item"
+};
 function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("div", _hoisted_1$1, [
     renderSlot(_ctx.$slots, "default")
-  ]);
+  ], 512);
 }
 _sfc_main$1.__file = "components/base/carousel/CarouselItem.vue";
 var CarouselItem = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["__scopeId", "data-v-3aa017bf"], ["__file", "D:/projects/my-components/components/base/carousel/CarouselItem.vue"]]);
@@ -368,7 +380,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
               (openBlock(), createElementBlock(Fragment, null, renderList($setup.items, (item, index) => {
                 return createVNode($setup["CarouselItem"], {
                   key: item.title,
-                  class: "w-1/3 md:w-1/4 px-3 lg:w-1/5 xl:w-1/6"
+                  class: "w-1/3 md:w-1/4 px-3 lg:w-1/5 xl:w-1/6 select-none"
                 }, {
                   default: withCtx(() => [
                     createBaseVNode("div", _hoisted_9, [
