@@ -137,7 +137,9 @@ const items = [
         <CarouselItem
           v-for="(color, index) in colors"
           :key="color"
-          :class="[`item-${color} text-center py-4 text-white basis-full`]"
+          :class="[
+            `item-${color} text-center py-4 text-white basis-full select-none`,
+          ]"
         >
           {{ index }} - {{ activeIndex }}
         </CarouselItem>
@@ -186,7 +188,7 @@ const items = [
           <CarouselItem
             v-for="(item, index) in items"
             :key="item.title"
-            class="basis-[25%] w-1/4 relative"
+            class="basis-[25%] w-1/4 relative select-none"
           >
             <img :src="item.image" />
             <span

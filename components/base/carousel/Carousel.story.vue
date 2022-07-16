@@ -124,7 +124,7 @@ const items = [
           <CarouselItem
             v-for="(item, index) in items"
             :key="item.title"
-            class="w-1/3 md:w-1/4 px-3 lg:w-1/5 xl:w-1/6"
+            class="w-1/3 md:w-1/4 px-3 lg:w-1/5 xl:w-1/6 select-none"
           >
             <div class="relative bg-gray-400" style="padding-bottom: 56.25%">
               <img
