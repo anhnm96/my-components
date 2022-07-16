@@ -24,6 +24,7 @@ const props = defineProps({
   },
 })
 
+const dragging = ref(false)
 const activeIndex = ref(props.initialIndex)
 const elRef = ref<HTMLElement>()
 const startX = ref()
@@ -42,6 +43,7 @@ provide(CarouselKey, { addItem })
 const eventMoveType = ref('')
 const eventEndType = ref('')
 function pointerStart(e: PointerEvent) {
+  dragging.value = true
   if (e.pointerType === 'mouse') {
     eventMoveType.value = 'pointermove'
     eventEndType.value = 'pointerup'
@@ -66,6 +68,7 @@ function pointerMove(e: any) {
 }
 
 function pointerUp() {
+  dragging.value = false
   window.removeEventListener(eventMoveType.value, pointerMove)
   window.removeEventListener(eventEndType.value, pointerUp)
   if (delta.value !== 0) {
@@ -103,6 +106,7 @@ function mouseLeave() {
 
 let scrollTimeout: NodeJS.Timeout
 function onScrollFinished() {
+  if (dragging.value) return
   clearTimeout(scrollTimeout)
   scrollTimeout = setTimeout(() => {
     const newIndex = Math.round(elRef.value!.scrollLeft / itemWidth.value)
@@ -138,10 +142,10 @@ function scrollTo(index: number) {
     if (props.repeat || props.autoplay) index = items.value.length - 1
     else return
   }
-    elRef.value?.scrollTo({
-      left: index * itemWidth.value,
-      behavior: 'smooth',
-    })
+  elRef.value?.scrollTo({
+    left: index * itemWidth.value,
+    behavior: 'smooth',
+  })
   activeIndex.value = index
 }
 
