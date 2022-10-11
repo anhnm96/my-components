@@ -6,4 +6,16 @@ export default defineConfig({
   vite: {
     base: '/my-components/',
   },
+  tree: {
+    groups: [
+      {
+        title: 'Components',
+        include: (file) => file.path.includes('base'),
+      },
+      {
+        title: 'Tailwind',
+        include: (file) => file.path.includes('tailwind'),
+      },
+    ],
+  },
 })

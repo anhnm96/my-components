@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Carousel from '~~/components/base/carousel/Carousel.vue'
 import CarouselItem from '~~/components/base/carousel/CarouselItem.vue'
+import GlowingBackground from '~~/components/tailwind/GlowingBackground.story.vue'
 const loading = ref(false)
 function click() {
   loading.value = true
@@ -200,6 +201,7 @@ const items = [
         </template>
       </Carousel>
     </div>
+    <GlowingBackground />
   </div>
 </template>
 
