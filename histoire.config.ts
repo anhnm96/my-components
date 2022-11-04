@@ -5,6 +5,9 @@ export default defineConfig({
   plugins: [HstNuxt()],
   vite: {
     base: '/my-components/',
+    server: {
+      port: 4000,
+    },
   },
   tree: {
     groups: [

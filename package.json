@@ -7,7 +7,7 @@
     "preview": "nuxt preview",
     "lint:fix": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "test:unit": "vitest",
-    "story:dev": "histoire dev --port 4000",
+    "story:dev": "histoire dev",
     "story:build": "histoire build",
     "story:preview": "histoire preview",
     "deploy": "gh-pages -d .histoire/dist"
