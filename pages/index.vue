@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import Carousel from '~~/components/base/carousel/Carousel.vue'
 import CarouselItem from '~~/components/base/carousel/CarouselItem.vue'
-import GlowingBackground from '~~/components/tailwind/backgrounds/GlowingBackground.story.vue'
+import GlowingBackground from '~~/components/tailwind/backgrounds/GlowingBackground.vue'
+import ThreeDCard from '~~/components/tailwind/cards/3d-card.vue'
 const loading = ref(false)
 function click() {
   loading.value = true
@@ -202,6 +203,7 @@ const items = [
       </Carousel>
     </div>
     <GlowingBackground />
+    <ThreeDCard />
   </div>
 </template>
 
