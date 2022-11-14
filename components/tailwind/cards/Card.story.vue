@@ -1,11 +1,15 @@
 <script lang="ts" setup>
 import ThreeDCard from './3d-card.vue'
+import LineClamp from './LineClamp.vue'
 </script>
 
 <template>
-  <Story title="3d card">
-    <Variant>
+  <Story title="Cards">
+    <Variant title="3d card">
       <ThreeDCard />
+    </Variant>
+    <Variant title="Number of lines">
+      <LineClamp />
     </Variant>
   </Story>
 </template>
