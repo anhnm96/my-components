@@ -1,4 +1,17 @@
 /**
+ * Promised `setTimeout`
+ *
+ * @category Promise
+ */
+export function sleep(ms: number) {
+  return new Promise<void>((resolve) =>
+    setTimeout(() => {
+      resolve()
+    }, ms)
+  )
+}
+
+/**
  * Promise with `resolve` and `reject` methods of itself
  */
 export interface ControlledPromise<T = void> extends Promise<T> {
