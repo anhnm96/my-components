@@ -2,7 +2,7 @@ import { changeTracker } from './useTracker'
 
 describe('changeTracker', () => {
   it('should detect changed properties', () => {
-    const obj = { a: 'a' }
+    const obj: Record<string, any> = { a: 'a' }
     changeTracker.track(obj)
     obj.a = 'a'
     obj.b = 'c'
@@ -11,7 +11,7 @@ describe('changeTracker', () => {
   })
 
   it('should produce changed partial object', () => {
-    const obj = { a: 'a' }
+    const obj: Record<string, any> = { a: 'a' }
     changeTracker.track(obj)
     obj.a = 'a'
     obj.b = 'c'
