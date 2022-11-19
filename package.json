@@ -23,6 +23,7 @@
     "@vue/test-utils": "^2.0.0",
     "@vueuse/core": "^9.4.0",
     "@vueuse/nuxt": "^9.4.0",
+    "@vueuse/router": "^9.5.0",
     "eslint": "^8.17.0",
     "gh-pages": "^4.0.0",
     "happy-dom": "^7.6.6",

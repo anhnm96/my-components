@@ -10,6 +10,7 @@ specifiers:
   '@vue/test-utils': ^2.0.0
   '@vueuse/core': ^9.4.0
   '@vueuse/nuxt': ^9.4.0
+  '@vueuse/router': ^9.5.0
   eslint: ^8.17.0
   gh-pages: ^4.0.0
   happy-dom: ^7.6.6
@@ -30,6 +31,7 @@ devDependencies:
   '@vue/test-utils': 2.2.1
   '@vueuse/core': 9.4.0
   '@vueuse/nuxt': 9.4.0_nuxt@3.0.0-rc.13
+  '@vueuse/router': 9.5.0
   eslint: 8.27.0
   gh-pages: 4.0.0
   happy-dom: 7.6.6
@@ -1626,7 +1628,7 @@ packages:
     peerDependencies:
       vue: '>=2.7 || >=3'
     dependencies:
-      '@vueuse/shared': 9.4.0_vue@3.2.41
+      '@vueuse/shared': 9.5.0_vue@3.2.41
       '@zhead/schema': 0.9.9
       '@zhead/schema-vue': 0.9.9_vue@3.2.41
       vue: 3.2.41
@@ -1656,6 +1658,18 @@ packages:
       - vue
     dev: true
 
+  /@vueuse/router/9.5.0:
+    resolution: {integrity: sha512-OtgV3iqC3CqbnXVy98Lv3PMf5exr/jntjxRDnAetsV+VAG9ipuzna3JW95KntW1m6I5EEsuQYdU3MXtCvvNlKQ==}
+    peerDependencies:
+      vue-router: '>=4.0.0-rc.1'
+    dependencies:
+      '@vueuse/shared': 9.5.0
+      vue-demi: 0.13.11
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
+    dev: true
+
   /@vueuse/shared/9.4.0:
     resolution: {integrity: sha512-fTuem51KwMCnqUKkI8B57qAIMcFovtGgsCtAeqxIzH3i6nE9VYge+gVfneNHAAy7lj8twbkNfqQSygOPJTm4tQ==}
     dependencies:
@@ -1665,8 +1679,17 @@ packages:
       - vue
     dev: true
 
-  /@vueuse/shared/9.4.0_vue@3.2.41:
-    resolution: {integrity: sha512-fTuem51KwMCnqUKkI8B57qAIMcFovtGgsCtAeqxIzH3i6nE9VYge+gVfneNHAAy7lj8twbkNfqQSygOPJTm4tQ==}
+  /@vueuse/shared/9.5.0:
+    resolution: {integrity: sha512-HnnCWU1Vg9CVWRCcI8ohDKDRB2Sc4bTgT1XAIaoLSfVHHn+TKbrox6pd3klCSw4UDxkhDfOk8cAdcK+Z5KleCA==}
+    dependencies:
+      vue-demi: 0.13.11
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
+    dev: true
+
+  /@vueuse/shared/9.5.0_vue@3.2.41:
+    resolution: {integrity: sha512-HnnCWU1Vg9CVWRCcI8ohDKDRB2Sc4bTgT1XAIaoLSfVHHn+TKbrox6pd3klCSw4UDxkhDfOk8cAdcK+Z5KleCA==}
     dependencies:
       vue-demi: 0.13.11_vue@3.2.41
     transitivePeerDependencies:
@@ -1679,7 +1702,7 @@ packages:
     peerDependencies:
       vue: '>=2.7 || >=3'
     dependencies:
-      '@vueuse/shared': 9.4.0_vue@3.2.41
+      '@vueuse/shared': 9.5.0_vue@3.2.41
       '@zhead/schema': 0.9.9
       vue: 3.2.41
     transitivePeerDependencies:

@@ -2,4 +2,18 @@
 export default defineNuxtConfig({
   ssr: false,
   modules: ['@nuxtjs/tailwindcss', '@vueuse/nuxt'],
+  components: {
+    dirs: [
+      {
+        path: '~/components/base',
+        extensions: ['vue'],
+        prefix: 'base',
+      },
+      {
+        path: '~/components/custom',
+        extensions: ['vue'],
+        prefix: '',
+      },
+    ],
+  },
 })
