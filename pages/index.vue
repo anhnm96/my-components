@@ -55,34 +55,34 @@ const items = [
     <div>
       <h1 class="text-red-400">Hello world</h1>
       <BaseButton
-        class="px-2 py-1 text-white bg-purple-600 rounded"
+        class="rounded bg-purple-600 px-2 py-1 text-white"
         loading
         @click="click"
       >
         Button
       </BaseButton>
       <BaseButton
-        class="px-2 py-1 text-white bg-purple-600 rounded"
+        class="rounded bg-purple-600 px-2 py-1 text-white"
         disabled
         @click="click"
       >
         Disabled
       </BaseButton>
       <BaseButton
-        class="px-2 py-1 text-white bg-purple-600 rounded"
+        class="rounded bg-purple-600 px-2 py-1 text-white"
         aria-disabled="true"
         @click="click"
       >
         aira-disabled
       </BaseButton>
       <BaseButton
-        class="px-2 py-1 text-white bg-purple-600 rounded"
+        class="rounded bg-purple-600 px-2 py-1 text-white"
         @click="click"
       >
         Normal
       </BaseButton>
       <BaseButton
-        class="items-center justify-between px-2 py-1 text-white bg-purple-600 rounded"
+        class="items-center justify-between rounded bg-purple-600 px-2 py-1 text-white"
         :loading="loading"
         @click="click"
       >
@@ -98,7 +98,7 @@ const items = [
     <div class="mt-5 space-x-2">
       <button class="btn bg-info">Test</button>
       <button class="btn">Test</button>
-      <button class="btn bg-purple-600 btn-lg">Test</button>
+      <button class="btn btn-lg bg-purple-600">Test</button>
       <button class="btn btn-link">Link</button>
       <button class="btn btn-outline">Test</button>
       <button class="btn btn-outline btn-info">Test</button>
@@ -141,22 +141,22 @@ const items = [
           v-for="(color, index) in colors"
           :key="color"
           :class="[
-            `item-${color} text-center py-4 text-white basis-full select-none`,
+            `item-${color} basis-full select-none py-4 text-center text-white`,
           ]"
         >
           {{ index }} - {{ activeIndex }}
         </CarouselItem>
         <div
-          class="absolute top-1/2 w-full -translate-y-1/2 flex justify-between pointer-events-none"
+          class="pointer-events-none absolute top-1/2 flex w-full -translate-y-1/2 justify-between"
         >
           <button
-            class="w-10 h-10 rounded-full bg-gray-300 bg-opacity-50 pointer-events-auto"
+            class="pointer-events-auto h-10 w-10 rounded-full bg-gray-300 bg-opacity-50"
             @click="scrollTo(activeIndex - 1)"
           >
             &lt;
           </button>
           <button
-            class="w-10 h-10 rounded-full bg-gray-300 bg-opacity-50 pointer-events-auto"
+            class="pointer-events-auto h-10 w-10 rounded-full bg-gray-300 bg-opacity-50"
             @click="scrollTo(activeIndex + 1)"
           >
             >
@@ -191,11 +191,11 @@ const items = [
           <CarouselItem
             v-for="(item, index) in items"
             :key="item.title"
-            class="basis-[25%] w-1/4 relative select-none"
+            class="relative w-1/4 basis-[25%] select-none"
           >
             <img :src="item.image" />
             <span
-              class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-4xl text-red-500 font-bold"
+              class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-4xl font-bold text-red-500"
             >
               {{ `${index} - ${activeIndex}` }}
             </span>

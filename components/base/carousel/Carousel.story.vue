@@ -75,21 +75,21 @@ const items = [
         <CarouselItem
           v-for="(color, index) in colors"
           :key="color"
-          :class="[`item-${color} text-center py-4 text-white basis-full`]"
+          :class="[`item-${color} basis-full py-4 text-center text-white`]"
         >
           {{ index }} - {{ activeIndex }}
         </CarouselItem>
         <div
-          class="absolute top-1/2 w-full -translate-y-1/2 flex justify-between pointer-events-none"
+          class="pointer-events-none absolute top-1/2 flex w-full -translate-y-1/2 justify-between"
         >
           <button
-            class="w-10 h-10 rounded-full bg-gray-300 bg-opacity-50 pointer-events-auto"
+            class="pointer-events-auto h-10 w-10 rounded-full bg-gray-300 bg-opacity-50"
             @click="scrollTo(activeIndex - 1)"
           >
             &lt;
           </button>
           <button
-            class="w-10 h-10 rounded-full bg-gray-300 bg-opacity-50 pointer-events-auto"
+            class="pointer-events-auto h-10 w-10 rounded-full bg-gray-300 bg-opacity-50"
             @click="scrollTo(activeIndex + 1)"
           >
             >
@@ -124,7 +124,7 @@ const items = [
           <CarouselItem
             v-for="(item, index) in items"
             :key="item.title"
-            class="w-1/3 md:w-1/4 px-3 lg:w-1/5 xl:w-1/6 select-none"
+            class="w-1/3 select-none px-3 md:w-1/4 lg:w-1/5 xl:w-1/6"
           >
             <div class="relative bg-gray-400" style="padding-bottom: 56.25%">
               <img
@@ -133,7 +133,7 @@ const items = [
                 :alt="item.title"
               />
               <span
-                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-xl text-red-500 font-bold"
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-xl font-bold text-red-500"
               >
                 {{ `${index} - ${activeIndex}` }}
               </span>

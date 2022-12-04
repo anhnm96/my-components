@@ -4,19 +4,19 @@
 </script>
 
 <template>
-  <div class="px-8 py-32 bg-black">
-    <div class="grid gap-8 items-start justify-center">
-      <div class="relative group">
+  <div class="bg-black px-8 py-32">
+    <div class="grid items-start justify-center gap-8">
+      <div class="group relative">
         <div
-          class="absolute -inset-0.5 bg-gradient-to-r from-pink-600 to-purple-600 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt"
+          class="absolute -inset-0.5 animate-tilt rounded-lg bg-gradient-to-r from-pink-600 to-purple-600 opacity-75 blur transition duration-1000 group-hover:opacity-100 group-hover:duration-200"
         ></div>
         <button
-          class="relative px-7 py-4 bg-black rounded-lg leading-none flex items-center divide-x divide-gray-600"
+          class="relative flex items-center divide-x divide-gray-600 rounded-lg bg-black px-7 py-4 leading-none"
         >
           <span class="flex items-center space-x-5">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 text-pink-600 -rotate-6"
+              class="h-6 w-6 -rotate-6 text-pink-600"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -31,7 +31,7 @@
             <span class="pr-6 text-gray-100">Labs Release 2021.09</span>
           </span>
           <span
-            class="pl-6 text-indigo-400 group-hover:text-gray-100 transition duration-200"
+            class="pl-6 text-indigo-400 transition duration-200 group-hover:text-gray-100"
             >See what's new &rarr;</span
           >
         </button>

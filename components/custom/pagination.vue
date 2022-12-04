@@ -133,10 +133,10 @@ function getPage(num: number) {
 
 <style scoped>
 .btn-page {
-  @apply w-9 h-9 justify-center text-gray-800 inline-flex items-center;
+  @apply inline-flex h-9 w-9 items-center justify-center text-gray-800;
 }
 
 .btn-page--active {
-  @apply bg-gray-100 text-gray-600 rounded-full;
+  @apply rounded-full bg-gray-100 text-gray-600;
 }
 </style>

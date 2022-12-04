@@ -23,13 +23,13 @@ const cardTransform = computed(() => {
 <template>
   <div
     ref="target"
-    class="max-w-[400px] mx-auto p-8 rounded shadow-2xl bg-charcoal-600 card text-white"
+    class="card mx-auto max-w-[400px] rounded bg-charcoal-600 p-8 text-white shadow-2xl"
   >
     <h1 class="mb-2 text-2xl font-bold">B.S. Meeting Notes 🥴</h1>
     <section class="flex items-center">
       <img
         src="https://learnvue.co/img/matt-maribojoc.png"
-        class="w-8 h-8 mr-4 rounded"
+        class="mr-4 h-8 w-8 rounded"
       />
       <h2 class="font-2xl">@mattmaribojoc</h2>
     </section>

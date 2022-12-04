@@ -51,6 +51,6 @@ button {
 
 button:disabled,
 button[aria-disabled='true'] {
-  @apply opacity-70 cursor-not-allowed;
+  @apply cursor-not-allowed opacity-70;
 }
 </style>

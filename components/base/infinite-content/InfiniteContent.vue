@@ -17,16 +17,16 @@ useInfiniteScroll(
 <template>
   <div class="text-gray-400">
     <div
-      class="fixed p-2 text-xl rounded shadow-lg top-4 left-4 bg-green text-medium"
+      class="bg-green text-medium fixed top-4 left-4 rounded p-2 text-xl shadow-lg"
     >
       Loaded items: {{ data.length }}
     </div>
-    <div class="h-screen p-2 rounded" v-bind="containerProps">
-      <div v-bind="wrapperProps" class="max-w-sm mx-auto">
+    <div class="h-screen rounded p-2" v-bind="containerProps">
+      <div v-bind="wrapperProps" class="mx-auto max-w-sm">
         <div
           v-for="{ index, data: dt } in list"
           :key="index"
-          class="flex flex-col h-[80px] justify-center px-4 mb-4 rounded-lg bg-neutral-800 border-neutral-600"
+          class="mb-4 flex h-[80px] flex-col justify-center rounded-lg border-neutral-600 bg-neutral-800 px-4"
         >
           <h2 class="mb-2 text-2xl">Item #{{ index }}</h2>
           <p class="text-sm">{{ dt }}</p>

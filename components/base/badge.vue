@@ -12,7 +12,7 @@ defineEmits(['close'])
     <slot />
     <button
       v-if="icon"
-      class="flex-shrink-0 ml-0.5 h-4 w-4 rounded-full inline-flex items-center justify-center"
+      class="ml-0.5 inline-flex h-4 w-4 flex-shrink-0 items-center justify-center rounded-full"
       @click="$emit('close')"
     >
       <span v-if="actionLabel" class="sr-only">{{ actionLabel }}</span>
