@@ -15,6 +15,8 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.29.3",
+    "@commitlint/cli": "^17.3.0",
+    "@commitlint/config-conventional": "^17.3.0",
     "@histoire/plugin-nuxt": "^0.11.6",
     "@histoire/plugin-vue": "^0.11.6",
     "@nuxt/test-utils-edge": "3.0.0-rc.4-27585508.c9d4b2e",
@@ -29,6 +31,7 @@
     "gh-pages": "^4.0.0",
     "happy-dom": "^7.6.6",
     "histoire": "^0.11.6",
+    "husky": "^8.0.2",
     "nuxt": "3.0.0-rc.13",
     "prettier": "^2.7.0",
     "prettier-plugin-tailwindcss": "^0.1.11",
