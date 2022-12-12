@@ -5,5 +5,7 @@
     "strict": true,
     "strictNullChecks": true,
     "types": ["vite/client", "vitest/globals"]
-  }
+  },
+  // "exclude": ["./cypress.config.ts", "*.cy.ts", "./cypress/*"]
+  "exclude": ["./cypress.config.ts", "./cypress/*"]
 }
