@@ -1,6 +1,7 @@
-import { d as defineComponent, r as ref, av as provide, aw as useIntervalFn, p as onMounted, as as onBeforeUnmount, c as computed, ax as _export_sfc, a as openBlock, b as createElementBlock, f as renderSlot, e as createBaseVNode, n as normalizeClass, ay as inject, q as resolveComponent, j as createBlock, k as withCtx, l as createVNode, J as renderList, F as Fragment, R as createTextVNode, t as toDisplayString } from "./vendor.d2da194d.js";
+import { ar as defineComponent, aE as ref, aF as provide, aG as useIntervalFn, aH as onMounted, aI as onBeforeUnmount, aJ as computed, as as openBlock, at as createElementBlock, ay as renderSlot, au as createBaseVNode, av as normalizeClass, aK as inject, aB as resolveComponent, aw as createBlock, ax as withCtx, aC as createVNode, aL as renderList, aM as Fragment, aD as createTextVNode, aN as toDisplayString } from "./vendor.57cb7ace.js";
+import { _ as _export_sfc } from "./_plugin-vue_export-helper.cdc0426e.js";
 const CarouselKey = Symbol("Carousel");
-var Carousel_vue_vue_type_style_index_0_scoped_true_lang = /* @__PURE__ */ (() => ".carousel[data-v-3fd3d40c]{-ms-overflow-style:none;display:flex;overflow-x:auto;scrollbar-width:none;width:100%}.carousel[data-v-3fd3d40c]::-webkit-scrollbar{display:none}.scroll-snap[data-v-3fd3d40c]{-ms-scroll-snap-type:x mandatory;scroll-snap-type:x mandatory}")();
+const Carousel_vue_vue_type_style_index_0_scoped_f9ce7289_lang = "";
 const _sfc_main$2 = /* @__PURE__ */ defineComponent({
   __name: "Carousel",
   props: {
@@ -191,7 +192,19 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
     onBeforeUnmount(() => {
       observer.disconnect();
     });
-    const __returned__ = { props, dragging, activeIndex, elRef, startX, slideX, delta, itemWidth, items, addItem, eventMoveType, eventEndType, pointerStart, pointerMove, pointerUp, intervalFn, mouseEnter, mouseLeave, scrollTimeout, onScrollFinished, itemsToShow, scrollTo, hasPrev, hasNext, prev, next, refresh, observer };
+    const __returned__ = { props, dragging, activeIndex, elRef, startX, slideX, delta, itemWidth, items, addItem, eventMoveType, eventEndType, pointerStart, pointerMove, pointerUp, get intervalFn() {
+      return intervalFn;
+    }, set intervalFn(v) {
+      intervalFn = v;
+    }, mouseEnter, mouseLeave, get scrollTimeout() {
+      return scrollTimeout;
+    }, set scrollTimeout(v) {
+      scrollTimeout = v;
+    }, onScrollFinished, itemsToShow, scrollTo, hasPrev, hasNext, prev, next, refresh, get observer() {
+      return observer;
+    }, set observer(v) {
+      observer = v;
+    } };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
@@ -218,8 +231,8 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
   ], 32);
 }
 _sfc_main$2.__file = "components/base/carousel/Carousel.vue";
-var Carousel = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$2], ["__scopeId", "data-v-3fd3d40c"], ["__file", "D:/projects/my-components/components/base/carousel/Carousel.vue"]]);
-var CarouselItem_vue_vue_type_style_index_0_scoped_true_lang = /* @__PURE__ */ (() => ".carousel-item[data-v-3aa017bf]{flex-shrink:0;scroll-snap-align:start}.carousel-item img[data-v-3aa017bf-s]{pointer-events:none}")();
+const Carousel = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$2], ["__scopeId", "data-v-f9ce7289"], ["__file", "D:/projects/my-components/components/base/carousel/Carousel.vue"]]);
+const CarouselItem_vue_vue_type_style_index_0_scoped_3e74529a_lang = "";
 const _sfc_main$1 = /* @__PURE__ */ defineComponent({
   __name: "CarouselItem",
   setup(__props, { expose }) {
@@ -244,8 +257,8 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
   ], 512);
 }
 _sfc_main$1.__file = "components/base/carousel/CarouselItem.vue";
-var CarouselItem = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["__scopeId", "data-v-3aa017bf"], ["__file", "D:/projects/my-components/components/base/carousel/CarouselItem.vue"]]);
-var Carousel_story_vue_vue_type_style_index_0_lang = /* @__PURE__ */ (() => ".item-red{background-color:red}.item-green{background-color:green}.item-blue{background-color:blue}.item-gray{background-color:gray}")();
+const CarouselItem = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["__scopeId", "data-v-3e74529a"], ["__file", "D:/projects/my-components/components/base/carousel/CarouselItem.vue"]]);
+const Carousel_story_vue_vue_type_style_index_0_lang = "";
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "Carousel.story",
   setup(__props, { expose }) {
@@ -306,7 +319,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     return __returned__;
   }
 });
-const _hoisted_1 = { class: "absolute top-1/2 w-full -translate-y-1/2 flex justify-between pointer-events-none" };
+const _hoisted_1 = { class: "pointer-events-none absolute top-1/2 flex w-full -translate-y-1/2 justify-between" };
 const _hoisted_2 = ["onClick"];
 const _hoisted_3 = ["onClick"];
 const _hoisted_4 = { class: "flex justify-between text-white" };
@@ -319,7 +332,7 @@ const _hoisted_9 = {
   style: { "padding-bottom": "56.25%" }
 };
 const _hoisted_10 = ["src", "alt"];
-const _hoisted_11 = { class: "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-xl text-red-500 font-bold" };
+const _hoisted_11 = { class: "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-xl font-bold text-red-500" };
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_Variant = resolveComponent("Variant");
   const _component_Story = resolveComponent("Story");
@@ -332,7 +345,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
               (openBlock(), createElementBlock(Fragment, null, renderList($setup.colors, (color, index) => {
                 return createVNode($setup["CarouselItem"], {
                   key: color,
-                  class: normalizeClass([`item-${color} text-center py-4 text-white basis-full`])
+                  class: normalizeClass([`item-${color} basis-full py-4 text-center text-white`])
                 }, {
                   default: withCtx(() => [
                     createTextVNode(toDisplayString(index) + " - " + toDisplayString(activeIndex), 1)
@@ -342,11 +355,11 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
               }), 64)),
               createBaseVNode("div", _hoisted_1, [
                 createBaseVNode("button", {
-                  class: "w-10 h-10 rounded-full bg-gray-300 bg-opacity-50 pointer-events-auto",
+                  class: "pointer-events-auto h-10 w-10 rounded-full bg-gray-300 bg-opacity-50",
                   onClick: ($event) => scrollTo(activeIndex - 1)
                 }, " < ", 8, _hoisted_2),
                 createBaseVNode("button", {
-                  class: "w-10 h-10 rounded-full bg-gray-300 bg-opacity-50 pointer-events-auto",
+                  class: "pointer-events-auto h-10 w-10 rounded-full bg-gray-300 bg-opacity-50",
                   onClick: ($event) => scrollTo(activeIndex + 1)
                 }, " > ", 8, _hoisted_3)
               ])
@@ -380,7 +393,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
               (openBlock(), createElementBlock(Fragment, null, renderList($setup.items, (item, index) => {
                 return createVNode($setup["CarouselItem"], {
                   key: item.title,
-                  class: "w-1/3 md:w-1/4 px-3 lg:w-1/5 xl:w-1/6 select-none"
+                  class: "w-1/3 select-none px-3 md:w-1/4 lg:w-1/5 xl:w-1/6"
                 }, {
                   default: withCtx(() => [
                     createBaseVNode("div", _hoisted_9, [
@@ -406,5 +419,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   });
 }
 _sfc_main.__file = "components/base/carousel/Carousel.story.vue";
-var Carousel_story = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/projects/my-components/components/base/carousel/Carousel.story.vue"]]);
-export { Carousel_story as default };
+const Carousel_story = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/projects/my-components/components/base/carousel/Carousel.story.vue"]]);
+export {
+  Carousel_story as default
+};

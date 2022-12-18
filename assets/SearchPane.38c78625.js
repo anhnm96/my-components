@@ -1,10 +1,9 @@
-import { _ as __vitePreload } from "./mapping.9be4b5ef.js";
-import { Z as markRaw, d as defineComponent, r as ref, a3 as useFocus, w as watch, a4 as refDebounced, c as computed, a as openBlock, b as createElementBlock, e as createBaseVNode, l as createVNode, i as unref, I as Icon, M as withDirectives, a5 as vModelText, v as withKeys, g as withModifiers, j as createBlock, k as withCtx, F as Fragment, J as renderList, m as createCommentVNode, R as createTextVNode, a6 as flexsearch, Q as useCssVars, a7 as toRefs, a8 as useRouter, n as normalizeClass, t as toDisplayString } from "./vendor.d2da194d.js";
-import { u as useStoryStore, _ as _export_sfc, a as useScrollOnActive, o as onKeyboardShortcut, B as BaseListItemLink } from "./bundle-main.a6883b99.js";
-import { B as BaseEmpty } from "./BaseEmpty.41ebc01c.js";
-let searchData$1 = { "index": { "reg": '{"0":1,"1":1,"2":1,"3":1,"4":1,"5":1,"6":1,"7":1,"8":1,"9":1,"10":1,"11":1,"12":1,"13":1,"14":1,"15":1,"16":1,"17":1,"18":1,"19":1}', "text.cfg": '{"doc":0,"opt":1}', "text.map": '[{"k":[0,1,2],"ka":[0,1,2],"kar":[0,1,2],"karo":[0,1,2],"karos":[0,1,2],"karose":[0,1,2],"karosel":[0,1,2],"t":[3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19],"ta":[3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19],"tal":[3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19],"talf":[3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19],"talfe":[3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19],"talfem":[3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19],"talfemt":[3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]},{"ko":[1],"kom":[1],"komo":[1],"komom":[1],"l":[2,12,13],"le":[2,12,13],"les":[2],"lest":[2],"p":[4,6,7,15,16],"pa":[4,7],"pak":[4],"pakr":[4],"pakro":[4],"pakrom":[4],"pakromt":[4],"te":[5],"tes":[5],"test":[5],"po":[6,15,16],"por":[6,15,16],"port":[6,15,16],"porte":[6,15,16],"porter":[6,15,16],"pat":[7],"pate":[7],"patem":[7],"patemk":[7],"m":[8],"ma":[8],"mar":[8],"mark":[8],"marke":[8],"markem":[8],"f":[9,10,11,17,19],"fo":[9,10,11,19],"fom":[9,10,11],"fomt":[9,10,11],"let":[12],"lete":[12],"leter":[12],"lem":[13],"leme":[13],"tr":[14],"tro":[14],"trop":[14],"fe":[17],"fet":[17],"e":[18],"ek":[18],"ekt":[18],"fol":[19]},{"k":[4,5,6,19],"ko":[4,5,6,19],"kol":[4,5,6],"kolo":[4,5,6],"kolor":[4,5,6],"s":[9,12,14],"se":[9],"ses":[9],"sese":[9],"fe":[10,16],"fek":[10],"fekt":[10],"fa":[11],"fam":[11],"fame":[11],"famel":[11],"famele":[11],"sp":[12],"spa":[12],"spak":[12],"spake":[12],"spakem":[12],"spakemk":[12],"e":[13],"ek":[13],"ekt":[13],"sa":[14],"sat":[14],"sato":[14],"satof":[14],"r":[15],"ra":[15],"rat":[15],"rate":[15],"rateo":[15],"rateos":[15],"f":[16],"fet":[16],"kom":[19],"komf":[19],"komfe":[19],"komfek":[19]},{},{},{},{},{},{}]', "text.ctx": "[{}]" }, "idMap": { "0": { "id": "components-base-carousel-carousel-story-vue", "kind": "story" }, "1": { "id": "components-base-carousel-carousel-story-vue:components-base-carousel-carousel-story-vue-0", "kind": "variant" }, "2": { "id": "components-base-carousel-carousel-story-vue:components-base-carousel-carousel-story-vue-1", "kind": "variant" }, "3": { "id": "tailwind", "kind": "story" }, "4": { "id": "tailwind:background-color", "kind": "variant" }, "5": { "id": "tailwind:text-color", "kind": "variant" }, "6": { "id": "tailwind:border-color", "kind": "variant" }, "7": { "id": "tailwind:padding", "kind": "variant" }, "8": { "id": "tailwind:margin", "kind": "variant" }, "9": { "id": "tailwind:font-size", "kind": "variant" }, "10": { "id": "tailwind:font-weight", "kind": "variant" }, "11": { "id": "tailwind:font-family", "kind": "variant" }, "12": { "id": "tailwind:letter-spacing", "kind": "variant" }, "13": { "id": "tailwind:line-height", "kind": "variant" }, "14": { "id": "tailwind:drop-shadow", "kind": "variant" }, "15": { "id": "tailwind:border-radius", "kind": "variant" }, "16": { "id": "tailwind:border-width", "kind": "variant" }, "17": { "id": "tailwind:width", "kind": "variant" }, "18": { "id": "tailwind:height", "kind": "variant" }, "19": { "id": "tailwind:full-config", "kind": "variant" } } };
+import { _ as __vitePreload } from "./GenericMountStory.vue_vue_type_script_setup_true_lang.9525fc72.js";
+import { d as defineComponent, u as useCssVars, k as ref, a5 as toRefs, a6 as useRouter, o as openBlock, l as createElementBlock, p as createVNode, w as withCtx, h as unref, I as Icon, n as normalizeClass, a as createBaseVNode, M as createTextVNode, t as toDisplayString, F as Fragment, B as renderList, c as createBlock, q as createCommentVNode, $ as markRaw, aU as useFocus, f as watch, aV as refDebounced, i as computed, K as withDirectives, a8 as vModelText, b as withKeys, D as withModifiers, aW as flexsearch_bundle } from "./vendor.57cb7ace.js";
+import { u as useScrollOnActive, o as onKeyboardShortcut, B as BaseListItemLink, _ as _export_sfc, a as useStoryStore } from "./bundle-main.2f4c69ba.js";
+import { B as BaseEmpty } from "./BaseEmpty.36181800.js";
 function pipeline(a, b, c, d) {
-  if (a && (b && (a = replace(a, b)), this.matcher && (a = replace(a, this.matcher)), this.stemmer && 1 < a.length && (a = replace(a, this.stemmer)), d && 1 < a.length && (a = collapse(a)), c || c === "")) {
+  if (a && (b && (a = replace(a, b)), this.matcher && (a = replace(a, this.matcher)), this.stemmer && 1 < a.length && (a = replace(a, this.stemmer)), d && 1 < a.length && (a = collapse(a)), c || "" === c)) {
     const b2 = a.split(c);
     return this.filter ? filter$1(b2, this.filter) : b2;
   }
@@ -61,7 +60,7 @@ function encode$1(a) {
   }
   return b;
 }
-var charset = { encode, rtl: false, tokenize: "" };
+const charset = { encode, rtl: false, tokenize: "" };
 const regex_ae = regex("ae"), regex_oe = regex("oe"), regex_sh = regex("sh"), regex_th = regex("th"), regex_ph = regex("ph"), regex_pf = regex("pf"), pairs = [regex_ae, "a", regex_oe, "o", regex_sh, "s", regex_th, "t", regex_ph, "f", regex_pf, "f", regex("(?![aeo])h(?![aeo])"), "", regex("(?!^[aeo])h(?!^[aeo])"), ""];
 function encode(a, b) {
   return a && (a = encode$1.call(this, a).join(" "), 2 < a.length && (a = replace(a, pairs)), !b && (1 < a.length && (a = collapse(a)), a && (a = a.split(" ")))), a;
@@ -69,9 +68,9 @@ function encode(a, b) {
 const filter = ["a", "about", "above", "after", "again", "against", "all", "also", "am", "an", "and", "any", "are", "aren't", "as", "at", "be", "because", "been", "before", "being", "below", "both", "but", "by", "can", "cannot", "can't", "come", "could", "couldn't", "did", "didn't", "do", "does", "doesn't", "doing", "dont", "down", "during", "each", "even", "few", "first", "for", "from", "further", "get", "go", "had", "hadn't", "has", "hasn't", "have", "haven't", "having", "he", "hed", "her", "here", "here's", "hers", "herself", "hes", "him", "himself", "his", "how", "how's", "i", "id", "if", "ill", "im", "in", "into", "is", "isn't", "it", "it's", "itself", "i've", "just", "know", "let's", "like", "make", "me", "more", "most", "mustn't", "my", "myself", "new", "no", "nor", "not", "now", "of", "off", "on", "once", "only", "or", "other", "ought", "our", "our's", "ourselves", "out", "over", "own", "same", "say", "see", "shan't", "she", "she'd", "shell", "shes", "should", "shouldn't", "so", "some", "such", "than", "that", "that's", "the", "their", "theirs", "them", "themselves", "then", "there", "there's", "these", "they", "they'd", "they'll", "they're", "they've", "this", "those", "through", "time", "to", "too", "until", "up", "us", "very", "want", "was", "wasn't", "way", "we", "wed", "well", "were", "weren't", "we've", "what", "what's", "when", "when's", "where", "where's", "which", "while", "who", "whom", "who's", "why", "why's", "will", "with", "won't", "would", "wouldn't", "you", "you'd", "you'll", "your", "you're", "your's", "yourself", "yourselves", "you've"];
 const stemmer = { ational: "ate", iveness: "ive", fulness: "ful", ousness: "ous", ization: "ize", tional: "tion", biliti: "ble", icate: "ic", ative: "", alize: "al", iciti: "ic", entli: "ent", ousli: "ous", alism: "al", ation: "ate", aliti: "al", iviti: "ive", ement: "", enci: "ence", anci: "ance", izer: "ize", alli: "al", ator: "ate", logi: "log", ical: "ic", ance: "", ence: "", ness: "", able: "", ible: "", ment: "", eli: "e", bli: "ble", ful: "", ant: "", ent: "", ism: "", ate: "", iti: "", ous: "", ive: "", ize: "", al: "", ou: "", er: "", ic: "" };
 const matcher = {};
-var language = { filter, stemmer, matcher };
+const language = { filter, stemmer, matcher };
 const _hoisted_1$1 = ["data-selected"];
-const _hoisted_2$1 = { class: "htw-flex-1" };
+const _hoisted_2 = { class: "htw-flex-1" };
 const _hoisted_3 = { class: "htw-flex" };
 const _hoisted_4 = { class: "htw-ml-auto htw-opacity-40" };
 const _hoisted_5 = {
@@ -79,7 +78,7 @@ const _hoisted_5 = {
   class: "htw-flex htw-items-center htw-gap-0.5 htw-opacity-60"
 };
 const _sfc_main$1 = /* @__PURE__ */ defineComponent({
-  name: "SearchItem",
+  __name: "SearchItem",
   props: {
     result: {
       type: Object,
@@ -96,7 +95,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
   setup(__props, { emit }) {
     const props = __props;
     useCssVars((_ctx) => ({
-      "0e1c785e": __props.result.iconColor
+      "beebbd52": __props.result.iconColor
     }));
     const el = ref();
     const { selected } = toRefs(props);
@@ -120,6 +119,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
       return openBlock(), createElementBlock("div", {
         ref_key: "el",
         ref: el,
+        class: "histoire-search-item",
         "data-test-id": "search-item",
         "data-selected": unref(selected) ? "" : void 0
       }, [
@@ -143,7 +143,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
                   ] : []
                 ]])
               }, null, 8, ["icon", "class"]),
-              createBaseVNode("div", _hoisted_2$1, [
+              createBaseVNode("div", _hoisted_2, [
                 createBaseVNode("div", _hoisted_3, [
                   createTextVNode(toDisplayString(__props.result.title) + " ", 1),
                   createBaseVNode("span", _hoisted_4, toDisplayString(kindLabels[__props.result.kind]), 1)
@@ -172,15 +172,15 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-var SearchItem = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-7856c5b0"]]);
+const SearchItem = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["__scopeId", "data-v-d95fcb03"]]);
+let searchData$1 = { "index": { "reg": '{"0":1,"1":1,"2":1,"3":1,"4":1,"5":1,"6":1,"7":1,"8":1,"9":1,"10":1,"11":1,"12":1,"13":1,"14":1,"15":1,"16":1,"17":1,"18":1,"19":1,"20":1,"21":1,"22":1,"23":1,"24":1,"25":1,"26":1,"27":1,"28":1}', "text.cfg": '{"doc":0,"opt":1}', "text.map": '[{"r":[0,1],"re":[0,1],"rep":[0,1],"repo":[0,1],"repom":[0,1],"k":[2,3,4,7,8,9,10,11],"ka":[2,3,4,9,10,11],"kar":[2,3,4,9,10,11],"karo":[2,3,4],"karos":[2,3,4],"karose":[2,3,4],"karosel":[2,3,4],"e":[5,6],"em":[5,6],"emf":[5,6],"emfe":[5,6],"emfem":[5,6],"emfeme":[5,6],"emfemet":[5,6],"emfemete":[5,6],"kl":[7,8],"klo":[7,8],"klof":[7,8],"klofe":[7,8],"klofem":[7,8],"klofemk":[7,8],"kart":[9,10,11],"karts":[9,10,11],"t":[12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28],"ta":[12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28],"tal":[12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28],"talf":[12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28],"talfe":[12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28],"talfem":[12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28],"talfemt":[12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28]},{"3":[10],"t":[1],"te":[1,14],"tef":[1],"tefa":[1],"tefao":[1],"tefaol":[1],"tefaolt":[1],"ko":[3,5,6],"kom":[3,5,6],"komo":[3],"komom":[3],"l":[4,21,22],"le":[4,21,22],"les":[4],"lest":[4],"k":[5,6],"komt":[5,6],"komte":[5,6],"komtem":[5,6],"komtemt":[5,6],"p":[7,8,13,15,16,24,25],"pa":[7,8,13,16],"pak":[7,8,13],"pakr":[7,8,13],"pakro":[7,8,13],"pakrom":[7,8,13],"pakromt":[7,8,13],"3t":[10],"m":[11,17],"mo":[11],"mom":[11],"momp":[11],"mompe":[11],"momper":[11],"tes":[14],"test":[14],"po":[15,24,25],"por":[15,24,25],"port":[15,24,25],"porte":[15,24,25],"porter":[15,24,25],"pat":[16],"pate":[16],"patem":[16],"patemk":[16],"ma":[17],"mar":[17],"mark":[17],"marke":[17],"markem":[17],"f":[18,19,20,26,28],"fo":[18,19,20,28],"fom":[18,19,20],"fomt":[18,19,20],"let":[21],"lete":[21],"leter":[21],"lem":[22],"leme":[22],"tr":[23],"tro":[23],"trop":[23],"fe":[26],"fet":[26],"e":[27],"ek":[27],"ekt":[27],"fol":[28]},{"o":[6,8,11],"om":[6,8],"omt":[6,8],"omte":[6,8],"omtet":[6,8],"omtetl":[6,8],"omtetle":[6,8],"omtetlet":[6,8],"of":[11],"k":[13,14,15,28],"ko":[13,14,15,28],"kol":[13,14,15],"kolo":[13,14,15],"kolor":[13,14,15],"s":[18,21,23],"se":[18],"ses":[18],"sese":[18],"fe":[19,25],"fek":[19],"fekt":[19],"fa":[20],"fam":[20],"fame":[20],"famel":[20],"famele":[20],"sp":[21],"spa":[21],"spak":[21],"spake":[21],"spakem":[21],"spakemk":[21],"e":[22],"ek":[22],"ekt":[22],"sa":[23],"sat":[23],"sato":[23],"satof":[23],"r":[24],"ra":[24],"rat":[24],"rate":[24],"rateo":[24],"rateos":[24],"f":[25],"fet":[25],"kom":[28],"komf":[28],"komfe":[28],"komfek":[28]},{"l":[11],"le":[11],"lem":[11],"leme":[11],"lemes":[11]},{},{},{},{},{}]', "text.ctx": "[{}]" }, "idMap": { "0": { "id": "components-custom-ribbon-ribbon-story-vue", "kind": "story" }, "1": { "id": "components-custom-ribbon-ribbon-story-vue:_default", "kind": "variant" }, "2": { "id": "components-base-carousel-carousel-story-vue", "kind": "story" }, "3": { "id": "components-base-carousel-carousel-story-vue:components-base-carousel-carousel-story-vue-0", "kind": "variant" }, "4": { "id": "components-base-carousel-carousel-story-vue:components-base-carousel-carousel-story-vue-1", "kind": "variant" }, "5": { "id": "components-base-infinite-content-infinitecontent-story-vue", "kind": "story" }, "6": { "id": "components-base-infinite-content-infinitecontent-story-vue:components-base-infinite-content-infinitecontent-story-vue-0", "kind": "variant" }, "7": { "id": "components-tailwind-backgrounds-glowingbackground-story-vue", "kind": "story" }, "8": { "id": "components-tailwind-backgrounds-glowingbackground-story-vue:components-tailwind-backgrounds-glowingbackground-story-vue-0", "kind": "variant" }, "9": { "id": "components-tailwind-cards-card-story-vue", "kind": "story" }, "10": { "id": "components-tailwind-cards-card-story-vue:components-tailwind-cards-card-story-vue-0", "kind": "variant" }, "11": { "id": "components-tailwind-cards-card-story-vue:components-tailwind-cards-card-story-vue-1", "kind": "variant" }, "12": { "id": "tailwind", "kind": "story" }, "13": { "id": "tailwind:background-color", "kind": "variant" }, "14": { "id": "tailwind:text-color", "kind": "variant" }, "15": { "id": "tailwind:border-color", "kind": "variant" }, "16": { "id": "tailwind:padding", "kind": "variant" }, "17": { "id": "tailwind:margin", "kind": "variant" }, "18": { "id": "tailwind:font-size", "kind": "variant" }, "19": { "id": "tailwind:font-weight", "kind": "variant" }, "20": { "id": "tailwind:font-family", "kind": "variant" }, "21": { "id": "tailwind:letter-spacing", "kind": "variant" }, "22": { "id": "tailwind:line-height", "kind": "variant" }, "23": { "id": "tailwind:drop-shadow", "kind": "variant" }, "24": { "id": "tailwind:border-radius", "kind": "variant" }, "25": { "id": "tailwind:border-width", "kind": "variant" }, "26": { "id": "tailwind:width", "kind": "variant" }, "27": { "id": "tailwind:height", "kind": "variant" }, "28": { "id": "tailwind:full-config", "kind": "variant" } } };
 const searchData = markRaw(searchData$1);
-const _hoisted_1 = /* @__PURE__ */ createTextVNode(" No results ");
-const _hoisted_2 = {
+const _hoisted_1 = {
   key: 1,
   class: "htw-max-h-[400px] htw-overflow-y-auto htw-rounded-b-lg"
 };
 const _sfc_main = /* @__PURE__ */ defineComponent({
-  name: "SearchPane",
+  __name: "SearchPane",
   props: {
     shown: {
       type: Boolean,
@@ -192,7 +192,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   },
   setup(__props, { emit }) {
     const props = __props;
-    const DocSearchData = () => __vitePreload(() => import("./search-docs-data.d746f42b.js"), true ? ["assets/search-docs-data.d746f42b.js","assets/vendor.d2da194d.js"] : void 0);
+    const DocSearchData = () => __vitePreload(() => import("./search-docs-data.854dfe01.js"), true ? ["assets/search-docs-data.854dfe01.js","assets/vendor.57cb7ace.js"] : void 0);
     function close() {
       emit("close");
     }
@@ -214,7 +214,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     let titleSearchIndex;
     let titleIdMap;
     function createIndex() {
-      return new flexsearch.Document({
+      return new flexsearch_bundle.exports.Document({
         preset: "match",
         document: {
           id: "id",
@@ -298,7 +298,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               continue;
             switch (idMapData.kind) {
               case "story": {
-                list.push(storyResultFactory(storyStore.getStoryById(idMapData.id), rank));
+                list.push(storyResultFactory(storyStore.getStoryById(idMapData.id), rank, "docs"));
                 rank++;
                 break;
               }
@@ -309,7 +309,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       }
     }
     watch(rateLimitedSearch, searchOnDocField);
-    function storyResultFactory(story, rank) {
+    function storyResultFactory(story, rank, type = "title") {
       return {
         kind: "story",
         rank,
@@ -319,14 +319,18 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           name: "story",
           params: {
             storyId: story.id
+          },
+          query: {
+            ...type === "docs" ? { tab: "docs" } : {}
           }
         },
         path: story.file.path.slice(0, -1),
         icon: story.icon,
-        iconColor: story.iconColor
+        iconColor: story.iconColor,
+        type
       };
     }
-    function variantResultFactory(story, variant, rank) {
+    function variantResultFactory(story, variant, rank, type = "title") {
       var _a;
       return {
         kind: "variant",
@@ -339,12 +343,14 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             storyId: story.id
           },
           query: {
-            variantId: variant.id
+            variantId: variant.id,
+            ...type === "docs" ? { tab: "docs" } : {}
           }
         },
         path: [...(_a = story.file.path) != null ? _a : [], story.title],
         icon: variant.icon,
-        iconColor: variant.iconColor
+        iconColor: variant.iconColor,
+        type
       };
     }
     const results = computed(() => {
@@ -379,7 +385,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock(Fragment, null, [
         createBaseVNode("div", {
-          class: "htw-flex htw-items-center htw-gap-4 htw-pl-6 htw-border htw-border-transparent focus-visible:htw-border-primary-500",
+          class: "histoire-search-pane htw-flex htw-items-center htw-gap-4 htw-pl-6 htw-border htw-border-transparent focus-visible:htw-border-primary-500",
           onClick: _cache[4] || (_cache[4] = ($event) => focused.value = true)
         }, [
           createVNode(unref(Icon), {
@@ -406,10 +412,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           class: "no-animation"
         }, {
           default: withCtx(() => [
-            _hoisted_1
+            createTextVNode(" No results ")
           ]),
           _: 1
-        })) : unref(results).length ? (openBlock(), createElementBlock("div", _hoisted_2, [
+        })) : unref(results).length ? (openBlock(), createElementBlock("div", _hoisted_1, [
           (openBlock(true), createElementBlock(Fragment, null, renderList(unref(results), (result, index) => {
             return openBlock(), createBlock(SearchItem, {
               key: result.id,
@@ -423,4 +429,6 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     };
   }
 });
-export { _sfc_main as default };
+export {
+  _sfc_main as default
+};
