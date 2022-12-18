@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import Ribbon from './index.vue'
+import Ribbon from './Ribbon.vue'
 </script>
 
 <template>
