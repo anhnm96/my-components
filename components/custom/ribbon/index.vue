@@ -1,11 +1,23 @@
+<script lang="ts">
+export default defineComponent({
+  inheritAttrs: false,
+})
+</script>
+
 <script lang="ts" setup>
 type Position = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
 type Size = 'small' | 'medium' | 'large'
 type Color = 'amber' | 'green' | 'purple' | 'cyan'
 
 withDefaults(
-  defineProps<{ position?: Position; size?: Size; color?: Color }>(),
+  defineProps<{
+    as?: string
+    position?: Position
+    size?: Size
+    color?: Color
+  }>(),
   {
+    as: 'button',
     position: 'top-right',
     size: 'medium',
     color: 'amber',
@@ -81,7 +93,7 @@ const colorClasses: Record<
 
 <template>
   <div
-    class="absolute aspect-square overflow-hidden rounded-sm"
+    class="pointer-events-none absolute aspect-square overflow-hidden rounded-sm"
     :class="[sizeClasses[size], positionClasses[position].wrapper]"
   >
     <div
@@ -92,12 +104,13 @@ const colorClasses: Record<
       class="absolute h-2 w-2"
       :class="[positionClasses[position].shadeTwo, colorClasses[color].shades]"
     ></div>
-    <a
-      href="#"
-      class="absolute block w-square-diagonal py-1.5 text-center text-xs font-semibold uppercase tracking-wider shadow-sm"
+    <component
+      :is="as"
+      v-bind="$attrs"
+      class="pointer-events-auto absolute block w-square-diagonal py-1.5 text-center text-xs font-semibold uppercase tracking-wider shadow-sm"
       :class="[positionClasses[position].banner, colorClasses[color].banner]"
     >
       <slot />
-    </a>
+    </component>
   </div>
 </template>
