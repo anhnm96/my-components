@@ -8,6 +8,7 @@ const props = withDefaults(
   }>(),
   {
     loading: false,
+    loadingMsg: 'processing, wait...',
   }
 )
 const emit = defineEmits<{
