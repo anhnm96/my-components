@@ -22,6 +22,22 @@ const props = defineProps({
     type: Number,
     default: 1,
   },
+  ariaNextLabel: {
+    type: String,
+    default: 'next page',
+  },
+  ariaPreviousLabel: {
+    type: String,
+    default: 'previous page',
+  },
+  ariaPageLabel: {
+    type: String,
+    default: 'page',
+  },
+  ariaCurrentLabel: {
+    type: String,
+    default: 'current',
+  },
 })
 
 const emit = defineEmits(['update:currentPage', 'change'])
@@ -71,13 +87,15 @@ function changePage(event: MouseEvent, pageNumber: number) {
   // Set focus on element to keep tab order
   if (event.target) nextTick(() => (event.target as HTMLElement).focus())
 }
-function getPage(num: number) {
+function getPage(number: number) {
   return {
-    number: num,
-    isCurrent: props.currentPage === num,
-    onClick: (event: MouseEvent) => changePage(event, num),
+    number,
+    isCurrent: props.currentPage === number,
+    onClick: (event: MouseEvent) => changePage(event, number),
     ariaLabel:
-      props.currentPage === num ? `current, page ${num}` : `page ${num}`,
+      props.currentPage === number
+        ? `${props.ariaCurrentLabel}, ${props.ariaPageLabel} ${number}`
+        : `${props.ariaPageLabel} ${number}`,
   }
 }
 </script>
@@ -85,44 +103,56 @@ function getPage(num: number) {
 <template>
   <nav
     class="relative z-0 inline-flex space-x-3 rounded-md shadow-sm"
-    aria-label="Pagination"
+    aria-label="pagination"
   >
     <button
-      aria-label="previous page"
+      :aria-label="`${ariaPreviousLabel}, ${ariaPageLabel} ${currentPage - 1}`"
       class="btn-page"
       :disabled="!hasPrev"
+      data-test="hasPrev"
       @click="changePage($event, currentPage - 1)"
     >
       <!-- <ChevronLeftIcon class="w-4 h-4" aria-hidden="true" /> -->
       &lt;
     </button>
-    <button v-if="hasFirst" class="btn-page" @click="changePage($event, 1)">
+    <button
+      v-if="hasFirst"
+      class="btn-page"
+      :aria-label="`${props.ariaPageLabel} 1`"
+      data-test="hasFirst"
+      @click="changePage($event, 1)"
+    >
       1
     </button>
-    <button v-if="hasFirstEllipsis" class="btn-page">...</button>
+    <button v-if="hasFirstEllipsis" class="btn-page">&hellip;</button>
     <!-- Pages -->
     <button
       v-for="page in pagesInRange"
       :key="page.number"
       :aria-label="page.ariaLabel"
+      :aria-current="page.isCurrent"
       class="btn-page"
       :class="[page.isCurrent && 'btn-page--active']"
+      :data-test="`page-${page.number}`"
       @click="page.onClick"
     >
       {{ page.number }}
     </button>
-    <button v-if="hasLastEllipsis" class="btn-page">...</button>
+    <button v-if="hasLastEllipsis" class="btn-page">&hellip;</button>
     <button
       v-if="hasLast"
       class="btn-page"
+      :aria-label="`${props.ariaPageLabel} ${pageCount}`"
+      data-test="hasLast"
       @click="changePage($event, pageCount)"
     >
       {{ pageCount }}
     </button>
     <button
-      aria-label="next page"
+      :aria-label="`${ariaNextLabel}, ${ariaPageLabel} ${currentPage + 1}`"
       :disabled="!hasNext"
       class="btn-page"
+      data-test="hasNext"
       @click="changePage($event, currentPage + 1)"
     >
       <!-- <ChevronRightIcon class="w-4 h-4" aria-hidden="true" /> -->

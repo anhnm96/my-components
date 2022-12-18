@@ -1,0 +1,12 @@
+// Vitest Snapshot v1
+
+exports[`Pagination > render correctly 1`] = `
+"<nav class=\\"relative z-0 inline-flex space-x-3 rounded-md shadow-sm\\" aria-label=\\"pagination\\" data-v-1f2877d7=\\"\\"><button aria-label=\\"previous page, page 0\\" class=\\"btn-page\\" disabled=\\"\\" data-test=\\"hasPrev\\" data-v-1f2877d7=\\"\\">
+    <!-- <ChevronLeftIcon class=\\"w-4 h-4\\" aria-hidden=\\"true\\" /> -->
+    < </button>
+      <!--v-if-->
+      <!--v-if-->
+      <!-- Pages --><button aria-label=\\"current, page 1\\" aria-current=\\"true\\" class=\\"btn-page btn-page--active\\" data-test=\\"page-1\\" data-v-1f2877d7=\\"\\">1</button><button aria-label=\\"page 2\\" aria-current=\\"false\\" class=\\"btn-page\\" data-test=\\"page-2\\" data-v-1f2877d7=\\"\\">2</button><button aria-label=\\"page 3\\" aria-current=\\"false\\" class=\\"btn-page\\" data-test=\\"page-3\\" data-v-1f2877d7=\\"\\">3</button><button class=\\"btn-page\\" data-v-1f2877d7=\\"\\">…</button><button class=\\"btn-page\\" aria-label=\\"page 10\\" data-test=\\"hasLast\\" data-v-1f2877d7=\\"\\">10</button><button aria-label=\\"next page, page 2\\" class=\\"btn-page\\" data-test=\\"hasNext\\" data-v-1f2877d7=\\"\\">
+        <!-- <ChevronRightIcon class=\\"w-4 h-4\\" aria-hidden=\\"true\\" /> --> >
+      </button></nav>"
+`;
