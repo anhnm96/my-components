@@ -1,5 +1,5 @@
 import { ar as defineComponent, aE as ref, aF as provide, aG as useIntervalFn, aH as onMounted, aI as onBeforeUnmount, aJ as computed, as as openBlock, at as createElementBlock, ay as renderSlot, au as createBaseVNode, av as normalizeClass, aK as inject, aB as resolveComponent, aw as createBlock, ax as withCtx, aC as createVNode, aL as renderList, aM as Fragment, aD as createTextVNode, aN as toDisplayString } from "./vendor.57cb7ace.js";
-import { _ as _export_sfc } from "./_plugin-vue_export-helper.cdc0426e.js";
+import { _ as _export_sfc } from "./plugin-vue_export-helper.cdc0426e.js";
 const CarouselKey = Symbol("Carousel");
 const Carousel_vue_vue_type_style_index_0_scoped_f9ce7289_lang = "";
 const _sfc_main$2 = /* @__PURE__ */ defineComponent({
