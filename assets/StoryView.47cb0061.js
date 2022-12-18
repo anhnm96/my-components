@@ -85,7 +85,7 @@ function getSandboxUrl(story, variant) {
   const url = new URLSearchParams();
   url.append("storyId", story.id);
   url.append("variantId", variant.id);
-  return `${base}__sandbox.html?${url.toString()}`;
+  return `${base}sandbox.html?${url.toString()}`;
 }
 const _hoisted_1$r = ["href"];
 const _sfc_main$v = /* @__PURE__ */ defineComponent({
