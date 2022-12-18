@@ -13,8 +13,12 @@ export default defineConfig({
   tree: {
     groups: [
       {
-        title: 'Components',
+        title: 'Base',
         include: (file) => file.path.includes('base'),
+      },
+      {
+        title: 'Custom',
+        include: (file) => file.path.includes('custom'),
       },
       {
         title: 'Tailwind',

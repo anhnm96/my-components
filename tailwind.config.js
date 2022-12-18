@@ -48,6 +48,9 @@ module.exports = {
           900: '#080A0C',
         },
       },
+      width: {
+        'square-diagonal': `${(Math.sqrt(2) * 100).toFixed(2)}%`,
+      },
       animation: {
         tilt: 'tilt 10s infinite linear',
       },
