@@ -70,3 +70,20 @@ export async function avoidTooFastPromise<T>(
 
   return multiplePromisesProvided ? resolved : resolved[0]
 }
+
+// https://twitter.com/wesbos/status/1600186156238442496
+// https://github.com/open-draft/until
+export type AsyncTuple<DataType = unknown, ErrorType = Error> =
+  | [data: undefined, error: ErrorType]
+  | [data: DataType, error: undefined]
+
+export async function asyncWrap<DataType = unknown, ErrorType = Error>(
+  func: () => Promise<DataType>
+): Promise<AsyncTuple<DataType, ErrorType>> {
+  try {
+    const data = await func()
+    return [data, undefined]
+  } catch (err: any) {
+    return [undefined, err]
+  }
+}
