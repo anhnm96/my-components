@@ -7,30 +7,30 @@
   --success: #52c41a;
   --warning: #faad14;
   --danger: #ff4d4f;
-  --primary: #3A21BA;
+  --primary: #3a21ba;
 }
 
-[data-theme="light"] {
-  --primary: #FDFCFF;
+[data-theme='light'] {
+  --primary: #fdfcff;
 }
 
 @layer components {
   .btn {
-    @apply inline-flex shadow-sm items-center select-none border border-transparent focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-indigo-500 text-white transition;
+    @apply inline-flex select-none items-center border border-transparent text-white shadow-sm transition focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1;
     /* default btn */
     & {
-      @apply px-4 py-2 text-sm rounded-md bg-neutral-500;
+      @apply rounded-md bg-neutral-500 px-4 py-2 text-sm;
     }
     &-sm {
-      @apply px-3 py-2 text-sm leading-4 rounded-sm;
+      @apply rounded-sm px-3 py-2 text-sm leading-4;
     }
     &-lg {
-      @apply px-4 py-2 text-base rounded-md;
+      @apply rounded-md px-4 py-2 text-base;
     }
     &-xl {
-      @apply px-6 py-3 text-base rounded-md;
+      @apply rounded-md px-6 py-3 text-base;
     }
-     /* btn variants */
+    /* btn variants */
     &-ghost {
       @apply bg-transparent text-neutral-500 shadow-none focus:ring-current;
       &:hover,
@@ -40,7 +40,7 @@
     }
 
     &-link {
-      @apply bg-transparent text-indigo-500 hover:underline shadow-none;
+      @apply bg-transparent text-indigo-500 shadow-none hover:underline;
     }
 
     &-outline {
@@ -55,7 +55,7 @@
           @apply border-primary bg-primary text-white;
         }
       }
-      
+
       &.btn-info {
         @apply text-info;
         &:hover {
@@ -70,97 +70,93 @@
         }
       }
     }
-
   }
 
   .badge {
-    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium;
 
     & {
       @apply bg-gray-100 text-gray-800;
       & > button {
-        @apply text-gray-400 hover:bg-gray-200 hover:text-gray-500 focus:outline-none focus:bg-gray-500 focus:text-white
+        @apply text-gray-400 hover:bg-gray-200 hover:text-gray-500 focus:bg-gray-500 focus:text-white focus:outline-none;
       }
     }
 
     &-info {
       @apply bg-blue-100 text-blue-800;
       & > button {
-        @apply text-blue-400 hover:bg-blue-200 hover:text-blue-500 focus:outline-none focus:bg-blue-500 focus:text-white
+        @apply text-blue-400 hover:bg-blue-200 hover:text-blue-500 focus:bg-blue-500 focus:text-white focus:outline-none;
       }
     }
 
     &-success {
       @apply bg-green-100 text-green-800;
       & > button {
-        @apply text-green-400 hover:bg-green-200 hover:text-green-500 focus:outline-none focus:bg-green-500 focus:text-white
+        @apply text-green-400 hover:bg-green-200 hover:text-green-500 focus:bg-green-500 focus:text-white focus:outline-none;
       }
     }
 
     &-warning {
       @apply bg-yellow-100 text-yellow-800;
       & > button {
-        @apply text-yellow-400 hover:bg-yellow-200 hover:text-yellow-500 focus:outline-none focus:bg-yellow-500 focus:text-white
+        @apply text-yellow-400 hover:bg-yellow-200 hover:text-yellow-500 focus:bg-yellow-500 focus:text-white focus:outline-none;
       }
     }
 
     &-error {
       @apply bg-red-100 text-red-800;
       & > button {
-        @apply text-red-400 hover:bg-red-200 hover:text-red-500 focus:outline-none focus:bg-red-500 focus:text-white
+        @apply text-red-400 hover:bg-red-200 hover:text-red-500 focus:bg-red-500 focus:text-white focus:outline-none;
       }
     }
 
     &-icon {
-      @apply pl-2 pr-0.5
+      @apply pl-2 pr-0.5;
     }
   }
 
   /* radio */
-  input[type=radio] {
-    --s: 1em;     /* control the size */
+  input[type='radio'] {
+    --s: 1em; /* control the size */
     --c: var(--primary); /* the active color */
-    
+
     height: var(--s);
     aspect-ratio: 1;
-    border: calc(var(--s)/8) solid #939393;
-    padding: calc(var(--s)/8);
-    background: 
-       radial-gradient(farthest-side,var(--c) 94%,#0000) 
-       50%/0 0 no-repeat content-box;
+    border: calc(var(--s) / 8) solid #939393;
+    padding: calc(var(--s) / 8);
+    background: radial-gradient(farthest-side, var(--c) 94%, #0000) 50%/0 0
+      no-repeat content-box;
     border-radius: 50%;
-    outline-offset: calc(var(--s)/10);
+    outline-offset: calc(var(--s) / 10);
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     cursor: pointer;
     font-size: inherit;
-    transition: .3s;
+    transition: 0.3s;
   }
-  input[type=radio]:checked {
+  input[type='radio']:checked {
     border-color: var(--c);
     background-size: 100% 100%;
   }
-  
-  input[type=radio]:disabled {
-    background: 
-       linear-gradient(#939393 0 0) 
-       50%/100% 20% no-repeat content-box;
-    opacity: .5;
+
+  input[type='radio']:disabled {
+    background: linear-gradient(#939393 0 0) 50%/100% 20% no-repeat content-box;
+    opacity: 0.5;
     cursor: not-allowed;
   }
-  
+
   @media print {
-    input[type=radio] {
+    input[type='radio'] {
       -webkit-appearance: auto;
       -moz-appearance: auto;
       appearance: auto;
       background: none;
     }
   }
-  
+
   label {
-    display:inline-flex;
-    align-items:center;
+    display: inline-flex;
+    align-items: center;
   }
 }
