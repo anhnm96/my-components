@@ -16,7 +16,10 @@
 
 @layer components {
   .btn {
-    @apply inline-flex select-none items-center border border-transparent text-white shadow-sm transition focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1;
+    @apply inline-flex select-none items-center border border-transparent text-white shadow-sm transition focus:outline-none;
+    &:focus-visible {
+      @apply focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1;
+    }
     /* default btn */
     & {
       @apply rounded-md bg-neutral-500 px-4 py-2 text-sm;
