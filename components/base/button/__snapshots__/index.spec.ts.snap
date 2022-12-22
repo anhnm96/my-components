@@ -1,0 +1,7 @@
+// Vitest Snapshot v1
+
+exports[`Button.vue > render correctly 1`] = `
+"<button class=\\"btn\\" data-v-cbcdd221=\\"\\">
+  <!--v-if-->
+</button>"
+`;
