@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils'
 import type { VueWrapper } from '@vue/test-utils'
-import Button from './index.vue'
+import Button from './Button.vue'
 
 let wrapper: VueWrapper
 describe('Button.vue', () => {
