@@ -1,6 +1,6 @@
 import type { DOMWrapper, VueWrapper } from '@vue/test-utils'
 import { shallowMount } from '@vue/test-utils'
-import Pagination from './index.vue'
+import Pagination from './Pagination.vue'
 
 let wrapper: VueWrapper
 
