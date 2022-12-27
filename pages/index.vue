@@ -48,6 +48,8 @@ const items = [
     image: 'https://picsum.photos/id/7/1230/500',
   },
 ]
+
+const switchState = ref(false)
 </script>
 
 <template>
@@ -130,6 +132,42 @@ const items = [
       <label><input type="radio" name="e" /> First</label>
       <label><input type="radio" name="e" /> Second</label>
       <label><input type="radio" name="e" disabled /> Disabled</label>
+    </div>
+    <div>
+      <Switch :label="{ checked: 'on', unchecked: 'off' }" />
+      <Switch
+        v-model="switchState"
+        :label="{ checked: 'asd', unchecked: 'zxc' }"
+      />
+      <Switch
+        v-model="switchState"
+        active-color="#bb99cc"
+        width="100px"
+        :label="{ checked: 'only left label', unchecked: '' }"
+      />
+      <label id="lb" dir="rtl">
+        <Switch
+          id="btn"
+          v-model="switchState"
+          aria-labelledby="lb btn"
+          active-color="#fe877b"
+          in-active-color="#be3e61"
+          width="200px"
+          height="40px"
+          :label="{ checked: 'Holdd the door?', unchecked: 'Hodor' }"
+        />
+        Hodor or not
+      </label>
+      <Switch
+        v-model="switchState"
+        active-color="linear-gradient(to right, #0cebeb, #20e3b2, #29ffc6)"
+        margin="6px"
+        in-active-color="linear-gradient(to left, #0cebeb, #20e3b2, #29ffc6)"
+        width="200px"
+        height="40px"
+        :label="{ checked: 'Holdd the door?', unchecked: 'Hodor' }"
+      />
+      <Switch v-model="switchState" disabled />
     </div>
     <div>
       <Carousel

@@ -1,0 +1,7 @@
+// Vitest Snapshot v1
+
+exports[`Switch.vue > render correctly 1`] = `
+"<button role=\\"switch\\" type=\\"button\\" class=\\"toggle-button\\" aria-pressed=\\"false\\" data-v-1d1a5bb9=\\"\\">
+  <!--v-if-->
+</button>"
+`;
