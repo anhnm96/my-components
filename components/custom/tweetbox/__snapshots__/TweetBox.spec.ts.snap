@@ -1,0 +1,11 @@
+// Vitest Snapshot v1
+
+exports[`TweetBox.vue > render correctly 1`] = `
+"<div class=\\"tweetbox\\">
+  <div class=\\"tweetbox__htmlarea\\" aria-hidden=\\"true\\"><span></span><span class=\\"text-excess\\"></span></div><textarea class=\\"tweetbox__textarea\\" rows=\\"NaN\\"></textarea>
+  <div class=\\"tweetbox__limit\\"><span class=\\"tweetbox__remainingCharacters\\">40</span><svg class=\\"tweetbox__counter\\" viewBox=\\"0 0 33.83098862 33.83098862\\" height=\\"20\\" width=\\"20\\" xmlns=\\"http://www.w3.org/2000/svg\\">
+      <circle class=\\"tweetbox__counterUnderlay\\" cx=\\"16.91549431\\" cy=\\"16.91549431\\" r=\\"15.91549431\\" fill=\\"none\\" stroke-width=\\"2\\"></circle>
+      <circle class=\\"tweetbox__counterProgress\\" stroke-dasharray=\\"0,100\\" cx=\\"16.91549431\\" cy=\\"16.91549431\\" r=\\"15.91549431\\" fill=\\"none\\" stroke-width=\\"4\\"></circle>
+    </svg></div>
+</div>"
+`;

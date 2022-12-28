@@ -50,6 +50,7 @@ const items = [
 ]
 
 const switchState = ref(false)
+const text = ref('')
 </script>
 
 <template>
@@ -132,6 +133,9 @@ const switchState = ref(false)
       <label><input type="radio" name="e" /> First</label>
       <label><input type="radio" name="e" /> Second</label>
       <label><input type="radio" name="e" disabled /> Disabled</label>
+    </div>
+    <div>
+      <TweetBox v-model="text" />
     </div>
     <div>
       <Switch :label="{ checked: 'on', unchecked: 'off' }" />
