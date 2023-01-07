@@ -1,4 +1,4 @@
-const style$1 = "";
+const style$2 = "";
 function makeMap$1(str, expectsLowerCase) {
   const map2 = /* @__PURE__ */ Object.create(null);
   const list = str.split(",");
@@ -12,7 +12,7 @@ function normalizeStyle$1(value) {
     const res = {};
     for (let i2 = 0; i2 < value.length; i2++) {
       const item = value[i2];
-      const normalized = isString$3(item) ? parseStringStyle$1(item) : normalizeStyle$1(item);
+      const normalized = isString$4(item) ? parseStringStyle$1(item) : normalizeStyle$1(item);
       if (normalized) {
         for (const key in normalized) {
           res[key] = normalized[key];
@@ -20,7 +20,7 @@ function normalizeStyle$1(value) {
       }
     }
     return res;
-  } else if (isString$3(value)) {
+  } else if (isString$4(value)) {
     return value;
   } else if (isObject$1(value)) {
     return value;
@@ -41,7 +41,7 @@ function parseStringStyle$1(cssText) {
 }
 function normalizeClass$1(value) {
   let res = "";
-  if (isString$3(value)) {
+  if (isString$4(value)) {
     res = value;
   } else if (isArray$2(value)) {
     for (let i2 = 0; i2 < value.length; i2++) {
@@ -63,7 +63,7 @@ function normalizeProps(props) {
   if (!props)
     return null;
   let { class: klass, style: style2 } = props;
-  if (klass && !isString$3(klass)) {
+  if (klass && !isString$4(klass)) {
     props.class = normalizeClass$1(klass);
   }
   if (style2) {
@@ -81,7 +81,7 @@ function includeBooleanAttr$1(value) {
   return !!value || value === "";
 }
 const toDisplayString$1 = (val) => {
-  return isString$3(val) ? val : val == null ? "" : isArray$2(val) || isObject$1(val) && (val.toString === objectToString$1 || !isFunction$1(val.toString)) ? JSON.stringify(val, replacer$1, 2) : String(val);
+  return isString$4(val) ? val : val == null ? "" : isArray$2(val) || isObject$1(val) && (val.toString === objectToString$1 || !isFunction$2(val.toString)) ? JSON.stringify(val, replacer$1, 2) : String(val);
 };
 const replacer$1 = (_key, val) => {
   if (val && val.__v_isRef) {
@@ -122,12 +122,12 @@ const hasOwn$1 = (val, key) => hasOwnProperty$1.call(val, key);
 const isArray$2 = Array.isArray;
 const isMap$1 = (val) => toTypeString$1(val) === "[object Map]";
 const isSet$1 = (val) => toTypeString$1(val) === "[object Set]";
-const isFunction$1 = (val) => typeof val === "function";
-const isString$3 = (val) => typeof val === "string";
+const isFunction$2 = (val) => typeof val === "function";
+const isString$4 = (val) => typeof val === "string";
 const isSymbol$1 = (val) => typeof val === "symbol";
 const isObject$1 = (val) => val !== null && typeof val === "object";
 const isPromise$1 = (val) => {
-  return isObject$1(val) && isFunction$1(val.then) && isFunction$1(val.catch);
+  return isObject$1(val) && isFunction$2(val.then) && isFunction$2(val.catch);
 };
 const objectToString$1 = Object.prototype.toString;
 const toTypeString$1 = (value) => objectToString$1.call(value);
@@ -135,7 +135,7 @@ const toRawType$1 = (value) => {
   return toTypeString$1(value).slice(8, -1);
 };
 const isPlainObject$2 = (val) => toTypeString$1(val) === "[object Object]";
-const isIntegerKey$1 = (key) => isString$3(key) && key !== "NaN" && key[0] !== "-" && "" + parseInt(key, 10) === key;
+const isIntegerKey$1 = (key) => isString$4(key) && key !== "NaN" && key[0] !== "-" && "" + parseInt(key, 10) === key;
 const isReservedProp$1 = /* @__PURE__ */ makeMap$1(
   ",key,ref,ref_for,ref_key,onVnodeBeforeMount,onVnodeMounted,onVnodeBeforeUpdate,onVnodeUpdated,onVnodeBeforeUnmount,onVnodeUnmounted"
 );
@@ -155,7 +155,7 @@ const hyphenateRE$1 = /\B([A-Z])/g;
 const hyphenate$1 = cacheStringFunction$1((str) => str.replace(hyphenateRE$1, "-$1").toLowerCase());
 const capitalize$1 = cacheStringFunction$1((str) => str.charAt(0).toUpperCase() + str.slice(1));
 const toHandlerKey$1 = cacheStringFunction$1((str) => str ? `on${capitalize$1(str)}` : ``);
-const hasChanged$1 = (value, oldValue) => !Object.is(value, oldValue);
+const hasChanged$2 = (value, oldValue) => !Object.is(value, oldValue);
 const invokeArrayFns$1 = (fns, arg) => {
   for (let i2 = 0; i2 < fns.length; i2++) {
     fns[i2](arg);
@@ -582,7 +582,7 @@ function createSetter$1(shallow = false) {
     if (target === toRaw$1(receiver)) {
       if (!hadKey) {
         trigger$1(target, "add", key, value);
-      } else if (hasChanged$1(value, oldValue)) {
+      } else if (hasChanged$2(value, oldValue)) {
         trigger$1(target, "set", key, value, oldValue);
       }
     }
@@ -703,7 +703,7 @@ function set$1$1(key, value) {
   target.set(key, value);
   if (!hadKey) {
     trigger$1(target, "add", key, value);
-  } else if (hasChanged$1(value, oldValue)) {
+  } else if (hasChanged$2(value, oldValue)) {
     trigger$1(target, "set", key, value, oldValue);
   }
   return this;
@@ -1026,7 +1026,7 @@ class RefImpl$1 {
   set value(newVal) {
     const useDirectValue = this.__v_isShallow || isShallow$1$1(newVal) || isReadonly$1(newVal);
     newVal = useDirectValue ? newVal : toRaw$1(newVal);
-    if (hasChanged$1(newVal, this._rawValue)) {
+    if (hasChanged$2(newVal, this._rawValue)) {
       this._rawValue = newVal;
       this._value = useDirectValue ? newVal : toReactive$1(newVal);
       triggerRefValue$1(this, newVal);
@@ -1115,7 +1115,7 @@ _a$4 = "__v_isReadonly";
 function computed$1$1(getterOrOptions, debugOptions, isSSR = false) {
   let getter;
   let setter;
-  const onlyGetter = isFunction$1(getterOrOptions);
+  const onlyGetter = isFunction$2(getterOrOptions);
   if (onlyGetter) {
     getter = getterOrOptions;
     setter = () => {
@@ -1209,7 +1209,7 @@ function formatProps$1(props) {
   return res;
 }
 function formatProp$1(key, value, raw) {
-  if (isString$3(value)) {
+  if (isString$4(value)) {
     value = JSON.stringify(value);
     return raw ? value : [`${key}=${value}`];
   } else if (typeof value === "number" || typeof value === "boolean" || value == null) {
@@ -1217,7 +1217,7 @@ function formatProp$1(key, value, raw) {
   } else if (isRef$1(value)) {
     value = formatProp$1(key, toRaw$1(value.value), true);
     return raw ? value : [`${key}=Ref<`, value, `>`];
-  } else if (isFunction$1(value)) {
+  } else if (isFunction$2(value)) {
     return [`${key}=fn${value.name ? `<${value.name}>` : ``}`];
   } else {
     value = toRaw$1(value);
@@ -1265,7 +1265,7 @@ function callWithErrorHandling$1(fn2, instance, type, args) {
   return res;
 }
 function callWithAsyncErrorHandling$1(fn2, instance, type, args) {
-  if (isFunction$1(fn2)) {
+  if (isFunction$2(fn2)) {
     const res = callWithErrorHandling$1(fn2, instance, type, args);
     if (res && isPromise$1(res)) {
       res.catch((err) => {
@@ -1639,8 +1639,8 @@ function createDevtoolsComponentHook$1(hook) {
 const devtoolsPerfStart$1 = /* @__PURE__ */ createDevtoolsPerformanceHook$1("perf:start");
 const devtoolsPerfEnd$1 = /* @__PURE__ */ createDevtoolsPerformanceHook$1("perf:end");
 function createDevtoolsPerformanceHook$1(hook) {
-  return (component, type, time) => {
-    emit$2(hook, component.appContext.app, component.uid, component, type, time);
+  return (component, type, time2) => {
+    emit$2(hook, component.appContext.app, component.uid, component, type, time2);
   };
 }
 function devtoolsComponentEmit$1(component, event, params) {
@@ -1659,7 +1659,7 @@ function emit$1$1(instance, event, ...rawArgs) {
         }
       } else {
         const validator = emitsOptions[event];
-        if (isFunction$1(validator)) {
+        if (isFunction$2(validator)) {
           const isValid = validator(...rawArgs);
           if (!isValid) {
             warn$3(`Invalid event arguments: event validation failed for event "${event}".`);
@@ -1675,7 +1675,7 @@ function emit$1$1(instance, event, ...rawArgs) {
     const modifiersKey = `${modelArg === "modelValue" ? "model" : modelArg}Modifiers`;
     const { number, trim } = props[modifiersKey] || EMPTY_OBJ$1;
     if (trim) {
-      args = rawArgs.map((a2) => isString$3(a2) ? a2.trim() : a2);
+      args = rawArgs.map((a2) => isString$4(a2) ? a2.trim() : a2);
     }
     if (number) {
       args = rawArgs.map(toNumber$1);
@@ -1718,7 +1718,7 @@ function normalizeEmitsOptions$1(comp, appContext, asMixin = false) {
   const raw = comp.emits;
   let normalized = {};
   let hasExtends = false;
-  if (!isFunction$1(comp)) {
+  if (!isFunction$2(comp)) {
     const extendEmits = (raw2) => {
       const normalizedFromExtend = normalizeEmitsOptions$1(raw2, appContext, true);
       if (normalizedFromExtend) {
@@ -1809,7 +1809,7 @@ function markAttrsAccessed$1() {
   accessedAttrs$1 = true;
 }
 function renderComponentRoot$1(instance) {
-  const { type: Component, vnode, proxy, withProxy, props, propsOptions: [propsOptions], slots, attrs, emit: emit2, render: render2, renderCache, data, setupState, ctx, inheritAttrs } = instance;
+  const { type: Component, vnode, proxy, withProxy, props, propsOptions: [propsOptions], slots, attrs, emit: emit2, render: render2, renderCache, data: data2, setupState, ctx, inheritAttrs } = instance;
   let result;
   let fallthroughAttrs;
   const prev = setCurrentRenderingInstance$1(instance);
@@ -1819,7 +1819,7 @@ function renderComponentRoot$1(instance) {
   try {
     if (vnode.shapeFlag & 4) {
       const proxyToUse = withProxy || proxy;
-      result = normalizeVNode$1(render2.call(proxyToUse, proxyToUse, renderCache, props, setupState, data, ctx));
+      result = normalizeVNode$1(render2.call(proxyToUse, proxyToUse, renderCache, props, setupState, data2, ctx));
       fallthroughAttrs = attrs;
     } else {
       const render3 = Component;
@@ -2058,7 +2058,7 @@ function inject$1(key, defaultValue, treatDefaultAsFactory = false) {
     if (provides && key in provides) {
       return provides[key];
     } else if (arguments.length > 1) {
-      return treatDefaultAsFactory && isFunction$1(defaultValue) ? defaultValue.call(instance.proxy) : defaultValue;
+      return treatDefaultAsFactory && isFunction$2(defaultValue) ? defaultValue.call(instance.proxy) : defaultValue;
     } else {
       warn$3(`injection "${String(key)}" not found.`);
     }
@@ -2074,7 +2074,7 @@ function watchPostEffect$1(effect, options) {
 }
 const INITIAL_WATCHER_VALUE$1 = {};
 function watch$1(source, cb, options) {
-  if (!isFunction$1(cb)) {
+  if (!isFunction$2(cb)) {
     warn$3(`\`watch(fn, options?)\` signature has been moved to a separate API. Use \`watchEffect(fn, options?)\` instead. \`watch\` now only supports \`watch(source, cb, options?) signature.`);
   }
   return doWatch$1(source, cb, options);
@@ -2109,13 +2109,13 @@ function doWatch$1(source, cb, { immediate, deep, flush, onTrack, onTrigger } = 
         return s2.value;
       } else if (isReactive$1(s2)) {
         return traverse$1(s2);
-      } else if (isFunction$1(s2)) {
+      } else if (isFunction$2(s2)) {
         return callWithErrorHandling$1(s2, instance, 2);
       } else {
         warnInvalidSource(s2);
       }
     });
-  } else if (isFunction$1(source)) {
+  } else if (isFunction$2(source)) {
     if (cb) {
       getter = () => callWithErrorHandling$1(source, instance, 2);
     } else {
@@ -2169,7 +2169,7 @@ function doWatch$1(source, cb, { immediate, deep, flush, onTrack, onTrigger } = 
     }
     if (cb) {
       const newValue = effect.run();
-      if (deep || forceTrigger || (isMultiSource ? newValue.some((v2, i2) => hasChanged$1(v2, oldValue[i2])) : hasChanged$1(newValue, oldValue)) || false) {
+      if (deep || forceTrigger || (isMultiSource ? newValue.some((v2, i2) => hasChanged$2(v2, oldValue[i2])) : hasChanged$2(newValue, oldValue)) || false) {
         if (cleanup) {
           cleanup();
         }
@@ -2224,9 +2224,9 @@ function doWatch$1(source, cb, { immediate, deep, flush, onTrack, onTrigger } = 
 }
 function instanceWatch$1(source, value, options) {
   const publicThis = this.proxy;
-  const getter = isString$3(source) ? source.includes(".") ? createPathGetter$1(publicThis, source) : () => publicThis[source] : source.bind(publicThis, publicThis);
+  const getter = isString$4(source) ? source.includes(".") ? createPathGetter$1(publicThis, source) : () => publicThis[source] : source.bind(publicThis, publicThis);
   let cb;
-  if (isFunction$1(value)) {
+  if (isFunction$2(value)) {
     cb = value;
   } else {
     cb = value.handler;
@@ -2278,7 +2278,7 @@ function traverse$1(value, seen) {
   }
   return value;
 }
-function useTransitionState() {
+function useTransitionState$1() {
   const state = {
     isMounted: false,
     isLeaving: false,
@@ -2293,32 +2293,32 @@ function useTransitionState() {
   });
   return state;
 }
-const TransitionHookValidator = [Function, Array];
-const BaseTransitionImpl = {
+const TransitionHookValidator$1 = [Function, Array];
+const BaseTransitionImpl$1 = {
   name: `BaseTransition`,
   props: {
     mode: String,
     appear: Boolean,
     persisted: Boolean,
-    onBeforeEnter: TransitionHookValidator,
-    onEnter: TransitionHookValidator,
-    onAfterEnter: TransitionHookValidator,
-    onEnterCancelled: TransitionHookValidator,
-    onBeforeLeave: TransitionHookValidator,
-    onLeave: TransitionHookValidator,
-    onAfterLeave: TransitionHookValidator,
-    onLeaveCancelled: TransitionHookValidator,
-    onBeforeAppear: TransitionHookValidator,
-    onAppear: TransitionHookValidator,
-    onAfterAppear: TransitionHookValidator,
-    onAppearCancelled: TransitionHookValidator
+    onBeforeEnter: TransitionHookValidator$1,
+    onEnter: TransitionHookValidator$1,
+    onAfterEnter: TransitionHookValidator$1,
+    onEnterCancelled: TransitionHookValidator$1,
+    onBeforeLeave: TransitionHookValidator$1,
+    onLeave: TransitionHookValidator$1,
+    onAfterLeave: TransitionHookValidator$1,
+    onLeaveCancelled: TransitionHookValidator$1,
+    onBeforeAppear: TransitionHookValidator$1,
+    onAppear: TransitionHookValidator$1,
+    onAfterAppear: TransitionHookValidator$1,
+    onAppearCancelled: TransitionHookValidator$1
   },
   setup(props, { slots }) {
     const instance = getCurrentInstance$1();
-    const state = useTransitionState();
+    const state = useTransitionState$1();
     let prevTransitionKey;
     return () => {
-      const children = slots.default && getTransitionRawChildren(slots.default(), true);
+      const children = slots.default && getTransitionRawChildren$1(slots.default(), true);
       if (!children || !children.length) {
         return;
       }
@@ -2342,16 +2342,16 @@ const BaseTransitionImpl = {
         warn$3(`invalid <transition> mode: ${mode}`);
       }
       if (state.isLeaving) {
-        return emptyPlaceholder(child);
+        return emptyPlaceholder$1(child);
       }
-      const innerChild = getKeepAliveChild(child);
+      const innerChild = getKeepAliveChild$1(child);
       if (!innerChild) {
-        return emptyPlaceholder(child);
+        return emptyPlaceholder$1(child);
       }
-      const enterHooks = resolveTransitionHooks(innerChild, rawProps, state, instance);
-      setTransitionHooks(innerChild, enterHooks);
+      const enterHooks = resolveTransitionHooks$1(innerChild, rawProps, state, instance);
+      setTransitionHooks$1(innerChild, enterHooks);
       const oldChild = instance.subTree;
-      const oldInnerChild = oldChild && getKeepAliveChild(oldChild);
+      const oldInnerChild = oldChild && getKeepAliveChild$1(oldChild);
       let transitionKeyChanged = false;
       const { getTransitionKey } = innerChild.type;
       if (getTransitionKey) {
@@ -2364,8 +2364,8 @@ const BaseTransitionImpl = {
         }
       }
       if (oldInnerChild && oldInnerChild.type !== Comment$1 && (!isSameVNodeType$1(innerChild, oldInnerChild) || transitionKeyChanged)) {
-        const leavingHooks = resolveTransitionHooks(oldInnerChild, rawProps, state, instance);
-        setTransitionHooks(oldInnerChild, leavingHooks);
+        const leavingHooks = resolveTransitionHooks$1(oldInnerChild, rawProps, state, instance);
+        setTransitionHooks$1(oldInnerChild, leavingHooks);
         if (mode === "out-in") {
           state.isLeaving = true;
           leavingHooks.afterLeave = () => {
@@ -2374,10 +2374,10 @@ const BaseTransitionImpl = {
               instance.update();
             }
           };
-          return emptyPlaceholder(child);
+          return emptyPlaceholder$1(child);
         } else if (mode === "in-out" && innerChild.type !== Comment$1) {
           leavingHooks.delayLeave = (el2, earlyRemove, delayedLeave) => {
-            const leavingVNodesCache = getLeavingNodesForType(state, oldInnerChild);
+            const leavingVNodesCache = getLeavingNodesForType$1(state, oldInnerChild);
             leavingVNodesCache[String(oldInnerChild.key)] = oldInnerChild;
             el2._leaveCb = () => {
               earlyRemove();
@@ -2392,8 +2392,8 @@ const BaseTransitionImpl = {
     };
   }
 };
-const BaseTransition = BaseTransitionImpl;
-function getLeavingNodesForType(state, vnode) {
+const BaseTransition$1 = BaseTransitionImpl$1;
+function getLeavingNodesForType$1(state, vnode) {
   const { leavingVNodes } = state;
   let leavingVNodesCache = leavingVNodes.get(vnode.type);
   if (!leavingVNodesCache) {
@@ -2402,10 +2402,10 @@ function getLeavingNodesForType(state, vnode) {
   }
   return leavingVNodesCache;
 }
-function resolveTransitionHooks(vnode, props, state, instance) {
+function resolveTransitionHooks$1(vnode, props, state, instance) {
   const { appear, mode, persisted = false, onBeforeEnter, onEnter, onAfterEnter, onEnterCancelled, onBeforeLeave, onLeave, onAfterLeave, onLeaveCancelled, onBeforeAppear, onAppear, onAfterAppear, onAppearCancelled } = props;
   const key = String(vnode.key);
-  const leavingVNodesCache = getLeavingNodesForType(state, vnode);
+  const leavingVNodesCache = getLeavingNodesForType$1(state, vnode);
   const callHook2 = (hook, args) => {
     hook && callWithAsyncErrorHandling$1(hook, instance, 9, args);
   };
@@ -2507,24 +2507,24 @@ function resolveTransitionHooks(vnode, props, state, instance) {
       }
     },
     clone(vnode2) {
-      return resolveTransitionHooks(vnode2, props, state, instance);
+      return resolveTransitionHooks$1(vnode2, props, state, instance);
     }
   };
   return hooks;
 }
-function emptyPlaceholder(vnode) {
+function emptyPlaceholder$1(vnode) {
   if (isKeepAlive$1(vnode)) {
     vnode = cloneVNode$1(vnode);
     vnode.children = null;
     return vnode;
   }
 }
-function getKeepAliveChild(vnode) {
+function getKeepAliveChild$1(vnode) {
   return isKeepAlive$1(vnode) ? vnode.children ? vnode.children[0] : void 0 : vnode;
 }
-function setTransitionHooks(vnode, hooks) {
+function setTransitionHooks$1(vnode, hooks) {
   if (vnode.shapeFlag & 6 && vnode.component) {
-    setTransitionHooks(vnode.component.subTree, hooks);
+    setTransitionHooks$1(vnode.component.subTree, hooks);
   } else if (vnode.shapeFlag & 128) {
     vnode.ssContent.transition = hooks.clone(vnode.ssContent);
     vnode.ssFallback.transition = hooks.clone(vnode.ssFallback);
@@ -2532,7 +2532,7 @@ function setTransitionHooks(vnode, hooks) {
     vnode.transition = hooks;
   }
 }
-function getTransitionRawChildren(children, keepComment = false, parentKey) {
+function getTransitionRawChildren$1(children, keepComment = false, parentKey) {
   let ret = [];
   let keyedFragmentCount = 0;
   for (let i2 = 0; i2 < children.length; i2++) {
@@ -2541,7 +2541,7 @@ function getTransitionRawChildren(children, keepComment = false, parentKey) {
     if (child.type === Fragment$1) {
       if (child.patchFlag & 128)
         keyedFragmentCount++;
-      ret = ret.concat(getTransitionRawChildren(child.children, keepComment, key));
+      ret = ret.concat(getTransitionRawChildren$1(child.children, keepComment, key));
     } else if (keepComment || child.type !== Comment$1) {
       ret.push(key != null ? cloneVNode$1(child, { key }) : child);
     }
@@ -2554,11 +2554,11 @@ function getTransitionRawChildren(children, keepComment = false, parentKey) {
   return ret;
 }
 function defineComponent$1(options) {
-  return isFunction$1(options) ? { setup: options, name: options.name } : options;
+  return isFunction$2(options) ? { setup: options, name: options.name } : options;
 }
 const isAsyncWrapper$1 = (i2) => !!i2.type.__asyncLoader;
 function defineAsyncComponent$1(source) {
-  if (isFunction$1(source)) {
+  if (isFunction$2(source)) {
     source = { loader: source };
   }
   const {
@@ -2601,7 +2601,7 @@ function defineAsyncComponent$1(source) {
       if (comp && (comp.__esModule || comp[Symbol.toStringTag] === "Module")) {
         comp = comp.default;
       }
-      if (comp && !isObject$1(comp) && !isFunction$1(comp)) {
+      if (comp && !isObject$1(comp) && !isFunction$2(comp)) {
         throw new Error(`Invalid async component load result: ${comp}`);
       }
       resolvedComp = comp;
@@ -2770,7 +2770,7 @@ function withDirectives(vnode, directives2) {
   for (let i2 = 0; i2 < directives2.length; i2++) {
     let [dir, value, arg, modifiers = EMPTY_OBJ$1] = directives2[i2];
     if (dir) {
-      if (isFunction$1(dir)) {
+      if (isFunction$2(dir)) {
         dir = {
           mounted: dir,
           updated: dir
@@ -2819,7 +2819,7 @@ function resolveComponent$1(name, maybeSelfReference) {
 }
 const NULL_DYNAMIC_COMPONENT$1 = Symbol();
 function resolveDynamicComponent$1(component) {
-  if (isString$3(component)) {
+  if (isString$4(component)) {
     return resolveAsset$1(COMPONENTS$1, component, false) || component;
   } else {
     return component || NULL_DYNAMIC_COMPONENT$1;
@@ -2858,7 +2858,7 @@ function resolve$1(registry, name) {
 function renderList$1(source, renderItem, cache2, index) {
   let ret;
   const cached = cache2 && cache2[index];
-  if (isArray$2(source) || isString$3(source)) {
+  if (isArray$2(source) || isString$4(source)) {
     ret = new Array(source.length);
     for (let i2 = 0, l2 = source.length; i2 < l2; i2++) {
       ret[i2] = renderItem(source[i2], i2, void 0, cached && cached[i2]);
@@ -2955,7 +2955,7 @@ const isReservedPrefix$1 = (key) => key === "_" || key === "$";
 const hasSetupBinding$1 = (state, key) => state !== EMPTY_OBJ$1 && !state.__isScriptSetup && hasOwn$1(state, key);
 const PublicInstanceProxyHandlers$1 = {
   get({ _: instance }, key) {
-    const { ctx, setupState, data, props, accessCache, type, appContext } = instance;
+    const { ctx, setupState, data: data2, props, accessCache, type, appContext } = instance;
     if (key === "__isVue") {
       return true;
     }
@@ -2967,7 +2967,7 @@ const PublicInstanceProxyHandlers$1 = {
           case 1:
             return setupState[key];
           case 2:
-            return data[key];
+            return data2[key];
           case 4:
             return ctx[key];
           case 3:
@@ -2976,9 +2976,9 @@ const PublicInstanceProxyHandlers$1 = {
       } else if (hasSetupBinding$1(setupState, key)) {
         accessCache[key] = 1;
         return setupState[key];
-      } else if (data !== EMPTY_OBJ$1 && hasOwn$1(data, key)) {
+      } else if (data2 !== EMPTY_OBJ$1 && hasOwn$1(data2, key)) {
         accessCache[key] = 2;
-        return data[key];
+        return data2[key];
       } else if ((normalizedProps = instance.propsOptions[0]) && hasOwn$1(normalizedProps, key)) {
         accessCache[key] = 3;
         return props[key];
@@ -3006,8 +3006,8 @@ const PublicInstanceProxyHandlers$1 = {
       {
         return globalProperties[key];
       }
-    } else if (currentRenderingInstance$1 && (!isString$3(key) || key.indexOf("__v") !== 0)) {
-      if (data !== EMPTY_OBJ$1 && isReservedPrefix$1(key[0]) && hasOwn$1(data, key)) {
+    } else if (currentRenderingInstance$1 && (!isString$4(key) || key.indexOf("__v") !== 0)) {
+      if (data2 !== EMPTY_OBJ$1 && isReservedPrefix$1(key[0]) && hasOwn$1(data2, key)) {
         warn$3(`Property ${JSON.stringify(key)} must be accessed via $data because it starts with a reserved character ("$" or "_") and is not proxied on the render context.`);
       } else if (instance === currentRenderingInstance$1) {
         warn$3(`Property ${JSON.stringify(key)} was accessed during render but is not defined on instance.`);
@@ -3015,15 +3015,15 @@ const PublicInstanceProxyHandlers$1 = {
     }
   },
   set({ _: instance }, key, value) {
-    const { data, setupState, ctx } = instance;
+    const { data: data2, setupState, ctx } = instance;
     if (hasSetupBinding$1(setupState, key)) {
       setupState[key] = value;
       return true;
     } else if (setupState.__isScriptSetup && hasOwn$1(setupState, key)) {
       warn$3(`Cannot mutate <script setup> binding "${key}" from Options API.`);
       return false;
-    } else if (data !== EMPTY_OBJ$1 && hasOwn$1(data, key)) {
-      data[key] = value;
+    } else if (data2 !== EMPTY_OBJ$1 && hasOwn$1(data2, key)) {
+      data2[key] = value;
       return true;
     } else if (hasOwn$1(instance.props, key)) {
       warn$3(`Attempting to mutate prop "${key}". Props are readonly.`);
@@ -3045,9 +3045,9 @@ const PublicInstanceProxyHandlers$1 = {
     }
     return true;
   },
-  has({ _: { data, setupState, accessCache, ctx, appContext, propsOptions } }, key) {
+  has({ _: { data: data2, setupState, accessCache, ctx, appContext, propsOptions } }, key) {
     let normalizedProps;
-    return !!accessCache[key] || data !== EMPTY_OBJ$1 && hasOwn$1(data, key) || hasSetupBinding$1(setupState, key) || (normalizedProps = propsOptions[0]) && hasOwn$1(normalizedProps, key) || hasOwn$1(ctx, key) || hasOwn$1(publicPropertiesMap$1, key) || hasOwn$1(appContext.config.globalProperties, key);
+    return !!accessCache[key] || data2 !== EMPTY_OBJ$1 && hasOwn$1(data2, key) || hasSetupBinding$1(setupState, key) || (normalizedProps = propsOptions[0]) && hasOwn$1(normalizedProps, key) || hasOwn$1(ctx, key) || hasOwn$1(publicPropertiesMap$1, key) || hasOwn$1(appContext.config.globalProperties, key);
   },
   defineProperty(target, key, descriptor) {
     if (descriptor.get != null) {
@@ -3128,7 +3128,7 @@ function applyOptions$1(instance) {
   const ctx = instance.ctx;
   shouldCacheAccess$1 = false;
   if (options.beforeCreate) {
-    callHook$1(options.beforeCreate, instance, "bc");
+    callHook$1$1(options.beforeCreate, instance, "bc");
   }
   const {
     data: dataOptions,
@@ -3174,7 +3174,7 @@ function applyOptions$1(instance) {
   if (methods) {
     for (const key in methods) {
       const methodHandler = methods[key];
-      if (isFunction$1(methodHandler)) {
+      if (isFunction$2(methodHandler)) {
         {
           Object.defineProperty(ctx, key, {
             value: methodHandler.bind(publicThis),
@@ -3192,25 +3192,25 @@ function applyOptions$1(instance) {
     }
   }
   if (dataOptions) {
-    if (!isFunction$1(dataOptions)) {
+    if (!isFunction$2(dataOptions)) {
       warn$3(`The data option must be a function. Plain object usage is no longer supported.`);
     }
-    const data = dataOptions.call(publicThis, publicThis);
-    if (isPromise$1(data)) {
+    const data2 = dataOptions.call(publicThis, publicThis);
+    if (isPromise$1(data2)) {
       warn$3(`data() returned a Promise - note data() cannot be async; If you intend to perform data fetching before component renders, use async setup() + <Suspense>.`);
     }
-    if (!isObject$1(data)) {
+    if (!isObject$1(data2)) {
       warn$3(`data() should return an object.`);
     } else {
-      instance.data = reactive$1(data);
+      instance.data = reactive$1(data2);
       {
-        for (const key in data) {
+        for (const key in data2) {
           checkDuplicateProperties("Data", key);
           if (!isReservedPrefix$1(key[0])) {
             Object.defineProperty(ctx, key, {
               configurable: true,
               enumerable: true,
-              get: () => data[key],
+              get: () => data2[key],
               set: NOOP$1
             });
           }
@@ -3222,11 +3222,11 @@ function applyOptions$1(instance) {
   if (computedOptions) {
     for (const key in computedOptions) {
       const opt = computedOptions[key];
-      const get2 = isFunction$1(opt) ? opt.bind(publicThis, publicThis) : isFunction$1(opt.get) ? opt.get.bind(publicThis, publicThis) : NOOP$1;
+      const get2 = isFunction$2(opt) ? opt.bind(publicThis, publicThis) : isFunction$2(opt.get) ? opt.get.bind(publicThis, publicThis) : NOOP$1;
       if (get2 === NOOP$1) {
         warn$3(`Computed property "${key}" has no getter.`);
       }
-      const set2 = !isFunction$1(opt) && isFunction$1(opt.set) ? opt.set.bind(publicThis) : () => {
+      const set2 = !isFunction$2(opt) && isFunction$2(opt.set) ? opt.set.bind(publicThis) : () => {
         warn$3(`Write operation failed: computed property "${key}" is readonly.`);
       };
       const c2 = computed$2({
@@ -3250,13 +3250,13 @@ function applyOptions$1(instance) {
     }
   }
   if (provideOptions) {
-    const provides = isFunction$1(provideOptions) ? provideOptions.call(publicThis) : provideOptions;
+    const provides = isFunction$2(provideOptions) ? provideOptions.call(publicThis) : provideOptions;
     Reflect.ownKeys(provides).forEach((key) => {
       provide$1(key, provides[key]);
     });
   }
   if (created) {
-    callHook$1(created, instance, "c");
+    callHook$1$1(created, instance, "c");
   }
   function registerLifecycleHook(register, hook) {
     if (isArray$2(hook)) {
@@ -3339,26 +3339,26 @@ function resolveInjections$1(injectOptions, ctx, checkDuplicateProperties = NOOP
     }
   }
 }
-function callHook$1(hook, instance, type) {
+function callHook$1$1(hook, instance, type) {
   callWithAsyncErrorHandling$1(isArray$2(hook) ? hook.map((h2) => h2.bind(instance.proxy)) : hook.bind(instance.proxy), instance, type);
 }
 function createWatcher$1(raw, ctx, publicThis, key) {
   const getter = key.includes(".") ? createPathGetter$1(publicThis, key) : () => publicThis[key];
-  if (isString$3(raw)) {
+  if (isString$4(raw)) {
     const handler = ctx[raw];
-    if (isFunction$1(handler)) {
+    if (isFunction$2(handler)) {
       watch$1(getter, handler);
     } else {
       warn$3(`Invalid watch handler specified by key "${raw}"`, handler);
     }
-  } else if (isFunction$1(raw)) {
+  } else if (isFunction$2(raw)) {
     watch$1(getter, raw.bind(publicThis));
   } else if (isObject$1(raw)) {
     if (isArray$2(raw)) {
       raw.forEach((r2) => createWatcher$1(r2, ctx, publicThis, key));
     } else {
-      const handler = isFunction$1(raw.handler) ? raw.handler.bind(publicThis) : ctx[raw.handler];
-      if (isFunction$1(handler)) {
+      const handler = isFunction$2(raw.handler) ? raw.handler.bind(publicThis) : ctx[raw.handler];
+      if (isFunction$2(handler)) {
         watch$1(getter, handler, raw);
       } else {
         warn$3(`Invalid watch handler specified by key "${raw.handler}"`, handler);
@@ -3444,7 +3444,7 @@ function mergeDataFn$1(to2, from) {
     return from;
   }
   return function mergedDataFn() {
-    return extend$1(isFunction$1(to2) ? to2.call(this, this) : to2, isFunction$1(from) ? from.call(this, this) : from);
+    return extend$1(isFunction$2(to2) ? to2.call(this, this) : to2, isFunction$2(from) ? from.call(this, this) : from);
   };
 }
 function mergeInject$1(to2, from) {
@@ -3614,7 +3614,7 @@ function resolvePropValue$1(options, props, key, value, instance, isAbsent) {
     const hasDefault = hasOwn$1(opt, "default");
     if (hasDefault && value === void 0) {
       const defaultValue = opt.default;
-      if (opt.type !== Function && isFunction$1(defaultValue)) {
+      if (opt.type !== Function && isFunction$2(defaultValue)) {
         const { propsDefaults } = instance;
         if (key in propsDefaults) {
           value = propsDefaults[key];
@@ -3647,7 +3647,7 @@ function normalizePropsOptions$1(comp, appContext, asMixin = false) {
   const normalized = {};
   const needCastKeys = [];
   let hasExtends = false;
-  if (!isFunction$1(comp)) {
+  if (!isFunction$2(comp)) {
     const extendProps = (raw2) => {
       hasExtends = true;
       const [props, keys] = normalizePropsOptions$1(raw2, appContext, true);
@@ -3673,7 +3673,7 @@ function normalizePropsOptions$1(comp, appContext, asMixin = false) {
   }
   if (isArray$2(raw)) {
     for (let i2 = 0; i2 < raw.length; i2++) {
-      if (!isString$3(raw[i2])) {
+      if (!isString$4(raw[i2])) {
         warn$3(`props must be strings when using array syntax.`, raw[i2]);
       }
       const normalizedKey = camelize$1(raw[i2]);
@@ -3689,7 +3689,7 @@ function normalizePropsOptions$1(comp, appContext, asMixin = false) {
       const normalizedKey = camelize$1(key);
       if (validatePropName$1(normalizedKey)) {
         const opt = raw[key];
-        const prop = normalized[normalizedKey] = isArray$2(opt) || isFunction$1(opt) ? { type: opt } : Object.assign({}, opt);
+        const prop = normalized[normalizedKey] = isArray$2(opt) || isFunction$2(opt) ? { type: opt } : Object.assign({}, opt);
         if (prop) {
           const booleanIndex = getTypeIndex$1(Boolean, prop.type);
           const stringIndex = getTypeIndex$1(String, prop.type);
@@ -3726,7 +3726,7 @@ function isSameType$1(a2, b2) {
 function getTypeIndex$1(type, expectedTypes) {
   if (isArray$2(expectedTypes)) {
     return expectedTypes.findIndex((t2) => isSameType$1(t2, type));
-  } else if (isFunction$1(expectedTypes)) {
+  } else if (isFunction$2(expectedTypes)) {
     return isSameType$1(expectedTypes, type) ? 0 : -1;
   }
   return -1;
@@ -3844,7 +3844,7 @@ const normalizeObjectSlots$1 = (rawSlots, slots, instance) => {
     if (isInternalKey$1(key))
       continue;
     const value = rawSlots[key];
-    if (isFunction$1(value)) {
+    if (isFunction$2(value)) {
       slots[key] = normalizeSlot$2(key, value, ctx);
     } else if (value != null) {
       {
@@ -3937,7 +3937,7 @@ function createAppContext$1() {
 let uid$3 = 0;
 function createAppAPI$1(render2, hydrate) {
   return function createApp2(rootComponent, rootProps = null) {
-    if (!isFunction$1(rootComponent)) {
+    if (!isFunction$2(rootComponent)) {
       rootComponent = Object.assign({}, rootComponent);
     }
     if (rootProps != null && !isObject$1(rootProps)) {
@@ -3966,10 +3966,10 @@ function createAppAPI$1(render2, hydrate) {
       use(plugin2, ...options) {
         if (installedPlugins.has(plugin2)) {
           warn$3(`Plugin has already been applied to target app.`);
-        } else if (plugin2 && isFunction$1(plugin2.install)) {
+        } else if (plugin2 && isFunction$2(plugin2.install)) {
           installedPlugins.add(plugin2);
           plugin2.install(app, ...options);
-        } else if (isFunction$1(plugin2)) {
+        } else if (isFunction$2(plugin2)) {
           installedPlugins.add(plugin2);
           plugin2(app, ...options);
         } else {
@@ -4086,7 +4086,7 @@ function setRef$1(rawRef, oldRawRef, parentSuspense, vnode, isUnmount = false) {
   const refs = owner.refs === EMPTY_OBJ$1 ? owner.refs = {} : owner.refs;
   const setupState = owner.setupState;
   if (oldRef != null && oldRef !== ref2) {
-    if (isString$3(oldRef)) {
+    if (isString$4(oldRef)) {
       refs[oldRef] = null;
       if (hasOwn$1(setupState, oldRef)) {
         setupState[oldRef] = null;
@@ -4095,10 +4095,10 @@ function setRef$1(rawRef, oldRawRef, parentSuspense, vnode, isUnmount = false) {
       oldRef.value = null;
     }
   }
-  if (isFunction$1(ref2)) {
+  if (isFunction$2(ref2)) {
     callWithErrorHandling$1(ref2, owner, 12, [value, refs]);
   } else {
-    const _isString = isString$3(ref2);
+    const _isString = isString$4(ref2);
     const _isRef = isRef$1(ref2);
     if (_isString || _isRef) {
       const doSet = () => {
@@ -5243,7 +5243,7 @@ const createVNodeWithArgsTransform$1 = (...args) => {
 const InternalObjectKey$1 = `__vInternal`;
 const normalizeKey$1 = ({ key }) => key != null ? key : null;
 const normalizeRef$1 = ({ ref: ref2, ref_key, ref_for }) => {
-  return ref2 != null ? isString$3(ref2) || isRef$1(ref2) || isFunction$1(ref2) ? { i: currentRenderingInstance$1, r: ref2, k: ref_key, f: !!ref_for } : ref2 : null;
+  return ref2 != null ? isString$4(ref2) || isRef$1(ref2) || isFunction$2(ref2) ? { i: currentRenderingInstance$1, r: ref2, k: ref_key, f: !!ref_for } : ref2 : null;
 };
 function createBaseVNode$1(type, props = null, children = null, patchFlag = 0, dynamicProps = null, shapeFlag = type === Fragment$1 ? 0 : 1, isBlockNode = false, needFullChildrenNormalization = false) {
   const vnode = {
@@ -5280,7 +5280,7 @@ function createBaseVNode$1(type, props = null, children = null, patchFlag = 0, d
       type.normalize(vnode);
     }
   } else if (children) {
-    vnode.shapeFlag |= isString$3(children) ? 8 : 16;
+    vnode.shapeFlag |= isString$4(children) ? 8 : 16;
   }
   if (vnode.key !== vnode.key) {
     warn$3(`VNode created with invalid key (NaN). VNode type:`, vnode.type);
@@ -5319,7 +5319,7 @@ function _createVNode$1(type, props = null, children = null, patchFlag = 0, dyna
   if (props) {
     props = guardReactiveProps$1(props);
     let { class: klass, style: style2 } = props;
-    if (klass && !isString$3(klass)) {
+    if (klass && !isString$4(klass)) {
       props.class = normalizeClass$1(klass);
     }
     if (isObject$1(style2)) {
@@ -5329,7 +5329,7 @@ function _createVNode$1(type, props = null, children = null, patchFlag = 0, dyna
       props.style = normalizeStyle$1(style2);
     }
   }
-  const shapeFlag = isString$3(type) ? 1 : isSuspense$1(type) ? 128 : isTeleport$1(type) ? 64 : isObject$1(type) ? 4 : isFunction$1(type) ? 2 : 0;
+  const shapeFlag = isString$4(type) ? 1 : isSuspense$1(type) ? 128 : isTeleport$1(type) ? 64 : isObject$1(type) ? 4 : isFunction$2(type) ? 2 : 0;
   if (shapeFlag & 4 && isProxy$1(type)) {
     type = toRaw$1(type);
     warn$3(`Vue received a Component which was made a reactive object. This can lead to unnecessary performance overhead, and should be avoided by marking the component with \`markRaw\` or using \`shallowRef\` instead of \`ref\`.`, `
@@ -5390,7 +5390,7 @@ function createStaticVNode$1(content, numberOfNodes) {
   vnode.staticCount = numberOfNodes;
   return vnode;
 }
-function createCommentVNode(text = "", asBlock = false) {
+function createCommentVNode$1(text = "", asBlock = false) {
   return asBlock ? (openBlock$1(), createBlock$1(Comment$1, null, text)) : createVNode$1(Comment$1, null, text);
 }
 function normalizeVNode$1(child) {
@@ -5441,7 +5441,7 @@ function normalizeChildren$1(vnode, children) {
         }
       }
     }
-  } else if (isFunction$1(children)) {
+  } else if (isFunction$2(children)) {
     children = { default: children, _ctx: currentRenderingInstance$1 };
     type = 32;
   } else {
@@ -5649,7 +5649,7 @@ function setupStatefulComponent$1(instance, isSSR) {
   }
 }
 function handleSetupResult$1(instance, setupResult, isSSR) {
-  if (isFunction$1(setupResult)) {
+  if (isFunction$2(setupResult)) {
     if (instance.type.__ssrInlineRender) {
       instance.ssrRender = setupResult;
     } else {
@@ -5773,7 +5773,7 @@ function getExposeProxy$1(instance) {
 const classifyRE$1 = /(?:^|[-_])(\w)/g;
 const classify$1 = (str) => str.replace(classifyRE$1, (c2) => c2.toUpperCase()).replace(/[-_]/g, "");
 function getComponentName$1(Component, includeInferred = true) {
-  return isFunction$1(Component) ? Component.displayName || Component.name : Component.name || includeInferred && Component.__name;
+  return isFunction$2(Component) ? Component.displayName || Component.name : Component.name || includeInferred && Component.__name;
 }
 function formatComponentName$1(instance, Component, isRoot = false) {
   let name = getComponentName$1(Component);
@@ -5796,7 +5796,7 @@ function formatComponentName$1(instance, Component, isRoot = false) {
   return name ? classify$1(name) : isRoot ? `App` : `Anonymous`;
 }
 function isClassComponent$1(value) {
-  return isFunction$1(value) && "__vccOpts" in value;
+  return isFunction$2(value) && "__vccOpts" in value;
 }
 const computed$2 = (getterOrOptions, debugOptions) => {
   return computed$1$1(getterOrOptions, debugOptions, isInSSRComponentSetup$1);
@@ -5971,7 +5971,7 @@ function initCustomFormatter$1() {
   }
   function extractKeys(instance, type) {
     const Comp = instance.type;
-    if (isFunction$1(Comp)) {
+    if (isFunction$2(Comp)) {
       return;
     }
     const extracted = {};
@@ -6085,12 +6085,12 @@ function patchClass$1(el2, value, isSVG) {
 }
 function patchStyle$1(el2, prev, next) {
   const style2 = el2.style;
-  const isCssString = isString$3(next);
+  const isCssString = isString$4(next);
   if (next && !isCssString) {
     for (const key in next) {
       setStyle$1(style2, key, next[key]);
     }
-    if (prev && !isString$3(prev)) {
+    if (prev && !isString$4(prev)) {
       for (const key in prev) {
         if (next[key] == null) {
           setStyle$1(style2, key, "");
@@ -6304,7 +6304,7 @@ function shouldSetAsProp$1(el2, key, value, isSVG) {
     if (key === "innerHTML" || key === "textContent") {
       return true;
     }
-    if (key in el2 && nativeOnRE$1.test(key) && isFunction$1(value)) {
+    if (key in el2 && nativeOnRE$1.test(key) && isFunction$2(value)) {
       return true;
     }
     return false;
@@ -6321,7 +6321,7 @@ function shouldSetAsProp$1(el2, key, value, isSVG) {
   if (key === "type" && el2.tagName === "TEXTAREA") {
     return false;
   }
-  if (nativeOnRE$1.test(key) && isString$3(value)) {
+  if (nativeOnRE$1.test(key) && isString$4(value)) {
     return false;
   }
   return key in el2;
@@ -6382,11 +6382,11 @@ function setVarsOnNode$1(el2, vars) {
     }
   }
 }
-const TRANSITION = "transition";
-const ANIMATION = "animation";
-const Transition = (props, { slots }) => h$2(BaseTransition, resolveTransitionProps(props), slots);
-Transition.displayName = "Transition";
-const DOMTransitionPropsValidators = {
+const TRANSITION$1 = "transition";
+const ANIMATION$1 = "animation";
+const Transition$1 = (props, { slots }) => h$2(BaseTransition$1, resolveTransitionProps$1(props), slots);
+Transition$1.displayName = "Transition";
+const DOMTransitionPropsValidators$1 = {
   name: String,
   type: String,
   css: {
@@ -6404,7 +6404,7 @@ const DOMTransitionPropsValidators = {
   leaveActiveClass: String,
   leaveToClass: String
 };
-Transition.props = /* @__PURE__ */ extend$1({}, BaseTransition.props, DOMTransitionPropsValidators);
+Transition$1.props = /* @__PURE__ */ extend$1({}, BaseTransition$1.props, DOMTransitionPropsValidators$1);
 const callHook$2 = (hook, args = []) => {
   if (isArray$2(hook)) {
     hook.forEach((h2) => h2(...args));
@@ -6412,13 +6412,13 @@ const callHook$2 = (hook, args = []) => {
     hook(...args);
   }
 };
-const hasExplicitCallback = (hook) => {
+const hasExplicitCallback$1 = (hook) => {
   return hook ? isArray$2(hook) ? hook.some((h2) => h2.length > 1) : hook.length > 1 : false;
 };
-function resolveTransitionProps(rawProps) {
+function resolveTransitionProps$1(rawProps) {
   const baseProps = {};
   for (const key in rawProps) {
-    if (!(key in DOMTransitionPropsValidators)) {
+    if (!(key in DOMTransitionPropsValidators$1)) {
       baseProps[key] = rawProps[key];
     }
   }
@@ -6426,20 +6426,20 @@ function resolveTransitionProps(rawProps) {
     return baseProps;
   }
   const { name = "v", type, duration, enterFromClass = `${name}-enter-from`, enterActiveClass = `${name}-enter-active`, enterToClass = `${name}-enter-to`, appearFromClass = enterFromClass, appearActiveClass = enterActiveClass, appearToClass = enterToClass, leaveFromClass = `${name}-leave-from`, leaveActiveClass = `${name}-leave-active`, leaveToClass = `${name}-leave-to` } = rawProps;
-  const durations = normalizeDuration(duration);
+  const durations = normalizeDuration$1(duration);
   const enterDuration = durations && durations[0];
   const leaveDuration = durations && durations[1];
   const { onBeforeEnter, onEnter, onEnterCancelled, onLeave, onLeaveCancelled, onBeforeAppear = onBeforeEnter, onAppear = onEnter, onAppearCancelled = onEnterCancelled } = baseProps;
   const finishEnter = (el2, isAppear, done) => {
-    removeTransitionClass(el2, isAppear ? appearToClass : enterToClass);
-    removeTransitionClass(el2, isAppear ? appearActiveClass : enterActiveClass);
+    removeTransitionClass$1(el2, isAppear ? appearToClass : enterToClass);
+    removeTransitionClass$1(el2, isAppear ? appearActiveClass : enterActiveClass);
     done && done();
   };
   const finishLeave = (el2, done) => {
     el2._isLeaving = false;
-    removeTransitionClass(el2, leaveFromClass);
-    removeTransitionClass(el2, leaveToClass);
-    removeTransitionClass(el2, leaveActiveClass);
+    removeTransitionClass$1(el2, leaveFromClass);
+    removeTransitionClass$1(el2, leaveToClass);
+    removeTransitionClass$1(el2, leaveActiveClass);
     done && done();
   };
   const makeEnterHook = (isAppear) => {
@@ -6447,11 +6447,11 @@ function resolveTransitionProps(rawProps) {
       const hook = isAppear ? onAppear : onEnter;
       const resolve2 = () => finishEnter(el2, isAppear, done);
       callHook$2(hook, [el2, resolve2]);
-      nextFrame$1(() => {
-        removeTransitionClass(el2, isAppear ? appearFromClass : enterFromClass);
-        addTransitionClass(el2, isAppear ? appearToClass : enterToClass);
-        if (!hasExplicitCallback(hook)) {
-          whenTransitionEnds(el2, type, enterDuration, resolve2);
+      nextFrame$2(() => {
+        removeTransitionClass$1(el2, isAppear ? appearFromClass : enterFromClass);
+        addTransitionClass$1(el2, isAppear ? appearToClass : enterToClass);
+        if (!hasExplicitCallback$1(hook)) {
+          whenTransitionEnds$1(el2, type, enterDuration, resolve2);
         }
       });
     };
@@ -6459,30 +6459,30 @@ function resolveTransitionProps(rawProps) {
   return extend$1(baseProps, {
     onBeforeEnter(el2) {
       callHook$2(onBeforeEnter, [el2]);
-      addTransitionClass(el2, enterFromClass);
-      addTransitionClass(el2, enterActiveClass);
+      addTransitionClass$1(el2, enterFromClass);
+      addTransitionClass$1(el2, enterActiveClass);
     },
     onBeforeAppear(el2) {
       callHook$2(onBeforeAppear, [el2]);
-      addTransitionClass(el2, appearFromClass);
-      addTransitionClass(el2, appearActiveClass);
+      addTransitionClass$1(el2, appearFromClass);
+      addTransitionClass$1(el2, appearActiveClass);
     },
     onEnter: makeEnterHook(false),
     onAppear: makeEnterHook(true),
     onLeave(el2, done) {
       el2._isLeaving = true;
       const resolve2 = () => finishLeave(el2, done);
-      addTransitionClass(el2, leaveFromClass);
-      forceReflow();
-      addTransitionClass(el2, leaveActiveClass);
-      nextFrame$1(() => {
+      addTransitionClass$1(el2, leaveFromClass);
+      forceReflow$1();
+      addTransitionClass$1(el2, leaveActiveClass);
+      nextFrame$2(() => {
         if (!el2._isLeaving) {
           return;
         }
-        removeTransitionClass(el2, leaveFromClass);
-        addTransitionClass(el2, leaveToClass);
-        if (!hasExplicitCallback(onLeave)) {
-          whenTransitionEnds(el2, type, leaveDuration, resolve2);
+        removeTransitionClass$1(el2, leaveFromClass);
+        addTransitionClass$1(el2, leaveToClass);
+        if (!hasExplicitCallback$1(onLeave)) {
+          whenTransitionEnds$1(el2, type, leaveDuration, resolve2);
         }
       });
       callHook$2(onLeave, [el2, resolve2]);
@@ -6501,33 +6501,33 @@ function resolveTransitionProps(rawProps) {
     }
   });
 }
-function normalizeDuration(duration) {
+function normalizeDuration$1(duration) {
   if (duration == null) {
     return null;
   } else if (isObject$1(duration)) {
-    return [NumberOf(duration.enter), NumberOf(duration.leave)];
+    return [NumberOf$1(duration.enter), NumberOf$1(duration.leave)];
   } else {
-    const n2 = NumberOf(duration);
+    const n2 = NumberOf$1(duration);
     return [n2, n2];
   }
 }
-function NumberOf(val) {
+function NumberOf$1(val) {
   const res = toNumber$1(val);
-  validateDuration(res);
+  validateDuration$1(res);
   return res;
 }
-function validateDuration(val) {
+function validateDuration$1(val) {
   if (typeof val !== "number") {
     warn$3(`<transition> explicit duration is not a valid number - got ${JSON.stringify(val)}.`);
   } else if (isNaN(val)) {
     warn$3(`<transition> explicit duration is NaN - the duration expression might be incorrect.`);
   }
 }
-function addTransitionClass(el2, cls) {
+function addTransitionClass$1(el2, cls) {
   cls.split(/\s+/).forEach((c2) => c2 && el2.classList.add(c2));
   (el2._vtc || (el2._vtc = /* @__PURE__ */ new Set())).add(cls);
 }
-function removeTransitionClass(el2, cls) {
+function removeTransitionClass$1(el2, cls) {
   cls.split(/\s+/).forEach((c2) => c2 && el2.classList.remove(c2));
   const { _vtc } = el2;
   if (_vtc) {
@@ -6537,14 +6537,14 @@ function removeTransitionClass(el2, cls) {
     }
   }
 }
-function nextFrame$1(cb) {
+function nextFrame$2(cb) {
   requestAnimationFrame(() => {
     requestAnimationFrame(cb);
   });
 }
-let endId = 0;
-function whenTransitionEnds(el2, expectedType, explicitTimeout, resolve2) {
-  const id2 = el2._endId = ++endId;
+let endId$1 = 0;
+function whenTransitionEnds$1(el2, expectedType, explicitTimeout, resolve2) {
+  const id2 = el2._endId = ++endId$1;
   const resolveIfNotStale = () => {
     if (id2 === el2._endId) {
       resolve2();
@@ -6553,7 +6553,7 @@ function whenTransitionEnds(el2, expectedType, explicitTimeout, resolve2) {
   if (explicitTimeout) {
     return setTimeout(resolveIfNotStale, explicitTimeout);
   }
-  const { type, timeout, propCount } = getTransitionInfo(el2, expectedType);
+  const { type, timeout, propCount } = getTransitionInfo$1(el2, expectedType);
   if (!type) {
     return resolve2();
   }
@@ -6575,36 +6575,36 @@ function whenTransitionEnds(el2, expectedType, explicitTimeout, resolve2) {
   }, timeout + 1);
   el2.addEventListener(endEvent, onEnd);
 }
-function getTransitionInfo(el2, expectedType) {
+function getTransitionInfo$1(el2, expectedType) {
   const styles = window.getComputedStyle(el2);
   const getStyleProperties = (key) => (styles[key] || "").split(", ");
-  const transitionDelays = getStyleProperties(`${TRANSITION}Delay`);
-  const transitionDurations = getStyleProperties(`${TRANSITION}Duration`);
-  const transitionTimeout = getTimeout(transitionDelays, transitionDurations);
-  const animationDelays = getStyleProperties(`${ANIMATION}Delay`);
-  const animationDurations = getStyleProperties(`${ANIMATION}Duration`);
-  const animationTimeout = getTimeout(animationDelays, animationDurations);
+  const transitionDelays = getStyleProperties(`${TRANSITION$1}Delay`);
+  const transitionDurations = getStyleProperties(`${TRANSITION$1}Duration`);
+  const transitionTimeout = getTimeout$1(transitionDelays, transitionDurations);
+  const animationDelays = getStyleProperties(`${ANIMATION$1}Delay`);
+  const animationDurations = getStyleProperties(`${ANIMATION$1}Duration`);
+  const animationTimeout = getTimeout$1(animationDelays, animationDurations);
   let type = null;
   let timeout = 0;
   let propCount = 0;
-  if (expectedType === TRANSITION) {
+  if (expectedType === TRANSITION$1) {
     if (transitionTimeout > 0) {
-      type = TRANSITION;
+      type = TRANSITION$1;
       timeout = transitionTimeout;
       propCount = transitionDurations.length;
     }
-  } else if (expectedType === ANIMATION) {
+  } else if (expectedType === ANIMATION$1) {
     if (animationTimeout > 0) {
-      type = ANIMATION;
+      type = ANIMATION$1;
       timeout = animationTimeout;
       propCount = animationDurations.length;
     }
   } else {
     timeout = Math.max(transitionTimeout, animationTimeout);
-    type = timeout > 0 ? transitionTimeout > animationTimeout ? TRANSITION : ANIMATION : null;
-    propCount = type ? type === TRANSITION ? transitionDurations.length : animationDurations.length : 0;
+    type = timeout > 0 ? transitionTimeout > animationTimeout ? TRANSITION$1 : ANIMATION$1 : null;
+    propCount = type ? type === TRANSITION$1 ? transitionDurations.length : animationDurations.length : 0;
   }
-  const hasTransform = type === TRANSITION && /\b(transform|all)(,|$)/.test(getStyleProperties(`${TRANSITION}Property`).toString());
+  const hasTransform = type === TRANSITION$1 && /\b(transform|all)(,|$)/.test(getStyleProperties(`${TRANSITION$1}Property`).toString());
   return {
     type,
     timeout,
@@ -6612,16 +6612,16 @@ function getTransitionInfo(el2, expectedType) {
     hasTransform
   };
 }
-function getTimeout(delays, durations) {
+function getTimeout$1(delays, durations) {
   while (delays.length < durations.length) {
     delays = delays.concat(delays);
   }
-  return Math.max(...durations.map((d2, i2) => toMs(d2) + toMs(delays[i2])));
+  return Math.max(...durations.map((d2, i2) => toMs$1(d2) + toMs$1(delays[i2])));
 }
-function toMs(s2) {
+function toMs$1(s2) {
   return Number(s2.slice(0, -1).replace(",", ".")) * 1e3;
 }
-function forceReflow() {
+function forceReflow$1() {
   return document.body.offsetHeight;
 }
 const getModelAssigner$1 = (vnode) => {
@@ -6788,7 +6788,7 @@ const createApp$1 = (...args) => {
     if (!container)
       return;
     const component = app._component;
-    if (!isFunction$1(component) && !component.render && !component.template) {
+    if (!isFunction$2(component) && !component.render && !component.template) {
       component.template = container.innerHTML;
     }
     container.innerHTML = "";
@@ -6835,7 +6835,7 @@ function injectCompilerOptionsCheck$1(app) {
   }
 }
 function normalizeContainer$1(container) {
-  if (isString$3(container)) {
+  if (isString$4(container)) {
     const res = document.querySelector(container);
     if (!res) {
       warn$3(`Failed to mount app: mount target selector "${container}" returned null.`);
@@ -6920,8 +6920,8 @@ class ApiProxy {
     let currentSettings = Object.assign({}, defaultSettings);
     try {
       const raw = localStorage.getItem(localSettingsSaveId);
-      const data = JSON.parse(raw);
-      Object.assign(currentSettings, data);
+      const data2 = JSON.parse(raw);
+      Object.assign(currentSettings, data2);
     } catch (e2) {
     }
     this.fallbacks = {
@@ -7332,12 +7332,12 @@ function formatEventData(events) {
   if (!events)
     return {};
   if (Array.isArray(events)) {
-    return events.reduce((data, event) => {
-      data.keys.push(event.key);
-      data.operations.push(event.type);
-      data.oldValue[event.key] = event.oldValue;
-      data.newValue[event.key] = event.newValue;
-      return data;
+    return events.reduce((data2, event) => {
+      data2.keys.push(event.key);
+      data2.operations.push(event.type);
+      data2.oldValue[event.key] = event.oldValue;
+      data2.newValue[event.key] = event.newValue;
+      return data2;
     }, {
       oldValue: {},
       keys: [],
@@ -7814,9 +7814,9 @@ function patchObject(newState, oldState) {
   }
   return newState;
 }
-const noop$3 = () => {
+const noop$4 = () => {
 };
-function addSubscription(subscriptions, callback, detached, onCleanup = noop$3) {
+function addSubscription(subscriptions, callback, detached, onCleanup = noop$4) {
   subscriptions.push(callback);
   const removeSubscription = () => {
     const idx = subscriptions.indexOf(callback);
@@ -8366,7 +8366,7 @@ const computePosition$1 = async (reference, floating, config2) => {
     const {
       x: nextX,
       y: nextY,
-      data,
+      data: data2,
       reset
     } = await fn2({
       x: x2,
@@ -8386,7 +8386,7 @@ const computePosition$1 = async (reference, floating, config2) => {
     y = nextY != null ? nextY : y;
     middlewareData = {
       ...middlewareData,
-      [name]: data != null ? data : {}
+      [name]: data2 != null ? data2 : {}
     };
     if (reset) {
       if (typeof reset === "object") {
@@ -9490,7 +9490,7 @@ function removeFromArray(array, item) {
     array.splice(index, 1);
   }
 }
-function nextFrame() {
+function nextFrame$1() {
   return new Promise((resolve2) => requestAnimationFrame(() => {
     requestAnimationFrame(resolve2);
   }));
@@ -10014,13 +10014,13 @@ var PrivatePopper = () => defineComponent$1({
           }
         }));
       }
-      const data = await computePosition(this.$_referenceNode, this.$_popperNode, options2);
+      const data2 = await computePosition(this.$_referenceNode, this.$_popperNode, options2);
       Object.assign(this.result, {
-        x: data.x,
-        y: data.y,
-        placement: data.placement,
-        strategy: data.strategy,
-        arrow: __spreadValues$1(__spreadValues$1({}, data.middlewareData.arrow), data.middlewareData.arrowOverflow)
+        x: data2.x,
+        y: data2.y,
+        placement: data2.placement,
+        strategy: data2.strategy,
+        arrow: __spreadValues$1(__spreadValues$1({}, data2.middlewareData.arrow), data2.middlewareData.arrowOverflow)
       });
     },
     $_scheduleShow(event = null, skipDelay = false) {
@@ -10067,7 +10067,7 @@ var PrivatePopper = () => defineComponent$1({
         return;
       }
       this.$_ensureTeleport();
-      await nextFrame();
+      await nextFrame$1();
       await this.$_computePosition();
       await this.$_applyShowEffect();
       if (!this.positioningDisabled) {
@@ -10117,7 +10117,7 @@ var PrivatePopper = () => defineComponent$1({
       this.classes.showTo = false;
       this.classes.hideFrom = false;
       this.classes.hideTo = false;
-      await nextFrame();
+      await nextFrame$1();
       this.classes.showFrom = false;
       this.classes.showTo = true;
       if (!this.noAutoFocus)
@@ -10169,7 +10169,7 @@ var PrivatePopper = () => defineComponent$1({
       this.classes.showTo = false;
       this.classes.hideFrom = true;
       this.classes.hideTo = false;
-      await nextFrame();
+      await nextFrame$1();
       this.classes.hideFrom = false;
       this.classes.hideTo = true;
     },
@@ -10661,8 +10661,8 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
           _ctx.handleResize ? (openBlock$1(), createBlock$1(_component_ResizeObserver, {
             key: 0,
             onNotify: _cache[1] || (_cache[1] = ($event) => _ctx.$emit("resize", $event))
-          })) : createCommentVNode("", true)
-        ], 64)) : createCommentVNode("", true)
+          })) : createCommentVNode$1("", true)
+        ], 64)) : createCommentVNode$1("", true)
       ], 512),
       createBaseVNode$1("div", {
         ref: "arrow",
@@ -10951,7 +10951,7 @@ function getPlacement(options2, modifiers) {
   }
   return result;
 }
-function getOptions$1(el2, value, modifiers) {
+function getOptions$2(el2, value, modifiers) {
   let options2;
   const type = typeof value;
   if (type === "string") {
@@ -10998,7 +10998,7 @@ function ensureDirectiveApp() {
 }
 function createTooltip(el2, value, modifiers) {
   ensureDirectiveApp();
-  const options2 = ref$1(getOptions$1(el2, value, modifiers));
+  const options2 = ref$1(getOptions$2(el2, value, modifiers));
   const shown = ref$1(false);
   const item = {
     id: uid$2++,
@@ -11035,7 +11035,7 @@ function destroyTooltip(el2) {
   }
 }
 function bind(el2, { value, modifiers }) {
-  const options2 = getOptions$1(el2, value, modifiers);
+  const options2 = getOptions$2(el2, value, modifiers);
   if (!options2.content || getDefaultConfig(options2.theme || "tooltip", "disabled")) {
     destroyTooltip(el2);
   } else {
@@ -11152,7 +11152,7 @@ function normalizeStyle(value) {
     const res = {};
     for (let i2 = 0; i2 < value.length; i2++) {
       const item = value[i2];
-      const normalized = isString$2(item) ? parseStringStyle(item) : normalizeStyle(item);
+      const normalized = isString$3(item) ? parseStringStyle(item) : normalizeStyle(item);
       if (normalized) {
         for (const key in normalized) {
           res[key] = normalized[key];
@@ -11160,7 +11160,7 @@ function normalizeStyle(value) {
       }
     }
     return res;
-  } else if (isString$2(value)) {
+  } else if (isString$3(value)) {
     return value;
   } else if (isObject(value)) {
     return value;
@@ -11181,7 +11181,7 @@ function parseStringStyle(cssText) {
 }
 function normalizeClass(value) {
   let res = "";
-  if (isString$2(value)) {
+  if (isString$3(value)) {
     res = value;
   } else if (isArray$1(value)) {
     for (let i2 = 0; i2 < value.length; i2++) {
@@ -11260,7 +11260,7 @@ function looseIndexOf(arr, val) {
   return arr.findIndex((item) => looseEqual(item, val));
 }
 const toDisplayString = (val) => {
-  return isString$2(val) ? val : val == null ? "" : isArray$1(val) || isObject(val) && (val.toString === objectToString || !isFunction(val.toString)) ? JSON.stringify(val, replacer, 2) : String(val);
+  return isString$3(val) ? val : val == null ? "" : isArray$1(val) || isObject(val) && (val.toString === objectToString || !isFunction$1(val.toString)) ? JSON.stringify(val, replacer, 2) : String(val);
 };
 const replacer = (_key, val) => {
   if (val && val.__v_isRef) {
@@ -11302,12 +11302,12 @@ const isArray$1 = Array.isArray;
 const isMap = (val) => toTypeString(val) === "[object Map]";
 const isSet = (val) => toTypeString(val) === "[object Set]";
 const isDate = (val) => toTypeString(val) === "[object Date]";
-const isFunction = (val) => typeof val === "function";
-const isString$2 = (val) => typeof val === "string";
+const isFunction$1 = (val) => typeof val === "function";
+const isString$3 = (val) => typeof val === "string";
 const isSymbol = (val) => typeof val === "symbol";
 const isObject = (val) => val !== null && typeof val === "object";
 const isPromise = (val) => {
-  return isObject(val) && isFunction(val.then) && isFunction(val.catch);
+  return isObject(val) && isFunction$1(val.then) && isFunction$1(val.catch);
 };
 const objectToString = Object.prototype.toString;
 const toTypeString = (value) => objectToString.call(value);
@@ -11315,7 +11315,7 @@ const toRawType = (value) => {
   return toTypeString(value).slice(8, -1);
 };
 const isPlainObject = (val) => toTypeString(val) === "[object Object]";
-const isIntegerKey = (key) => isString$2(key) && key !== "NaN" && key[0] !== "-" && "" + parseInt(key, 10) === key;
+const isIntegerKey = (key) => isString$3(key) && key !== "NaN" && key[0] !== "-" && "" + parseInt(key, 10) === key;
 const isReservedProp = /* @__PURE__ */ makeMap(
   ",key,ref,ref_for,ref_key,onVnodeBeforeMount,onVnodeMounted,onVnodeBeforeUpdate,onVnodeUpdated,onVnodeBeforeUnmount,onVnodeUnmounted"
 );
@@ -11335,7 +11335,7 @@ const hyphenateRE = /\B([A-Z])/g;
 const hyphenate = cacheStringFunction((str) => str.replace(hyphenateRE, "-$1").toLowerCase());
 const capitalize = cacheStringFunction((str) => str.charAt(0).toUpperCase() + str.slice(1));
 const toHandlerKey = cacheStringFunction((str) => str ? `on${capitalize(str)}` : ``);
-const hasChanged = (value, oldValue) => !Object.is(value, oldValue);
+const hasChanged$1 = (value, oldValue) => !Object.is(value, oldValue);
 const invokeArrayFns = (fns, arg) => {
   for (let i2 = 0; i2 < fns.length; i2++) {
     fns[i2](arg);
@@ -11759,7 +11759,7 @@ function createSetter(shallow = false) {
     if (target === toRaw(receiver)) {
       if (!hadKey) {
         trigger(target, "add", key, value);
-      } else if (hasChanged(value, oldValue)) {
+      } else if (hasChanged$1(value, oldValue)) {
         trigger(target, "set", key, value, oldValue);
       }
     }
@@ -11880,7 +11880,7 @@ function set$1(key, value) {
   target.set(key, value);
   if (!hadKey) {
     trigger(target, "add", key, value);
-  } else if (hasChanged(value, oldValue)) {
+  } else if (hasChanged$1(value, oldValue)) {
     trigger(target, "set", key, value, oldValue);
   }
   return this;
@@ -12203,7 +12203,7 @@ class RefImpl {
   set value(newVal) {
     const useDirectValue = this.__v_isShallow || isShallow$1(newVal) || isReadonly(newVal);
     newVal = useDirectValue ? newVal : toRaw(newVal);
-    if (hasChanged(newVal, this._rawValue)) {
+    if (hasChanged$1(newVal, this._rawValue)) {
       this._rawValue = newVal;
       this._value = useDirectValue ? newVal : toReactive(newVal);
       triggerRefValue(this, newVal);
@@ -12263,7 +12263,7 @@ _a$3 = "__v_isReadonly";
 function computed$1(getterOrOptions, debugOptions, isSSR = false) {
   let getter;
   let setter;
-  const onlyGetter = isFunction(getterOrOptions);
+  const onlyGetter = isFunction$1(getterOrOptions);
   if (onlyGetter) {
     getter = getterOrOptions;
     setter = () => {
@@ -12357,7 +12357,7 @@ function formatProps(props) {
   return res;
 }
 function formatProp(key, value, raw) {
-  if (isString$2(value)) {
+  if (isString$3(value)) {
     value = JSON.stringify(value);
     return raw ? value : [`${key}=${value}`];
   } else if (typeof value === "number" || typeof value === "boolean" || value == null) {
@@ -12365,7 +12365,7 @@ function formatProp(key, value, raw) {
   } else if (isRef(value)) {
     value = formatProp(key, toRaw(value.value), true);
     return raw ? value : [`${key}=Ref<`, value, `>`];
-  } else if (isFunction(value)) {
+  } else if (isFunction$1(value)) {
     return [`${key}=fn${value.name ? `<${value.name}>` : ``}`];
   } else {
     value = toRaw(value);
@@ -12413,7 +12413,7 @@ function callWithErrorHandling(fn2, instance, type, args) {
   return res;
 }
 function callWithAsyncErrorHandling(fn2, instance, type, args) {
-  if (isFunction(fn2)) {
+  if (isFunction$1(fn2)) {
     const res = callWithErrorHandling(fn2, instance, type, args);
     if (res && isPromise(res)) {
       res.catch((err) => {
@@ -12787,8 +12787,8 @@ function createDevtoolsComponentHook(hook) {
 const devtoolsPerfStart = /* @__PURE__ */ createDevtoolsPerformanceHook("perf:start");
 const devtoolsPerfEnd = /* @__PURE__ */ createDevtoolsPerformanceHook("perf:end");
 function createDevtoolsPerformanceHook(hook) {
-  return (component, type, time) => {
-    emit(hook, component.appContext.app, component.uid, component, type, time);
+  return (component, type, time2) => {
+    emit(hook, component.appContext.app, component.uid, component, type, time2);
   };
 }
 function devtoolsComponentEmit(component, event, params) {
@@ -12807,7 +12807,7 @@ function emit$1(instance, event, ...rawArgs) {
         }
       } else {
         const validator = emitsOptions[event];
-        if (isFunction(validator)) {
+        if (isFunction$1(validator)) {
           const isValid = validator(...rawArgs);
           if (!isValid) {
             warn$1(`Invalid event arguments: event validation failed for event "${event}".`);
@@ -12823,7 +12823,7 @@ function emit$1(instance, event, ...rawArgs) {
     const modifiersKey = `${modelArg === "modelValue" ? "model" : modelArg}Modifiers`;
     const { number, trim } = props[modifiersKey] || EMPTY_OBJ;
     if (trim) {
-      args = rawArgs.map((a2) => isString$2(a2) ? a2.trim() : a2);
+      args = rawArgs.map((a2) => isString$3(a2) ? a2.trim() : a2);
     }
     if (number) {
       args = rawArgs.map(toNumber);
@@ -12866,7 +12866,7 @@ function normalizeEmitsOptions(comp, appContext, asMixin = false) {
   const raw = comp.emits;
   let normalized = {};
   let hasExtends = false;
-  if (!isFunction(comp)) {
+  if (!isFunction$1(comp)) {
     const extendEmits = (raw2) => {
       const normalizedFromExtend = normalizeEmitsOptions(raw2, appContext, true);
       if (normalizedFromExtend) {
@@ -12950,7 +12950,7 @@ function markAttrsAccessed() {
   accessedAttrs = true;
 }
 function renderComponentRoot(instance) {
-  const { type: Component, vnode, proxy, withProxy, props, propsOptions: [propsOptions], slots, attrs, emit: emit2, render: render2, renderCache, data, setupState, ctx, inheritAttrs } = instance;
+  const { type: Component, vnode, proxy, withProxy, props, propsOptions: [propsOptions], slots, attrs, emit: emit2, render: render2, renderCache, data: data2, setupState, ctx, inheritAttrs } = instance;
   let result;
   let fallthroughAttrs;
   const prev = setCurrentRenderingInstance(instance);
@@ -12960,7 +12960,7 @@ function renderComponentRoot(instance) {
   try {
     if (vnode.shapeFlag & 4) {
       const proxyToUse = withProxy || proxy;
-      result = normalizeVNode(render2.call(proxyToUse, proxyToUse, renderCache, props, setupState, data, ctx));
+      result = normalizeVNode(render2.call(proxyToUse, proxyToUse, renderCache, props, setupState, data2, ctx));
       fallthroughAttrs = attrs;
     } else {
       const render3 = Component;
@@ -13184,7 +13184,7 @@ const SuspenseImpl = {
 const Suspense = SuspenseImpl;
 function triggerEvent(vnode, name) {
   const eventListener = vnode.props && vnode.props[name];
-  if (isFunction(eventListener)) {
+  if (isFunction$1(eventListener)) {
     eventListener();
   }
 }
@@ -13494,7 +13494,7 @@ function normalizeSuspenseChildren(vnode) {
 }
 function normalizeSuspenseSlot(s2) {
   let block;
-  if (isFunction(s2)) {
+  if (isFunction$1(s2)) {
     const trackBlock = isBlockTreeEnabled && s2._c;
     if (trackBlock) {
       s2._d = false;
@@ -13561,7 +13561,7 @@ function inject(key, defaultValue, treatDefaultAsFactory = false) {
     if (provides && key in provides) {
       return provides[key];
     } else if (arguments.length > 1) {
-      return treatDefaultAsFactory && isFunction(defaultValue) ? defaultValue.call(instance.proxy) : defaultValue;
+      return treatDefaultAsFactory && isFunction$1(defaultValue) ? defaultValue.call(instance.proxy) : defaultValue;
     } else {
       warn$1(`injection "${String(key)}" not found.`);
     }
@@ -13574,7 +13574,7 @@ function watchPostEffect(effect, options) {
 }
 const INITIAL_WATCHER_VALUE = {};
 function watch(source, cb, options) {
-  if (!isFunction(cb)) {
+  if (!isFunction$1(cb)) {
     warn$1(`\`watch(fn, options?)\` signature has been moved to a separate API. Use \`watchEffect(fn, options?)\` instead. \`watch\` now only supports \`watch(source, cb, options?) signature.`);
   }
   return doWatch(source, cb, options);
@@ -13609,13 +13609,13 @@ function doWatch(source, cb, { immediate, deep, flush, onTrack, onTrigger } = EM
         return s2.value;
       } else if (isReactive(s2)) {
         return traverse(s2);
-      } else if (isFunction(s2)) {
+      } else if (isFunction$1(s2)) {
         return callWithErrorHandling(s2, instance, 2);
       } else {
         warnInvalidSource(s2);
       }
     });
-  } else if (isFunction(source)) {
+  } else if (isFunction$1(source)) {
     if (cb) {
       getter = () => callWithErrorHandling(source, instance, 2);
     } else {
@@ -13669,7 +13669,7 @@ function doWatch(source, cb, { immediate, deep, flush, onTrack, onTrigger } = EM
     }
     if (cb) {
       const newValue = effect.run();
-      if (deep || forceTrigger || (isMultiSource ? newValue.some((v2, i2) => hasChanged(v2, oldValue[i2])) : hasChanged(newValue, oldValue)) || false) {
+      if (deep || forceTrigger || (isMultiSource ? newValue.some((v2, i2) => hasChanged$1(v2, oldValue[i2])) : hasChanged$1(newValue, oldValue)) || false) {
         if (cleanup) {
           cleanup();
         }
@@ -13724,9 +13724,9 @@ function doWatch(source, cb, { immediate, deep, flush, onTrack, onTrigger } = EM
 }
 function instanceWatch(source, value, options) {
   const publicThis = this.proxy;
-  const getter = isString$2(source) ? source.includes(".") ? createPathGetter(publicThis, source) : () => publicThis[source] : source.bind(publicThis, publicThis);
+  const getter = isString$3(source) ? source.includes(".") ? createPathGetter(publicThis, source) : () => publicThis[source] : source.bind(publicThis, publicThis);
   let cb;
-  if (isFunction(value)) {
+  if (isFunction$1(value)) {
     cb = value;
   } else {
     cb = value.handler;
@@ -13778,12 +13778,287 @@ function traverse(value, seen) {
   }
   return value;
 }
+function useTransitionState() {
+  const state = {
+    isMounted: false,
+    isLeaving: false,
+    isUnmounting: false,
+    leavingVNodes: /* @__PURE__ */ new Map()
+  };
+  onMounted(() => {
+    state.isMounted = true;
+  });
+  onBeforeUnmount(() => {
+    state.isUnmounting = true;
+  });
+  return state;
+}
+const TransitionHookValidator = [Function, Array];
+const BaseTransitionImpl = {
+  name: `BaseTransition`,
+  props: {
+    mode: String,
+    appear: Boolean,
+    persisted: Boolean,
+    onBeforeEnter: TransitionHookValidator,
+    onEnter: TransitionHookValidator,
+    onAfterEnter: TransitionHookValidator,
+    onEnterCancelled: TransitionHookValidator,
+    onBeforeLeave: TransitionHookValidator,
+    onLeave: TransitionHookValidator,
+    onAfterLeave: TransitionHookValidator,
+    onLeaveCancelled: TransitionHookValidator,
+    onBeforeAppear: TransitionHookValidator,
+    onAppear: TransitionHookValidator,
+    onAfterAppear: TransitionHookValidator,
+    onAppearCancelled: TransitionHookValidator
+  },
+  setup(props, { slots }) {
+    const instance = getCurrentInstance();
+    const state = useTransitionState();
+    let prevTransitionKey;
+    return () => {
+      const children = slots.default && getTransitionRawChildren(slots.default(), true);
+      if (!children || !children.length) {
+        return;
+      }
+      let child = children[0];
+      if (children.length > 1) {
+        let hasFound = false;
+        for (const c2 of children) {
+          if (c2.type !== Comment) {
+            if (hasFound) {
+              warn$1("<transition> can only be used on a single element or component. Use <transition-group> for lists.");
+              break;
+            }
+            child = c2;
+            hasFound = true;
+          }
+        }
+      }
+      const rawProps = toRaw(props);
+      const { mode } = rawProps;
+      if (mode && mode !== "in-out" && mode !== "out-in" && mode !== "default") {
+        warn$1(`invalid <transition> mode: ${mode}`);
+      }
+      if (state.isLeaving) {
+        return emptyPlaceholder(child);
+      }
+      const innerChild = getKeepAliveChild(child);
+      if (!innerChild) {
+        return emptyPlaceholder(child);
+      }
+      const enterHooks = resolveTransitionHooks(innerChild, rawProps, state, instance);
+      setTransitionHooks(innerChild, enterHooks);
+      const oldChild = instance.subTree;
+      const oldInnerChild = oldChild && getKeepAliveChild(oldChild);
+      let transitionKeyChanged = false;
+      const { getTransitionKey } = innerChild.type;
+      if (getTransitionKey) {
+        const key = getTransitionKey();
+        if (prevTransitionKey === void 0) {
+          prevTransitionKey = key;
+        } else if (key !== prevTransitionKey) {
+          prevTransitionKey = key;
+          transitionKeyChanged = true;
+        }
+      }
+      if (oldInnerChild && oldInnerChild.type !== Comment && (!isSameVNodeType(innerChild, oldInnerChild) || transitionKeyChanged)) {
+        const leavingHooks = resolveTransitionHooks(oldInnerChild, rawProps, state, instance);
+        setTransitionHooks(oldInnerChild, leavingHooks);
+        if (mode === "out-in") {
+          state.isLeaving = true;
+          leavingHooks.afterLeave = () => {
+            state.isLeaving = false;
+            if (instance.update.active !== false) {
+              instance.update();
+            }
+          };
+          return emptyPlaceholder(child);
+        } else if (mode === "in-out" && innerChild.type !== Comment) {
+          leavingHooks.delayLeave = (el2, earlyRemove, delayedLeave) => {
+            const leavingVNodesCache = getLeavingNodesForType(state, oldInnerChild);
+            leavingVNodesCache[String(oldInnerChild.key)] = oldInnerChild;
+            el2._leaveCb = () => {
+              earlyRemove();
+              el2._leaveCb = void 0;
+              delete enterHooks.delayedLeave;
+            };
+            enterHooks.delayedLeave = delayedLeave;
+          };
+        }
+      }
+      return child;
+    };
+  }
+};
+const BaseTransition = BaseTransitionImpl;
+function getLeavingNodesForType(state, vnode) {
+  const { leavingVNodes } = state;
+  let leavingVNodesCache = leavingVNodes.get(vnode.type);
+  if (!leavingVNodesCache) {
+    leavingVNodesCache = /* @__PURE__ */ Object.create(null);
+    leavingVNodes.set(vnode.type, leavingVNodesCache);
+  }
+  return leavingVNodesCache;
+}
+function resolveTransitionHooks(vnode, props, state, instance) {
+  const { appear, mode, persisted = false, onBeforeEnter, onEnter, onAfterEnter, onEnterCancelled, onBeforeLeave, onLeave, onAfterLeave, onLeaveCancelled, onBeforeAppear, onAppear, onAfterAppear, onAppearCancelled } = props;
+  const key = String(vnode.key);
+  const leavingVNodesCache = getLeavingNodesForType(state, vnode);
+  const callHook2 = (hook, args) => {
+    hook && callWithAsyncErrorHandling(hook, instance, 9, args);
+  };
+  const callAsyncHook = (hook, args) => {
+    const done = args[1];
+    callHook2(hook, args);
+    if (isArray$1(hook)) {
+      if (hook.every((hook2) => hook2.length <= 1))
+        done();
+    } else if (hook.length <= 1) {
+      done();
+    }
+  };
+  const hooks = {
+    mode,
+    persisted,
+    beforeEnter(el2) {
+      let hook = onBeforeEnter;
+      if (!state.isMounted) {
+        if (appear) {
+          hook = onBeforeAppear || onBeforeEnter;
+        } else {
+          return;
+        }
+      }
+      if (el2._leaveCb) {
+        el2._leaveCb(true);
+      }
+      const leavingVNode = leavingVNodesCache[key];
+      if (leavingVNode && isSameVNodeType(vnode, leavingVNode) && leavingVNode.el._leaveCb) {
+        leavingVNode.el._leaveCb();
+      }
+      callHook2(hook, [el2]);
+    },
+    enter(el2) {
+      let hook = onEnter;
+      let afterHook = onAfterEnter;
+      let cancelHook = onEnterCancelled;
+      if (!state.isMounted) {
+        if (appear) {
+          hook = onAppear || onEnter;
+          afterHook = onAfterAppear || onAfterEnter;
+          cancelHook = onAppearCancelled || onEnterCancelled;
+        } else {
+          return;
+        }
+      }
+      let called = false;
+      const done = el2._enterCb = (cancelled) => {
+        if (called)
+          return;
+        called = true;
+        if (cancelled) {
+          callHook2(cancelHook, [el2]);
+        } else {
+          callHook2(afterHook, [el2]);
+        }
+        if (hooks.delayedLeave) {
+          hooks.delayedLeave();
+        }
+        el2._enterCb = void 0;
+      };
+      if (hook) {
+        callAsyncHook(hook, [el2, done]);
+      } else {
+        done();
+      }
+    },
+    leave(el2, remove2) {
+      const key2 = String(vnode.key);
+      if (el2._enterCb) {
+        el2._enterCb(true);
+      }
+      if (state.isUnmounting) {
+        return remove2();
+      }
+      callHook2(onBeforeLeave, [el2]);
+      let called = false;
+      const done = el2._leaveCb = (cancelled) => {
+        if (called)
+          return;
+        called = true;
+        remove2();
+        if (cancelled) {
+          callHook2(onLeaveCancelled, [el2]);
+        } else {
+          callHook2(onAfterLeave, [el2]);
+        }
+        el2._leaveCb = void 0;
+        if (leavingVNodesCache[key2] === vnode) {
+          delete leavingVNodesCache[key2];
+        }
+      };
+      leavingVNodesCache[key2] = vnode;
+      if (onLeave) {
+        callAsyncHook(onLeave, [el2, done]);
+      } else {
+        done();
+      }
+    },
+    clone(vnode2) {
+      return resolveTransitionHooks(vnode2, props, state, instance);
+    }
+  };
+  return hooks;
+}
+function emptyPlaceholder(vnode) {
+  if (isKeepAlive(vnode)) {
+    vnode = cloneVNode(vnode);
+    vnode.children = null;
+    return vnode;
+  }
+}
+function getKeepAliveChild(vnode) {
+  return isKeepAlive(vnode) ? vnode.children ? vnode.children[0] : void 0 : vnode;
+}
+function setTransitionHooks(vnode, hooks) {
+  if (vnode.shapeFlag & 6 && vnode.component) {
+    setTransitionHooks(vnode.component.subTree, hooks);
+  } else if (vnode.shapeFlag & 128) {
+    vnode.ssContent.transition = hooks.clone(vnode.ssContent);
+    vnode.ssFallback.transition = hooks.clone(vnode.ssFallback);
+  } else {
+    vnode.transition = hooks;
+  }
+}
+function getTransitionRawChildren(children, keepComment = false, parentKey) {
+  let ret = [];
+  let keyedFragmentCount = 0;
+  for (let i2 = 0; i2 < children.length; i2++) {
+    let child = children[i2];
+    const key = parentKey == null ? child.key : String(parentKey) + String(child.key != null ? child.key : i2);
+    if (child.type === Fragment) {
+      if (child.patchFlag & 128)
+        keyedFragmentCount++;
+      ret = ret.concat(getTransitionRawChildren(child.children, keepComment, key));
+    } else if (keepComment || child.type !== Comment) {
+      ret.push(key != null ? cloneVNode(child, { key }) : child);
+    }
+  }
+  if (keyedFragmentCount > 1) {
+    for (let i2 = 0; i2 < ret.length; i2++) {
+      ret[i2].patchFlag = -2;
+    }
+  }
+  return ret;
+}
 function defineComponent(options) {
-  return isFunction(options) ? { setup: options, name: options.name } : options;
+  return isFunction$1(options) ? { setup: options, name: options.name } : options;
 }
 const isAsyncWrapper = (i2) => !!i2.type.__asyncLoader;
 function defineAsyncComponent(source) {
-  if (isFunction(source)) {
+  if (isFunction$1(source)) {
     source = { loader: source };
   }
   const {
@@ -13826,7 +14101,7 @@ function defineAsyncComponent(source) {
       if (comp && (comp.__esModule || comp[Symbol.toStringTag] === "Module")) {
         comp = comp.default;
       }
-      if (comp && !isObject(comp) && !isFunction(comp)) {
+      if (comp && !isObject(comp) && !isFunction$1(comp)) {
         throw new Error(`Invalid async component load result: ${comp}`);
       }
       resolvedComp = comp;
@@ -14011,7 +14286,7 @@ function resolveComponent(name, maybeSelfReference) {
 }
 const NULL_DYNAMIC_COMPONENT = Symbol();
 function resolveDynamicComponent(component) {
-  if (isString$2(component)) {
+  if (isString$3(component)) {
     return resolveAsset(COMPONENTS, component, false) || component;
   } else {
     return component || NULL_DYNAMIC_COMPONENT;
@@ -14047,7 +14322,7 @@ function resolve(registry, name) {
 function renderList(source, renderItem, cache2, index) {
   let ret;
   const cached = cache2 && cache2[index];
-  if (isArray$1(source) || isString$2(source)) {
+  if (isArray$1(source) || isString$3(source)) {
     ret = new Array(source.length);
     for (let i2 = 0, l2 = source.length; i2 < l2; i2++) {
       ret[i2] = renderItem(source[i2], i2, void 0, cached && cached[i2]);
@@ -14144,7 +14419,7 @@ const isReservedPrefix = (key) => key === "_" || key === "$";
 const hasSetupBinding = (state, key) => state !== EMPTY_OBJ && !state.__isScriptSetup && hasOwn(state, key);
 const PublicInstanceProxyHandlers = {
   get({ _: instance }, key) {
-    const { ctx, setupState, data, props, accessCache, type, appContext } = instance;
+    const { ctx, setupState, data: data2, props, accessCache, type, appContext } = instance;
     if (key === "__isVue") {
       return true;
     }
@@ -14156,7 +14431,7 @@ const PublicInstanceProxyHandlers = {
           case 1:
             return setupState[key];
           case 2:
-            return data[key];
+            return data2[key];
           case 4:
             return ctx[key];
           case 3:
@@ -14165,9 +14440,9 @@ const PublicInstanceProxyHandlers = {
       } else if (hasSetupBinding(setupState, key)) {
         accessCache[key] = 1;
         return setupState[key];
-      } else if (data !== EMPTY_OBJ && hasOwn(data, key)) {
+      } else if (data2 !== EMPTY_OBJ && hasOwn(data2, key)) {
         accessCache[key] = 2;
-        return data[key];
+        return data2[key];
       } else if ((normalizedProps = instance.propsOptions[0]) && hasOwn(normalizedProps, key)) {
         accessCache[key] = 3;
         return props[key];
@@ -14195,8 +14470,8 @@ const PublicInstanceProxyHandlers = {
       {
         return globalProperties[key];
       }
-    } else if (currentRenderingInstance && (!isString$2(key) || key.indexOf("__v") !== 0)) {
-      if (data !== EMPTY_OBJ && isReservedPrefix(key[0]) && hasOwn(data, key)) {
+    } else if (currentRenderingInstance && (!isString$3(key) || key.indexOf("__v") !== 0)) {
+      if (data2 !== EMPTY_OBJ && isReservedPrefix(key[0]) && hasOwn(data2, key)) {
         warn$1(`Property ${JSON.stringify(key)} must be accessed via $data because it starts with a reserved character ("$" or "_") and is not proxied on the render context.`);
       } else if (instance === currentRenderingInstance) {
         warn$1(`Property ${JSON.stringify(key)} was accessed during render but is not defined on instance.`);
@@ -14204,15 +14479,15 @@ const PublicInstanceProxyHandlers = {
     }
   },
   set({ _: instance }, key, value) {
-    const { data, setupState, ctx } = instance;
+    const { data: data2, setupState, ctx } = instance;
     if (hasSetupBinding(setupState, key)) {
       setupState[key] = value;
       return true;
     } else if (setupState.__isScriptSetup && hasOwn(setupState, key)) {
       warn$1(`Cannot mutate <script setup> binding "${key}" from Options API.`);
       return false;
-    } else if (data !== EMPTY_OBJ && hasOwn(data, key)) {
-      data[key] = value;
+    } else if (data2 !== EMPTY_OBJ && hasOwn(data2, key)) {
+      data2[key] = value;
       return true;
     } else if (hasOwn(instance.props, key)) {
       warn$1(`Attempting to mutate prop "${key}". Props are readonly.`);
@@ -14234,9 +14509,9 @@ const PublicInstanceProxyHandlers = {
     }
     return true;
   },
-  has({ _: { data, setupState, accessCache, ctx, appContext, propsOptions } }, key) {
+  has({ _: { data: data2, setupState, accessCache, ctx, appContext, propsOptions } }, key) {
     let normalizedProps;
-    return !!accessCache[key] || data !== EMPTY_OBJ && hasOwn(data, key) || hasSetupBinding(setupState, key) || (normalizedProps = propsOptions[0]) && hasOwn(normalizedProps, key) || hasOwn(ctx, key) || hasOwn(publicPropertiesMap, key) || hasOwn(appContext.config.globalProperties, key);
+    return !!accessCache[key] || data2 !== EMPTY_OBJ && hasOwn(data2, key) || hasSetupBinding(setupState, key) || (normalizedProps = propsOptions[0]) && hasOwn(normalizedProps, key) || hasOwn(ctx, key) || hasOwn(publicPropertiesMap, key) || hasOwn(appContext.config.globalProperties, key);
   },
   defineProperty(target, key, descriptor) {
     if (descriptor.get != null) {
@@ -14317,7 +14592,7 @@ function applyOptions(instance) {
   const ctx = instance.ctx;
   shouldCacheAccess = false;
   if (options.beforeCreate) {
-    callHook(options.beforeCreate, instance, "bc");
+    callHook$1(options.beforeCreate, instance, "bc");
   }
   const {
     data: dataOptions,
@@ -14363,7 +14638,7 @@ function applyOptions(instance) {
   if (methods) {
     for (const key in methods) {
       const methodHandler = methods[key];
-      if (isFunction(methodHandler)) {
+      if (isFunction$1(methodHandler)) {
         {
           Object.defineProperty(ctx, key, {
             value: methodHandler.bind(publicThis),
@@ -14381,25 +14656,25 @@ function applyOptions(instance) {
     }
   }
   if (dataOptions) {
-    if (!isFunction(dataOptions)) {
+    if (!isFunction$1(dataOptions)) {
       warn$1(`The data option must be a function. Plain object usage is no longer supported.`);
     }
-    const data = dataOptions.call(publicThis, publicThis);
-    if (isPromise(data)) {
+    const data2 = dataOptions.call(publicThis, publicThis);
+    if (isPromise(data2)) {
       warn$1(`data() returned a Promise - note data() cannot be async; If you intend to perform data fetching before component renders, use async setup() + <Suspense>.`);
     }
-    if (!isObject(data)) {
+    if (!isObject(data2)) {
       warn$1(`data() should return an object.`);
     } else {
-      instance.data = reactive(data);
+      instance.data = reactive(data2);
       {
-        for (const key in data) {
+        for (const key in data2) {
           checkDuplicateProperties("Data", key);
           if (!isReservedPrefix(key[0])) {
             Object.defineProperty(ctx, key, {
               configurable: true,
               enumerable: true,
-              get: () => data[key],
+              get: () => data2[key],
               set: NOOP
             });
           }
@@ -14411,11 +14686,11 @@ function applyOptions(instance) {
   if (computedOptions) {
     for (const key in computedOptions) {
       const opt = computedOptions[key];
-      const get2 = isFunction(opt) ? opt.bind(publicThis, publicThis) : isFunction(opt.get) ? opt.get.bind(publicThis, publicThis) : NOOP;
+      const get2 = isFunction$1(opt) ? opt.bind(publicThis, publicThis) : isFunction$1(opt.get) ? opt.get.bind(publicThis, publicThis) : NOOP;
       if (get2 === NOOP) {
         warn$1(`Computed property "${key}" has no getter.`);
       }
-      const set2 = !isFunction(opt) && isFunction(opt.set) ? opt.set.bind(publicThis) : () => {
+      const set2 = !isFunction$1(opt) && isFunction$1(opt.set) ? opt.set.bind(publicThis) : () => {
         warn$1(`Write operation failed: computed property "${key}" is readonly.`);
       };
       const c2 = computed({
@@ -14439,13 +14714,13 @@ function applyOptions(instance) {
     }
   }
   if (provideOptions) {
-    const provides = isFunction(provideOptions) ? provideOptions.call(publicThis) : provideOptions;
+    const provides = isFunction$1(provideOptions) ? provideOptions.call(publicThis) : provideOptions;
     Reflect.ownKeys(provides).forEach((key) => {
       provide(key, provides[key]);
     });
   }
   if (created) {
-    callHook(created, instance, "c");
+    callHook$1(created, instance, "c");
   }
   function registerLifecycleHook(register, hook) {
     if (isArray$1(hook)) {
@@ -14528,26 +14803,26 @@ function resolveInjections(injectOptions, ctx, checkDuplicateProperties = NOOP, 
     }
   }
 }
-function callHook(hook, instance, type) {
+function callHook$1(hook, instance, type) {
   callWithAsyncErrorHandling(isArray$1(hook) ? hook.map((h2) => h2.bind(instance.proxy)) : hook.bind(instance.proxy), instance, type);
 }
 function createWatcher(raw, ctx, publicThis, key) {
   const getter = key.includes(".") ? createPathGetter(publicThis, key) : () => publicThis[key];
-  if (isString$2(raw)) {
+  if (isString$3(raw)) {
     const handler = ctx[raw];
-    if (isFunction(handler)) {
+    if (isFunction$1(handler)) {
       watch(getter, handler);
     } else {
       warn$1(`Invalid watch handler specified by key "${raw}"`, handler);
     }
-  } else if (isFunction(raw)) {
+  } else if (isFunction$1(raw)) {
     watch(getter, raw.bind(publicThis));
   } else if (isObject(raw)) {
     if (isArray$1(raw)) {
       raw.forEach((r2) => createWatcher(r2, ctx, publicThis, key));
     } else {
-      const handler = isFunction(raw.handler) ? raw.handler.bind(publicThis) : ctx[raw.handler];
-      if (isFunction(handler)) {
+      const handler = isFunction$1(raw.handler) ? raw.handler.bind(publicThis) : ctx[raw.handler];
+      if (isFunction$1(handler)) {
         watch(getter, handler, raw);
       } else {
         warn$1(`Invalid watch handler specified by key "${raw.handler}"`, handler);
@@ -14633,7 +14908,7 @@ function mergeDataFn(to2, from) {
     return from;
   }
   return function mergedDataFn() {
-    return extend(isFunction(to2) ? to2.call(this, this) : to2, isFunction(from) ? from.call(this, this) : from);
+    return extend(isFunction$1(to2) ? to2.call(this, this) : to2, isFunction$1(from) ? from.call(this, this) : from);
   };
 }
 function mergeInject(to2, from) {
@@ -14803,7 +15078,7 @@ function resolvePropValue(options, props, key, value, instance, isAbsent) {
     const hasDefault = hasOwn(opt, "default");
     if (hasDefault && value === void 0) {
       const defaultValue = opt.default;
-      if (opt.type !== Function && isFunction(defaultValue)) {
+      if (opt.type !== Function && isFunction$1(defaultValue)) {
         const { propsDefaults } = instance;
         if (key in propsDefaults) {
           value = propsDefaults[key];
@@ -14836,7 +15111,7 @@ function normalizePropsOptions(comp, appContext, asMixin = false) {
   const normalized = {};
   const needCastKeys = [];
   let hasExtends = false;
-  if (!isFunction(comp)) {
+  if (!isFunction$1(comp)) {
     const extendProps = (raw2) => {
       hasExtends = true;
       const [props, keys] = normalizePropsOptions(raw2, appContext, true);
@@ -14862,7 +15137,7 @@ function normalizePropsOptions(comp, appContext, asMixin = false) {
   }
   if (isArray$1(raw)) {
     for (let i2 = 0; i2 < raw.length; i2++) {
-      if (!isString$2(raw[i2])) {
+      if (!isString$3(raw[i2])) {
         warn$1(`props must be strings when using array syntax.`, raw[i2]);
       }
       const normalizedKey = camelize(raw[i2]);
@@ -14878,7 +15153,7 @@ function normalizePropsOptions(comp, appContext, asMixin = false) {
       const normalizedKey = camelize(key);
       if (validatePropName(normalizedKey)) {
         const opt = raw[key];
-        const prop = normalized[normalizedKey] = isArray$1(opt) || isFunction(opt) ? { type: opt } : Object.assign({}, opt);
+        const prop = normalized[normalizedKey] = isArray$1(opt) || isFunction$1(opt) ? { type: opt } : Object.assign({}, opt);
         if (prop) {
           const booleanIndex = getTypeIndex(Boolean, prop.type);
           const stringIndex = getTypeIndex(String, prop.type);
@@ -14915,7 +15190,7 @@ function isSameType(a2, b2) {
 function getTypeIndex(type, expectedTypes) {
   if (isArray$1(expectedTypes)) {
     return expectedTypes.findIndex((t2) => isSameType(t2, type));
-  } else if (isFunction(expectedTypes)) {
+  } else if (isFunction$1(expectedTypes)) {
     return isSameType(expectedTypes, type) ? 0 : -1;
   }
   return -1;
@@ -15033,7 +15308,7 @@ const normalizeObjectSlots = (rawSlots, slots, instance) => {
     if (isInternalKey(key))
       continue;
     const value = rawSlots[key];
-    if (isFunction(value)) {
+    if (isFunction$1(value)) {
       slots[key] = normalizeSlot$1(key, value, ctx);
     } else if (value != null) {
       {
@@ -15126,7 +15401,7 @@ function createAppContext() {
 let uid = 0;
 function createAppAPI(render2, hydrate) {
   return function createApp2(rootComponent, rootProps = null) {
-    if (!isFunction(rootComponent)) {
+    if (!isFunction$1(rootComponent)) {
       rootComponent = Object.assign({}, rootComponent);
     }
     if (rootProps != null && !isObject(rootProps)) {
@@ -15155,10 +15430,10 @@ function createAppAPI(render2, hydrate) {
       use(plugin2, ...options) {
         if (installedPlugins.has(plugin2)) {
           warn$1(`Plugin has already been applied to target app.`);
-        } else if (plugin2 && isFunction(plugin2.install)) {
+        } else if (plugin2 && isFunction$1(plugin2.install)) {
           installedPlugins.add(plugin2);
           plugin2.install(app, ...options);
-        } else if (isFunction(plugin2)) {
+        } else if (isFunction$1(plugin2)) {
           installedPlugins.add(plugin2);
           plugin2(app, ...options);
         } else {
@@ -15275,7 +15550,7 @@ function setRef(rawRef, oldRawRef, parentSuspense, vnode, isUnmount = false) {
   const refs = owner.refs === EMPTY_OBJ ? owner.refs = {} : owner.refs;
   const setupState = owner.setupState;
   if (oldRef != null && oldRef !== ref2) {
-    if (isString$2(oldRef)) {
+    if (isString$3(oldRef)) {
       refs[oldRef] = null;
       if (hasOwn(setupState, oldRef)) {
         setupState[oldRef] = null;
@@ -15284,10 +15559,10 @@ function setRef(rawRef, oldRawRef, parentSuspense, vnode, isUnmount = false) {
       oldRef.value = null;
     }
   }
-  if (isFunction(ref2)) {
+  if (isFunction$1(ref2)) {
     callWithErrorHandling(ref2, owner, 12, [value, refs]);
   } else {
-    const _isString = isString$2(ref2);
+    const _isString = isString$3(ref2);
     const _isRef = isRef(ref2);
     if (_isString || _isRef) {
       const doSet = () => {
@@ -16432,7 +16707,7 @@ const createVNodeWithArgsTransform = (...args) => {
 const InternalObjectKey = `__vInternal`;
 const normalizeKey = ({ key }) => key != null ? key : null;
 const normalizeRef = ({ ref: ref2, ref_key, ref_for }) => {
-  return ref2 != null ? isString$2(ref2) || isRef(ref2) || isFunction(ref2) ? { i: currentRenderingInstance, r: ref2, k: ref_key, f: !!ref_for } : ref2 : null;
+  return ref2 != null ? isString$3(ref2) || isRef(ref2) || isFunction$1(ref2) ? { i: currentRenderingInstance, r: ref2, k: ref_key, f: !!ref_for } : ref2 : null;
 };
 function createBaseVNode(type, props = null, children = null, patchFlag = 0, dynamicProps = null, shapeFlag = type === Fragment ? 0 : 1, isBlockNode = false, needFullChildrenNormalization = false) {
   const vnode = {
@@ -16469,7 +16744,7 @@ function createBaseVNode(type, props = null, children = null, patchFlag = 0, dyn
       type.normalize(vnode);
     }
   } else if (children) {
-    vnode.shapeFlag |= isString$2(children) ? 8 : 16;
+    vnode.shapeFlag |= isString$3(children) ? 8 : 16;
   }
   if (vnode.key !== vnode.key) {
     warn$1(`VNode created with invalid key (NaN). VNode type:`, vnode.type);
@@ -16508,7 +16783,7 @@ function _createVNode(type, props = null, children = null, patchFlag = 0, dynami
   if (props) {
     props = guardReactiveProps(props);
     let { class: klass, style: style2 } = props;
-    if (klass && !isString$2(klass)) {
+    if (klass && !isString$3(klass)) {
       props.class = normalizeClass(klass);
     }
     if (isObject(style2)) {
@@ -16518,7 +16793,7 @@ function _createVNode(type, props = null, children = null, patchFlag = 0, dynami
       props.style = normalizeStyle(style2);
     }
   }
-  const shapeFlag = isString$2(type) ? 1 : isSuspense(type) ? 128 : isTeleport(type) ? 64 : isObject(type) ? 4 : isFunction(type) ? 2 : 0;
+  const shapeFlag = isString$3(type) ? 1 : isSuspense(type) ? 128 : isTeleport(type) ? 64 : isObject(type) ? 4 : isFunction$1(type) ? 2 : 0;
   if (shapeFlag & 4 && isProxy(type)) {
     type = toRaw(type);
     warn$1(`Vue received a Component which was made a reactive object. This can lead to unnecessary performance overhead, and should be avoided by marking the component with \`markRaw\` or using \`shallowRef\` instead of \`ref\`.`, `
@@ -16579,6 +16854,9 @@ function createStaticVNode(content, numberOfNodes) {
   vnode.staticCount = numberOfNodes;
   return vnode;
 }
+function createCommentVNode(text = "", asBlock = false) {
+  return asBlock ? (openBlock(), createBlock(Comment, null, text)) : createVNode(Comment, null, text);
+}
 function normalizeVNode(child) {
   if (child == null || typeof child === "boolean") {
     return createVNode(Comment);
@@ -16627,7 +16905,7 @@ function normalizeChildren(vnode, children) {
         }
       }
     }
-  } else if (isFunction(children)) {
+  } else if (isFunction$1(children)) {
     children = { default: children, _ctx: currentRenderingInstance };
     type = 32;
   } else {
@@ -16835,7 +17113,7 @@ function setupStatefulComponent(instance, isSSR) {
   }
 }
 function handleSetupResult(instance, setupResult, isSSR) {
-  if (isFunction(setupResult)) {
+  if (isFunction$1(setupResult)) {
     if (instance.type.__ssrInlineRender) {
       instance.ssrRender = setupResult;
     } else {
@@ -16959,7 +17237,7 @@ function getExposeProxy(instance) {
 const classifyRE = /(?:^|[-_])(\w)/g;
 const classify = (str) => str.replace(classifyRE, (c2) => c2.toUpperCase()).replace(/[-_]/g, "");
 function getComponentName(Component, includeInferred = true) {
-  return isFunction(Component) ? Component.displayName || Component.name : Component.name || includeInferred && Component.__name;
+  return isFunction$1(Component) ? Component.displayName || Component.name : Component.name || includeInferred && Component.__name;
 }
 function formatComponentName(instance, Component, isRoot = false) {
   let name = getComponentName(Component);
@@ -16982,7 +17260,7 @@ function formatComponentName(instance, Component, isRoot = false) {
   return name ? classify(name) : isRoot ? `App` : `Anonymous`;
 }
 function isClassComponent(value) {
-  return isFunction(value) && "__vccOpts" in value;
+  return isFunction$1(value) && "__vccOpts" in value;
 }
 const computed = (getterOrOptions, debugOptions) => {
   return computed$1(getterOrOptions, debugOptions, isInSSRComponentSetup);
@@ -17167,7 +17445,7 @@ function initCustomFormatter() {
   }
   function extractKeys(instance, type) {
     const Comp = instance.type;
-    if (isFunction(Comp)) {
+    if (isFunction$1(Comp)) {
       return;
     }
     const extracted = {};
@@ -17281,12 +17559,12 @@ function patchClass(el2, value, isSVG) {
 }
 function patchStyle(el2, prev, next) {
   const style2 = el2.style;
-  const isCssString = isString$2(next);
+  const isCssString = isString$3(next);
   if (next && !isCssString) {
     for (const key in next) {
       setStyle(style2, key, next[key]);
     }
-    if (prev && !isString$2(prev)) {
+    if (prev && !isString$3(prev)) {
       for (const key in prev) {
         if (next[key] == null) {
           setStyle(style2, key, "");
@@ -17500,7 +17778,7 @@ function shouldSetAsProp(el2, key, value, isSVG) {
     if (key === "innerHTML" || key === "textContent") {
       return true;
     }
-    if (key in el2 && nativeOnRE.test(key) && isFunction(value)) {
+    if (key in el2 && nativeOnRE.test(key) && isFunction$1(value)) {
       return true;
     }
     return false;
@@ -17517,7 +17795,7 @@ function shouldSetAsProp(el2, key, value, isSVG) {
   if (key === "type" && el2.tagName === "TEXTAREA") {
     return false;
   }
-  if (nativeOnRE.test(key) && isString$2(value)) {
+  if (nativeOnRE.test(key) && isString$3(value)) {
     return false;
   }
   return key in el2;
@@ -17577,6 +17855,248 @@ function setVarsOnNode(el2, vars) {
       style2.setProperty(`--${key}`, vars[key]);
     }
   }
+}
+const TRANSITION = "transition";
+const ANIMATION = "animation";
+const Transition = (props, { slots }) => h$1(BaseTransition, resolveTransitionProps(props), slots);
+Transition.displayName = "Transition";
+const DOMTransitionPropsValidators = {
+  name: String,
+  type: String,
+  css: {
+    type: Boolean,
+    default: true
+  },
+  duration: [String, Number, Object],
+  enterFromClass: String,
+  enterActiveClass: String,
+  enterToClass: String,
+  appearFromClass: String,
+  appearActiveClass: String,
+  appearToClass: String,
+  leaveFromClass: String,
+  leaveActiveClass: String,
+  leaveToClass: String
+};
+Transition.props = /* @__PURE__ */ extend({}, BaseTransition.props, DOMTransitionPropsValidators);
+const callHook = (hook, args = []) => {
+  if (isArray$1(hook)) {
+    hook.forEach((h2) => h2(...args));
+  } else if (hook) {
+    hook(...args);
+  }
+};
+const hasExplicitCallback = (hook) => {
+  return hook ? isArray$1(hook) ? hook.some((h2) => h2.length > 1) : hook.length > 1 : false;
+};
+function resolveTransitionProps(rawProps) {
+  const baseProps = {};
+  for (const key in rawProps) {
+    if (!(key in DOMTransitionPropsValidators)) {
+      baseProps[key] = rawProps[key];
+    }
+  }
+  if (rawProps.css === false) {
+    return baseProps;
+  }
+  const { name = "v", type, duration, enterFromClass = `${name}-enter-from`, enterActiveClass = `${name}-enter-active`, enterToClass = `${name}-enter-to`, appearFromClass = enterFromClass, appearActiveClass = enterActiveClass, appearToClass = enterToClass, leaveFromClass = `${name}-leave-from`, leaveActiveClass = `${name}-leave-active`, leaveToClass = `${name}-leave-to` } = rawProps;
+  const durations = normalizeDuration(duration);
+  const enterDuration = durations && durations[0];
+  const leaveDuration = durations && durations[1];
+  const { onBeforeEnter, onEnter, onEnterCancelled, onLeave, onLeaveCancelled, onBeforeAppear = onBeforeEnter, onAppear = onEnter, onAppearCancelled = onEnterCancelled } = baseProps;
+  const finishEnter = (el2, isAppear, done) => {
+    removeTransitionClass(el2, isAppear ? appearToClass : enterToClass);
+    removeTransitionClass(el2, isAppear ? appearActiveClass : enterActiveClass);
+    done && done();
+  };
+  const finishLeave = (el2, done) => {
+    el2._isLeaving = false;
+    removeTransitionClass(el2, leaveFromClass);
+    removeTransitionClass(el2, leaveToClass);
+    removeTransitionClass(el2, leaveActiveClass);
+    done && done();
+  };
+  const makeEnterHook = (isAppear) => {
+    return (el2, done) => {
+      const hook = isAppear ? onAppear : onEnter;
+      const resolve2 = () => finishEnter(el2, isAppear, done);
+      callHook(hook, [el2, resolve2]);
+      nextFrame(() => {
+        removeTransitionClass(el2, isAppear ? appearFromClass : enterFromClass);
+        addTransitionClass(el2, isAppear ? appearToClass : enterToClass);
+        if (!hasExplicitCallback(hook)) {
+          whenTransitionEnds(el2, type, enterDuration, resolve2);
+        }
+      });
+    };
+  };
+  return extend(baseProps, {
+    onBeforeEnter(el2) {
+      callHook(onBeforeEnter, [el2]);
+      addTransitionClass(el2, enterFromClass);
+      addTransitionClass(el2, enterActiveClass);
+    },
+    onBeforeAppear(el2) {
+      callHook(onBeforeAppear, [el2]);
+      addTransitionClass(el2, appearFromClass);
+      addTransitionClass(el2, appearActiveClass);
+    },
+    onEnter: makeEnterHook(false),
+    onAppear: makeEnterHook(true),
+    onLeave(el2, done) {
+      el2._isLeaving = true;
+      const resolve2 = () => finishLeave(el2, done);
+      addTransitionClass(el2, leaveFromClass);
+      forceReflow();
+      addTransitionClass(el2, leaveActiveClass);
+      nextFrame(() => {
+        if (!el2._isLeaving) {
+          return;
+        }
+        removeTransitionClass(el2, leaveFromClass);
+        addTransitionClass(el2, leaveToClass);
+        if (!hasExplicitCallback(onLeave)) {
+          whenTransitionEnds(el2, type, leaveDuration, resolve2);
+        }
+      });
+      callHook(onLeave, [el2, resolve2]);
+    },
+    onEnterCancelled(el2) {
+      finishEnter(el2, false);
+      callHook(onEnterCancelled, [el2]);
+    },
+    onAppearCancelled(el2) {
+      finishEnter(el2, true);
+      callHook(onAppearCancelled, [el2]);
+    },
+    onLeaveCancelled(el2) {
+      finishLeave(el2);
+      callHook(onLeaveCancelled, [el2]);
+    }
+  });
+}
+function normalizeDuration(duration) {
+  if (duration == null) {
+    return null;
+  } else if (isObject(duration)) {
+    return [NumberOf(duration.enter), NumberOf(duration.leave)];
+  } else {
+    const n2 = NumberOf(duration);
+    return [n2, n2];
+  }
+}
+function NumberOf(val) {
+  const res = toNumber(val);
+  validateDuration(res);
+  return res;
+}
+function validateDuration(val) {
+  if (typeof val !== "number") {
+    warn$1(`<transition> explicit duration is not a valid number - got ${JSON.stringify(val)}.`);
+  } else if (isNaN(val)) {
+    warn$1(`<transition> explicit duration is NaN - the duration expression might be incorrect.`);
+  }
+}
+function addTransitionClass(el2, cls) {
+  cls.split(/\s+/).forEach((c2) => c2 && el2.classList.add(c2));
+  (el2._vtc || (el2._vtc = /* @__PURE__ */ new Set())).add(cls);
+}
+function removeTransitionClass(el2, cls) {
+  cls.split(/\s+/).forEach((c2) => c2 && el2.classList.remove(c2));
+  const { _vtc } = el2;
+  if (_vtc) {
+    _vtc.delete(cls);
+    if (!_vtc.size) {
+      el2._vtc = void 0;
+    }
+  }
+}
+function nextFrame(cb) {
+  requestAnimationFrame(() => {
+    requestAnimationFrame(cb);
+  });
+}
+let endId = 0;
+function whenTransitionEnds(el2, expectedType, explicitTimeout, resolve2) {
+  const id2 = el2._endId = ++endId;
+  const resolveIfNotStale = () => {
+    if (id2 === el2._endId) {
+      resolve2();
+    }
+  };
+  if (explicitTimeout) {
+    return setTimeout(resolveIfNotStale, explicitTimeout);
+  }
+  const { type, timeout, propCount } = getTransitionInfo(el2, expectedType);
+  if (!type) {
+    return resolve2();
+  }
+  const endEvent = type + "end";
+  let ended = 0;
+  const end = () => {
+    el2.removeEventListener(endEvent, onEnd);
+    resolveIfNotStale();
+  };
+  const onEnd = (e2) => {
+    if (e2.target === el2 && ++ended >= propCount) {
+      end();
+    }
+  };
+  setTimeout(() => {
+    if (ended < propCount) {
+      end();
+    }
+  }, timeout + 1);
+  el2.addEventListener(endEvent, onEnd);
+}
+function getTransitionInfo(el2, expectedType) {
+  const styles = window.getComputedStyle(el2);
+  const getStyleProperties = (key) => (styles[key] || "").split(", ");
+  const transitionDelays = getStyleProperties(`${TRANSITION}Delay`);
+  const transitionDurations = getStyleProperties(`${TRANSITION}Duration`);
+  const transitionTimeout = getTimeout(transitionDelays, transitionDurations);
+  const animationDelays = getStyleProperties(`${ANIMATION}Delay`);
+  const animationDurations = getStyleProperties(`${ANIMATION}Duration`);
+  const animationTimeout = getTimeout(animationDelays, animationDurations);
+  let type = null;
+  let timeout = 0;
+  let propCount = 0;
+  if (expectedType === TRANSITION) {
+    if (transitionTimeout > 0) {
+      type = TRANSITION;
+      timeout = transitionTimeout;
+      propCount = transitionDurations.length;
+    }
+  } else if (expectedType === ANIMATION) {
+    if (animationTimeout > 0) {
+      type = ANIMATION;
+      timeout = animationTimeout;
+      propCount = animationDurations.length;
+    }
+  } else {
+    timeout = Math.max(transitionTimeout, animationTimeout);
+    type = timeout > 0 ? transitionTimeout > animationTimeout ? TRANSITION : ANIMATION : null;
+    propCount = type ? type === TRANSITION ? transitionDurations.length : animationDurations.length : 0;
+  }
+  const hasTransform = type === TRANSITION && /\b(transform|all)(,|$)/.test(getStyleProperties(`${TRANSITION}Property`).toString());
+  return {
+    type,
+    timeout,
+    propCount,
+    hasTransform
+  };
+}
+function getTimeout(delays, durations) {
+  while (delays.length < durations.length) {
+    delays = delays.concat(delays);
+  }
+  return Math.max(...durations.map((d2, i2) => toMs(d2) + toMs(delays[i2])));
+}
+function toMs(s2) {
+  return Number(s2.slice(0, -1).replace(",", ".")) * 1e3;
+}
+function forceReflow() {
+  return document.body.offsetHeight;
 }
 const getModelAssigner = (vnode) => {
   const fn2 = vnode.props["onUpdate:modelValue"] || false;
@@ -17813,7 +18333,7 @@ const createApp = (...args) => {
     if (!container)
       return;
     const component = app._component;
-    if (!isFunction(component) && !component.render && !component.template) {
+    if (!isFunction$1(component) && !component.render && !component.template) {
       component.template = container.innerHTML;
     }
     container.innerHTML = "";
@@ -17860,7 +18380,7 @@ function injectCompilerOptionsCheck(app) {
   }
 }
 function normalizeContainer(container) {
-  if (isString$2(container)) {
+  if (isString$3(container)) {
     const res = document.querySelector(container);
     if (!res) {
       warn$1(`Failed to mount app: mount target selector "${container}" returned null.`);
@@ -17880,7 +18400,7 @@ function initDev() {
 {
   initDev();
 }
-const style = "";
+const style$1 = "";
 const matchName = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 const iconDefaults = Object.freeze({
   left: 0,
@@ -17891,8 +18411,8 @@ const iconDefaults = Object.freeze({
   vFlip: false,
   hFlip: false
 });
-function fullIcon(data) {
-  return { ...iconDefaults, ...data };
+function fullIcon(data2) {
+  return { ...iconDefaults, ...data2 };
 }
 const stringToIcon = (value, validate, allowSimpleName, provider = "") => {
   const colonSeparated = value.split(":");
@@ -17966,15 +18486,15 @@ function mergeIconData(icon, alias) {
   }
   return result;
 }
-function getIconData$1(data, name, full = false) {
+function getIconData$1(data2, name, full = false) {
   function getIcon(name2, iteration) {
-    if (data.icons[name2] !== void 0) {
-      return Object.assign({}, data.icons[name2]);
+    if (data2.icons[name2] !== void 0) {
+      return Object.assign({}, data2.icons[name2]);
     }
     if (iteration > 5) {
       return null;
     }
-    const aliases = data.aliases;
+    const aliases = data2.aliases;
     if (aliases && aliases[name2] !== void 0) {
       const item = aliases[name2];
       const result2 = getIcon(item.parent, iteration + 1);
@@ -17983,7 +18503,7 @@ function getIconData$1(data, name, full = false) {
       }
       return result2;
     }
-    const chars = data.chars;
+    const chars = data2.chars;
     if (!iteration && chars && chars[name2] !== void 0) {
       return getIcon(chars[name2], iteration + 1);
     }
@@ -17992,8 +18512,8 @@ function getIconData$1(data, name, full = false) {
   const result = getIcon(name, 0);
   if (result) {
     for (const key in iconDefaults) {
-      if (result[key] === void 0 && data[key] !== void 0) {
-        result[key] = data[key];
+      if (result[key] === void 0 && data2[key] !== void 0) {
+        result[key] = data2[key];
       }
     }
   }
@@ -18007,34 +18527,34 @@ function isVariation(item) {
   }
   return false;
 }
-function parseIconSet(data, callback, options) {
+function parseIconSet(data2, callback, options) {
   options = options || {};
   const names = [];
-  if (typeof data !== "object" || typeof data.icons !== "object") {
+  if (typeof data2 !== "object" || typeof data2.icons !== "object") {
     return names;
   }
-  if (data.not_found instanceof Array) {
-    data.not_found.forEach((name) => {
+  if (data2.not_found instanceof Array) {
+    data2.not_found.forEach((name) => {
       callback(name, null);
       names.push(name);
     });
   }
-  const icons = data.icons;
+  const icons = data2.icons;
   Object.keys(icons).forEach((name) => {
-    const iconData = getIconData$1(data, name, true);
+    const iconData = getIconData$1(data2, name, true);
     if (iconData) {
       callback(name, iconData);
       names.push(name);
     }
   });
   const parseAliases = options.aliases || "all";
-  if (parseAliases !== "none" && typeof data.aliases === "object") {
-    const aliases = data.aliases;
+  if (parseAliases !== "none" && typeof data2.aliases === "object") {
+    const aliases = data2.aliases;
     Object.keys(aliases).forEach((name) => {
       if (parseAliases === "variations" && isVariation(aliases[name])) {
         return;
       }
-      const iconData = getIconData$1(data, name, true);
+      const iconData = getIconData$1(data2, name, true);
       if (iconData) {
         callback(name, iconData);
         names.push(name);
@@ -18055,8 +18575,8 @@ function quicklyValidateIconSet(obj) {
   if (typeof obj !== "object" || obj === null) {
     return null;
   }
-  const data = obj;
-  if (typeof data.prefix !== "string" || !obj.icons || typeof obj.icons !== "object") {
+  const data2 = obj;
+  if (typeof data2.prefix !== "string" || !obj.icons || typeof obj.icons !== "object") {
     return null;
   }
   for (const prop in optionalProperties) {
@@ -18064,7 +18584,7 @@ function quicklyValidateIconSet(obj) {
       return null;
     }
   }
-  const icons = data.icons;
+  const icons = data2.icons;
   for (const name in icons) {
     const icon = icons[name];
     if (!name.match(matchName) || typeof icon.body !== "string") {
@@ -18076,7 +18596,7 @@ function quicklyValidateIconSet(obj) {
       }
     }
   }
-  const aliases = data.aliases;
+  const aliases = data2.aliases;
   if (aliases) {
     for (const name in aliases) {
       const icon = aliases[name];
@@ -18091,7 +18611,7 @@ function quicklyValidateIconSet(obj) {
       }
     }
   }
-  return data;
+  return data2;
 }
 const storageVersion = 1;
 let storage$1 = /* @__PURE__ */ Object.create(null);
@@ -18120,12 +18640,12 @@ function getStorage(provider, prefix) {
   }
   return providerStorage[prefix];
 }
-function addIconSet(storage2, data) {
-  if (!quicklyValidateIconSet(data)) {
+function addIconSet(storage2, data2) {
+  if (!quicklyValidateIconSet(data2)) {
     return [];
   }
   const t2 = Date.now();
-  return parseIconSet(data, (name, icon) => {
+  return parseIconSet(data2, (name, icon) => {
     if (icon) {
       storage2.icons[name] = icon;
     } else {
@@ -18158,26 +18678,26 @@ function getIconData(name) {
   const icon = typeof name === "string" ? stringToIcon(name, true, simpleNames) : name;
   return icon ? getIconFromStorage(getStorage(icon.provider, icon.prefix), icon.name) : null;
 }
-function addIcon(name, data) {
+function addIcon(name, data2) {
   const icon = stringToIcon(name, true, simpleNames);
   if (!icon) {
     return false;
   }
   const storage2 = getStorage(icon.provider, icon.prefix);
-  return addIconToStorage(storage2, icon.name, data);
+  return addIconToStorage(storage2, icon.name, data2);
 }
-function addCollection(data, provider) {
-  if (typeof data !== "object") {
+function addCollection(data2, provider) {
+  if (typeof data2 !== "object") {
     return false;
   }
   if (typeof provider !== "string") {
-    provider = typeof data.provider === "string" ? data.provider : "";
+    provider = typeof data2.provider === "string" ? data2.provider : "";
   }
-  if (simpleNames && provider === "" && (typeof data.prefix !== "string" || data.prefix === "")) {
+  if (simpleNames && provider === "" && (typeof data2.prefix !== "string" || data2.prefix === "")) {
     let added = false;
-    if (quicklyValidateIconSet(data)) {
-      data.prefix = "";
-      parseIconSet(data, (name, icon) => {
+    if (quicklyValidateIconSet(data2)) {
+      data2.prefix = "";
+      parseIconSet(data2, (name, icon) => {
         if (icon && addIcon(name, icon)) {
           added = true;
         }
@@ -18185,17 +18705,17 @@ function addCollection(data, provider) {
     }
     return added;
   }
-  if (typeof data.prefix !== "string" || !validateIcon({
+  if (typeof data2.prefix !== "string" || !validateIcon({
     provider,
-    prefix: data.prefix,
+    prefix: data2.prefix,
     name: "a"
   })) {
     return false;
   }
-  const storage2 = getStorage(provider, data.prefix);
-  return !!addIconSet(storage2, data);
+  const storage2 = getStorage(provider, data2.prefix);
+  return !!addIconSet(storage2, data2);
 }
-const defaults = Object.freeze({
+const defaults$1 = Object.freeze({
   inline: false,
   width: null,
   height: null,
@@ -18268,9 +18788,9 @@ function calculateSize(size2, ratio, precision) {
   }
   const newParts = [];
   let code = oldParts.shift();
-  let isNumber = unitsTest.test(code);
+  let isNumber2 = unitsTest.test(code);
   while (true) {
-    if (isNumber) {
+    if (isNumber2) {
       const num = parseFloat(code);
       if (isNaN(num)) {
         newParts.push(code);
@@ -18284,7 +18804,7 @@ function calculateSize(size2, ratio, precision) {
     if (code === void 0) {
       return newParts.join("");
     }
-    isNumber = !isNumber;
+    isNumber2 = !isNumber2;
   }
 }
 function preserveAspectRatio(props) {
@@ -18324,10 +18844,10 @@ function iconToSVG(icon, customisations) {
     const transformations = [];
     const hFlip = props.hFlip;
     const vFlip = props.vFlip;
-    let rotation = props.rotate;
+    let rotation2 = props.rotate;
     if (hFlip) {
       if (vFlip) {
-        rotation += 2;
+        rotation2 += 2;
       } else {
         transformations.push("translate(" + (box.width + box.left).toString() + " " + (0 - box.top).toString() + ")");
         transformations.push("scale(-1 1)");
@@ -18339,11 +18859,11 @@ function iconToSVG(icon, customisations) {
       box.top = box.left = 0;
     }
     let tempValue;
-    if (rotation < 0) {
-      rotation -= Math.floor(rotation / 4) * 4;
+    if (rotation2 < 0) {
+      rotation2 -= Math.floor(rotation2 / 4) * 4;
     }
-    rotation = rotation % 4;
-    switch (rotation) {
+    rotation2 = rotation2 % 4;
+    switch (rotation2) {
       case 1:
         tempValue = box.height / 2 + box.top;
         transformations.unshift("rotate(90 " + tempValue.toString() + " " + tempValue.toString() + ")");
@@ -18356,7 +18876,7 @@ function iconToSVG(icon, customisations) {
         transformations.unshift("rotate(-90 " + tempValue.toString() + " " + tempValue.toString() + ")");
         break;
     }
-    if (rotation % 2 === 1) {
+    if (rotation2 % 2 === 1) {
       if (box.left !== 0 || box.top !== 0) {
         tempValue = box.left;
         box.left = box.top;
@@ -18555,7 +19075,7 @@ function shouldAbort(status) {
   return status === 404;
 }
 const prepare = (provider, prefix, icons) => {
-  const results = [];
+  const results2 = [];
   let maxLength = maxLengthCache[prefix];
   if (maxLength === void 0) {
     maxLength = calculateMaxLength(provider, prefix);
@@ -18571,7 +19091,7 @@ const prepare = (provider, prefix, icons) => {
   icons.forEach((name, index) => {
     length += name.length + 1;
     if (length >= maxLength && index > 0) {
-      results.push(item);
+      results2.push(item);
       item = {
         type,
         provider,
@@ -18582,8 +19102,8 @@ const prepare = (provider, prefix, icons) => {
     }
     item.icons.push(name);
   });
-  results.push(item);
-  return results;
+  results2.push(item);
+  return results2;
 };
 function getPath(provider) {
   if (typeof provider === "string") {
@@ -18634,15 +19154,15 @@ const send = (host, params, callback) => {
     }
     defaultError = 501;
     return response.json();
-  }).then((data) => {
-    if (typeof data !== "object" || data === null) {
+  }).then((data2) => {
+    if (typeof data2 !== "object" || data2 === null) {
       setTimeout(() => {
         callback("next", defaultError);
       });
       return;
     }
     setTimeout(() => {
-      callback("success", data);
+      callback("success", data2);
     });
   }).catch(() => {
     callback("next", defaultError);
@@ -18852,9 +19372,9 @@ function sendQuery(config2, payload, query, done) {
   let lastError;
   let timer = null;
   let queue2 = [];
-  let doneCallbacks = [];
+  let doneCallbacks2 = [];
   if (typeof done === "function") {
-    doneCallbacks.push(done);
+    doneCallbacks2.push(done);
   }
   function resetTimer() {
     if (timer) {
@@ -18876,10 +19396,10 @@ function sendQuery(config2, payload, query, done) {
   }
   function subscribe(callback, overwrite) {
     if (overwrite) {
-      doneCallbacks = [];
+      doneCallbacks2 = [];
     }
     if (typeof callback === "function") {
-      doneCallbacks.push(callback);
+      doneCallbacks2.push(callback);
     }
   }
   function getQueryStatus() {
@@ -18895,7 +19415,7 @@ function sendQuery(config2, payload, query, done) {
   }
   function failQuery() {
     status = "failed";
-    doneCallbacks.forEach((callback) => {
+    doneCallbacks2.forEach((callback) => {
       callback(void 0, lastError);
     });
   }
@@ -18907,7 +19427,7 @@ function sendQuery(config2, payload, query, done) {
     });
     queue2 = [];
   }
-  function moduleResponse(item, response, data) {
+  function moduleResponse(item, response, data2) {
     const isError = response !== "success";
     queue2 = queue2.filter((queued) => queued !== item);
     switch (status) {
@@ -18922,12 +19442,12 @@ function sendQuery(config2, payload, query, done) {
         return;
     }
     if (response === "abort") {
-      lastError = data;
+      lastError = data2;
       failQuery();
       return;
     }
     if (isError) {
-      lastError = data;
+      lastError = data2;
       if (!queue2.length) {
         if (!resources.length) {
           failQuery();
@@ -18946,8 +19466,8 @@ function sendQuery(config2, payload, query, done) {
       }
     }
     status = "completed";
-    doneCallbacks.forEach((callback) => {
-      callback(data);
+    doneCallbacks2.forEach((callback) => {
+      callback(data2);
     });
   }
   function execNext() {
@@ -18973,8 +19493,8 @@ function sendQuery(config2, payload, query, done) {
     const item = {
       status: "pending",
       resource,
-      callback: (status2, data) => {
-        moduleResponse(item, status2, data);
+      callback: (status2, data2) => {
+        moduleResponse(item, status2, data2);
       }
     };
     queue2.push(item);
@@ -19007,10 +19527,10 @@ function initRedundancy(cfg) {
     queries = queries.filter((item) => item().status === "pending");
   }
   function query(payload, queryCallback, doneCallback) {
-    const query2 = sendQuery(config2, payload, queryCallback, (data, error) => {
+    const query2 = sendQuery(config2, payload, queryCallback, (data2, error) => {
       cleanup();
       if (doneCallback) {
-        doneCallback(data, error);
+        doneCallback(data2, error);
       }
     });
     queries.push(query2);
@@ -19106,9 +19626,9 @@ const errorsCache = /* @__PURE__ */ Object.create(null);
 function loadNewIcons(provider, prefix, icons) {
   function err() {
     const key = (provider === "" ? "" : "@" + provider + ":") + prefix;
-    const time = Math.floor(Date.now() / 6e4);
-    if (errorsCache[key] < time) {
-      errorsCache[key] = time;
+    const time2 = Math.floor(Date.now() / 6e4);
+    if (errorsCache[key] < time2) {
+      errorsCache[key] = time2;
       console.error('Unable to retrieve icons for "' + key + '" because API is not configured properly.');
     }
   }
@@ -19142,9 +19662,9 @@ function loadNewIcons(provider, prefix, icons) {
       }
       const params = api.prepare(provider, prefix, icons2);
       params.forEach((item) => {
-        sendAPIQuery(provider, item, (data, error) => {
+        sendAPIQuery(provider, item, (data2, error) => {
           const storage2 = getStorage(provider, prefix);
-          if (typeof data !== "object") {
+          if (typeof data2 !== "object") {
             if (error !== 404) {
               return;
             }
@@ -19154,7 +19674,7 @@ function loadNewIcons(provider, prefix, icons) {
             });
           } else {
             try {
-              const parsed = addIconSet(storage2, data);
+              const parsed = addIconSet(storage2, data2);
               if (!parsed.length) {
                 return;
               }
@@ -19163,7 +19683,7 @@ function loadNewIcons(provider, prefix, icons) {
                 delete pending[name];
               });
               if (cache.store) {
-                cache.store(provider, data);
+                cache.store(provider, data2);
               }
             } catch (err2) {
               console.error(err2);
@@ -19221,14 +19741,14 @@ const loadIcons = (icons, callback) => {
       providerNewIcons[prefix] = [];
     }
   });
-  const time = Date.now();
+  const time2 = Date.now();
   sortedIcons.pending.forEach((icon) => {
     const provider = icon.provider;
     const prefix = icon.prefix;
     const name = icon.name;
     const pendingQueue = pendingIcons[provider][prefix];
     if (pendingQueue[name] === void 0) {
-      pendingQueue[name] = time;
+      pendingQueue[name] = time2;
       newIcons[provider][prefix].push(name);
     }
   });
@@ -19324,14 +19844,14 @@ const loadCache = () => {
       }
       let valid = true;
       try {
-        const data = JSON.parse(item);
-        if (typeof data !== "object" || typeof data.cached !== "number" || data.cached < minTime || typeof data.provider !== "string" || typeof data.data !== "object" || typeof data.data.prefix !== "string") {
+        const data2 = JSON.parse(item);
+        if (typeof data2 !== "object" || typeof data2.cached !== "number" || data2.cached < minTime || typeof data2.provider !== "string" || typeof data2.data !== "object" || typeof data2.data.prefix !== "string") {
           valid = false;
         } else {
-          const provider = data.provider;
-          const prefix = data.data.prefix;
+          const provider = data2.provider;
+          const prefix = data2.data.prefix;
           const storage2 = getStorage(provider, prefix);
-          valid = addIconSet(storage2, data.data).length > 0;
+          valid = addIconSet(storage2, data2.data).length > 0;
         }
       } catch (err) {
         valid = false;
@@ -19368,7 +19888,7 @@ const loadCache = () => {
     load(key);
   }
 };
-const storeCache = (provider, data) => {
+const storeCache = (provider, data2) => {
   if (!loaded) {
     loadCache();
   }
@@ -19391,7 +19911,7 @@ const storeCache = (provider, data) => {
       const item = {
         cached: Math.floor(Date.now() / hour),
         provider,
-        data
+        data: data2
       };
       func.setItem(cachePrefix + index.toString(), JSON.stringify(item));
     } catch (err) {
@@ -19399,12 +19919,12 @@ const storeCache = (provider, data) => {
     }
     return true;
   }
-  if (!Object.keys(data.icons).length) {
+  if (!Object.keys(data2.icons).length) {
     return;
   }
-  if (data.not_found) {
-    data = Object.assign({}, data);
-    delete data.not_found;
+  if (data2.not_found) {
+    data2 = Object.assign({}, data2);
+    delete data2.not_found;
   }
   if (!store("local")) {
     store("session");
@@ -19498,7 +20018,7 @@ let customisationAliases = {};
   });
 });
 const render = (icon, props) => {
-  const customisations = mergeCustomisations(defaults, props);
+  const customisations = mergeCustomisations(defaults$1, props);
   const componentProps = { ...svgDefaults };
   let style2 = typeof props.style === "object" && !(props.style instanceof Array) ? { ...props.style } : {};
   for (let key in props) {
@@ -19549,7 +20069,7 @@ const render = (icon, props) => {
           } else if (!customisationAliases[key].boolean && typeof value === "string" && value !== "") {
             customisations[customisationAliases[key].attr] = value;
           }
-        } else if (defaults[key] === void 0) {
+        } else if (defaults$1[key] === void 0) {
           componentProps[key] = value;
         }
     }
@@ -19652,8 +20172,8 @@ const Icon = defineComponent$1({
         this.abortLoading();
         return null;
       }
-      const data = getIconData(iconName);
-      if (data === null) {
+      const data2 = getIconData(iconName);
+      if (data2 === null) {
         if (!this._loadingIcon || this._loadingIcon.name !== icon) {
           this.abortLoading();
           this._name = "";
@@ -19680,7 +20200,7 @@ const Icon = defineComponent$1({
       if (iconName.provider !== "") {
         classes.push("iconify--" + iconName.provider);
       }
-      return { data, classes };
+      return { data: data2, classes };
     }
   },
   render() {
@@ -19703,8 +20223,8 @@ const Icon = defineComponent$1({
 var _a$2;
 const isClient$1 = typeof window !== "undefined";
 const isDef = (val) => typeof val !== "undefined";
-const isString$1 = (val) => typeof val === "string";
-const noop$2 = () => {
+const isString$2 = (val) => typeof val === "string";
+const noop$3 = () => {
 };
 isClient$1 && ((_a$2 = window == null ? void 0 : window.navigator) == null ? void 0 : _a$2.userAgent) && /iP(ad|hone|od)/.test(window.navigator.userAgent);
 function createFilterWrapper$1(filter, fn2) {
@@ -19935,15 +20455,15 @@ function useEventListener$1(...args) {
   let event;
   let listener;
   let options;
-  if (isString$1(args[0])) {
+  if (isString$2(args[0])) {
     [event, listener, options] = args;
     target = defaultWindow$1;
   } else {
     [target, event, listener, options] = args;
   }
   if (!target)
-    return noop$2;
-  let cleanup = noop$2;
+    return noop$3;
+  let cleanup = noop$3;
   const stopWatch = watch$1(() => unrefElement$1(target), (el2) => {
     cleanup();
     if (!el2)
@@ -19951,7 +20471,7 @@ function useEventListener$1(...args) {
     el2.addEventListener(event, listener, options);
     cleanup = () => {
       el2.removeEventListener(event, listener, options);
-      cleanup = noop$2;
+      cleanup = noop$3;
     };
   }, { immediate: true, flush: "post" });
   const stop = () => {
@@ -20140,7 +20660,7 @@ function useStorage(key, initialValue, storage2, options = {}) {
       console.error(e2);
     }
   } = options;
-  const data = (shallow ? shallowRef$1 : ref$1)(initialValue);
+  const data2 = (shallow ? shallowRef$1 : ref$1)(initialValue);
   if (!storage2) {
     try {
       storage2 = getSSRHandler("getDefaultStorage", () => {
@@ -20152,15 +20672,15 @@ function useStorage(key, initialValue, storage2, options = {}) {
     }
   }
   if (!storage2)
-    return data;
+    return data2;
   const rawInit = unref$1(initialValue);
   const type = guessSerializerType(rawInit);
   const serializer = (_a2 = options.serializer) != null ? _a2 : StorageSerializers[type];
-  const { pause: pauseWatch, resume: resumeWatch } = watchPausable(data, () => write(data.value), { flush, deep, eventFilter });
+  const { pause: pauseWatch, resume: resumeWatch } = watchPausable(data2, () => write(data2.value), { flush, deep, eventFilter });
   if (window2 && listenToStorageChanges)
     useEventListener$1(window2, "storage", update);
   update();
-  return data;
+  return data2;
   function write(v2) {
     try {
       if (v2 == null)
@@ -20195,7 +20715,7 @@ function useStorage(key, initialValue, storage2, options = {}) {
   function update(event) {
     if (event && event.key !== key)
       return;
-    data.value = read2(event);
+    data2.value = read2(event);
   }
 }
 function usePreferredDark(options) {
@@ -20449,7 +20969,7 @@ function useTitle(newTitle = null, options = {}) {
   } = options;
   const title = ref$1((_a2 = newTitle != null ? newTitle : document2 == null ? void 0 : document2.title) != null ? _a2 : null);
   watch$1(title, (t2, o2) => {
-    if (isString$1(t2) && t2 !== o2 && document2)
+    if (isString$2(t2) && t2 !== o2 && document2)
       document2.title = titleTemplate.replace("%s", t2);
   }, { immediate: true });
   if (observe && document2) {
@@ -20858,7 +21378,7 @@ const za = { class: "htw-relative htw-w-full htw-flex htw-items-center" }, _a$1 
             style: normalizeStyle$1(unref$1(l2))
           }, null, 4)), [
             [unref$1(VTooltip), { content: s2.modelValue.toString(), shown: true, distance: 16, delay: 0 }]
-          ]) : createCommentVNode("", true)
+          ]) : createCommentVNode$1("", true)
         ])
       ]),
       _: 1
@@ -21063,7 +21583,7 @@ const Ja = { class: "htw-cursor-pointer htw-w-full htw-outline-none htw-px-2 htw
               key: 0,
               content: h2.name,
               class: "htw-flex-none"
-            }, null, 8, ["content"])) : createCommentVNode("", true)
+            }, null, 8, ["content"])) : createCommentVNode$1("", true)
           ]),
           createBaseVNode$1("div", fc, [
             withDirectives((openBlock$1(), createElementBlock$1("pre", dc, [
@@ -21075,11 +21595,11 @@ const Ja = { class: "htw-cursor-pointer htw-w-full htw-outline-none htw-px-2 htw
               key: 0,
               content: h2.color,
               class: "htw-flex-none"
-            }, null, 8, ["content"])) : createCommentVNode("", true)
+            }, null, 8, ["content"])) : createCommentVNode$1("", true)
           ])
         ])
       ], 40, ac))), 128))
-    ])) : createCommentVNode("", true);
+    ])) : createCommentVNode$1("", true);
   }
 }), mc = gc, wc = ["onMouseenter"], yc = { class: "htw-mx-4" }, bc = { class: "htw-flex htw-gap-1" }, kc = { class: "htw-my-0 htw-truncate htw-shrink" }, xc = { class: "htw-flex htw-gap-1" }, vc = { class: "htw-my-0 htw-opacity-50 htw-truncate htw-shrink" }, Sc = {
   name: "HstTokenList"
@@ -21115,7 +21635,7 @@ const Ja = { class: "htw-cursor-pointer htw-w-full htw-outline-none htw-px-2 htw
             key: 0,
             content: o2.name,
             class: "htw-flex-none"
-          }, null, 8, ["content"])) : createCommentVNode("", true)
+          }, null, 8, ["content"])) : createCommentVNode$1("", true)
         ]),
         createBaseVNode$1("div", xc, [
           createBaseVNode$1("pre", vc, toDisplayString$1(o2.value), 1),
@@ -21123,7 +21643,7 @@ const Ja = { class: "htw-cursor-pointer htw-w-full htw-outline-none htw-px-2 htw
             key: 0,
             content: typeof o2.value == "string" ? o2.value : JSON.stringify(o2.value),
             class: "htw-flex-none"
-          }, null, 8, ["content"])) : createCommentVNode("", true)
+          }, null, 8, ["content"])) : createCommentVNode$1("", true)
         ])
       ])
     ], 40, wc))), 128));
@@ -21174,7 +21694,7 @@ const Oc = ["onMouseenter"], Mc = { class: "htw-flex htw-gap-1" }, Dc = { class:
               key: 0,
               content: l2.name,
               class: "htw-flex-none"
-            }, null, 8, ["content"])) : createCommentVNode("", true)
+            }, null, 8, ["content"])) : createCommentVNode$1("", true)
           ]),
           createBaseVNode$1("div", Tc, [
             withDirectives((openBlock$1(), createElementBlock$1("pre", Pc, [
@@ -21186,7 +21706,7 @@ const Oc = ["onMouseenter"], Mc = { class: "htw-flex htw-gap-1" }, Dc = { class:
               key: 0,
               content: typeof l2.value == "string" ? l2.value : JSON.stringify(l2.value),
               class: "htw-flex-none"
-            }, null, 8, ["content"])) : createCommentVNode("", true)
+            }, null, 8, ["content"])) : createCommentVNode$1("", true)
           ])
         ])
       ], 40, Oc))), 128))
@@ -32820,7 +33340,7 @@ const Kg = (s2, t2) => {
           class: "htw-text-orange-500"
         }, null, 512)), [
           [unref$1(VTooltip), "JSON error"]
-        ]) : createCommentVNode("", true),
+        ]) : createCommentVNode$1("", true),
         renderSlot$1(c2.$slots, "actions", {}, void 0, true)
       ]),
       default: withCtx$1(() => [
@@ -39312,6 +39832,7 @@ const config = markRaw$1({
         }
       }
     },
+    null,
     null
   ],
   "content": {
@@ -39379,6 +39900,7 @@ const config = markRaw$1({
           }
         }
       },
+      null,
       null
     ]
   },
@@ -39425,7 +39947,7 @@ function mountApp({ el: el2, state, onUnmount }, render2) {
     app.unmount();
   });
 }
-const Comp5 = {
+const Comp8 = {
   id: "tailwind",
   title: "Tailwind",
   group: "design-system",
@@ -39839,7 +40361,7 @@ function applyToParams(fn2, params) {
   }
   return newParams;
 }
-const noop$1 = () => {
+const noop$2 = () => {
 };
 const isArray = Array.isArray;
 function warn(msg) {
@@ -40134,17 +40656,17 @@ function useHistoryStateNavigation(base) {
       location2[replace2 ? "replace" : "assign"](url);
     }
   }
-  function replace(to2, data) {
+  function replace(to2, data2) {
     const state = assign({}, history2.state, buildState(
       historyState.value.back,
       to2,
       historyState.value.forward,
       true
-    ), data, { position: historyState.value.position });
+    ), data2, { position: historyState.value.position });
     changeLocation(to2, state, true);
     currentLocation.value = to2;
   }
-  function push(to2, data) {
+  function push(to2, data2) {
     const currentState = assign(
       {},
       historyState.value,
@@ -40162,7 +40684,7 @@ history.replaceState(history.state, '', url)
 You can find more information at https://next.router.vuejs.org/guide/migration/#usage-of-history-state.`);
     }
     changeLocation(currentState.current, currentState, true);
-    const state = assign({}, buildState(currentLocation.value, to2, null), { position: currentState.position + 1 }, data);
+    const state = assign({}, buildState(currentLocation.value, to2, null), { position: currentState.position + 1 }, data2);
     changeLocation(to2, state, false);
     currentLocation.value = to2;
   }
@@ -40647,7 +41169,7 @@ function createRouterMatcher(routes, globalOptions) {
     }
     return originalMatcher ? () => {
       removeRoute(originalMatcher);
-    } : noop$1;
+    } : noop$2;
   }
   function removeRoute(matcherRef) {
     if (isRouteName(matcherRef)) {
@@ -41077,7 +41599,7 @@ function useLink(props) {
     if (guardEvent(e2)) {
       return router[unref$1(props.replace) ? "replace" : "push"](
         unref$1(props.to)
-      ).catch(noop$1);
+      ).catch(noop$2);
     }
     return Promise.resolve();
   }
@@ -41258,10 +41780,10 @@ const RouterViewImpl = /* @__PURE__ */ defineComponent$1({
     };
   }
 });
-function normalizeSlot(slot, data) {
+function normalizeSlot(slot, data2) {
   if (!slot)
     return null;
-  const slotContent = slot(data);
+  const slotContent = slot(data2);
   return slotContent.length === 1 ? slotContent[0] : slotContent;
 }
 const RouterView = RouterViewImpl;
@@ -41387,7 +41909,7 @@ function addDevtools(app, router, matcher) {
     });
     let navigationId = 0;
     router.beforeEach((to2, from) => {
-      const data = {
+      const data2 = {
         guard: formatDisplay("beforeEach"),
         from: formatRouteLocation(from, "Current Location during this navigation"),
         to: formatRouteLocation(to2, "Target location")
@@ -41401,17 +41923,17 @@ function addDevtools(app, router, matcher) {
           time: api.now(),
           title: "Start of navigation",
           subtitle: to2.fullPath,
-          data,
+          data: data2,
           groupId: to2.meta.__navigationId
         }
       });
     });
     router.afterEach((to2, from, failure) => {
-      const data = {
+      const data2 = {
         guard: formatDisplay("afterEach")
       };
       if (failure) {
-        data.failure = {
+        data2.failure = {
           _custom: {
             type: Error,
             readOnly: true,
@@ -41420,19 +41942,19 @@ function addDevtools(app, router, matcher) {
             value: failure
           }
         };
-        data.status = formatDisplay("\u274C");
+        data2.status = formatDisplay("\u274C");
       } else {
-        data.status = formatDisplay("\u2705");
+        data2.status = formatDisplay("\u2705");
       }
-      data.from = formatRouteLocation(from, "Current Location during this navigation");
-      data.to = formatRouteLocation(to2, "Target location");
+      data2.from = formatRouteLocation(from, "Current Location during this navigation");
+      data2.to = formatRouteLocation(to2, "Target location");
       api.addTimelineEvent({
         layerId: navigationsLayerId,
         event: {
           title: "End of navigation",
           subtitle: to2.fullPath,
           time: api.now(),
-          data,
+          data: data2,
           logType: failure ? "warning" : "default",
           groupId: to2.meta.__navigationId
         }
@@ -41813,14 +42335,14 @@ ${JSON.stringify(newTargetLocation, null, 2)}
   function pushWithRedirect(to2, redirectedFrom) {
     const targetLocation = pendingLocation = resolve2(to2);
     const from = currentRoute.value;
-    const data = to2.state;
+    const data2 = to2.state;
     const force = to2.force;
     const replace2 = to2.replace === true;
     const shouldRedirect = handleRedirectRecord(targetLocation);
     if (shouldRedirect)
       return pushWithRedirect(
         assign(locationAsObject(shouldRedirect), {
-          state: typeof shouldRedirect === "object" ? assign({}, data, shouldRedirect.state) : data,
+          state: typeof shouldRedirect === "object" ? assign({}, data2, shouldRedirect.state) : data2,
           force,
           replace: replace2
         }),
@@ -41849,14 +42371,14 @@ ${JSON.stringify(newTargetLocation, null, 2)}
             assign({
               replace: replace2
             }, locationAsObject(failure2.to), {
-              state: typeof failure2.to === "object" ? assign({}, data, failure2.to.state) : data,
+              state: typeof failure2.to === "object" ? assign({}, data2, failure2.to.state) : data2,
               force
             }),
             redirectedFrom || toLocation
           );
         }
       } else {
-        failure2 = finalizeNavigation(toLocation, from, true, replace2, data);
+        failure2 = finalizeNavigation(toLocation, from, true, replace2, data2);
       }
       triggerAfterEach(toLocation, from, failure2);
       return failure2;
@@ -41925,7 +42447,7 @@ ${JSON.stringify(newTargetLocation, null, 2)}
     for (const guard of afterGuards.list())
       guard(to2, from, failure);
   }
-  function finalizeNavigation(toLocation, from, isPush, replace2, data) {
+  function finalizeNavigation(toLocation, from, isPush, replace2, data2) {
     const error = checkCanceledNavigation(toLocation, from);
     if (error)
       return error;
@@ -41935,9 +42457,9 @@ ${JSON.stringify(newTargetLocation, null, 2)}
       if (replace2 || isFirstNavigation)
         routerHistory.replace(toLocation.fullPath, assign({
           scroll: isFirstNavigation && state && state.scroll
-        }, data));
+        }, data2));
       else
-        routerHistory.push(toLocation.fullPath, data);
+        routerHistory.push(toLocation.fullPath, data2);
     }
     currentRoute.value = toLocation;
     handleScroll(toLocation, from, isPush, isFirstNavigation);
@@ -41953,7 +42475,7 @@ ${JSON.stringify(newTargetLocation, null, 2)}
       const toLocation = resolve2(to2);
       const shouldRedirect = handleRedirectRecord(toLocation);
       if (shouldRedirect) {
-        pushWithRedirect(assign(shouldRedirect, { replace: true }), toLocation).catch(noop$1);
+        pushWithRedirect(assign(shouldRedirect, { replace: true }), toLocation).catch(noop$2);
         return;
       }
       pendingLocation = toLocation;
@@ -41973,7 +42495,7 @@ ${JSON.stringify(newTargetLocation, null, 2)}
             if (isNavigationFailure(failure, 4 | 16) && !info.delta && info.type === NavigationType.pop) {
               routerHistory.go(-1, false);
             }
-          }).catch(noop$1);
+          }).catch(noop$2);
           return Promise.reject();
         }
         if (info.delta) {
@@ -41994,7 +42516,7 @@ ${JSON.stringify(newTargetLocation, null, 2)}
           }
         }
         triggerAfterEach(toLocation, from, failure);
-      }).catch(noop$1);
+      }).catch(noop$2);
     });
   }
   let readyHandlers = useCallbacks();
@@ -42210,7 +42732,7 @@ function defaultBehavior(actions, behavior) {
     }
   });
 }
-function getOptions(options) {
+function getOptions$1(options) {
   if (options === false) {
     return {
       block: "end",
@@ -42233,7 +42755,7 @@ function scrollIntoView(target, options) {
   if (!isTargetAttached) {
     return;
   }
-  var computeOptions = getOptions(options);
+  var computeOptions = getOptions$1(options);
   return defaultBehavior(i$2(target, computeOptions), computeOptions.behavior);
 }
 const voidElements = [
@@ -42346,10 +42868,10 @@ function createLines(indentCount, handler) {
 function addLinesFromValue(lines, value, before, after, seen) {
   let result;
   if (Array.isArray(value)) {
-    lines.push(...wrap(arrayToSourceLines(value, seen), before, after));
+    lines.push(...wrap$1(arrayToSourceLines(value, seen), before, after));
     return;
   } else if (value && typeof value === "object") {
-    lines.push(...wrap(objectToSourceLines(value, seen), before, after));
+    lines.push(...wrap$1(objectToSourceLines(value, seen), before, after));
     return;
   } else if (typeof value === "string") {
     result = value.includes("'") ? `\`${value}\`` : `'${value}'`;
@@ -42364,7 +42886,7 @@ function addLinesFromValue(lines, value, before, after, seen) {
   }
   lines.push(before + result + after);
 }
-function wrap(lines, before, after) {
+function wrap$1(lines, before, after) {
   lines[0].line = before + lines[0].line;
   lines[lines.length - 1].line += after;
   return lines;
@@ -42438,24 +42960,24 @@ function createAutoBuildingObject(format, specialKeysHandler, key = "", depth = 
     proxy
   };
 }
-function clone(data) {
+function clone(data2) {
   try {
-    return structuredClone(data);
+    return structuredClone(data2);
   } catch (e2) {
     console.warn(e2, `Fallback to JSON cloning`);
     try {
-      return JSON.parse(JSON.stringify(data));
+      return JSON.parse(JSON.stringify(data2));
     } catch (e3) {
       console.error(e3);
     }
-    return data;
+    return data2;
   }
 }
-function omit(data, keys) {
+function omit(data2, keys) {
   const copy = {};
-  for (const key in data) {
+  for (const key in data2) {
     if (!keys.includes(key)) {
-      copy[key] = data[key];
+      copy[key] = data2[key];
     }
   }
   return copy;
@@ -42481,8 +43003,8 @@ const omitInheritStoryProps = [
 ];
 var _a;
 const isClient = typeof window !== "undefined";
-const isString = (val) => typeof val === "string";
-const noop = () => {
+const isString$1 = (val) => typeof val === "string";
+const noop$1 = () => {
 };
 isClient && ((_a = window == null ? void 0 : window.navigator) == null ? void 0 : _a.userAgent) && /iP(ad|hone|od)/.test(window.navigator.userAgent);
 function resolveUnref(r2) {
@@ -42638,14 +43160,14 @@ function useEventListener(...args) {
   let events;
   let listeners;
   let options;
-  if (isString(args[0]) || Array.isArray(args[0])) {
+  if (isString$1(args[0]) || Array.isArray(args[0])) {
     [events, listeners, options] = args;
     target = defaultWindow;
   } else {
     [target, events, listeners, options] = args;
   }
   if (!target)
-    return noop;
+    return noop$1;
   if (!Array.isArray(events))
     events = [events];
   if (!Array.isArray(listeners))
@@ -42755,8 +43277,8 @@ function useScroll(element, options = {}) {
   const {
     throttle = 0,
     idle = 200,
-    onStop = noop,
-    onScroll = noop,
+    onStop = noop$1,
+    onScroll = noop$1,
     offset: offset2 = {
       left: 0,
       right: 0,
@@ -43237,6 +43759,1071 @@ function useVerticalVirtualList(options, list) {
     containerRef
   };
 }
+function addUniqueItem(array, item) {
+  array.indexOf(item) === -1 && array.push(item);
+}
+function removeItem(arr, item) {
+  const index = arr.indexOf(item);
+  index > -1 && arr.splice(index, 1);
+}
+const clamp = (min2, max2, v2) => Math.min(Math.max(v2, min2), max2);
+const defaults = {
+  duration: 0.3,
+  delay: 0,
+  endDelay: 0,
+  repeat: 0,
+  easing: "ease"
+};
+const isNumber = (value) => typeof value === "number";
+const isEasingList = (easing) => Array.isArray(easing) && !isNumber(easing[0]);
+const wrap = (min2, max2, v2) => {
+  const rangeSize = max2 - min2;
+  return ((v2 - min2) % rangeSize + rangeSize) % rangeSize + min2;
+};
+function getEasingForSegment(easing, i2) {
+  return isEasingList(easing) ? easing[wrap(0, easing.length, i2)] : easing;
+}
+const mix = (min2, max2, progress2) => -progress2 * min2 + progress2 * max2 + min2;
+const noop = () => {
+};
+const noopReturn = (v2) => v2;
+const progress = (min2, max2, value) => max2 - min2 === 0 ? 1 : (value - min2) / (max2 - min2);
+function fillOffset(offset2, remaining) {
+  const min2 = offset2[offset2.length - 1];
+  for (let i2 = 1; i2 <= remaining; i2++) {
+    const offsetProgress = progress(0, remaining, i2);
+    offset2.push(mix(min2, 1, offsetProgress));
+  }
+}
+function defaultOffset(length) {
+  const offset2 = [0];
+  fillOffset(offset2, length - 1);
+  return offset2;
+}
+function interpolate(output) {
+  let input = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : defaultOffset(output.length);
+  let easing = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : noopReturn;
+  const length = output.length;
+  const remainder = length - input.length;
+  remainder > 0 && fillOffset(input, remainder);
+  return (t2) => {
+    let i2 = 0;
+    for (; i2 < length - 2; i2++) {
+      if (t2 < input[i2 + 1])
+        break;
+    }
+    let progressInRange = clamp(0, 1, progress(input[i2], input[i2 + 1], t2));
+    const segmentEasing = getEasingForSegment(easing, i2);
+    progressInRange = segmentEasing(progressInRange);
+    return mix(output[i2], output[i2 + 1], progressInRange);
+  };
+}
+const isCubicBezier = (easing) => Array.isArray(easing) && isNumber(easing[0]);
+const isEasingGenerator = (easing) => typeof easing === "object" && Boolean(easing.createAnimation);
+const isFunction = (value) => typeof value === "function";
+const isString = (value) => typeof value === "string";
+const time = {
+  ms: (seconds) => seconds * 1e3,
+  s: (milliseconds) => milliseconds / 1e3
+};
+const calcBezier = (t2, a1, a2) => (((1 - 3 * a2 + 3 * a1) * t2 + (3 * a2 - 6 * a1)) * t2 + 3 * a1) * t2;
+const subdivisionPrecision = 1e-7;
+const subdivisionMaxIterations = 12;
+function binarySubdivide(x2, lowerBound, upperBound, mX1, mX2) {
+  let currentX;
+  let currentT;
+  let i2 = 0;
+  do {
+    currentT = lowerBound + (upperBound - lowerBound) / 2;
+    currentX = calcBezier(currentT, mX1, mX2) - x2;
+    if (currentX > 0) {
+      upperBound = currentT;
+    } else {
+      lowerBound = currentT;
+    }
+  } while (Math.abs(currentX) > subdivisionPrecision && ++i2 < subdivisionMaxIterations);
+  return currentT;
+}
+function cubicBezier(mX1, mY1, mX2, mY2) {
+  if (mX1 === mY1 && mX2 === mY2)
+    return noopReturn;
+  const getTForX = (aX) => binarySubdivide(aX, 0, 1, mX1, mX2);
+  return (t2) => t2 === 0 || t2 === 1 ? t2 : calcBezier(getTForX(t2), mY1, mY2);
+}
+const steps = function(steps2) {
+  let direction = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : "end";
+  return (progress2) => {
+    progress2 = direction === "end" ? Math.min(progress2, 0.999) : Math.max(progress2, 1e-3);
+    const expanded = progress2 * steps2;
+    const rounded = direction === "end" ? Math.floor(expanded) : Math.ceil(expanded);
+    return clamp(0, 1, rounded / steps2);
+  };
+};
+const namedEasings = {
+  ease: cubicBezier(0.25, 0.1, 0.25, 1),
+  "ease-in": cubicBezier(0.42, 0, 1, 1),
+  "ease-in-out": cubicBezier(0.42, 0, 0.58, 1),
+  "ease-out": cubicBezier(0, 0, 0.58, 1)
+};
+const functionArgsRegex = /\((.*?)\)/;
+function getEasingFunction(definition) {
+  if (isFunction(definition))
+    return definition;
+  if (isCubicBezier(definition))
+    return cubicBezier(...definition);
+  if (namedEasings[definition])
+    return namedEasings[definition];
+  if (definition.startsWith("steps")) {
+    const args = functionArgsRegex.exec(definition);
+    if (args) {
+      const argsArray = args[1].split(",");
+      return steps(parseFloat(argsArray[0]), argsArray[1].trim());
+    }
+  }
+  return noopReturn;
+}
+class Animation {
+  constructor(output) {
+    let keyframes = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : [0, 1];
+    let {
+      easing,
+      duration: initialDuration = defaults.duration,
+      delay = defaults.delay,
+      endDelay = defaults.endDelay,
+      repeat = defaults.repeat,
+      offset: offset2,
+      direction = "normal"
+    } = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : {};
+    this.startTime = null;
+    this.rate = 1;
+    this.t = 0;
+    this.cancelTimestamp = null;
+    this.easing = noopReturn;
+    this.duration = 0;
+    this.totalDuration = 0;
+    this.repeat = 0;
+    this.playState = "idle";
+    this.finished = new Promise((resolve2, reject) => {
+      this.resolve = resolve2;
+      this.reject = reject;
+    });
+    easing = easing || defaults.easing;
+    if (isEasingGenerator(easing)) {
+      const custom = easing.createAnimation(keyframes);
+      easing = custom.easing;
+      keyframes = custom.keyframes || keyframes;
+      initialDuration = custom.duration || initialDuration;
+    }
+    this.repeat = repeat;
+    this.easing = isEasingList(easing) ? noopReturn : getEasingFunction(easing);
+    this.updateDuration(initialDuration);
+    const interpolate$1 = interpolate(keyframes, offset2, isEasingList(easing) ? easing.map(getEasingFunction) : noopReturn);
+    this.tick = (timestamp) => {
+      var _a2;
+      delay = delay;
+      let t2 = 0;
+      if (this.pauseTime !== void 0) {
+        t2 = this.pauseTime;
+      } else {
+        t2 = (timestamp - this.startTime) * this.rate;
+      }
+      this.t = t2;
+      t2 /= 1e3;
+      t2 = Math.max(t2 - delay, 0);
+      if (this.playState === "finished" && this.pauseTime === void 0) {
+        t2 = this.totalDuration;
+      }
+      const progress2 = t2 / this.duration;
+      let currentIteration = Math.floor(progress2);
+      let iterationProgress = progress2 % 1;
+      if (!iterationProgress && progress2 >= 1) {
+        iterationProgress = 1;
+      }
+      iterationProgress === 1 && currentIteration--;
+      const iterationIsOdd = currentIteration % 2;
+      if (direction === "reverse" || direction === "alternate" && iterationIsOdd || direction === "alternate-reverse" && !iterationIsOdd) {
+        iterationProgress = 1 - iterationProgress;
+      }
+      const p2 = t2 >= this.totalDuration ? 1 : Math.min(iterationProgress, 1);
+      const latest = interpolate$1(this.easing(p2));
+      output(latest);
+      const isAnimationFinished = this.pauseTime === void 0 && (this.playState === "finished" || t2 >= this.totalDuration + endDelay);
+      if (isAnimationFinished) {
+        this.playState = "finished";
+        (_a2 = this.resolve) === null || _a2 === void 0 ? void 0 : _a2.call(this, latest);
+      } else if (this.playState !== "idle") {
+        this.frameRequestId = requestAnimationFrame(this.tick);
+      }
+    };
+    this.play();
+  }
+  play() {
+    const now2 = performance.now();
+    this.playState = "running";
+    if (this.pauseTime !== void 0) {
+      this.startTime = now2 - this.pauseTime;
+    } else if (!this.startTime) {
+      this.startTime = now2;
+    }
+    this.cancelTimestamp = this.startTime;
+    this.pauseTime = void 0;
+    this.frameRequestId = requestAnimationFrame(this.tick);
+  }
+  pause() {
+    this.playState = "paused";
+    this.pauseTime = this.t;
+  }
+  finish() {
+    this.playState = "finished";
+    this.tick(0);
+  }
+  stop() {
+    var _a2;
+    this.playState = "idle";
+    if (this.frameRequestId !== void 0) {
+      cancelAnimationFrame(this.frameRequestId);
+    }
+    (_a2 = this.reject) === null || _a2 === void 0 ? void 0 : _a2.call(this, false);
+  }
+  cancel() {
+    this.stop();
+    this.tick(this.cancelTimestamp);
+  }
+  reverse() {
+    this.rate *= -1;
+  }
+  commitStyles() {
+  }
+  updateDuration(duration) {
+    this.duration = duration;
+    this.totalDuration = duration * (this.repeat + 1);
+  }
+  get currentTime() {
+    return this.t;
+  }
+  set currentTime(t2) {
+    if (this.pauseTime !== void 0 || this.rate === 0) {
+      this.pauseTime = t2;
+    } else {
+      this.startTime = performance.now() - t2 / this.rate;
+    }
+  }
+  get playbackRate() {
+    return this.rate;
+  }
+  set playbackRate(rate) {
+    this.rate = rate;
+  }
+}
+class MotionValue {
+  setAnimation(animation) {
+    this.animation = animation;
+    animation === null || animation === void 0 ? void 0 : animation.finished.then(() => this.clearAnimation()).catch(() => {
+    });
+  }
+  clearAnimation() {
+    this.animation = this.generator = void 0;
+  }
+}
+const data = /* @__PURE__ */ new WeakMap();
+function getAnimationData(element) {
+  if (!data.has(element)) {
+    data.set(element, {
+      transforms: [],
+      values: /* @__PURE__ */ new Map()
+    });
+  }
+  return data.get(element);
+}
+function getMotionValue(motionValues, name) {
+  if (!motionValues.has(name)) {
+    motionValues.set(name, new MotionValue());
+  }
+  return motionValues.get(name);
+}
+const axes = ["", "X", "Y", "Z"];
+const order = ["translate", "scale", "rotate", "skew"];
+const transformAlias = {
+  x: "translateX",
+  y: "translateY",
+  z: "translateZ"
+};
+const rotation = {
+  syntax: "<angle>",
+  initialValue: "0deg",
+  toDefaultUnit: (v2) => v2 + "deg"
+};
+const baseTransformProperties = {
+  translate: {
+    syntax: "<length-percentage>",
+    initialValue: "0px",
+    toDefaultUnit: (v2) => v2 + "px"
+  },
+  rotate: rotation,
+  scale: {
+    syntax: "<number>",
+    initialValue: 1,
+    toDefaultUnit: noopReturn
+  },
+  skew: rotation
+};
+const transformDefinitions = /* @__PURE__ */ new Map();
+const asTransformCssVar = (name) => `--motion-${name}`;
+const transforms = ["x", "y", "z"];
+order.forEach((name) => {
+  axes.forEach((axis) => {
+    transforms.push(name + axis);
+    transformDefinitions.set(asTransformCssVar(name + axis), baseTransformProperties[name]);
+  });
+});
+const compareTransformOrder = (a2, b2) => transforms.indexOf(a2) - transforms.indexOf(b2);
+const transformLookup = new Set(transforms);
+const isTransform = (name) => transformLookup.has(name);
+const addTransformToElement = (element, name) => {
+  if (transformAlias[name])
+    name = transformAlias[name];
+  const {
+    transforms: transforms2
+  } = getAnimationData(element);
+  addUniqueItem(transforms2, name);
+  element.style.transform = buildTransformTemplate(transforms2);
+};
+const buildTransformTemplate = (transforms2) => transforms2.sort(compareTransformOrder).reduce(transformListToString, "").trim();
+const transformListToString = (template, name) => `${template} ${name}(var(${asTransformCssVar(name)}))`;
+const isCssVar = (name) => name.startsWith("--");
+const registeredProperties = /* @__PURE__ */ new Set();
+function registerCssVariable(name) {
+  if (registeredProperties.has(name))
+    return;
+  registeredProperties.add(name);
+  try {
+    const {
+      syntax,
+      initialValue
+    } = transformDefinitions.has(name) ? transformDefinitions.get(name) : {};
+    CSS.registerProperty({
+      name,
+      inherits: false,
+      syntax,
+      initialValue
+    });
+  } catch (e2) {
+  }
+}
+const testAnimation = (keyframes, options) => document.createElement("div").animate(keyframes, options);
+const featureTests = {
+  cssRegisterProperty: () => typeof CSS !== "undefined" && Object.hasOwnProperty.call(CSS, "registerProperty"),
+  waapi: () => Object.hasOwnProperty.call(Element.prototype, "animate"),
+  partialKeyframes: () => {
+    try {
+      testAnimation({
+        opacity: [1]
+      });
+    } catch (e2) {
+      return false;
+    }
+    return true;
+  },
+  finished: () => Boolean(testAnimation({
+    opacity: [0, 1]
+  }, {
+    duration: 1e-3
+  }).finished),
+  linearEasing: () => {
+    try {
+      testAnimation({
+        opacity: 0
+      }, {
+        easing: "linear(0, 1)"
+      });
+    } catch (e2) {
+      return false;
+    }
+    return true;
+  }
+};
+const results = {};
+const supports = {};
+for (const key in featureTests) {
+  supports[key] = () => {
+    if (results[key] === void 0)
+      results[key] = featureTests[key]();
+    return results[key];
+  };
+}
+const resolution = 0.015;
+const generateLinearEasingPoints = (easing, duration) => {
+  let points = "";
+  const numPoints = Math.round(duration / resolution);
+  for (let i2 = 0; i2 < numPoints; i2++) {
+    points += easing(progress(0, numPoints - 1, i2)) + ", ";
+  }
+  return points.substring(0, points.length - 2);
+};
+const convertEasing = (easing, duration) => {
+  if (isFunction(easing)) {
+    return supports.linearEasing() ? `linear(${generateLinearEasingPoints(easing, duration)})` : defaults.easing;
+  } else {
+    return isCubicBezier(easing) ? cubicBezierAsString(easing) : easing;
+  }
+};
+const cubicBezierAsString = (_ref) => {
+  let [a2, b2, c2, d2] = _ref;
+  return `cubic-bezier(${a2}, ${b2}, ${c2}, ${d2})`;
+};
+function hydrateKeyframes(keyframes, readInitialValue) {
+  for (let i2 = 0; i2 < keyframes.length; i2++) {
+    if (keyframes[i2] === null) {
+      keyframes[i2] = i2 ? keyframes[i2 - 1] : readInitialValue();
+    }
+  }
+  return keyframes;
+}
+const keyframesList = (keyframes) => Array.isArray(keyframes) ? keyframes : [keyframes];
+function getStyleName(key) {
+  if (transformAlias[key])
+    key = transformAlias[key];
+  return isTransform(key) ? asTransformCssVar(key) : key;
+}
+const style = {
+  get: (element, name) => {
+    name = getStyleName(name);
+    let value = isCssVar(name) ? element.style.getPropertyValue(name) : getComputedStyle(element)[name];
+    if (!value && value !== 0) {
+      const definition = transformDefinitions.get(name);
+      if (definition)
+        value = definition.initialValue;
+    }
+    return value;
+  },
+  set: (element, name, value) => {
+    name = getStyleName(name);
+    if (isCssVar(name)) {
+      element.style.setProperty(name, value);
+    } else {
+      element.style[name] = value;
+    }
+  }
+};
+function stopAnimation(animation) {
+  let needsCommit = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : true;
+  if (!animation || animation.playState === "finished")
+    return;
+  try {
+    if (animation.stop) {
+      animation.stop();
+    } else {
+      needsCommit && animation.commitStyles();
+      animation.cancel();
+    }
+  } catch (e2) {
+  }
+}
+function getUnitConverter(keyframes, definition) {
+  var _a2;
+  let toUnit = (definition === null || definition === void 0 ? void 0 : definition.toDefaultUnit) || noopReturn;
+  const finalKeyframe = keyframes[keyframes.length - 1];
+  if (isString(finalKeyframe)) {
+    const unit = ((_a2 = finalKeyframe.match(/(-?[\d.]+)([a-z%]*)/)) === null || _a2 === void 0 ? void 0 : _a2[2]) || "";
+    if (unit)
+      toUnit = (value) => value + unit;
+  }
+  return toUnit;
+}
+function getDevToolsRecord() {
+  return window.__MOTION_DEV_TOOLS_RECORD;
+}
+function animateStyle(element, key, keyframesDefinition) {
+  let options = arguments.length > 3 && arguments[3] !== void 0 ? arguments[3] : {};
+  let AnimationPolyfill = arguments.length > 4 ? arguments[4] : void 0;
+  const record = getDevToolsRecord();
+  const isRecording = options.record !== false && record;
+  let animation;
+  let {
+    duration = defaults.duration,
+    delay = defaults.delay,
+    endDelay = defaults.endDelay,
+    repeat = defaults.repeat,
+    easing = defaults.easing,
+    persist = false,
+    direction,
+    offset: offset2,
+    allowWebkitAcceleration = false
+  } = options;
+  const data2 = getAnimationData(element);
+  const valueIsTransform = isTransform(key);
+  let canAnimateNatively = supports.waapi();
+  valueIsTransform && addTransformToElement(element, key);
+  const name = getStyleName(key);
+  const motionValue = getMotionValue(data2.values, name);
+  const definition = transformDefinitions.get(name);
+  stopAnimation(motionValue.animation, !(isEasingGenerator(easing) && motionValue.generator) && options.record !== false);
+  return () => {
+    const readInitialValue = () => {
+      var _a2, _b;
+      return (_b = (_a2 = style.get(element, name)) !== null && _a2 !== void 0 ? _a2 : definition === null || definition === void 0 ? void 0 : definition.initialValue) !== null && _b !== void 0 ? _b : 0;
+    };
+    let keyframes = hydrateKeyframes(keyframesList(keyframesDefinition), readInitialValue);
+    const toUnit = getUnitConverter(keyframes, definition);
+    if (isEasingGenerator(easing)) {
+      const custom = easing.createAnimation(keyframes, key !== "opacity", readInitialValue, name, motionValue);
+      easing = custom.easing;
+      keyframes = custom.keyframes || keyframes;
+      duration = custom.duration || duration;
+    }
+    if (isCssVar(name)) {
+      if (supports.cssRegisterProperty()) {
+        registerCssVariable(name);
+      } else {
+        canAnimateNatively = false;
+      }
+    }
+    if (valueIsTransform && !supports.linearEasing() && (isFunction(easing) || isEasingList(easing) && easing.some(isFunction))) {
+      canAnimateNatively = false;
+    }
+    if (canAnimateNatively) {
+      if (definition) {
+        keyframes = keyframes.map((value) => isNumber(value) ? definition.toDefaultUnit(value) : value);
+      }
+      if (keyframes.length === 1 && (!supports.partialKeyframes() || isRecording)) {
+        keyframes.unshift(readInitialValue());
+      }
+      const animationOptions = {
+        delay: time.ms(delay),
+        duration: time.ms(duration),
+        endDelay: time.ms(endDelay),
+        easing: !isEasingList(easing) ? convertEasing(easing, duration) : void 0,
+        direction,
+        iterations: repeat + 1,
+        fill: "both"
+      };
+      animation = element.animate({
+        [name]: keyframes,
+        offset: offset2,
+        easing: isEasingList(easing) ? easing.map((thisEasing) => convertEasing(thisEasing, duration)) : void 0
+      }, animationOptions);
+      if (!animation.finished) {
+        animation.finished = new Promise((resolve2, reject) => {
+          animation.onfinish = resolve2;
+          animation.oncancel = reject;
+        });
+      }
+      const target = keyframes[keyframes.length - 1];
+      animation.finished.then(() => {
+        if (persist)
+          return;
+        style.set(element, name, target);
+        animation.cancel();
+      }).catch(noop);
+      if (!allowWebkitAcceleration)
+        animation.playbackRate = 1.000001;
+    } else if (AnimationPolyfill && valueIsTransform) {
+      keyframes = keyframes.map((value) => typeof value === "string" ? parseFloat(value) : value);
+      if (keyframes.length === 1) {
+        keyframes.unshift(parseFloat(readInitialValue()));
+      }
+      animation = new AnimationPolyfill((latest) => {
+        style.set(element, name, toUnit ? toUnit(latest) : latest);
+      }, keyframes, Object.assign(Object.assign({}, options), {
+        duration,
+        easing
+      }));
+    } else {
+      const target = keyframes[keyframes.length - 1];
+      style.set(element, name, definition && isNumber(target) ? definition.toDefaultUnit(target) : target);
+    }
+    if (isRecording) {
+      record(element, key, keyframes, {
+        duration,
+        delay,
+        easing,
+        repeat,
+        offset: offset2
+      }, "motion-one");
+    }
+    motionValue.setAnimation(animation);
+    return animation;
+  };
+}
+const getOptions = (options, key) => options[key] ? Object.assign(Object.assign({}, options), options[key]) : Object.assign({}, options);
+function resolveElements(elements, selectorCache) {
+  var _a2;
+  if (typeof elements === "string") {
+    if (selectorCache) {
+      (_a2 = selectorCache[elements]) !== null && _a2 !== void 0 ? _a2 : selectorCache[elements] = document.querySelectorAll(elements);
+      elements = selectorCache[elements];
+    } else {
+      elements = document.querySelectorAll(elements);
+    }
+  } else if (elements instanceof Element) {
+    elements = [elements];
+  }
+  return Array.from(elements || []);
+}
+function __rest(s2, e2) {
+  var t2 = {};
+  for (var p2 in s2)
+    if (Object.prototype.hasOwnProperty.call(s2, p2) && e2.indexOf(p2) < 0)
+      t2[p2] = s2[p2];
+  if (s2 != null && typeof Object.getOwnPropertySymbols === "function")
+    for (var i2 = 0, p2 = Object.getOwnPropertySymbols(s2); i2 < p2.length; i2++) {
+      if (e2.indexOf(p2[i2]) < 0 && Object.prototype.propertyIsEnumerable.call(s2, p2[i2]))
+        t2[p2[i2]] = s2[p2[i2]];
+    }
+  return t2;
+}
+const thresholds = {
+  any: 0,
+  all: 1
+};
+function inView$1(elementOrSelector, onStart) {
+  let {
+    root,
+    margin: rootMargin,
+    amount = "any"
+  } = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : {};
+  if (typeof IntersectionObserver === "undefined") {
+    return () => {
+    };
+  }
+  const elements = resolveElements(elementOrSelector);
+  const activeIntersections = /* @__PURE__ */ new WeakMap();
+  const onIntersectionChange = (entries) => {
+    entries.forEach((entry) => {
+      const onEnd = activeIntersections.get(entry.target);
+      if (entry.isIntersecting === Boolean(onEnd))
+        return;
+      if (entry.isIntersecting) {
+        const newOnEnd = onStart(entry);
+        if (isFunction(newOnEnd)) {
+          activeIntersections.set(entry.target, newOnEnd);
+        } else {
+          observer.unobserve(entry.target);
+        }
+      } else if (onEnd) {
+        onEnd(entry);
+        activeIntersections.delete(entry.target);
+      }
+    });
+  };
+  const observer = new IntersectionObserver(onIntersectionChange, {
+    root,
+    rootMargin,
+    threshold: typeof amount === "number" ? amount : thresholds[amount]
+  });
+  elements.forEach((element) => observer.observe(element));
+  return () => observer.disconnect();
+}
+function hasChanged(a2, b2) {
+  if (typeof a2 !== typeof b2)
+    return true;
+  if (Array.isArray(a2) && Array.isArray(b2))
+    return !shallowCompare(a2, b2);
+  return a2 !== b2;
+}
+function shallowCompare(next, prev) {
+  const prevLength = prev.length;
+  if (prevLength !== next.length)
+    return false;
+  for (let i2 = 0; i2 < prevLength; i2++) {
+    if (prev[i2] !== next[i2])
+      return false;
+  }
+  return true;
+}
+function isVariant(definition) {
+  return typeof definition === "object";
+}
+function resolveVariant(definition, variants) {
+  if (isVariant(definition)) {
+    return definition;
+  } else if (definition && variants) {
+    return variants[definition];
+  }
+}
+let scheduled = void 0;
+function processScheduledAnimations() {
+  if (!scheduled)
+    return;
+  const generators = scheduled.sort(compareByDepth).map(fireAnimateUpdates);
+  generators.forEach(fireNext);
+  generators.forEach(fireNext);
+  scheduled = void 0;
+}
+function scheduleAnimation(state) {
+  if (!scheduled) {
+    scheduled = [state];
+    requestAnimationFrame(processScheduledAnimations);
+  } else {
+    addUniqueItem(scheduled, state);
+  }
+}
+function unscheduleAnimation(state) {
+  scheduled && removeItem(scheduled, state);
+}
+const compareByDepth = (a2, b2) => a2.getDepth() - b2.getDepth();
+const fireAnimateUpdates = (state) => state.animateUpdates();
+const fireNext = (iterator) => iterator.next();
+const motionEvent = (name, target) => new CustomEvent(name, {
+  detail: {
+    target
+  }
+});
+function dispatchPointerEvent(element, name, event) {
+  element.dispatchEvent(new CustomEvent(name, {
+    detail: {
+      originalEvent: event
+    }
+  }));
+}
+function dispatchViewEvent(element, name, entry) {
+  element.dispatchEvent(new CustomEvent(name, {
+    detail: {
+      originalEntry: entry
+    }
+  }));
+}
+const inView = {
+  isActive: (options) => Boolean(options.inView),
+  subscribe: (element, _ref, _ref2) => {
+    let {
+      enable,
+      disable
+    } = _ref;
+    let {
+      inViewOptions = {}
+    } = _ref2;
+    const {
+      once
+    } = inViewOptions, viewOptions = __rest(inViewOptions, ["once"]);
+    return inView$1(element, (enterEntry) => {
+      enable();
+      dispatchViewEvent(element, "viewenter", enterEntry);
+      if (!once) {
+        return (leaveEntry) => {
+          disable();
+          dispatchViewEvent(element, "viewleave", leaveEntry);
+        };
+      }
+    }, viewOptions);
+  }
+};
+const mouseEvent = (element, name, action) => (event) => {
+  if (event.pointerType && event.pointerType !== "mouse")
+    return;
+  action();
+  dispatchPointerEvent(element, name, event);
+};
+const hover = {
+  isActive: (options) => Boolean(options.hover),
+  subscribe: (element, _ref) => {
+    let {
+      enable,
+      disable
+    } = _ref;
+    const onEnter = mouseEvent(element, "hoverstart", enable);
+    const onLeave = mouseEvent(element, "hoverend", disable);
+    element.addEventListener("pointerenter", onEnter);
+    element.addEventListener("pointerleave", onLeave);
+    return () => {
+      element.removeEventListener("pointerenter", onEnter);
+      element.removeEventListener("pointerleave", onLeave);
+    };
+  }
+};
+const press = {
+  isActive: (options) => Boolean(options.press),
+  subscribe: (element, _ref) => {
+    let {
+      enable,
+      disable
+    } = _ref;
+    const onPointerUp = (event) => {
+      disable();
+      dispatchPointerEvent(element, "pressend", event);
+      window.removeEventListener("pointerup", onPointerUp);
+    };
+    const onPointerDown = (event) => {
+      enable();
+      dispatchPointerEvent(element, "pressstart", event);
+      window.addEventListener("pointerup", onPointerUp);
+    };
+    element.addEventListener("pointerdown", onPointerDown);
+    return () => {
+      element.removeEventListener("pointerdown", onPointerDown);
+      window.removeEventListener("pointerup", onPointerUp);
+    };
+  }
+};
+const gestures = {
+  inView,
+  hover,
+  press
+};
+const stateTypes = ["initial", "animate", ...Object.keys(gestures), "exit"];
+const mountedStates = /* @__PURE__ */ new WeakMap();
+function createMotionState() {
+  let options = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {};
+  let parent = arguments.length > 1 ? arguments[1] : void 0;
+  let element;
+  let depth = parent ? parent.getDepth() + 1 : 0;
+  const activeStates = {
+    initial: true,
+    animate: true
+  };
+  const gestureSubscriptions = {};
+  const context = {};
+  for (const name of stateTypes) {
+    context[name] = typeof options[name] === "string" ? options[name] : parent === null || parent === void 0 ? void 0 : parent.getContext()[name];
+  }
+  const initialVariantSource = options.initial === false ? "animate" : "initial";
+  let _a2 = resolveVariant(options[initialVariantSource] || context[initialVariantSource], options.variants) || {}, target = __rest(_a2, ["transition"]);
+  const baseTarget = Object.assign({}, target);
+  function* animateUpdates() {
+    var _a3, _b;
+    const prevTarget = target;
+    target = {};
+    const animationOptions = {};
+    for (const name of stateTypes) {
+      if (!activeStates[name])
+        continue;
+      const variant = resolveVariant(options[name]);
+      if (!variant)
+        continue;
+      for (const key in variant) {
+        if (key === "transition")
+          continue;
+        target[key] = variant[key];
+        animationOptions[key] = getOptions((_b = (_a3 = variant.transition) !== null && _a3 !== void 0 ? _a3 : options.transition) !== null && _b !== void 0 ? _b : {}, key);
+      }
+    }
+    const allTargetKeys = /* @__PURE__ */ new Set([...Object.keys(target), ...Object.keys(prevTarget)]);
+    const animationFactories = [];
+    allTargetKeys.forEach((key) => {
+      var _a4;
+      if (target[key] === void 0) {
+        target[key] = baseTarget[key];
+      }
+      if (hasChanged(prevTarget[key], target[key])) {
+        (_a4 = baseTarget[key]) !== null && _a4 !== void 0 ? _a4 : baseTarget[key] = style.get(element, key);
+        animationFactories.push(animateStyle(element, key, target[key], animationOptions[key], Animation));
+      }
+    });
+    yield;
+    const animations = animationFactories.map((factory) => factory()).filter(Boolean);
+    if (!animations.length)
+      return;
+    const animationTarget = target;
+    element.dispatchEvent(motionEvent("motionstart", animationTarget));
+    Promise.all(animations.map((animation) => animation.finished)).then(() => {
+      element.dispatchEvent(motionEvent("motioncomplete", animationTarget));
+    }).catch(noop);
+  }
+  const setGesture = (name, isActive) => () => {
+    activeStates[name] = isActive;
+    scheduleAnimation(state);
+  };
+  const updateGestureSubscriptions = () => {
+    for (const name in gestures) {
+      const isGestureActive = gestures[name].isActive(options);
+      const remove2 = gestureSubscriptions[name];
+      if (isGestureActive && !remove2) {
+        gestureSubscriptions[name] = gestures[name].subscribe(element, {
+          enable: setGesture(name, true),
+          disable: setGesture(name, false)
+        }, options);
+      } else if (!isGestureActive && remove2) {
+        remove2();
+        delete gestureSubscriptions[name];
+      }
+    }
+  };
+  const state = {
+    update: (newOptions) => {
+      if (!element)
+        return;
+      options = newOptions;
+      updateGestureSubscriptions();
+      scheduleAnimation(state);
+    },
+    setActive: (name, isActive) => {
+      if (!element)
+        return;
+      activeStates[name] = isActive;
+      scheduleAnimation(state);
+    },
+    animateUpdates,
+    getDepth: () => depth,
+    getTarget: () => target,
+    getOptions: () => options,
+    getContext: () => context,
+    mount: (newElement) => {
+      element = newElement;
+      mountedStates.set(element, state);
+      updateGestureSubscriptions();
+      return () => {
+        mountedStates.delete(element);
+        unscheduleAnimation(state);
+        for (const key in gestureSubscriptions) {
+          gestureSubscriptions[key]();
+        }
+      };
+    },
+    isMounted: () => Boolean(element)
+  };
+  return state;
+}
+function createStyles(keyframes) {
+  const initialKeyframes = {};
+  const transformKeys = [];
+  for (let key in keyframes) {
+    const value = keyframes[key];
+    if (isTransform(key)) {
+      if (transformAlias[key])
+        key = transformAlias[key];
+      transformKeys.push(key);
+      key = asTransformCssVar(key);
+    }
+    let initialKeyframe = Array.isArray(value) ? value[0] : value;
+    const definition = transformDefinitions.get(key);
+    if (definition) {
+      initialKeyframe = isNumber(value) ? definition.toDefaultUnit(value) : value;
+    }
+    initialKeyframes[key] = initialKeyframe;
+  }
+  if (transformKeys.length) {
+    initialKeyframes.transform = buildTransformTemplate(transformKeys);
+  }
+  return initialKeyframes;
+}
+const contextId = "motion-state";
+const presenceId = "motion-presence";
+const objectType = {
+  type: Object
+};
+const Motion = defineComponent({
+  name: "Motion",
+  inheritAttrs: true,
+  props: {
+    tag: {
+      type: String,
+      default: "div"
+    },
+    initial: {
+      type: [Object, Boolean]
+    },
+    animate: objectType,
+    inView: objectType,
+    hover: objectType,
+    press: objectType,
+    exit: objectType,
+    inViewOptions: objectType,
+    transition: objectType,
+    style: objectType
+  },
+  setup(props) {
+    const root = ref(null);
+    const parentState = inject(contextId, void 0);
+    const presenceState = inject(presenceId, void 0);
+    const state = createMotionState(Object.assign(Object.assign({}, props), {
+      initial: (presenceState === null || presenceState === void 0 ? void 0 : presenceState.initial) === false ? presenceState.initial : props.initial === true ? void 0 : props.initial
+    }), parentState);
+    provide(contextId, state);
+    onMounted(() => {
+      const unmount = state.mount(root.value);
+      state.update(Object.assign(Object.assign({}, props), {
+        initial: props.initial === true ? void 0 : props.initial
+      }));
+      return unmount;
+    });
+    let manuallyAppliedMotionStyles = false;
+    onUpdated(() => {
+      if (!manuallyAppliedMotionStyles && root.value) {
+        manuallyAppliedMotionStyles = true;
+        const styles = createStyles(state.getTarget());
+        for (const key in styles) {
+          style.set(root.value, key, styles[key]);
+        }
+      }
+      state.update(Object.assign(Object.assign({}, props), {
+        initial: props.initial === true ? void 0 : props.initial
+      }));
+    });
+    return {
+      state,
+      root,
+      initialStyles: createStyles(state.getTarget())
+    };
+  },
+  render() {
+    var _a2, _b;
+    return h$1(this.tag, {
+      ref: "root",
+      style: this.state.isMounted() ? this.style : Object.assign(Object.assign({}, this.style), this.initialStyles)
+    }, (_b = (_a2 = this.$slots).default) === null || _b === void 0 ? void 0 : _b.call(_a2));
+  }
+});
+const doneCallbacks = /* @__PURE__ */ new WeakMap();
+function removeDoneCallback(element) {
+  const prevDoneCallback = doneCallbacks.get(element);
+  prevDoneCallback && element.removeEventListener("motioncomplete", prevDoneCallback);
+  doneCallbacks.delete(element);
+}
+defineComponent({
+  name: "Presence",
+  props: {
+    name: {
+      type: String
+    },
+    initial: {
+      type: Boolean,
+      default: true
+    },
+    exitBeforeEnter: {
+      type: Boolean,
+      default: false
+    }
+  },
+  methods: {
+    enter(element) {
+      const state = mountedStates.get(element);
+      if (!state)
+        return;
+      removeDoneCallback(element);
+      state.setActive("exit", false);
+    },
+    exit(element, done) {
+      const state = mountedStates.get(element);
+      if (!state)
+        return done();
+      state.setActive("exit", true);
+      removeDoneCallback(element);
+      doneCallbacks.set(element, done);
+      element.addEventListener("motioncomplete", done);
+    }
+  },
+  setup(_ref) {
+    let {
+      initial
+    } = _ref;
+    const state = {
+      initial
+    };
+    provide(presenceId, state);
+    onBeforeUpdate(() => {
+      state.initial = void 0;
+    });
+  },
+  render() {
+    return h$1(Transition, {
+      name: this.name,
+      onEnter: this.enter,
+      onLeave: this.exit,
+      css: false,
+      mode: this.exitBeforeEnter ? "out-in" : void 0
+    }, this.$slots.default);
+  }
+});
 var commonjsGlobal$1 = typeof globalThis !== "undefined" ? globalThis : typeof {} !== "undefined" ? {} : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
 var main$1 = { exports: {} };
 (function(module2, exports) {
@@ -49583,15 +51170,16 @@ export {
   vShow as Q,
   reactive$1 as R,
   useTitle as S,
-  Transition as T,
+  Transition$1 as T,
   createApp$1 as U,
   createPinia as V,
   plugin as W,
   defineAsyncComponent as X,
-  Comp5 as Y,
+  Comp8 as Y,
   useDark as Z,
   useToggle as _,
   createBaseVNode$1 as a,
+  client$1 as a$,
   watchEffect as a0,
   resolveDynamicComponent$1 as a1,
   parseQuery as a2,
@@ -49602,31 +51190,33 @@ export {
   useResizeObserver$1 as a7,
   vModelText$1 as a8,
   VTooltip as a9,
-  resolveDynamicComponent as aA,
-  resolveComponent as aB,
-  createVNode as aC,
-  createTextVNode as aD,
-  ref as aE,
-  provide as aF,
-  useIntervalFn as aG,
-  onMounted as aH,
-  onBeforeUnmount as aI,
-  computed as aJ,
-  inject as aK,
-  renderList as aL,
-  Fragment as aM,
-  toDisplayString as aN,
-  useVirtualList as aO,
-  useInfiniteScroll as aP,
+  renderSlot as aA,
+  createBaseVNode as aB,
+  normalizeClass as aC,
+  inject as aD,
+  resolveComponent as aE,
+  createBlock as aF,
+  withCtx as aG,
+  createVNode as aH,
+  renderList as aI,
+  Fragment as aJ,
+  createTextVNode as aK,
+  toDisplayString as aL,
+  useVirtualList as aM,
+  useInfiniteScroll as aN,
+  mergeProps as aO,
+  Motion as aP,
   createStaticVNode as aQ,
-  useCssVars as aR,
-  useMouseInElement as aS,
-  unref as aT,
-  useFocus as aU,
-  refDebounced as aV,
-  flexsearch_bundle as aW,
-  client$1 as aX,
-  client as aY,
+  resolveDynamicComponent as aR,
+  watch as aS,
+  useCssVars as aT,
+  reactive as aU,
+  unref as aV,
+  createCommentVNode as aW,
+  useMouseInElement as aX,
+  useFocus as aY,
+  refDebounced as aZ,
+  flexsearch_bundle as a_,
   createStaticVNode$1 as aa,
   toRaw$1 as ab,
   Dropdown as ac,
@@ -49645,15 +51235,16 @@ export {
   hm as ap,
   onBeforeUnmount$1 as aq,
   defineComponent as ar,
-  openBlock as as,
-  createElementBlock as at,
-  createBaseVNode as au,
-  normalizeClass as av,
-  createBlock as aw,
-  withCtx as ax,
-  renderSlot as ay,
-  mergeProps as az,
+  ref as as,
+  provide as at,
+  useIntervalFn as au,
+  onMounted as av,
+  onBeforeUnmount as aw,
+  computed as ax,
+  openBlock as ay,
+  createElementBlock as az,
   withKeys as b,
+  client as b0,
   createBlock$1 as c,
   defineComponent$1 as d,
   renderSlot$1 as e,
@@ -49668,7 +51259,7 @@ export {
   normalizeClass$1 as n,
   openBlock$1 as o,
   createVNode$1 as p,
-  createCommentVNode as q,
+  createCommentVNode$1 as q,
   resolveComponent$1 as r,
   scrollIntoView as s,
   toDisplayString$1 as t,

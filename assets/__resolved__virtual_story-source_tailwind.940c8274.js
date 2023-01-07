@@ -6472,6 +6472,7 @@ const config = markRaw({
         }
       }
     },
+    null,
     null
   ],
   "content": {
@@ -6539,6 +6540,7 @@ const config = markRaw({
           }
         }
       },
+      null,
       null
     ]
   },

@@ -1,11 +1,11 @@
-import { ar as defineComponent, as as openBlock, at as createElementBlock, au as createBaseVNode, av as normalizeClass, aw as createBlock, ax as withCtx, ay as renderSlot, az as mergeProps, aA as resolveDynamicComponent, aB as resolveComponent, aC as createVNode, aD as createTextVNode } from "./vendor.57cb7ace.js";
-import { _ as _export_sfc } from "./plugin-vue_export-helper.cdc0426e.js";
+import { ar as defineComponent, ay as openBlock, az as createElementBlock, aB as createBaseVNode, aC as normalizeClass, aF as createBlock, aG as withCtx, aA as renderSlot, aO as mergeProps, aR as resolveDynamicComponent, aE as resolveComponent, aH as createVNode, aK as createTextVNode } from "./vendor.e7409a8b.js";
+import { _ as _export_sfc } from "./_plugin-vue_export-helper.cdc0426e.js";
 const __default__ = defineComponent({
   inheritAttrs: false
 });
 const _sfc_main$1 = /* @__PURE__ */ defineComponent({
   ...__default__,
-  __name: "index",
+  __name: "Ribbon",
   props: {
     as: { type: String, required: false, default: "button" },
     position: { type: String, required: false, default: "top-right" },
@@ -88,10 +88,10 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
     }, 16, ["class"]))
   ], 2);
 }
-_sfc_main$1.__file = "components/custom/ribbon/index.vue";
-const Ribbon = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["__file", "D:/projects/my-components/components/custom/ribbon/index.vue"]]);
+_sfc_main$1.__file = "components/custom/ribbon/Ribbon.vue";
+const Ribbon = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["__file", "D:/projects/my-components/components/custom/ribbon/Ribbon.vue"]]);
 const _sfc_main = /* @__PURE__ */ defineComponent({
-  __name: "ribbon.story",
+  __name: "Ribbon.story",
   setup(__props, { expose }) {
     expose();
     const __returned__ = { Ribbon };
@@ -153,8 +153,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
   });
 }
-_sfc_main.__file = "components/custom/ribbon/ribbon.story.vue";
-const ribbon_story = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/projects/my-components/components/custom/ribbon/ribbon.story.vue"]]);
+_sfc_main.__file = "components/custom/ribbon/Ribbon.story.vue";
+const Ribbon_story = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/projects/my-components/components/custom/ribbon/Ribbon.story.vue"]]);
 export {
-  ribbon_story as default
+  Ribbon_story as default
 };
