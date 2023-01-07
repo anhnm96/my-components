@@ -111,6 +111,7 @@ const text = ref('')
       <BaseBadge icon>Badge</BaseBadge>
       <BaseBadge class="badge-success" icon>Badge</BaseBadge>
     </div>
+    <Steps />
     <div class="space-x-5">
       <BaseCheckbox :model-value="true">Basic</BaseCheckbox>
       <BaseCheckbox indeterminate>Indeterminate</BaseCheckbox>

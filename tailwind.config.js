@@ -1,4 +1,6 @@
 const plugin = require('tailwindcss/plugin')
+const flattenColorPalette =
+  require('tailwindcss/lib/util/flattenColorPalette').default
 
 const gridAutoFit = plugin(
   function ({ matchUtilities, theme }) {
@@ -80,6 +82,17 @@ module.exports = {
      */
     function ({ addVariant }) {
       addVariant('initial', 'html :where(&)')
+    },
+    // This plugin adds each Tailwind color as a global CSS variable, e.g. var(--gray-200).
+    function addVariablesForColors({ addBase, theme }) {
+      const allColors = flattenColorPalette(theme('colors'))
+      const newVars = Object.fromEntries(
+        Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
+      )
+
+      addBase({
+        ':root': newVars,
+      })
     },
   ],
 }
