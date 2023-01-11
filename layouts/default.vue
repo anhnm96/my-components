@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { clamp } from 'lodash-es'
+import { clamp, throttle } from 'lodash-es'
 
 const height = ref(80)
 const opacity = ref(1)
@@ -14,11 +14,11 @@ function onScroll() {
 
   const newOpacity = opacity.value - diff * 0.1
   opacity.value = clamp(newOpacity, 0, 1)
-  bgOpacity.value = clamp(newOpacity, 0.9, 1)
+  bgOpacity.value = clamp(newOpacity, 0.85, 1)
   lastScrollTop.value = current <= 0 ? 0 : current
 }
 
-useEventListener('scroll', onScroll)
+useEventListener('scroll', throttle(onScroll, 20))
 </script>
 
 <template>
