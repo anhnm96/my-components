@@ -11,5 +11,8 @@ import LineClamp from './LineClamp.vue'
     <Variant title="Number of lines">
       <LineClamp />
     </Variant>
+    <Variant title="Hover bubble">
+      <Bubble />
+    </Variant>
   </Story>
 </template>

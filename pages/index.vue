@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import Carousel from '~~/components/base/carousel/Carousel.vue'
-import CarouselItem from '~~/components/base/carousel/CarouselItem.vue'
 import GlowingBackground from '~~/components/tailwind/backgrounds/GlowingBackground.vue'
 import ThreeDCard from '~~/components/tailwind/cards/3d-card.vue'
 import LineClamp from '~~/components/tailwind/cards/LineClamp.vue'
+import Bubble from '~~/components/tailwind/cards/Bubble.vue'
 const loading = ref(false)
 function click() {
   loading.value = true
@@ -54,7 +53,7 @@ const text = ref('')
 </script>
 
 <template>
-  <div>
+  <div class="pt-20">
     <div>
       <h1 class="text-red-400">Hello world</h1>
       <BaseButton
@@ -111,6 +110,7 @@ const text = ref('')
       <BaseBadge icon>Badge</BaseBadge>
       <BaseBadge class="badge-success" icon>Badge</BaseBadge>
     </div>
+    <Bubble />
     <Steps />
     <div class="space-x-5">
       <BaseCheckbox :model-value="true">Basic</BaseCheckbox>
@@ -175,12 +175,12 @@ const text = ref('')
       <Switch v-model="switchState" disabled />
     </div>
     <div>
-      <Carousel
+      <BaseCarousel
         v-slot="{ scrollTo, activeIndex }"
         :initial-index="2"
         class="relative"
       >
-        <CarouselItem
+        <BaseCarouselItem
           v-for="(color, index) in colors"
           :key="color"
           :class="[
@@ -188,7 +188,7 @@ const text = ref('')
           ]"
         >
           {{ index }} - {{ activeIndex }}
-        </CarouselItem>
+        </BaseCarouselItem>
         <div
           class="pointer-events-none absolute top-1/2 flex w-full -translate-y-1/2 justify-between"
         >
@@ -205,10 +205,10 @@ const text = ref('')
             >
           </button>
         </div>
-      </Carousel>
+      </BaseCarousel>
     </div>
     <div>
-      <Carousel>
+      <BaseCarousel>
         <template #header="{ prev, next }">
           <div class="flex justify-between">
             <h2 class="text-lg font-bold text-primary">Top 100 hits</h2>
@@ -231,7 +231,7 @@ const text = ref('')
           </div>
         </template>
         <template #default="{ activeIndex }">
-          <CarouselItem
+          <BaseCarouselItem
             v-for="(item, index) in items"
             :key="item.title"
             class="relative w-1/4 basis-[25%] select-none"
@@ -242,9 +242,9 @@ const text = ref('')
             >
               {{ `${index} - ${activeIndex}` }}
             </span>
-          </CarouselItem>
+          </BaseCarouselItem>
         </template>
-      </Carousel>
+      </BaseCarousel>
     </div>
     <GlowingBackground />
     <ThreeDCard />
