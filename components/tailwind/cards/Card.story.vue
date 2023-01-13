@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import ThreeDCard from './3d-card.vue'
 import LineClamp from './LineClamp.vue'
+import Bubble from './Bubble.vue'
 </script>
 
 <template>
