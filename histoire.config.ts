@@ -9,6 +9,7 @@ export default defineConfig({
     server: {
       port: 4000,
     },
+    mode: 'histoire',
   },
   tree: {
     groups: [
