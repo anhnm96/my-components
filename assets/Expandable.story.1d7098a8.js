@@ -1,5 +1,5 @@
 import { ar as defineComponent, aR as useCssVars, aS as unref, aT as pick, av as openBlock, at as createBlock, au as withCtx, aH as renderSlot, aU as Transition, aA as ref, as as resolveComponent, aw as createVNode, az as createBaseVNode, aG as createElementBlock, aV as createCommentVNode } from "./vendor.aa0959a2.js";
-import { _ as _export_sfc } from "./_plugin-vue_export-helper.cdc0426e.js";
+import { _ as _export_sfc } from "./plugin-vue_export-helper.cdc0426e.js";
 const Expandable_vue_vue_type_style_index_0_scoped_3ec9d6eb_lang = "";
 const _sfc_main$1 = /* @__PURE__ */ defineComponent({
   __name: "Expandable",

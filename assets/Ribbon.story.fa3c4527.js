@@ -1,5 +1,5 @@
 import { ar as defineComponent, av as openBlock, aG as createElementBlock, az as createBaseVNode, aI as normalizeClass, at as createBlock, au as withCtx, aH as renderSlot, aQ as mergeProps, aW as resolveDynamicComponent, as as resolveComponent, aw as createVNode, aM as createTextVNode } from "./vendor.aa0959a2.js";
-import { _ as _export_sfc } from "./_plugin-vue_export-helper.cdc0426e.js";
+import { _ as _export_sfc } from "./plugin-vue_export-helper.cdc0426e.js";
 const __default__ = defineComponent({
   inheritAttrs: false
 });

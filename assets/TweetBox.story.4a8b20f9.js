@@ -1,5 +1,5 @@
 import { ar as defineComponent, aA as ref, aF as computed, aD as onMounted, av as openBlock, aG as createElementBlock, az as createBaseVNode, aN as toDisplayString, aI as normalizeClass, as as resolveComponent, at as createBlock, au as withCtx, aw as createVNode } from "./vendor.aa0959a2.js";
-import { _ as _export_sfc } from "./_plugin-vue_export-helper.cdc0426e.js";
+import { _ as _export_sfc } from "./plugin-vue_export-helper.cdc0426e.js";
 const TweetBox_vue_vue_type_style_index_0_lang = "";
 const _sfc_main$1 = /* @__PURE__ */ defineComponent({
   __name: "TweetBox",
