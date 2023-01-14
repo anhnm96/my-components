@@ -1,6 +1,7 @@
 const __resolved__virtual_storySource_componentsTailwindCardsCardStoryVue = `<script lang="ts" setup>
 import ThreeDCard from './3d-card.vue'
 import LineClamp from './LineClamp.vue'
+import Bubble from './Bubble.vue'
 <\/script>
 
 <template>
@@ -10,6 +11,9 @@ import LineClamp from './LineClamp.vue'
     </Variant>
     <Variant title="Number of lines">
       <LineClamp />
+    </Variant>
+    <Variant title="Hover bubble">
+      <Bubble />
     </Variant>
   </Story>
 </template>

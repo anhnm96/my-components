@@ -1,5 +1,5 @@
-import { d as defineComponent, r as resolveComponent, o as openBlock, c as createBlock, w as withCtx, a as createBaseVNode, n as normalizeClass, b as withKeys, e as renderSlot, m as mergeProps, f as watch, s as scrollIntoView, g as onMounted, u as useCssVars, h as unref, i as computed, j as useRoute, k as ref, l as createElementBlock, p as createVNode, I as Icon, t as toDisplayString, q as createCommentVNode, v as createRouter, x as createWebHistory, y as createWebHashHistory, z as defineStore, A as useStorage, F as Fragment, B as renderList, C as onUnmounted, D as withModifiers, E as normalizeStyle, G as useEventListener, H as isRef, J as resolveDirective, K as withDirectives, L as useMediaQuery, T as Transition, M as createTextVNode, N as pushScopeId, O as popScopeId, P as defineAsyncComponent, Q as vShow, R as reactive, S as useTitle, U as createApp, V as createPinia, W as plugin } from "./vendor.e7409a8b.js";
-import { _ as __vitePreload, h as histoireConfig, i as isDark, c as customLogos, t as toggleDark, f as files, m as mapFile, a as tree, b as _sfc_main$e } from "./GenericMountStory.vue_vue_type_script_setup_true_lang.48e180d5.js";
+import { d as defineComponent, r as resolveComponent, o as openBlock, c as createBlock, w as withCtx, a as createBaseVNode, n as normalizeClass, b as withKeys, e as renderSlot, m as mergeProps, f as watch, s as scrollIntoView, g as onMounted, u as useCssVars, h as unref, i as computed, j as useRoute, k as ref, l as createElementBlock, p as createVNode, I as Icon, t as toDisplayString, q as createCommentVNode, v as createRouter, x as createWebHistory, y as createWebHashHistory, z as defineStore, A as useStorage, F as Fragment, B as renderList, C as onUnmounted, D as withModifiers, E as normalizeStyle, G as useEventListener, H as isRef, J as resolveDirective, K as withDirectives, L as useMediaQuery, T as Transition, M as createTextVNode, N as pushScopeId, O as popScopeId, P as defineAsyncComponent, Q as vShow, R as reactive, S as useTitle, U as createApp, V as createPinia, W as plugin } from "./vendor.aa0959a2.js";
+import { _ as __vitePreload, h as histoireConfig, i as isDark, c as customLogos, t as toggleDark, f as files, m as mapFile, a as tree, b as _sfc_main$e } from "./GenericMountStory.vue_vue_type_script_setup_true_lang.a9bd6adb.js";
 const style = "";
 const __resolved__virtual_$histoireTheme = "";
 const _sfc_main$d = defineComponent({
@@ -161,12 +161,12 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
-      component: () => __vitePreload(() => import("./HomeView.579af56a.js"), true ? ["assets/HomeView.579af56a.js","assets/GenericMountStory.vue_vue_type_script_setup_true_lang.48e180d5.js","assets/vendor.e7409a8b.js"] : void 0)
+      component: () => __vitePreload(() => import("./HomeView.2b38c88f.js"), true ? ["assets/HomeView.2b38c88f.js","assets/GenericMountStory.vue_vue_type_script_setup_true_lang.a9bd6adb.js","assets/vendor.aa0959a2.js"] : void 0)
     },
     {
       path: "/story/:storyId",
       name: "story",
-      component: () => __vitePreload(() => import("./StoryView.d7921aaa.js"), true ? ["assets/StoryView.d7921aaa.js","assets/vendor.e7409a8b.js","assets/BaseEmpty.a93b331d.js","assets/state.5f5f5a60.js","assets/GenericMountStory.vue_vue_type_script_setup_true_lang.48e180d5.js"] : void 0)
+      component: () => __vitePreload(() => import("./StoryView.74f5236a.js"), true ? ["assets/StoryView.74f5236a.js","assets/vendor.aa0959a2.js","assets/BaseEmpty.2b89f4f5.js","assets/state.1df5d41c.js","assets/GenericMountStory.vue_vue_type_script_setup_true_lang.a9bd6adb.js"] : void 0)
     }
   ]
 });
@@ -949,7 +949,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
   },
   setup(__props, { emit }) {
     const SearchPane = defineAsyncComponent({
-      loader: () => __vitePreload(() => import("./SearchPane.1713b7c8.js"), true ? ["assets/SearchPane.1713b7c8.js","assets/GenericMountStory.vue_vue_type_script_setup_true_lang.48e180d5.js","assets/vendor.e7409a8b.js","assets/BaseEmpty.a93b331d.js"] : void 0),
+      loader: () => __vitePreload(() => import("./SearchPane.2e7fa2d7.js"), true ? ["assets/SearchPane.2e7fa2d7.js","assets/GenericMountStory.vue_vue_type_script_setup_true_lang.a9bd6adb.js","assets/vendor.aa0959a2.js","assets/BaseEmpty.2b89f4f5.js"] : void 0),
       loadingComponent: _sfc_main$3,
       delay: 0
     });
