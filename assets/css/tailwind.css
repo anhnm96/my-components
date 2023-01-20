@@ -222,3 +222,34 @@
 .dropdown-leave-from {
   @apply scale-100 opacity-100;
 }
+
+/* gradient text */
+.gradient-text {
+  --color-one: var(--color-one, #42d392);
+  --color-two: var(--color-two, #647eff);
+  background: linear-gradient(315deg, var(--color-one) 25%, var(--color-two));
+  background-clip: text;
+  color: transparent;
+}
+/* animated gradient text */
+.animated-gradient-text {
+  --bg-size: 400%;
+  --color-one: var(--animated-gradient-color-one);
+  --color-two: var(--animated-gradient-color-two);
+  background: linear-gradient(
+      90deg,
+      var(--color-one),
+      var(--color-two),
+      var(--color-one)
+    )
+    0 0 / var(--bg-size) 100%;
+  animation: move-bg 8s infinite linear;
+  color: transparent;
+  background-clip: text;
+}
+
+@keyframes move-bg {
+  to {
+    background-position: var(--bg-size) 0;
+  }
+}
