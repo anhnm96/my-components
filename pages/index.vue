@@ -111,6 +111,9 @@ const text = ref('')
       <BaseBadge icon>Badge</BaseBadge>
       <BaseBadge class="badge-success" icon>Badge</BaseBadge>
     </div>
+    <div class="py-2">
+      <Slider />
+    </div>
     <GridTrack />
     <Bubble />
     <Steps />
