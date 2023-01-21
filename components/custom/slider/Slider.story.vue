@@ -1,62 +1,76 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { Motion } from 'motion/vue'
+
+const progress = ref(50)
+const roundedProgress = computed(
+  () => `${Math.round((progress.value / 100) * 100)}%`
+)
+</script>
 
 <template>
   <div class="flex flex-1 flex-col items-center justify-center">
-    <div class="flex w-full items-center justify-center">
-      <Motion
-        :initial="false"
-        :animate="{
-          color: hovered || panning ? 'rgb(255,255,255)' : 'rgb(120,113,108)',
-        }"
-        class="flex w-6 shrink-0 justify-start"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="h-4 w-4"
+    <Slider
+      v-model="progress"
+      :update-on-touch="false"
+      class="flex w-full items-center justify-center"
+    >
+      <template #left="{ hovered, panning }">
+        <Motion
+          :initial="false"
+          :animate="{
+            color: hovered || panning ? 'rgb(255,255,255)' : 'rgb(120,113,108)',
+          }"
+          class="flex w-6 shrink-0 justify-start"
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M17.25 9.75L19.5 12m0 0l2.25 2.25M19.5 12l2.25-2.25M19.5 12l-2.25 2.25m-10.5-6l4.72-4.72a.75.75 0 011.28.531V19.94a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.506-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.395C2.806 8.757 3.63 8.25 4.51 8.25H6.75z"
-          />
-        </svg>
-      </Motion>
-      <Slider />
-      <Motion
-        :initial="false"
-        :animate="{
-          color: hovered || panning ? 'rgb(255,255,255)' : 'rgb(120,113,108)',
-        }"
-        class="flex w-6 shrink-0 justify-end"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth="{1.5}"
-          stroke="currentColor"
-          class="h-4 w-4"
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="h-4 w-4"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M17.25 9.75L19.5 12m0 0l2.25 2.25M19.5 12l2.25-2.25M19.5 12l-2.25 2.25m-10.5-6l4.72-4.72a.75.75 0 011.28.531V19.94a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.506-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.395C2.806 8.757 3.63 8.25 4.51 8.25H6.75z"
+            />
+          </svg>
+        </Motion>
+      </template>
+      <template #right="{ hovered, panning }">
+        <Motion
+          :initial="false"
+          :animate="{
+            color: hovered || panning ? 'rgb(255,255,255)' : 'rgb(120,113,108)',
+          }"
+          class="flex w-6 shrink-0 justify-end"
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z"
-          />
-        </svg>
-      </Motion>
-    </div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="{1.5}"
+            stroke="currentColor"
+            class="h-4 w-4"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z"
+            />
+          </svg>
+        </Motion>
+      </template>
+    </Slider>
     <Motion
       :initial="false"
-      :animate="{
-        color: hovered || panning ? 'rgb(255,255,255)' : 'rgb(120,113,108)',
-      }"
       class="mt-4 select-none text-center text-sm font-semibold tabular-nums"
     >
-      {{ roundedProgress }} {{ width }}
+      <!-- :animate="{
+        color: hovered || panning ? 'rgb(255,255,255)' : 'rgb(120,113,108)',
+      }" -->
+      {{ roundedProgress }}
     </Motion>
   </div>
 </template>
