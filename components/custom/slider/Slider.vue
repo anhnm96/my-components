@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { clamp } from 'lodash-es'
+import { clamp, throttle } from 'lodash-es'
 import { Motion } from 'motion/vue'
 
 const props = withDefaults(
@@ -7,15 +7,15 @@ const props = withDefaults(
     modelValue?: number
     min?: number
     max?: number
-    initialHeight?: number
     updateOnTouch?: boolean
+    buffer?: number
   }>(),
   {
     modelValue: 0,
     min: 0,
     max: 100,
-    initialHeight: 4,
     updateOnTouch: true,
+    buffer: 12,
   }
 )
 const emit = defineEmits<{
@@ -25,7 +25,6 @@ const emit = defineEmits<{
 const transition = { type: 'spring', bounce: 0, duration: 0.3 }
 const progress = useInternalValue(props, 'modelValue', emit)
 const height = 12
-const buffer = 12
 const width = computed(() => `${(progress.value / props.max) * 100}%`)
 
 const hovered = ref(false)
@@ -33,11 +32,11 @@ const panning = ref(false)
 const state = computed(() =>
   panning.value ? 'panning' : hovered.value ? 'hovered' : 'idle'
 )
-const widthVariants = computed(() => ({
+const widthVariants = {
   idle: { width: 'calc(95% - 48px)' },
   hovered: { width: 'calc(100% - 48px)' },
   panning: { width: 'calc(100% - 48px)' },
-}))
+}
 
 const progressElement = ref()
 const startPoint = ref<number>()
@@ -46,19 +45,23 @@ function setProgress(e: MouseEvent) {
   startPoint.value ??= e.clientX
   const { left, right } = progressElement.value.$el.getBoundingClientRect()
   const elWidth = progressElement.value.$el.offsetWidth
-  if (
-    (e.clientX < left && progress.value <= props.min) ||
-    (e.clientX > right && progress.value >= props.max)
-  )
+
+  if (e.clientX < left && progress.value <= props.min) {
+    startPoint.value = left
     return
+  }
+  if (e.clientX > right && progress.value >= props.max) {
+    startPoint.value = right
+    return
+  }
   const delta = ((e.clientX - startPoint.value) / elWidth) * props.max
   progress.value = clamp(progress.value + delta, props.min, props.max)
   startPoint.value = e.clientX
 }
 
-function pointermove(e: PointerEvent) {
+const pointermove = throttle((e: PointerEvent) => {
   setProgress(e)
-}
+}, 10)
 
 function pointerdown(e: PointerEvent) {
   if (props.updateOnTouch) {
@@ -80,11 +83,11 @@ function pointerup() {
   window.removeEventListener('pointerup', pointerup)
 }
 
-const heightVariants = computed(() => ({
-  idle: { height: `${props.initialHeight}px` },
+const heightVariants = {
+  idle: { height: `4px` },
   hovered: { height: `${height}px` },
   panning: { height: `${height}px` },
-}))
+}
 </script>
 
 <template>

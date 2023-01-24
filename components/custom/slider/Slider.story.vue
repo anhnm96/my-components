@@ -65,7 +65,7 @@ const roundedProgress = computed(
     </Slider>
     <Motion
       :initial="false"
-      class="mt-4 select-none text-center text-sm font-semibold tabular-nums"
+      class="mt-4 select-none text-center text-sm font-semibold tabular-nums text-white"
     >
       <!-- :animate="{
         color: hovered || panning ? 'rgb(255,255,255)' : 'rgb(120,113,108)',
