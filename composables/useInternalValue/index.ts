@@ -9,7 +9,7 @@ export default function useInternalValue<
 >(
   props: P,
   key: K = 'modelValue' as K,
-  emit: (e: Name, payload: any) => void,
+  emit?: (e: Name, payload: any) => void,
   options: UseInternaValueOptions = {}
 ) {
   const { eventName } = options
@@ -26,7 +26,7 @@ export default function useInternalValue<
   return computed<P[K]>({
     set(value) {
       _modelValue.value = value
-      emit(event, value)
+      emit?.(event, value)
     },
     get() {
       return _modelValue.value
