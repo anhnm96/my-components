@@ -75,7 +75,9 @@ const items = [
         <CarouselItem
           v-for="(color, index) in colors"
           :key="color"
-          :class="[`item-${color} basis-full py-4 text-center text-white`]"
+          :class="[
+            `item-${color} basis-full select-none py-4 text-center text-white`,
+          ]"
         >
           {{ index }} - {{ activeIndex }}
         </CarouselItem>
