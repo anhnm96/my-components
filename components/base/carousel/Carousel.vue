@@ -77,12 +77,6 @@ function pointerUp() {
     scrollTo(activeIndex.value + signCheck * results)
     delta.value = 0
   }
-
-  // scroll-snap may break animation
-  // so we need to wait until animation end
-  setTimeout(() => {
-    elRef.value!.classList.add('scroll-snap')
-  }, 0)
 }
 
 let intervalFn: Pausable
@@ -111,6 +105,9 @@ function onScrollFinished() {
   scrollTimeout = setTimeout(() => {
     const newIndex = Math.round(elRef.value!.scrollLeft / itemWidth.value)
     activeIndex.value = newIndex
+    // scroll-snap breaks animation
+    // so we need to wait until animation end
+    elRef.value!.classList.add('scroll-snap')
   }, 100)
 }
 
