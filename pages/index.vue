@@ -3,8 +3,6 @@ import GlowingBackground from '~~/components/tailwind/backgrounds/GlowingBackgro
 import ThreeDCard from '~~/components/tailwind/cards/3d-card.vue'
 import LineClamp from '~~/components/tailwind/cards/LineClamp.vue'
 import Bubble from '~~/components/tailwind/cards/Bubble.vue'
-import GridTrack from '~~/components/tailwind/GridTrack.story.vue'
-import SliderStory from '~~/components/custom/slider/Slider.story.vue'
 const loading = ref(false)
 function click() {
   loading.value = true
@@ -112,10 +110,6 @@ const text = ref('')
       <BaseBadge icon>Badge</BaseBadge>
       <BaseBadge class="badge-success" icon>Badge</BaseBadge>
     </div>
-    <div class="py-2">
-      <SliderStory />
-    </div>
-    <GridTrack />
     <Bubble />
     <Steps />
     <div class="space-x-5">
