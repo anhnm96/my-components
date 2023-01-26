@@ -1,10 +1,6 @@
 <script lang="ts" setup>
-let story = 'div'
-let variant = 'div'
-if (import.meta.env.MODE === 'histoire') {
-  story = 'Story'
-  variant = 'Variant'
-}
+const story = 'Story'
+const variant = 'Variant'
 </script>
 
 <template>

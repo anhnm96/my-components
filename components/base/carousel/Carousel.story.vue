@@ -164,3 +164,7 @@ const items = [
   background-color: gray;
 }
 </style>
+
+<docs lang="md">
+Carousel which supports horizontal scroll
+</docs>
