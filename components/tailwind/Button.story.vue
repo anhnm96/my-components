@@ -11,7 +11,7 @@
     </Variant>
     <Variant title="Gradient Border">
       <button
-        class="btn-disco relative overflow-hidden rounded-md bg-green-400 px-8 py-4 ring-red-500 will-change-transform"
+        class="btn-disco relative overflow-hidden rounded-md px-8 py-4 will-change-transform"
       >
         <span class="absolute inset-[2px] -z-[1] rounded bg-black"></span>
         <span class="text-neutral-400">Button</span>
