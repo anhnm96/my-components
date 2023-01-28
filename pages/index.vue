@@ -3,6 +3,7 @@ import GlowingBackground from '~~/components/tailwind/backgrounds/GlowingBackgro
 import ThreeDCard from '~~/components/tailwind/cards/3d-card.vue'
 import LineClamp from '~~/components/tailwind/cards/LineClamp.vue'
 import Bubble from '~~/components/tailwind/cards/Bubble.vue'
+import AutocompleteStory from '~~/components/custom/autocomplete/Autocomplete.story.vue'
 const loading = ref(false)
 function click() {
   loading.value = true
@@ -110,6 +111,7 @@ const text = ref('')
       <BaseBadge icon>Badge</BaseBadge>
       <BaseBadge class="badge-success" icon>Badge</BaseBadge>
     </div>
+    <AutocompleteStory />
     <Bubble />
     <Steps />
     <div class="space-x-5">
