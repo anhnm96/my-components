@@ -14,7 +14,7 @@ export default defineNuxtConfig({
       {
         path: '~/components/custom',
         extensions: ['vue'],
-        ignore: ['**/*.story.vue'],
+        ignore: ['**/stories/*', '**/*.story.vue'],
         pathPrefix: false,
       },
     ],
