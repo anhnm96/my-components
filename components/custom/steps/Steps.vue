@@ -1,6 +1,7 @@
 <script lang="tsx" setup>
 import type { FunctionalComponent } from 'vue'
 import { Motion } from 'motion/vue'
+import { spring } from 'motion'
 
 const step = ref(1)
 
@@ -32,8 +33,10 @@ const CheckIcon: FunctionalComponent = (props: any) => {
         animate={draw(1)}
         transition={{
           delay: 0.2,
-          type: 'tween',
-          ease: 'easeOut',
+          easing: spring({
+            stiffness: 400,
+            damping: 90,
+          }),
           duration: 0.3,
         }}
         pathLength="1"
