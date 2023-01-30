@@ -71,7 +71,7 @@ const beforeUnmount = (el: HTMLElement) => {
 }
 
 export default defineNuxtPlugin((nuxtApp) => {
-  nuxtApp.vueApp.directive('clickOutside', {
+  nuxtApp.vueApp.directive('trapFocus', {
     beforeMount,
     mounted,
     beforeUnmount,
