@@ -94,7 +94,7 @@ export default {
       }"
     >
       <label :for="`dropzone-${inputKey}`" class="image-message">
-        <span v-show="files.length === 0">Drop files</span>
+        <span v-show="files.length === 0" class="mx-auto">Drop files</span>
       </label>
       <input
         :id="`dropzone-${inputKey}`"
