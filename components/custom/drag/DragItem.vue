@@ -55,14 +55,14 @@ const props = withDefaults(
 )
 const emit = defineEmits(['dropped'])
 const slots = useSlots()
-const el = ref()
+const el = ref<HTMLElement>()
 const dragging = ref(false)
 const dragImageEl = ref<HTMLElement>()
 const hasDragImageSlot = Object.keys(slots).includes('drag-image')
 const width = ref(0)
 const height = ref(0)
 // handle's stuffs
-let handleEl: HTMLElement
+let handleEl: HTMLElement | null
 const handleLock = ref(false)
 function handleMouseDown() {
   handleLock.value = false
@@ -71,22 +71,22 @@ function handleMouseDown() {
 function handleMouseUp() {
   handleLock.value = true
 }
-let triggerEl: HTMLElement
+let triggerEl: HTMLElement | null
 onMounted(() => {
   // for drag-image slot
-  const rect = el.value.getBoundingClientRect()
+  const rect = el.value!.getBoundingClientRect()
   width.value = rect.width
   height.value = rect.height
   // handle
   if (props.triggerMove) {
-    triggerEl = el.value.querySelector(props.triggerMove)
+    triggerEl = el.value!.querySelector(props.triggerMove)
   }
   // handle handle
   if (props.handle) {
     handleLock.value = true
-    handleEl = el.value.querySelector(props.handle)
-    handleEl.addEventListener('mousedown', handleMouseDown)
-    handleEl.addEventListener('mouseup', handleMouseUp)
+    handleEl = el.value!.querySelector(props.handle)
+    handleEl?.addEventListener('mousedown', handleMouseDown)
+    handleEl?.addEventListener('mouseup', handleMouseUp)
   }
 })
 onBeforeUnmount(() => {
@@ -95,15 +95,6 @@ onBeforeUnmount(() => {
   handleEl?.removeEventListener('mousedown', handleMouseDown)
   handleEl?.removeEventListener('mouseup', handleMouseUp)
 })
-const documentDragover = throttle((e) => {
-  e.preventDefault()
-  console.log('asd2', dragging && hasDragImageSlot, dragImageEl.value)
-  dragImageEl.value!.style.left = `${e.clientX}px`
-  dragImageEl.value!.style.top = `${e.clientY}px`
-  // fix bug on firefox: drag event always return mouse position 0, 0
-  // https://bugzilla.mozilla.org/show_bug.cgi?id=505521
-  el.value.dispatchEvent(new MouseEvent('customdrag', e))
-}, 10)
 
 const dataAllowed = computed(() => {
   return props.acceptData(DnDState.data)
@@ -120,6 +111,19 @@ const clazz = computed(() => {
   }
 })
 
+const documentDragover = throttle((e: DragEvent) => {
+  e.preventDefault()
+
+  if (!dragImageEl.value) {
+    return
+  }
+  dragImageEl.value!.style.left = `${e.clientX}px`
+  dragImageEl.value!.style.top = `${e.clientY}px`
+  // fix bug on firefox: drag event always return mouse position 0, 0
+  // https://bugzilla.mozilla.org/show_bug.cgi?id=505521
+  el.value!.dispatchEvent(new MouseEvent('customdrag', e))
+}, 20)
+
 function dragstart(e: DragEvent) {
   dragging.value = true
 
@@ -134,7 +138,6 @@ function dragstart(e: DragEvent) {
     // add dragover event for handling drag image position compatible with firefox
     // and prevent drag end move back animation when drop outside of dropable element
     nextTick(() => {
-      console.log('asd', dragImageEl.value)
       dragImageEl.value!.style.position = 'fixed'
       dragImageEl.value!.style.transform = 'translate(-50%, -50%)'
       document.addEventListener('dragover', documentDragover)
@@ -189,8 +192,9 @@ function drop(e: DragEvent) {
     return
   Object.assign(DnDState, { success: true })
   // remove hover class
-  el.value.classList.remove(props.hoverClass)
-  const dataTransfer = JSON.parse(e.dataTransfer?.getData('text') || '')
+  el.value!.classList.remove(props.hoverClass)
+  let dataTransfer = e.dataTransfer?.getData('text')
+  if (dataTransfer) dataTransfer = JSON.parse(dataTransfer)
   /** drop event */
   emit('dropped', { event: e, from: dataTransfer, to: props.dataTransfer })
 

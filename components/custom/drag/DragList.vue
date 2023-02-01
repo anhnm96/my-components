@@ -37,10 +37,11 @@ const props = defineProps({
     default: 'copy',
   },
 })
+const emit = defineEmits(['update:list'])
 const slots = useSlots()
-const listEl = ref(null)
+const listEl = ref<DefineComponent>()
 // draggingOver listEl
-const listBeingDraggedOver = ref(null)
+const listBeingDraggedOver = ref(false)
 // currentIndex for hanlding move immediate only
 const draggingItem = reactive({
   inProgress: false,
@@ -49,7 +50,7 @@ const draggingItem = reactive({
   data: null,
 })
 // index of hovering element
-const placeholderIndex = ref(-1)
+const placeholderIndex = ref(props.list.length)
 const enteringRef = ref<HTMLElement | null>()
 const hasPlaceholderMoveSlot = Object.keys(slots).includes('placeholder-move')
 const hasPlaceholderAddSlot = Object.keys(slots).includes('placeholder-add')
@@ -78,13 +79,6 @@ const showPlaceholderAdd = computed(() => {
     hasPlaceholderAddSlot &&
     !draggingItem.inProgress &&
     listBeingDraggedOver.value
-  console.log(
-    'showPlaceholderAdd:',
-    res,
-    'dragging:',
-    draggingItem.inProgress,
-    props.list[0]
-  )
   return res
 })
 // list events
@@ -92,7 +86,7 @@ const id = (Date.now() + Math.random()).toString(36)
 // item events
 const dragstart = (e: DragEvent) => {
   // user can select text then drag even if draggable = false
-  if (!e.target.draggable) return
+  if (!(e.target as HTMLElement)?.draggable) return
   const payload = JSON.parse(e.dataTransfer?.getData('text') || '')
   // init state
   Object.assign(draggingItem, {
@@ -191,7 +185,7 @@ function dragenter(e: DragEvent) {
   if (
     props.list.length === 0 &&
     !listBeingDraggedOver.value &&
-    !DnDState.ref.contains(e.target) &&
+    !DnDState.ref?.contains(e.target as HTMLElement) &&
     DnDState.group === props.group
   ) {
     console.log('list dragenter')
@@ -220,7 +214,7 @@ function dragentered({ detail: payload }: any) {
   }
   // prevent drag into its nested list
   const closestList = payload.ref.closest('.drag-list')
-  if (DnDState.ref.contains(closestList)) {
+  if (DnDState.ref!.contains(closestList)) {
     console.log('prevent bubbled from nested list')
     return
   }
@@ -271,7 +265,7 @@ function dragentered({ detail: payload }: any) {
     draggingItem.currentIndex !== payload.index
   ) {
     console.log('move immediate', draggingItem.currentIndex, payload.index)
-    array_move(props.list, draggingItem.currentIndex, payload.index, false)
+    array_move(props.list, draggingItem.currentIndex, payload.index)
     // update index of dragging element
     draggingItem.currentIndex = payload.index
     Object.assign(DnDState, { dropId: id })
@@ -283,7 +277,7 @@ function dragentered({ detail: payload }: any) {
   payload.event.stopPropagation()
 }
 
-function dragend(e) {
+function dragend(e: DragEvent) {
   console.log(
     'dragend',
     e,
@@ -355,19 +349,13 @@ function drop(e: DragEvent) {
       props.list[0]
     )
     if (placeholderIndex.value < draggingItem.currentIndex)
-      array_move(
-        props.list,
-        draggingItem.currentIndex,
-        placeholderIndex.value,
-        false
-      )
+      array_move(props.list, draggingItem.currentIndex, placeholderIndex.value)
     // -1 in case of move el up
     if (placeholderIndex.value > draggingItem.currentIndex)
       array_move(
         props.list,
         draggingItem.currentIndex,
-        placeholderIndex.value - 1,
-        false
+        placeholderIndex.value - 1
       )
     // set inProgress as false to prevent remove el when drop success in dragend
     draggingItem.inProgress = false
@@ -382,17 +370,18 @@ function dragleave(e: DragEvent) {
   // safari always return relatedTarget as null so we use elementFromPoint instead
   if (isSafari) {
     const mouseEl = document.elementFromPoint(e.clientX, e.clientY)
-    const closestList =
+    const closestList = (
       mouseEl && mouseEl.nodeType === 1
         ? mouseEl.closest('.drag-list')
-        : mouseEl?.parentElement.closest('.drag-list')
+        : mouseEl?.parentElement?.closest('.drag-list')
+    ) as HTMLElement
 
     if (
       listBeingDraggedOver.value &&
-      (!listEl.value.$el.contains(mouseEl) || // leave to outside
+      (!listEl.value!.$el.contains(mouseEl) || // leave to outside
         (closestList && // leave to other el's nested list
-          !DnDState.ref.contains(mouseEl) && // prevent leave to inside dragging el
-          listEl.value.$el !== closestList &&
+          !DnDState.ref!.contains(mouseEl) && // prevent leave to inside dragging el
+          listEl.value!.$el !== closestList &&
           closestList.id !== DragListState.id && // there are chances dragleave el from nested one to parent relatedTarget was original list itself
           closestList.dataset.group === props.group))
     ) {
@@ -400,16 +389,18 @@ function dragleave(e: DragEvent) {
     }
     return
   }
+  const relatedTarget = e.relatedTarget as HTMLElement
+  if (!relatedTarget) return
   const closestList =
-    e.relatedTarget && e.relatedTarget.nodeType === 1
-      ? (e.relatedTarget.closest('.drag-list') as HTMLElement)
-      : (e.relatedTarget?.parentElement?.closest('.drag-list') as HTMLElement)
+    relatedTarget && relatedTarget.nodeType === 1
+      ? (relatedTarget.closest('.drag-list') as HTMLElement)
+      : (relatedTarget.parentElement?.closest('.drag-list') as HTMLElement)
   if (
     listBeingDraggedOver.value &&
-    (!listEl.value.$el.contains(e.relatedTarget) || // leave to outside
+    (!listEl.value!.$el.contains(relatedTarget) || // leave to outside
       (closestList && // leave to other el's nested list
-        !DnDState.ref.contains(e.relatedTarget) && // prevent leave to inside dragging el
-        listEl.value.$el !== closestList &&
+        !DnDState.ref!.contains(relatedTarget) && // prevent leave to inside dragging el
+        listEl.value!.$el !== closestList &&
         closestList.id !== DragListState.id && // there are chances dragleave el from nested one to parent relatedTarget was original list itself
         closestList.dataset.group === props.group))
   ) {
@@ -431,8 +422,7 @@ function dragleave(e: DragEvent) {
       array_move(
         props.list,
         draggingItem.currentIndex,
-        draggingItem.originalIndex,
-        false
+        draggingItem.originalIndex
       )
       draggingItem.currentIndex = draggingItem.originalIndex
     }
@@ -442,28 +432,12 @@ function dragleave(e: DragEvent) {
   }
 }
 
-function array_move(
-  arr: Array<any>,
-  oldIndex: number,
-  newIndex: number,
-  allowNegative = true
-) {
-  if (!allowNegative && (oldIndex < 0 || newIndex < 0)) return
-  console.log('move from', oldIndex, 'to', newIndex)
-  while (oldIndex < 0) {
-    oldIndex += arr.length
-  }
-  while (newIndex < 0) {
-    newIndex += arr.length
-  }
-  if (newIndex >= arr.length) {
-    let k = newIndex - arr.length + 1
-    while (k--) {
-      arr.push(undefined)
-    }
-  }
-  arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0])
-  return arr // for testing purposes
+function array_move(arr: Array<any>, index1: number, index2: number) {
+  if (index1 >= arr.length || index2 >= arr.length) return
+  const temp = arr[index1]
+  arr[index1] = arr[index2]
+  arr[index2] = temp
+  return arr
 }
 </script>
 
@@ -487,82 +461,18 @@ function array_move(
     @transitionend="setTransitionState(false)"
   >
     <div key="dummy-el" ref="dummyEl" />
-    <template v-if="showPlaceholderMove || showPlaceholderAdd">
-      <!-- We still add @dragstart when show placeholder because in production
+    <!-- We still add @dragstart when show placeholder because in production
       mode DragItem in placeholder may be reused after a success drop.
       So @dragstart may not be fired if we perform drag drop again. -->
-      <DragItem
-        v-for="(item, index) in itemsBeforePlaceholder"
-        :key="idAdapter(item)"
-        :data-transfer="{ index, value: item }"
-        :data-index="index"
-        :data-group="group"
-        :group="group"
-        :accept-data="acceptData"
-        :trigger-move="triggerMove"
-        :tag="childTag"
-        @dragstart="dragstart"
-        @dragentered="dragentered"
-      >
-        <template v-for="name of Object.keys($slots)" #[name]="scope">
-          <slot :name="name" v-bind="scope" :item="item" :index="index" />
-        </template>
-      </DragItem>
-      <!-- @slot use for swapping inside list -->
-      <DragItem
-        v-if="showPlaceholderMove"
-        ref="placeholderMoveEl"
-        key="drag-item--placeholder--move"
-        :tag="childTag"
-        class="placeholder-move"
-      >
-        <slot name="placeholder-move" :data="draggingItem.data" />
-      </DragItem>
-      <!-- @slot use for swapping outside list -->
-      <DragItem
-        v-if="showPlaceholderAdd"
-        ref="placeholderAddEl"
-        key="drag-item--placeholder--add"
-        :tag="childTag"
-        class="placeholder-add"
-      >
-        <slot name="placeholder-add" :data="draggingItem.data" />
-      </DragItem>
-      <!-- index + 1 for placeholder -->
-      <DragItem
-        v-for="(item, index) in itemsAfterPlaceholder"
-        :key="idAdapter(item)"
-        :data-transfer="{
-          index: index + 1 + itemsBeforePlaceholder.length,
-          value: item,
-        }"
-        :data-index="index + 1 + itemsBeforePlaceholder.length"
-        :data-group="group"
-        :group="group"
-        :accept-data="acceptData"
-        :trigger-move="triggerMove"
-        :tag="childTag"
-        @dragstart="dragstart"
-        @dragentered="dragentered"
-      >
-        <template v-for="name of Object.keys($slots)" #[name]="scope">
-          <slot
-            :name="name"
-            v-bind="scope"
-            :item="item"
-            :index="index + 1 + itemsBeforePlaceholder.length"
-          />
-        </template>
-      </DragItem>
-    </template>
     <DragItem
-      v-for="(item, index) in list"
-      v-else
+      v-for="(item, index) in itemsBeforePlaceholder"
       :key="idAdapter(item)"
       :data-transfer="{ index, value: item }"
+      :data-index="index"
+      :data-group="group"
       :group="group"
-      :trigger-move="triggerMove"
       :accept-data="acceptData"
+      :trigger-move="triggerMove"
       :handle="handle"
       :tag="childTag"
       @dragstart="dragstart"
@@ -570,6 +480,53 @@ function array_move(
     >
       <template v-for="name of Object.keys($slots)" #[name]="scope">
         <slot :name="name" v-bind="scope" :item="item" :index="index" />
+      </template>
+    </DragItem>
+    <!-- @slot use for swapping inside list -->
+    <DragItem
+      v-if="showPlaceholderMove"
+      ref="placeholderMoveEl"
+      key="drag-item--placeholder--move"
+      :tag="childTag"
+      class="placeholder-move"
+    >
+      <slot name="placeholder-move" :data="draggingItem.data" />
+    </DragItem>
+    <!-- @slot use for swapping outside list -->
+    <DragItem
+      v-if="showPlaceholderAdd"
+      ref="placeholderAddEl"
+      key="drag-item--placeholder--add"
+      :tag="childTag"
+      class="placeholder-add"
+    >
+      <slot name="placeholder-add" :data="draggingItem.data" />
+    </DragItem>
+    <!-- index + 1 for placeholder -->
+    <DragItem
+      v-for="(item, index) in itemsAfterPlaceholder"
+      :key="idAdapter(item)"
+      :data-transfer="{
+        index: index + 1 + itemsBeforePlaceholder.length,
+        value: item,
+      }"
+      :data-index="index + 1 + itemsBeforePlaceholder.length"
+      :data-group="group"
+      :group="group"
+      :accept-data="acceptData"
+      :trigger-move="triggerMove"
+      :handle="handle"
+      :tag="childTag"
+      @dragstart="dragstart"
+      @dragentered="dragentered"
+    >
+      <template v-for="name of Object.keys($slots)" #[name]="scope">
+        <slot
+          :name="name"
+          v-bind="scope"
+          :item="item"
+          :index="index + 1 + itemsBeforePlaceholder.length"
+        />
       </template>
     </DragItem>
   </transition-group>
