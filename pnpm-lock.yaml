@@ -5,8 +5,8 @@ specifiers:
   '@antfu/eslint-config': ^0.35.1
   '@commitlint/cli': ^17.4.2
   '@commitlint/config-conventional': ^17.4.2
-  '@histoire/plugin-nuxt': ^0.11.9
-  '@histoire/plugin-vue': ^0.11.9
+  '@histoire/plugin-nuxt': ^0.12.4
+  '@histoire/plugin-vue': ^0.12.4
   '@nuxt/test-utils-edge': 3.0.1-rc.0-27841867.1202b1a
   '@nuxtjs/tailwindcss': ^6.3.0
   '@types/lodash-es': ^4.17.6
@@ -40,8 +40,8 @@ devDependencies:
   '@antfu/eslint-config': 0.35.1_7uibuqfxkfaozanbtbziikiqje
   '@commitlint/cli': 17.4.2
   '@commitlint/config-conventional': 17.4.2
-  '@histoire/plugin-nuxt': 0.11.9_v7tchor32ypfzdcl5nahr33pfa
-  '@histoire/plugin-vue': 0.11.9_histoire@0.12.4
+  '@histoire/plugin-nuxt': 0.12.4_bq24uuzhme27kaigbgkewppgzi
+  '@histoire/plugin-vue': 0.12.4_histoire@0.12.4
   '@nuxt/test-utils-edge': 3.0.1-rc.0-27841867.1202b1a
   '@nuxtjs/tailwindcss': 6.3.0
   '@types/lodash-es': 4.17.6
@@ -510,7 +510,7 @@ packages:
       '@codemirror/view': 6.7.3
       '@lezer/common': 1.0.2
       '@lezer/highlight': 1.1.3
-      '@lezer/lr': 1.3.1
+      '@lezer/lr': 1.3.2
       style-mod: 4.0.0
     dev: true
 
@@ -1230,19 +1230,6 @@ packages:
       - vite
     dev: true
 
-  /@histoire/controls/0.11.9:
-    resolution: {integrity: sha512-CnUW7DfC5TLy7zKUqYKiDKqef7ookbAtTN4lPPtR2JvFpF6DOhfpwOcrRxePentxzB6jpnEBP7wCUci+0kR3eQ==}
-    dependencies:
-      '@codemirror/commands': 6.2.0
-      '@codemirror/lang-json': 6.0.1
-      '@codemirror/language': 6.4.0
-      '@codemirror/lint': 6.1.0
-      '@codemirror/state': 6.2.0
-      '@codemirror/theme-one-dark': 6.1.0
-      '@codemirror/view': 6.7.3
-      '@histoire/vendors': 0.11.9
-    dev: true
-
   /@histoire/controls/0.12.4:
     resolution: {integrity: sha512-p4qa11vXqhSMsnXW1p+n7ZqawoHVErLFL24yNnA9peMuXnR306/0cvdAnsLMQJdq5mDNayOY5Di69YKVQ0Shqg==}
     dependencies:
@@ -1256,14 +1243,14 @@ packages:
       '@histoire/vendors': 0.12.4
     dev: true
 
-  /@histoire/plugin-nuxt/0.11.9_v7tchor32ypfzdcl5nahr33pfa:
-    resolution: {integrity: sha512-MFiCMXc0I9S5y0Rx0WvitKhMI/gMz3WXmpuu8uvvpcqxettBolo7fI6nqEr8Oy8O8iIaz4c1i+uHgKljyWKL+g==}
+  /@histoire/plugin-nuxt/0.12.4_bq24uuzhme27kaigbgkewppgzi:
+    resolution: {integrity: sha512-4RCA/UzePlKKeoWPOKJM5Vf9B7JN0uDETwFpumX/j12qRC1aBZWdmDjNpXG4+PN1gV6NDUlXr/ssvts9gOVFZg==}
     peerDependencies:
-      '@histoire/plugin-vue': ^0.11.9
-      histoire: ^0.11.9
+      '@histoire/plugin-vue': ^0.12.4
+      histoire: ^0.12.4
       nuxt: ^3.0.0-rc.11
     dependencies:
-      '@histoire/plugin-vue': 0.11.9_histoire@0.12.4
+      '@histoire/plugin-vue': 0.12.4_histoire@0.12.4
       '@nuxt/kit': 3.1.1
       histoire: 0.12.4
       nuxt: 3.1.1_7uibuqfxkfaozanbtbziikiqje
@@ -1272,30 +1259,18 @@ packages:
       - supports-color
     dev: true
 
-  /@histoire/plugin-vue/0.11.9_histoire@0.12.4:
-    resolution: {integrity: sha512-7+872zuGg0iR8hhzgJnleMBVM5u2cnegsiBFljN/AAxCGtHpQbZTTOtl9dvsNxNDJUMbScnQsQTNw35KlNpmJA==}
+  /@histoire/plugin-vue/0.12.4_histoire@0.12.4:
+    resolution: {integrity: sha512-2xgBDwEHmiY053hPWy4rKnnMjntVcg8qfIYJGyITwFWSfNTq+6ez/HjWzUcHT6qwFMglUHq+rDlQb9gYZF+Edw==}
     peerDependencies:
-      histoire: ^0.11.9
+      histoire: ^0.12.4
       vue: ^3.2.31
     dependencies:
-      '@histoire/controls': 0.11.9
-      '@histoire/shared': 0.11.9
-      '@histoire/vendors': 0.11.9
+      '@histoire/controls': 0.12.4
+      '@histoire/shared': 0.12.4
+      '@histoire/vendors': 0.12.4
       histoire: 0.12.4
     transitivePeerDependencies:
       - vite
-    dev: true
-
-  /@histoire/shared/0.11.9:
-    resolution: {integrity: sha512-8pcWynhaUWWZTIilmu21TbqnB/z5uiwhyceEWknulbSG0mF4DQgchxQm3umgOzMwl1gw3556RwQyBdc9F7KsJA==}
-    peerDependencies:
-      vite: ^2.9.0 || ^3.0.0
-    dependencies:
-      '@types/fs-extra': 9.0.13
-      '@types/markdown-it': 12.2.3
-      chokidar: 3.5.3
-      pathe: 0.2.0
-      picocolors: 1.0.0
     dev: true
 
   /@histoire/shared/0.12.4:
@@ -1308,10 +1283,6 @@ packages:
       chokidar: 3.5.3
       pathe: 0.2.0
       picocolors: 1.0.0
-    dev: true
-
-  /@histoire/vendors/0.11.9:
-    resolution: {integrity: sha512-PnlPB1dAgLRcA+dSGPB/27zewREHCmO4nUCOQWu7rFNMO1wfB2EOn53hxkkBgzej3toa1u1knIRpHzQRSaUSUw==}
     dev: true
 
   /@histoire/vendors/0.12.4:
@@ -1421,11 +1392,11 @@ packages:
     resolution: {integrity: sha512-zbAuUY09RBzCoCA3lJ1+ypKw5WSNvLqGMtasdW6HvVOqZoCpPr8eWrsGnOVWGKGn8Rh21FnrKRVlJXrGAVUqRw==}
     dependencies:
       '@lezer/highlight': 1.1.3
-      '@lezer/lr': 1.3.1
+      '@lezer/lr': 1.3.2
     dev: true
 
-  /@lezer/lr/1.3.1:
-    resolution: {integrity: sha512-+GymJB/+3gThkk2zHwseaJTI5oa4AuOuj1I2LCslAVq1dFZLSX8SAe4ZlJq1TjezteDXtF/+d4qeWz9JvnrG9Q==}
+  /@lezer/lr/1.3.2:
+    resolution: {integrity: sha512-SDSvnHWMBH6WxoOt51AjuHOiQ0DMxxhfK5lNoyJXuv5POWz6MfXKGU9Fus9tK8NqrI1sSBNdKtG5cUXXZtGG5w==}
     dependencies:
       '@lezer/common': 1.0.2
     dev: true
@@ -1588,7 +1559,7 @@ packages:
       scule: 1.0.0
       semver: 7.3.8
       unctx: 2.1.1
-      unimport: 2.0.1
+      unimport: 2.1.0
       untyped: 1.2.2
     transitivePeerDependencies:
       - rollup
@@ -1615,7 +1586,7 @@ packages:
       scule: 1.0.0
       semver: 7.3.8
       unctx: 2.1.1
-      unimport: 2.0.1_rollup@3.12.0
+      unimport: 2.1.0_rollup@3.12.0
       untyped: 1.2.2
     transitivePeerDependencies:
       - rollup
@@ -1673,7 +1644,7 @@ packages:
       scule: 1.0.0
       std-env: 3.3.1
       ufo: 1.0.1
-      unimport: 2.0.1
+      unimport: 2.1.0
       untyped: 1.2.2
     transitivePeerDependencies:
       - rollup
@@ -1695,7 +1666,7 @@ packages:
       scule: 1.0.0
       std-env: 3.3.1
       ufo: 1.0.1
-      unimport: 2.0.1_rollup@3.12.0
+      unimport: 2.1.0_rollup@3.12.0
       untyped: 1.2.2
     transitivePeerDependencies:
       - rollup
@@ -2881,8 +2852,8 @@ packages:
     peerDependencies:
       postcss: ^8.1.0
     dependencies:
-      browserslist: 4.21.4
-      caniuse-lite: 1.0.30001449
+      browserslist: 4.21.5
+      caniuse-lite: 1.0.30001450
       fraction.js: 4.2.0
       normalize-range: 0.1.2
       picocolors: 1.0.0
@@ -2984,25 +2955,14 @@ packages:
       fill-range: 7.0.1
     dev: true
 
-  /browserslist/4.21.4:
-    resolution: {integrity: sha512-CBHJJdDmgjl3daYjN5Cp5kbTf1mUhZoS+beLklHIvkOWscs83YAhLlF3Wsh/lciQYAcbBJgTOD44VtG31ZM4Hw==}
-    engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
-    hasBin: true
-    dependencies:
-      caniuse-lite: 1.0.30001449
-      electron-to-chromium: 1.4.284
-      node-releases: 2.0.8
-      update-browserslist-db: 1.0.10_browserslist@4.21.4
-    dev: true
-
   /browserslist/4.21.5:
     resolution: {integrity: sha512-tUkiguQGW7S3IhB7N+c2MV/HZPSCPAAiYBZXLsBhFB/PCy6ZKKsZrmBayHV9fdGV/ARIfJ14NkxKzRDjvp7L6w==}
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001449
+      caniuse-lite: 1.0.30001450
       electron-to-chromium: 1.4.284
-      node-releases: 2.0.8
+      node-releases: 2.0.9
       update-browserslist-db: 1.0.10_browserslist@4.21.5
     dev: true
 
@@ -3119,13 +3079,13 @@ packages:
     resolution: {integrity: sha512-bsTwuIg/BZZK/vreVTYYbSWoe2F+71P7K5QGEX+pT250DZbfU1MQ5prOKpPR+LL6uWKK3KMwMCAS74QB3Um1uw==}
     dependencies:
       browserslist: 4.21.5
-      caniuse-lite: 1.0.30001449
+      caniuse-lite: 1.0.30001450
       lodash.memoize: 4.1.2
       lodash.uniq: 4.5.0
     dev: true
 
-  /caniuse-lite/1.0.30001449:
-    resolution: {integrity: sha512-CPB+UL9XMT/Av+pJxCKGhdx+yg1hzplvFJQlJ2n68PyQGMz9L/E2zCyLdOL8uasbouTUgnPl+y0tccI/se+BEw==}
+  /caniuse-lite/1.0.30001450:
+    resolution: {integrity: sha512-qMBmvmQmFXaSxexkjjfMvD5rnDL0+m+dUMZKoDYsGG8iZN29RuYh9eRoMvKsT6uMAWlyUUGDEQGJJYjzCIO9ew==}
     dev: true
 
   /capital-case/1.0.4:
@@ -7001,11 +6961,9 @@ packages:
       yallist: 4.0.0
     dev: true
 
-  /minipass/4.0.0:
-    resolution: {integrity: sha512-g2Uuh2jEKoht+zvO6vJqXmYpflPqzRBT+Th2h01DKh5z7wbY/AZ2gCQ78cP70YoHPyFdY30YBV5WxgLOEwOykw==}
+  /minipass/4.0.1:
+    resolution: {integrity: sha512-V9esFpNbK0arbN3fm2sxDKqMYgIp7XtVdE4Esj+PE4Qaaxdg1wIw48ITQIOn1sc8xXSmUviVL3cyjMqPlrVkiA==}
     engines: {node: '>=8'}
-    dependencies:
-      yallist: 4.0.0
     dev: true
 
   /minizlib/2.1.2:
@@ -7223,8 +7181,8 @@ packages:
     hasBin: true
     dev: true
 
-  /node-releases/2.0.8:
-    resolution: {integrity: sha512-dFSmB8fFHEH/s81Xi+Y/15DQY6VHW81nXRj86EMSL3lmuTmK1e+aT4wrFCkTbm+gSwkw4KpX+rT/pMM2c1mF+A==}
+  /node-releases/2.0.9:
+    resolution: {integrity: sha512-2xfmOrRkGogbTK9R6Leda0DGiXeY3p2NJpy4+gNCffdUvV6mdEJnaDEic1i3Ec2djAo8jWYoJMR5PB0MSMpxUA==}
     dev: true
 
   /nopt/5.0.0:
@@ -9250,7 +9208,7 @@ packages:
     dependencies:
       chownr: 2.0.0
       fs-minipass: 2.1.0
-      minipass: 4.0.0
+      minipass: 4.0.1
       minizlib: 2.1.2
       mkdirp: 1.0.4
       yallist: 4.0.0
@@ -9639,6 +9597,42 @@ packages:
       - rollup
     dev: true
 
+  /unimport/2.1.0:
+    resolution: {integrity: sha512-GDVIxATluUquX8EqelT6DtnmnZaXGID1jsO9IXwlnxb0OIEqKAxTOnTlnGmHbseoGTh+ZC9kcNDaO18HYQj9KA==}
+    dependencies:
+      '@rollup/pluginutils': 5.0.2
+      escape-string-regexp: 5.0.0
+      fast-glob: 3.2.12
+      local-pkg: 0.4.3
+      magic-string: 0.27.0
+      mlly: 1.1.0
+      pathe: 1.1.0
+      pkg-types: 1.0.1
+      scule: 1.0.0
+      strip-literal: 1.0.0
+      unplugin: 1.0.1
+    transitivePeerDependencies:
+      - rollup
+    dev: true
+
+  /unimport/2.1.0_rollup@3.12.0:
+    resolution: {integrity: sha512-GDVIxATluUquX8EqelT6DtnmnZaXGID1jsO9IXwlnxb0OIEqKAxTOnTlnGmHbseoGTh+ZC9kcNDaO18HYQj9KA==}
+    dependencies:
+      '@rollup/pluginutils': 5.0.2_rollup@3.12.0
+      escape-string-regexp: 5.0.0
+      fast-glob: 3.2.12
+      local-pkg: 0.4.3
+      magic-string: 0.27.0
+      mlly: 1.1.0
+      pathe: 1.1.0
+      pkg-types: 1.0.1
+      scule: 1.0.0
+      strip-literal: 1.0.0
+      unplugin: 1.0.1
+    transitivePeerDependencies:
+      - rollup
+    dev: true
+
   /unist-util-stringify-position/2.0.3:
     resolution: {integrity: sha512-3faScn5I+hy9VleOq/qNbAd6pAx7iH5jYBMS9I1HgQVijz/4mv5Bvw5iw1sC/90CODiKo81G/ps8AJrISn687g==}
     dependencies:
@@ -9728,17 +9722,6 @@ packages:
       scule: 1.0.0
     transitivePeerDependencies:
       - supports-color
-    dev: true
-
-  /update-browserslist-db/1.0.10_browserslist@4.21.4:
-    resolution: {integrity: sha512-OztqDenkfFkbSG+tRxBeAnCVPckDBcvibKd35yDONx6OU8N7sqgwc7rCbkJ/WcYtVRZ4ba68d6byhC21GFh7sQ==}
-    hasBin: true
-    peerDependencies:
-      browserslist: '>= 4.21.0'
-    dependencies:
-      browserslist: 4.21.4
-      escalade: 3.1.1
-      picocolors: 1.0.0
     dev: true
 
   /update-browserslist-db/1.0.10_browserslist@4.21.5:
