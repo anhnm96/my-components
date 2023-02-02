@@ -3,7 +3,7 @@ import VDragDrop from '../DragItem.vue'
 export default {
   components: { VDragDrop },
   setup() {
-    const docs = ref(['doc1', 'doc2'])
+    const doc = ref('doc1')
     const startPosition = reactive({})
     const totalDistance = reactive({ value: 0, lock: false })
     const idx = ref(0)
@@ -45,7 +45,7 @@ export default {
     function trashDrop() {
       hasTrash.value = true
     }
-    return { idx, docs, hasTrash, drag, dragend, trashDrop, trashRef }
+    return { idx, doc, hasTrash, drag, dragend, trashDrop, trashRef }
   },
 }
 </script>
@@ -60,10 +60,9 @@ export default {
       @dropped="trashDrop"
     />
     <VDragDrop
-      v-for="doc in docs"
-      :key="doc"
       :droppable="false"
       :data-transfer="{ value: doc }"
+      class="inline-block"
       @customdrag="drag"
       @dragend="dragend"
     >
@@ -80,7 +79,7 @@ export default {
   </div>
 </template>
 
-<style>
+<style scoped>
 .trash {
   background: url('./trash.png') top left no-repeat;
   height: 128px;

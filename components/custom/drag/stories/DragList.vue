@@ -1,22 +1,17 @@
-<script>
+<script lang="ts" setup>
 import DragList from '../DragList.vue'
-export default {
-  components: { DragList },
-  data() {
-    return {
-      list: [
-        'vue',
-        'ReactiveX',
-        'Drag and Drop',
-        'react',
-        'preact',
-        'golang',
-        'docker',
-      ],
-      items: [1, 2, 3, 4, 5, 6, 7],
-    }
-  },
-}
+
+const list = ref([
+  'vue',
+  'ReactiveX',
+  'Drag and Drop',
+  'react',
+  'preact',
+  'golang',
+  'docker',
+])
+
+const items = ref([1, 2, 3, 4, 5, 6, 7])
 </script>
 
 <template>
@@ -79,10 +74,10 @@ export default {
           </p>
         </template>
         <!-- <template #drag-image="{data, width, height}">
-            <p class="p-2 font-normal shadow border-2 border-green-300 rounded-md" :style="{width: width + 6 + 'px', height: height + 6 +'px'}">
-              :)) - {{ data.value }}
-            </p>
-          </template> -->
+                <p class="p-2 font-normal shadow border-2 border-green-300 rounded-md" :style="{width: width + 6 + 'px', height: height + 6 +'px'}">
+                  :)) - {{ data.value }}
+                </p>
+              </template> -->
       </DragList>
     </div>
     <div>

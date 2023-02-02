@@ -32,26 +32,28 @@ export default {
 
 <template>
   <div>
-    <VDragDrop
-      v-for="i in items"
-      :key="i"
-      group="DragImgOnDrop"
-      tag="span"
-      :droppable="false"
-      :data-transfer="{ value: i }"
-      @dragstart="dragstart"
-      @dragend="dragend"
-    >
-      <template #default="{ dragging }">
-        <span class="drag" :class="{ ghost: dragging }">{{ i }}</span>
-      </template>
-      <template #drag-image="{ data }">
-        <span v-show="!entering" class="drag">{{ data.value }}</span>
-        <span v-show="entering" class="drag" style="border-radius: 50%"
-          >DROP</span
-        >
-      </template>
-    </VDragDrop>
+    <div class="flex">
+      <VDragDrop
+        v-for="i in items"
+        :key="i"
+        group="DragImgOnDrop"
+        tag="span"
+        :droppable="false"
+        :data-transfer="{ value: i }"
+        @dragstart="dragstart"
+        @dragend="dragend"
+      >
+        <template #default="{ dragging }">
+          <span class="drag" :class="{ ghost: dragging }">{{ i }}</span>
+        </template>
+        <template #drag-image="{ data }">
+          <span v-show="!entering" class="drag">{{ data.value }}</span>
+          <span v-show="entering" class="drag" style="border-radius: 50%"
+            >DROP</span
+          >
+        </template>
+      </VDragDrop>
+    </div>
     <VDragDrop
       :draggable="false"
       group="DragImgOnDrop"
