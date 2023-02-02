@@ -471,7 +471,7 @@ function array_move(arr: Array<any>, index1: number, index2: number) {
       :accept-data="acceptData"
       :trigger-move="triggerMove"
       :handle="handle"
-      :tag="childTag"
+      :as="childTag"
       @dragstart="dragstart"
       @dragentered="dragentered"
     >
@@ -484,7 +484,7 @@ function array_move(arr: Array<any>, index1: number, index2: number) {
       v-if="showPlaceholderMove"
       ref="placeholderMoveEl"
       key="drag-item--placeholder--move"
-      :tag="childTag"
+      :as="childTag"
       class="placeholder-move"
     >
       <slot name="placeholder-move" :data="draggingItem.data" />
@@ -494,7 +494,7 @@ function array_move(arr: Array<any>, index1: number, index2: number) {
       v-if="showPlaceholderAdd"
       ref="placeholderAddEl"
       key="drag-item--placeholder--add"
-      :tag="childTag"
+      :as="childTag"
       class="placeholder-add"
     >
       <slot name="placeholder-add" :data="draggingItem.data" />
@@ -513,7 +513,7 @@ function array_move(arr: Array<any>, index1: number, index2: number) {
       :accept-data="acceptData"
       :trigger-move="triggerMove"
       :handle="handle"
-      :tag="childTag"
+      :as="childTag"
       @dragstart="dragstart"
       @dragentered="dragentered"
     >

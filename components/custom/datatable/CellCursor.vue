@@ -300,7 +300,12 @@ export default {
       :cell="cell"
       :on-input="onInput"
     >
-      <input type="text" class="cell-input" :value="cell" @input="onInput" />
+      <input
+        type="text"
+        class="cell-input"
+        :value="cell"
+        @input="onInput($event.target.value)"
+      />
     </slot>
   </div>
 </template>

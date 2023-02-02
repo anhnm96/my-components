@@ -26,7 +26,7 @@ useEventListener('scroll', throttle(onScroll, 20))
     <div
       class="mx-auto flex w-full max-w-3xl flex-1 overflow-hidden text-slate-600"
     >
-      <div class="z-0 flex-1 overflow-y-scroll">
+      <div class="z-0 flex-1">
         <header
           class="fixed inset-x-0 z-10 flex h-20 shadow backdrop-blur-md transition-all"
           :style="{
@@ -60,7 +60,7 @@ useEventListener('scroll', throttle(onScroll, 20))
           </div>
         </header>
 
-        <main class="px-8 pt-8">
+        <main class="px-8 pt-20">
           <slot />
         </main>
       </div>

@@ -24,7 +24,10 @@ export default {
     const handleAction = (e) => {
       console.log('action')
     }
-    return { handleAction, context }
+    function hide() {
+      context.show = false
+    }
+    return { handleAction, context, hide }
   },
 }
 </script>
@@ -32,7 +35,7 @@ export default {
 <template>
   <div
     v-if="context.show"
-    v-click-outside="() => (context.show = false)"
+    v-click-outside="hide"
     class="context__container bg-white shadow-sm"
     :style="{
       left: `${context.event.clientX}px`,

@@ -19,12 +19,8 @@ export default {
       default: false,
     },
   },
-  emits: ['update:items', 'on-input'],
+  emits: ['update:items', 'onInput'],
   setup(props, { emit }) {
-    const list = computed({
-      get: () => props.items,
-      set: (val) => emit('update:items', val),
-    })
     const tableRef = ref(null)
     const cursor = new Cursor(tableRef)
     provide('$cursor', cursor)
@@ -56,7 +52,19 @@ export default {
 
     // const itemsTracker = new Tracker(props.items)
     // const itemsTracker = useTrackRef(props.items)
-    const itemsTracker = useRefHistory(props.items, { deep: true })
+    const clonedItems = ref(props.items)
+    const list = computed({
+      get: () => props.items,
+      set: (val) => emit('update:items', val),
+    })
+    watch(
+      clonedItems,
+      (val) => {
+        emit('update:items', val)
+      },
+      { deep: true }
+    )
+    const itemsTracker = useRefHistory(clonedItems, { deep: true })
     const undo = (e) => {
       // return if ctrl.z on Mac or meta.z on other os
       if ((os === 'Mac OS' && e.ctrlKey) || (os !== 'Mac OS' && e.metaKey))
@@ -205,6 +213,7 @@ export default {
       paste,
       insertRow,
       insertColumn,
+      clonedItems,
     }
   },
 }
@@ -253,7 +262,7 @@ const dumpItem = {
       </tr>
     </thead>
     <DragList
-      v-model:list="list"
+      v-model:list="clonedItems"
       tag="tbody"
       child-tag="tr"
       handle=".datatable__index"
@@ -304,7 +313,7 @@ const dumpItem = {
         <slot :name="name" v-bind="scope" />
       </template>
     </CellCursor>
-    <ContextMenu :actions="actions">
+    <!-- <ContextMenu :actions="actions">
       <template #default="scope">
         <slot name="context-menu" v-bind="scope" :cursor="cursor">
           <button
@@ -347,7 +356,7 @@ const dumpItem = {
           </button>
         </slot>
       </template>
-    </ContextMenu>
+    </ContextMenu> -->
   </table>
 </template>
 

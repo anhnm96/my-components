@@ -62,38 +62,40 @@ const dumpItem = {
 </script>
 
 <template>
-  <div class="min-h-screen">
-    <!-- @keydown.stop to prevent storybook behavior in demo -->
-    <DataTable
-      v-model:items="items"
-      :columns="columns"
-      @keydown.stop
-      @on-input="onTableInput"
-    >
-      <template #cell-input-origin="{ cell, onInput }">
-        <Autocomplete
-          :input="cell"
-          :options="countries"
-          :use-filter="true"
-          @update:input="onInput"
-        />
-      </template>
-      <!-- <template #context-menu="{ cursor, context }">
-        <p
-          class="p-2 hover:bg-gray-400"
-          @click="insertRow(cursor.rowIndex.value, context)"
-        >
-          Add row above
-        </p>
-        <p
-          class="p-2 hover:bg-gray-400"
-          @click="insertRow(cursor.rowIndex.value + 1, context)"
-        >
-          Add row below
-        </p>
-      </template> -->
-    </DataTable>
-  </div>
+  <Story title="Datatable">
+    <div class="min-h-screen bg-white">
+      <!-- @keydown.stop to prevent storybook behavior in demo -->
+      <DataTable
+        v-model:items="items"
+        :columns="columns"
+        @keydown.stop
+        @on-input="onTableInput"
+      >
+        <template #cell-input-origin="{ cell, onInput }">
+          <Autocomplete
+            :input="cell"
+            :options="countries"
+            :use-filter="true"
+            @update:input="onInput"
+          />
+        </template>
+        <!-- <template #context-menu="{ cursor, context }">
+          <p
+            class="p-2 hover:bg-gray-400"
+            @click="insertRow(cursor.rowIndex.value, context)"
+          >
+            Add row above
+          </p>
+          <p
+            class="p-2 hover:bg-gray-400"
+            @click="insertRow(cursor.rowIndex.value + 1, context)"
+          >
+            Add row below
+          </p>
+        </template> -->
+      </DataTable>
+    </div>
+  </Story>
 </template>
 
 <style scoped>

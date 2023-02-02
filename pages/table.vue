@@ -4,11 +4,11 @@ import {
   intersection,
   isEmpty,
   isEqual,
-  isString,
   omitBy,
   pick,
 } from 'lodash-es'
 import { changeTracker } from '@/composables/useTracker'
+import TableStory from '@/components/custom/datatable/DataTable.story.vue'
 
 interface Item {
   id: number
@@ -112,9 +112,11 @@ function update(index = 0) {
       }
       // Only get changed field in item,
       // also ignored special fields starting with $
+      console.log('changed item', changeTracker.changed(item))
       const changedItem = omitBy(changeTracker.changed(item), (value, key) =>
         key.startsWith('$')
       )
+      console.log('changed item2', changedItem)
 
       if (isEmpty(changedItem)) {
         continue
@@ -167,28 +169,30 @@ function toItemForCreating(item: Item) {
 
 <template>
   <div>
-    <div class="space-x-2">
-      <button class="btn" @click="changedProps">Change Props</button>
-      <button class="btn" @click="changed">Changed</button>
-      <button class="btn" @click="getOriginal">Get Original</button>
-      <button class="btn" @click="update()">Update</button>
-    </div>
-    <table>
-      <tr>
-        <th v-for="header in headers" :key="header">{{ header }}</th>
-      </tr>
-      <tr v-for="item in items" :key="item.id">
-        <td v-for="i in headers.length" :key="i">
-          <!-- {{ item[headers[i - 1]] }} -->
-          <input
-            v-model="item[headers[Number(i) - 1]]"
-            class="border"
-            type="text"
-          />
-        </td>
-      </tr>
-    </table>
-    {{ detail }}
+    <TableStory class="bg-white" />
+    <!-- <div>
+      <div class="space-x-2">
+        <button class="btn" @click="changedProps">Change Props</button>
+        <button class="btn" @click="changed">Changed</button>
+        <button class="btn" @click="getOriginal">Get Original</button>
+        <button class="btn" @click="update()">Update</button>
+      </div>
+      <table>
+        <tr>
+          <th v-for="header in headers" :key="header">{{ header }}</th>
+        </tr>
+        <tr v-for="item in items" :key="item.id">
+          <td v-for="i in headers.length" :key="i">
+            <input
+              v-model="item[headers[Number(i) - 1]]"
+              class="border"
+              type="text"
+            />
+          </td>
+        </tr>
+      </table>
+      {{ detail }}
+    </div> -->
   </div>
 </template>
 
