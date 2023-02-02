@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { throttle } from 'lodash-es'
 import type { DefineComponent } from 'vue'
 import { DnDState, DragListState } from './DnDStore'
 import DragItem from './DragItem.vue'
@@ -54,32 +55,28 @@ const placeholderIndex = ref(props.list.length)
 const enteringRef = ref<HTMLElement | null>()
 const hasPlaceholderMoveSlot = Object.keys(slots).includes('placeholder-move')
 const hasPlaceholderAddSlot = Object.keys(slots).includes('placeholder-add')
-const itemsBeforePlaceholder = computed(() => {
-  return props.list.slice(0, placeholderIndex.value)
-})
-const itemsAfterPlaceholder = computed(() => {
-  return props.list.slice(placeholderIndex.value)
-})
+
 const showPlaceholderMove = computed(() => {
-  const res =
+  return (
     hasPlaceholderMoveSlot &&
     draggingItem.inProgress &&
     listBeingDraggedOver.value
-  console.log(
-    'showPlaceholderMove:',
-    res,
-    'dragging:',
-    draggingItem.inProgress,
-    props.list[0]
   )
-  return res
 })
 const showPlaceholderAdd = computed(() => {
-  const res =
+  return (
     hasPlaceholderAddSlot &&
     !draggingItem.inProgress &&
     listBeingDraggedOver.value
-  return res
+  )
+})
+const itemsBeforePlaceholder = computed(() => {
+  if (!showPlaceholderMove.value && !showPlaceholderAdd.value) return props.list
+  return props.list.slice(0, placeholderIndex.value)
+})
+const itemsAfterPlaceholder = computed(() => {
+  if (!showPlaceholderMove.value && !showPlaceholderAdd.value) return []
+  return props.list.slice(placeholderIndex.value)
 })
 // list events
 const id = (Date.now() + Math.random()).toString(36)
@@ -91,17 +88,17 @@ const dragstart = (e: DragEvent) => {
   // init state
   Object.assign(draggingItem, {
     inProgress: true,
-    originalIndex: payload.index,
-    currentIndex: payload.index,
+    originalIndex: Number(payload.index),
+    currentIndex: Number(payload.index),
     data: payload,
   })
   DragListState.id = id
-  placeholderIndex.value = payload.index
+  placeholderIndex.value = Number(payload.index)
   console.log('dragstart', `placeholderIndex: ${payload.index}`, props.list[0])
 }
 
 const dummyEl = ref<HTMLElement>()
-function dragover(e: DragEvent) {
+const dragover = throttle((e: DragEvent) => {
   if (props.group !== DnDState.group || !dummyEl.value) return
   // get closest drag element
   const target = e.target as Element
@@ -179,7 +176,7 @@ function dragover(e: DragEvent) {
       }
     }
   }
-}
+}, 10)
 function dragenter(e: DragEvent) {
   // init list with 0 item
   if (
@@ -188,7 +185,6 @@ function dragenter(e: DragEvent) {
     !DnDState.ref?.contains(e.target as HTMLElement) &&
     DnDState.group === props.group
   ) {
-    console.log('list dragenter')
     placeholderIndex.value = 0
     listBeingDraggedOver.value = true
     draggingItem.data = DnDState.data
@@ -225,6 +221,7 @@ function dragentered({ detail: payload }: any) {
   listBeingDraggedOver.value = true
   // move with placeholder
   if (showPlaceholderMove.value || showPlaceholderAdd.value) {
+    if (!enteringRef.value) return
     // enter from placeholder
     if (
       enteringRef.value === placeholderMoveEl.value?.$el ||
