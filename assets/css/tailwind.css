@@ -162,6 +162,70 @@
     display: inline-flex;
     align-items: center;
   }
+
+  /* checkbox */
+  [type='checkbox'] {
+    --hover-background: hsl(0deg 0% 50% / 30%);
+    --checkmark-svg: url('https://api.iconify.design/feather:check.svg');
+    --indeterminate-svg: url('https://api.iconify.design/feather:minus.svg');
+
+    display: inline-block;
+    height: 1rem;
+    width: 1rem;
+    position: relative;
+    cursor: pointer;
+    appearance: none;
+    color: currentColor;
+    border: 1px solid currentColor;
+    border-radius: 0.25rem;
+
+    &:disabled {
+      cursor: not-allowed;
+      /* system color for disabled elements */
+      color: GrayText;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -0.75rem;
+      border-radius: 50%;
+      transition: background-color 200ms;
+
+      /* increase tap target size for touch devices */
+      @media (pointer: coarse) {
+        inset: -1.25rem;
+        --hover-background: transparent;
+      }
+    }
+
+    &:enabled:where(:hover, :focus-visible) {
+      outline-offset: 1px;
+
+      &::before {
+        background-color: var(--hover-background);
+      }
+    }
+
+    &:checked::after,
+    &:indeterminate::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      mask-repeat: no-repeat;
+      mask-position: center;
+      mask-size: 1rem;
+      background-color: currentColor;
+    }
+
+    &:checked::after {
+      mask-image: var(--checkmark-svg);
+    }
+
+    &:indeterminate::after {
+      mask-image: var(--indeterminate-svg);
+    }
+  }
 }
 
 /* animate */
