@@ -1,5 +1,6 @@
 <script>
 import VDragDrop from '../DragItem.vue'
+import trash from './assets/trash.png'
 export default {
   components: { VDragDrop },
   setup() {
@@ -45,7 +46,7 @@ export default {
     function trashDrop() {
       hasTrash.value = true
     }
-    return { idx, doc, hasTrash, drag, dragend, trashDrop, trashRef }
+    return { idx, doc, hasTrash, drag, dragend, trashDrop, trashRef, trash }
   },
 }
 </script>
@@ -57,6 +58,7 @@ export default {
       hover-class="hovering"
       :class="{ full: hasTrash }"
       class="trash"
+      :style="{ backgroundImage: `url(${trash})` }"
       @dropped="trashDrop"
     />
     <VDragDrop
@@ -66,14 +68,38 @@ export default {
       @customdrag="drag"
       @dragend="dragend"
     >
-      <img :draggable="false" class="document" src="./document.png" />
+      <img :draggable="false" class="document" src="./assets/document.png" />
       <template #drag-image>
-        <img v-show="idx === 0" class="drag-image" src=".//smiley01.png" />
-        <img v-show="idx === 1" class="drag-image" src=".//smiley02.png" />
-        <img v-show="idx === 2" class="drag-image" src=".//smiley03.png" />
-        <img v-show="idx === 3" class="drag-image" src=".//smiley04.png" />
-        <img v-show="idx === 4" class="drag-image" src=".//smiley05.png" />
-        <img v-show="idx === 5" class="drag-image" src=".//smiley06.png" />
+        <img
+          v-show="idx === 0"
+          class="drag-image"
+          src="./assets/smiley01.png"
+        />
+        <img
+          v-show="idx === 1"
+          class="drag-image"
+          src="./assets/smiley02.png"
+        />
+        <img
+          v-show="idx === 2"
+          class="drag-image"
+          src="./assets/smiley03.png"
+        />
+        <img
+          v-show="idx === 3"
+          class="drag-image"
+          src="./assets/smiley04.png"
+        />
+        <img
+          v-show="idx === 4"
+          class="drag-image"
+          src="./assets/smiley05.png"
+        />
+        <img
+          v-show="idx === 5"
+          class="drag-image"
+          src="./assets/smiley06.png"
+        />
       </template>
     </VDragDrop>
   </div>
@@ -81,7 +107,8 @@ export default {
 
 <style scoped>
 .trash {
-  background: url('./trash.png') top left no-repeat;
+  background-position: top left;
+  background-repeat: no-repeat;
   height: 128px;
   width: 128px;
   margin-top: 90px;
@@ -90,7 +117,7 @@ export default {
 }
 
 .trash.full {
-  background: url('./trash.png') top right no-repeat;
+  background-position: top right;
 }
 .document {
   margin-top: 10px;
