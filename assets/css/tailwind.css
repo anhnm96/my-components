@@ -165,6 +165,7 @@
 
   /* checkbox */
   [type='checkbox'] {
+    --background: var(--info);
     --hover-background: hsl(0deg 0% 50% / 30%);
     --checkmark-svg: url('https://api.iconify.design/feather:check.svg');
     --indeterminate-svg: url('https://api.iconify.design/feather:minus.svg');
@@ -177,7 +178,8 @@
     appearance: none;
     color: currentColor;
     border: 1px solid currentColor;
-    border-radius: 0.25rem;
+    border-radius: 0.125rem;
+    outline: none;
 
     &:disabled {
       cursor: not-allowed;
@@ -200,11 +202,15 @@
     }
 
     &:enabled:where(:hover, :focus-visible) {
-      outline-offset: 1px;
-
       &::before {
         background-color: var(--hover-background);
       }
+    }
+
+    &:checked,
+    &:indeterminate {
+      background-color: var(--background);
+      border-color: var(--background);
     }
 
     &:checked::after,
