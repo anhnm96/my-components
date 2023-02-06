@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils'
-import CheckBox from './index.vue'
+import CheckBox from './Checkbox.vue'
 
 let wrapper: any
 
