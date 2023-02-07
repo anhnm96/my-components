@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import GlowingBackground from '~~/components/tailwind/backgrounds/GlowingBackground.vue'
 import ThreeDCard from '~~/components/tailwind/cards/3d-card.vue'
-import LineClamp from '~~/components/tailwind/cards/LineClamp.vue'
 import Bubble from '~~/components/tailwind/cards/Bubble.vue'
 import AutocompleteStory from '~~/components/custom/autocomplete/Autocomplete.story.vue'
 import DropzoneStory from '~~/components/custom/dropzone/Dropzone.story.vue'
+import ModalStory from '~~/components/custom/modal/Modal.story.vue'
 const loading = ref(false)
 function click() {
   loading.value = true
@@ -12,10 +12,6 @@ function click() {
     loading.value = false
   }, 1000)
 }
-
-const c1 = ref(false)
-const c2 = ref('Yes')
-const checkboxGroup = ref(['Silver'])
 
 const colors = ['red', 'green', 'blue', 'gray']
 
@@ -52,10 +48,66 @@ const items = [
 
 const switchState = ref(false)
 const text = ref('')
+const names = ref([])
+const customCheckboxValue = ref('Yes')
 </script>
 
 <template>
   <div class="pt-20">
+    <div class="space-x-2 text-white">
+      <div class="mb-4 flex gap-4">
+        <input type="radio" name="group" style="--c: var(--danger)" />
+        <input type="radio" name="group" style="--c: var(--success)" />
+        <input type="radio" disabled />
+      </div>
+      <div>
+        <p>Array</p>
+        <div class="flex gap-2">
+          <BaseCheckbox
+            v-model="names"
+            value="jack"
+            root-class="flex space-x-2"
+          >
+            jack
+          </BaseCheckbox>
+          <BaseCheckbox
+            v-model="names"
+            value="john"
+            root-class="flex space-x-2"
+            style="--background: var(--purple-500)"
+          >
+            john
+          </BaseCheckbox>
+          <BaseCheckbox
+            v-model="names"
+            value="mike"
+            root-class="flex space-x-2"
+            style="--background: var(--green-500)"
+          >
+            mike
+          </BaseCheckbox>
+          <span>{{ names }}</span>
+        </div>
+        <div class="space-x-4">
+          <BaseCheckbox indeterminate>Indeterminate</BaseCheckbox>
+          <BaseCheckbox disabled>Disabled</BaseCheckbox>
+          <BaseCheckbox :model-value="true">Default true</BaseCheckbox>
+          <BaseCheckbox
+            v-model="customCheckboxValue"
+            true-value="Yes"
+            false-value="No"
+            style="--background: var(--teal-500)"
+          >
+            Custom value: {{ customCheckboxValue }}
+          </BaseCheckbox>
+          <label>
+            <input type="checkbox" />
+            <span>Test</span>
+          </label>
+        </div>
+      </div>
+      <!-- <input v-model="names" type="checkbox" value="mike" class="text-white" /> -->
+    </div>
     <div>
       <h1 class="text-red-400">Hello world</h1>
       <BaseButton
@@ -112,28 +164,11 @@ const text = ref('')
       <BaseBadge icon>Badge</BaseBadge>
       <BaseBadge class="badge-success" icon>Badge</BaseBadge>
     </div>
+    <ModalStory />
     <AutocompleteStory />
     <DropzoneStory />
     <Bubble />
     <Steps />
-    <div class="space-x-5">
-      <BaseCheckbox :model-value="true">Basic</BaseCheckbox>
-      <BaseCheckbox indeterminate>Indeterminate</BaseCheckbox>
-      <BaseCheckbox disabled>Disabled</BaseCheckbox>
-      <BaseCheckbox v-model="c1">{{ c1 }}</BaseCheckbox>
-      <BaseCheckbox v-model="c2" true-value="Yes" false-value="No">
-        {{ c2 }}
-      </BaseCheckbox>
-      <div>
-        <BaseCheckbox v-model="checkboxGroup" value="Silver">
-          Silver
-        </BaseCheckbox>
-        <BaseCheckbox v-model="checkboxGroup" value="Flint">
-          Flint
-        </BaseCheckbox>
-        {{ checkboxGroup }}
-      </div>
-    </div>
     <div>
       <label><input type="radio" name="e" /> First</label>
       <label><input type="radio" name="e" /> Second</label>
@@ -252,7 +287,6 @@ const text = ref('')
     </div>
     <GlowingBackground />
     <ThreeDCard />
-    <LineClamp />
   </div>
 </template>
 

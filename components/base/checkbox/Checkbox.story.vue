@@ -109,11 +109,14 @@ const columns = [
     width: 'w-[129px]',
   },
 ]
+
+const names = ref([])
+const customCheckboxValue = ref('Yes')
 </script>
 
 <template>
   <Story title="Checkbox">
-    <Variant title="Simple demo">
+    <Variant title="Plain Input">
       <div class="space-x-4 px-4 py-2 text-white">
         <label class="space-x-2">
           <input type="checkbox" indeterminate />
@@ -127,6 +130,49 @@ const columns = [
           <input type="checkbox" style="--background: var(--success)" />
           <span>Normal</span>
         </label>
+      </div>
+    </Variant>
+    <Variant title="Base Checbox">
+      <div class="p-4 text-white">
+        <div class="flex gap-2">
+          <BaseCheckbox
+            v-model="names"
+            value="jack"
+            root-class="flex space-x-2"
+          >
+            jack
+          </BaseCheckbox>
+          <BaseCheckbox
+            v-model="names"
+            value="john"
+            root-class="flex space-x-2"
+            style="--background: var(--purple-500)"
+          >
+            john
+          </BaseCheckbox>
+          <BaseCheckbox
+            v-model="names"
+            value="mike"
+            root-class="flex space-x-2"
+            style="--background: var(--green-500)"
+          >
+            mike
+          </BaseCheckbox>
+          <span>{{ names }}</span>
+        </div>
+        <div class="space-x-4">
+          <BaseCheckbox indeterminate>Indeterminate</BaseCheckbox>
+          <BaseCheckbox disabled>Disabled</BaseCheckbox>
+          <BaseCheckbox :model-value="true">Default true</BaseCheckbox>
+          <BaseCheckbox
+            v-model="customCheckboxValue"
+            true-value="Yes"
+            false-value="No"
+            style="--background: var(--teal-500)"
+          >
+            Custom value: {{ customCheckboxValue }}
+          </BaseCheckbox>
+        </div>
       </div>
     </Variant>
     <Variant title="Table Selection">
