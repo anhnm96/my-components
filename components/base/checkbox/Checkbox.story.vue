@@ -118,6 +118,11 @@ const customCheckboxValue = ref('Yes')
   <Story title="Checkbox">
     <Variant title="Plain Input">
       <div class="space-x-4 px-4 py-2 text-white">
+        <div class="mb-4 flex gap-4">
+          <input type="radio" name="group" style="--c: var(--danger)" />
+          <input type="radio" name="group" style="--c: var(--success)" />
+          <input type="radio" disabled />
+        </div>
         <label class="space-x-2">
           <input type="checkbox" indeterminate />
           <span>Indeterminate</span>
