@@ -1,36 +1,19 @@
 <script lang="ts" setup>
 const props = withDefaults(
   defineProps<{
-    rootClasses?: string
-    modelValue?: string | number | boolean | any[]
+    rootClass?: string
+    modelValue?: string | number | boolean | any[] | Set<any>
   }>(),
   {
+    rootClass: 'inline-flex space-x-2',
     modelValue: false,
   }
 )
 
 const emit = defineEmits(['update:modelValue'])
+const value = useInternalValue(props, 'modelValue', emit)
 
-const labelRef = ref()
 const inputRef = ref()
-
-const _value = ref(props.modelValue)
-const computedValue = computed({
-  get() {
-    return _value.value
-  },
-  set(value: any) {
-    _value.value = value
-    emit('update:modelValue', _value.value)
-  },
-})
-watch(
-  () => props.modelValue,
-  (newVal) => {
-    _value.value = newVal
-  }
-)
-
 function focus() {
   // MacOS FireFox and Safari do not focus when clicked
   inputRef.value.focus()
@@ -44,19 +27,8 @@ export default {
 </script>
 
 <template>
-  <label
-    ref="labelRef"
-    :class="rootClasses"
-    @click.stop="focus"
-    @keydown.prevent.enter="labelRef.click()"
-  >
-    <input
-      v-bind="$attrs"
-      ref="inputRef"
-      v-model="computedValue"
-      type="checkbox"
-      @click.stop
-    />
-    <slot />
+  <label :class="rootClass" @click.stop="focus">
+    <input v-bind="$attrs" ref="inputRef" v-model="value" type="checkbox" />
+    <span v-if="$slots.default"><slot /></span>
   </label>
 </template>
