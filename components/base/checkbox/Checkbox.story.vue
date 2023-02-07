@@ -186,7 +186,7 @@ const customCheckboxValue = ref('Yes')
           <thead>
             <tr>
               <th class="pl-6 pr-4">
-                <input
+                <BaseCheckbox
                   class="inline-block h-[18px] w-[18px]"
                   type="checkbox"
                   :indeterminate="hasSelected && !isAllChecked"
