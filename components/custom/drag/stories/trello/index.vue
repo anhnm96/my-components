@@ -67,8 +67,7 @@ const data = [
         type: 0,
         date: 'Mar 17 2020',
         name: 'Donaldson Leonard',
-        avatar:
-          'https://identicon-api.herokuapp.com/Donaldson Leonard/100?format=png',
+        avatar: 'https://robohash.org/Donaldson Leonard/100?format=png',
       },
       {
         _id: '5f2685cd031d99f23295846d',
@@ -79,8 +78,7 @@ const data = [
         type: 1,
         date: 'Jun 15 2020',
         name: 'Wendy Sloan',
-        avatar:
-          'https://identicon-api.herokuapp.com/Wendy Sloan/100?format=png',
+        avatar: 'https://robohash.org/Wendy Sloan/100?format=png',
       },
       {
         _id: '5f2685cde8f010b912322bde',
@@ -91,8 +89,7 @@ const data = [
         type: 1,
         date: 'Jul 21 2020',
         name: 'Doreen Arnold',
-        avatar:
-          'https://identicon-api.herokuapp.com/Doreen Arnold/100?format=png',
+        avatar: 'https://robohash.org/Doreen Arnold/100?format=png',
       },
       {
         _id: '5f2685cd662bff62eadb30c7',
@@ -103,8 +100,7 @@ const data = [
         type: 0,
         date: 'Jun 08 2020',
         name: 'Hartman Sheppard',
-        avatar:
-          'https://identicon-api.herokuapp.com/Hartman Sheppard/100?format=png',
+        avatar: 'https://robohash.org/Hartman Sheppard/100?format=png',
       },
       {
         _id: '5f2685cdc9f13a0f2bb43467',
@@ -115,8 +111,7 @@ const data = [
         type: 0,
         date: 'Jul 22 2020',
         name: 'Pearson Love',
-        avatar:
-          'https://identicon-api.herokuapp.com/Pearson Love/100?format=png',
+        avatar: 'https://robohash.org/Pearson Love/100?format=png',
       },
       {
         _id: '5f2685cdcad846a880911167',
@@ -127,8 +122,7 @@ const data = [
         type: 2,
         date: 'Jun 23 2020',
         name: 'Dickerson Sanders',
-        avatar:
-          'https://identicon-api.herokuapp.com/Dickerson Sanders/100?format=png',
+        avatar: 'https://robohash.org/Dickerson Sanders/100?format=png',
       },
       {
         _id: '5f2685cd43bf38ebade6fba8',
@@ -138,8 +132,7 @@ const data = [
         type: 2,
         date: 'May 24 2020',
         name: 'Aisha Christensen',
-        avatar:
-          'https://identicon-api.herokuapp.com/Aisha Christensen/100?format=png',
+        avatar: 'https://robohash.org/Aisha Christensen/100?format=png',
       },
       {
         _id: '5f2685cd270e626a874e784f',
@@ -150,8 +143,7 @@ const data = [
         type: 0,
         date: 'Mar 06 2020',
         name: 'Hinton Norton',
-        avatar:
-          'https://identicon-api.herokuapp.com/Hinton Norton/100?format=png',
+        avatar: 'https://robohash.org/Hinton Norton/100?format=png',
       },
     ],
   },
@@ -166,8 +158,7 @@ const data = [
         type: 0,
         date: 'Mar 17 2020',
         name: 'Donaldson Leonard',
-        avatar:
-          'https://identicon-api.herokuapp.com/Donaldson Leonard/100?format=png',
+        avatar: 'https://robohash.org/Donaldson Leonard/100?format=png',
       },
       {
         _id: '5f2685cd031d99f23295846d',
@@ -178,8 +169,7 @@ const data = [
         type: 1,
         date: 'Jun 15 2020',
         name: 'Wendy Sloan',
-        avatar:
-          'https://identicon-api.herokuapp.com/Wendy Sloan/100?format=png',
+        avatar: 'https://robohash.org/Wendy Sloan/100?format=png',
       },
       {
         _id: '5f2685cde8f010b912322bde',
@@ -190,8 +180,7 @@ const data = [
         type: 1,
         date: 'Jul 21 2020',
         name: 'Doreen Arnold',
-        avatar:
-          'https://identicon-api.herokuapp.com/Doreen Arnold/100?format=png',
+        avatar: 'https://robohash.org/Doreen Arnold/100?format=png',
       },
       {
         _id: '5f2685cd662bff62eadb30c7',
@@ -202,8 +191,7 @@ const data = [
         type: 0,
         date: 'Jun 08 2020',
         name: 'Hartman Sheppard',
-        avatar:
-          'https://identicon-api.herokuapp.com/Hartman Sheppard/100?format=png',
+        avatar: 'https://robohash.org/Hartman Sheppard/100?format=png',
       },
       {
         _id: '5f2685cdc9f13a0f2bb43467',
@@ -214,8 +202,7 @@ const data = [
         type: 0,
         date: 'Jul 22 2020',
         name: 'Pearson Love',
-        avatar:
-          'https://identicon-api.herokuapp.com/Pearson Love/100?format=png',
+        avatar: 'https://robohash.org/Pearson Love/100?format=png',
       },
       {
         _id: '5f2685cdcad846a880911167',
@@ -226,8 +213,7 @@ const data = [
         type: 2,
         date: 'Jun 23 2020',
         name: 'Dickerson Sanders',
-        avatar:
-          'https://identicon-api.herokuapp.com/Dickerson Sanders/100?format=png',
+        avatar: 'https://robohash.org/Dickerson Sanders/100?format=png',
       },
       {
         _id: '5f2685cd43bf38ebade6fba8',
@@ -237,8 +223,7 @@ const data = [
         type: 2,
         date: 'May 24 2020',
         name: 'Aisha Christensen',
-        avatar:
-          'https://identicon-api.herokuapp.com/Aisha Christensen/100?format=png',
+        avatar: 'https://robohash.org/Aisha Christensen/100?format=png',
       },
       {
         _id: '5f2685cd270e626a874e784f',
@@ -249,8 +234,7 @@ const data = [
         type: 0,
         date: 'Mar 06 2020',
         name: 'Hinton Norton',
-        avatar:
-          'https://identicon-api.herokuapp.com/Hinton Norton/100?format=png',
+        avatar: 'https://robohash.org/Hinton Norton/100?format=png',
       },
     ],
   },
@@ -265,8 +249,7 @@ const data = [
         type: 0,
         date: 'Mar 17 2020',
         name: 'Donaldson Leonard',
-        avatar:
-          'https://identicon-api.herokuapp.com/Donaldson Leonard/100?format=png',
+        avatar: 'https://robohash.org/Donaldson Leonard/100?format=png',
       },
       {
         _id: '5f2685cd031d99f23295846d',
@@ -277,8 +260,7 @@ const data = [
         type: 1,
         date: 'Jun 15 2020',
         name: 'Wendy Sloan',
-        avatar:
-          'https://identicon-api.herokuapp.com/Wendy Sloan/100?format=png',
+        avatar: 'https://robohash.org/Wendy Sloan/100?format=png',
       },
       {
         _id: '5f2685cde8f010b912322bde',
@@ -289,8 +271,7 @@ const data = [
         type: 1,
         date: 'Jul 21 2020',
         name: 'Doreen Arnold',
-        avatar:
-          'https://identicon-api.herokuapp.com/Doreen Arnold/100?format=png',
+        avatar: 'https://robohash.org/Doreen Arnold/100?format=png',
       },
       {
         _id: '5f2685cd662bff62eadb30c7',
@@ -301,8 +282,7 @@ const data = [
         type: 0,
         date: 'Jun 08 2020',
         name: 'Hartman Sheppard',
-        avatar:
-          'https://identicon-api.herokuapp.com/Hartman Sheppard/100?format=png',
+        avatar: 'https://robohash.org/Hartman Sheppard/100?format=png',
       },
       {
         _id: '5f2685cdc9f13a0f2bb43467',
@@ -313,8 +293,7 @@ const data = [
         type: 0,
         date: 'Jul 22 2020',
         name: 'Pearson Love',
-        avatar:
-          'https://identicon-api.herokuapp.com/Pearson Love/100?format=png',
+        avatar: 'https://robohash.org/Pearson Love/100?format=png',
       },
       {
         _id: '5f2685cdcad846a880911167',
@@ -325,8 +304,7 @@ const data = [
         type: 2,
         date: 'Jun 23 2020',
         name: 'Dickerson Sanders',
-        avatar:
-          'https://identicon-api.herokuapp.com/Dickerson Sanders/100?format=png',
+        avatar: 'https://robohash.org/Dickerson Sanders/100?format=png',
       },
       {
         _id: '5f2685cd43bf38ebade6fba8',
@@ -336,8 +314,7 @@ const data = [
         type: 2,
         date: 'May 24 2020',
         name: 'Aisha Christensen',
-        avatar:
-          'https://identicon-api.herokuapp.com/Aisha Christensen/100?format=png',
+        avatar: 'https://robohash.org/Aisha Christensen/100?format=png',
       },
       {
         _id: '5f2685cd270e626a874e784f',
@@ -348,8 +325,7 @@ const data = [
         type: 0,
         date: 'Mar 06 2020',
         name: 'Hinton Norton',
-        avatar:
-          'https://identicon-api.herokuapp.com/Hinton Norton/100?format=png',
+        avatar: 'https://robohash.org/Hinton Norton/100?format=png',
       },
     ],
   },
@@ -364,8 +340,7 @@ const data = [
         type: 0,
         date: 'Mar 17 2020',
         name: 'Donaldson Leonard',
-        avatar:
-          'https://identicon-api.herokuapp.com/Donaldson Leonard/100?format=png',
+        avatar: 'https://robohash.org/Donaldson Leonard/100?format=png',
       },
       {
         _id: '5f2685cd031d99f23295846d',
@@ -376,8 +351,7 @@ const data = [
         type: 1,
         date: 'Jun 15 2020',
         name: 'Wendy Sloan',
-        avatar:
-          'https://identicon-api.herokuapp.com/Wendy Sloan/100?format=png',
+        avatar: 'https://robohash.org/Wendy Sloan/100?format=png',
       },
       {
         _id: '5f2685cde8f010b912322bde',
@@ -388,8 +362,7 @@ const data = [
         type: 1,
         date: 'Jul 21 2020',
         name: 'Doreen Arnold',
-        avatar:
-          'https://identicon-api.herokuapp.com/Doreen Arnold/100?format=png',
+        avatar: 'https://robohash.org/Doreen Arnold/100?format=png',
       },
       {
         _id: '5f2685cd662bff62eadb30c7',
@@ -400,8 +373,7 @@ const data = [
         type: 0,
         date: 'Jun 08 2020',
         name: 'Hartman Sheppard',
-        avatar:
-          'https://identicon-api.herokuapp.com/Hartman Sheppard/100?format=png',
+        avatar: 'https://robohash.org/Hartman Sheppard/100?format=png',
       },
       {
         _id: '5f2685cdc9f13a0f2bb43467',
@@ -412,8 +384,7 @@ const data = [
         type: 0,
         date: 'Jul 22 2020',
         name: 'Pearson Love',
-        avatar:
-          'https://identicon-api.herokuapp.com/Pearson Love/100?format=png',
+        avatar: 'https://robohash.org/Pearson Love/100?format=png',
       },
       {
         _id: '5f2685cdcad846a880911167',
@@ -424,8 +395,7 @@ const data = [
         type: 2,
         date: 'Jun 23 2020',
         name: 'Dickerson Sanders',
-        avatar:
-          'https://identicon-api.herokuapp.com/Dickerson Sanders/100?format=png',
+        avatar: 'https://robohash.org/Dickerson Sanders/100?format=png',
       },
       {
         _id: '5f2685cd43bf38ebade6fba8',
@@ -435,8 +405,7 @@ const data = [
         type: 2,
         date: 'May 24 2020',
         name: 'Aisha Christensen',
-        avatar:
-          'https://identicon-api.herokuapp.com/Aisha Christensen/100?format=png',
+        avatar: 'https://robohash.org/Aisha Christensen/100?format=png',
       },
       {
         _id: '5f2685cd270e626a874e784f',
@@ -447,8 +416,7 @@ const data = [
         type: 0,
         date: 'Mar 06 2020',
         name: 'Hinton Norton',
-        avatar:
-          'https://identicon-api.herokuapp.com/Hinton Norton/100?format=png',
+        avatar: 'https://robohash.org/Hinton Norton/100?format=png',
       },
     ],
   },
@@ -465,7 +433,7 @@ const data = [
 
     name: '{{firstName()}} {{surname()}}',
     avatar: function() {
-    	return 'https://identicon-api.herokuapp.com/' + this.name + '/100?format=png'
+    	return 'https://robohash.org/' + this.name + '/100?format=png'
     }
   }
 ]
