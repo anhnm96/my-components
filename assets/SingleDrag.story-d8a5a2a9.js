@@ -127,7 +127,7 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
 }
 _sfc_main$3.__file = "components/custom/drag/stories/DragImgOnDrop.vue";
 const DragImgOnDrop = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$3], ["__scopeId", "data-v-4525dd58"], ["__file", "C:/Users/anhnm21/Desktop/ma/my-components/components/custom/drag/stories/DragImgOnDrop.vue"]]);
-const _imports_0 = "/my-components/assets/document-63ecc31d.png";
+const _imports_0 = "/my-components/assets/document.png";
 const _imports_1 = "/my-components/assets/smiley01-7da484c0.png";
 const _imports_2 = "/my-components/assets/smiley02-67dce934.png";
 const _imports_3 = "/my-components/assets/smiley03-181c1cfd.png";
