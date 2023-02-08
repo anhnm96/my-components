@@ -50,10 +50,26 @@ const switchState = ref(false)
 const text = ref('')
 const names = ref([])
 const customCheckboxValue = ref('Yes')
+const { start, setClosed, visible } = usePolitePopup()
+start()
 </script>
 
 <template>
   <div class="pt-20">
+    <div
+      v-if="visible"
+      class="fixed right-0 bottom-0 z-50 rounded-md bg-gray-300 p-4 shadow-lg shadow-lg md:right-5 md:bottom-5"
+    >
+      <span>May I show you something cool?</span>
+      <div class="mt-4 flex gap-4">
+        <button class="rounded-md bg-gray-100 p-4" @click="setClosed">
+          OK
+        </button>
+        <button class="rounded-md bg-gray-100 p-4" @click="setClosed">
+          Nah, thanks
+        </button>
+      </div>
+    </div>
     <div class="space-x-2 text-white">
       <div class="mb-4 flex gap-4">
         <input type="radio" name="group" style="--c: var(--danger)" />
