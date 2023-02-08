@@ -1,5 +1,12 @@
 <script>
 import VDragDrop from '../DragItem.vue'
+import document from '/images/drag/document.png'
+import smiley01 from '/images/drag/smiley01.png'
+import smiley02 from '/images/drag/smiley02.png'
+import smiley03 from '/images/drag/smiley03.png'
+import smiley04 from '/images/drag/smiley04.png'
+import smiley05 from '/images/drag/smiley05.png'
+import smiley06 from '/images/drag/smiley06.png'
 export default {
   components: { VDragDrop },
   setup() {
@@ -45,7 +52,22 @@ export default {
     function trashDrop() {
       hasTrash.value = true
     }
-    return { idx, doc, hasTrash, drag, dragend, trashDrop, trashRef }
+    return {
+      idx,
+      doc,
+      hasTrash,
+      drag,
+      dragend,
+      trashDrop,
+      trashRef,
+      document,
+      smiley01,
+      smiley02,
+      smiley03,
+      smiley04,
+      smiley05,
+      smiley06,
+    }
   },
 }
 </script>
@@ -66,42 +88,14 @@ export default {
       @customdrag="drag"
       @dragend="dragend"
     >
-      <img
-        :draggable="false"
-        class="document"
-        src="/images/drag/document.png"
-      />
+      <img :draggable="false" class="document" :src="document" />
       <template #drag-image>
-        <img
-          v-show="idx === 0"
-          class="drag-image"
-          src="/images/drag/smiley01.png"
-        />
-        <img
-          v-show="idx === 1"
-          class="drag-image"
-          src="/images/drag/smiley02.png"
-        />
-        <img
-          v-show="idx === 2"
-          class="drag-image"
-          src="/images/drag/smiley03.png"
-        />
-        <img
-          v-show="idx === 3"
-          class="drag-image"
-          src="/images/drag/smiley04.png"
-        />
-        <img
-          v-show="idx === 4"
-          class="drag-image"
-          src="/images/drag/smiley05.png"
-        />
-        <img
-          v-show="idx === 5"
-          class="drag-image"
-          src="/images/drag/smiley06.png"
-        />
+        <img v-show="idx === 0" class="drag-image" :src="smiley01" />
+        <img v-show="idx === 1" class="drag-image" :src="smiley02" />
+        <img v-show="idx === 2" class="drag-image" :src="smiley03" />
+        <img v-show="idx === 3" class="drag-image" :src="smiley04" />
+        <img v-show="idx === 4" class="drag-image" :src="smiley05" />
+        <img v-show="idx === 5" class="drag-image" :src="smiley06" />
       </template>
     </VDragDrop>
   </div>
