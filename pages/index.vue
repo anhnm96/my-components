@@ -5,6 +5,7 @@ import Bubble from '~~/components/tailwind/cards/Bubble.vue'
 import AutocompleteStory from '~~/components/custom/autocomplete/Autocomplete.story.vue'
 import DropzoneStory from '~~/components/custom/dropzone/Dropzone.story.vue'
 import ModalStory from '~~/components/custom/modal/Modal.story.vue'
+import LazyLoad from '~~/components/custom/lazy/Lazy'
 const loading = ref(false)
 function click() {
   loading.value = true
@@ -52,6 +53,7 @@ const names = ref([])
 const customCheckboxValue = ref('Yes')
 const { start, setClosed, visible } = usePolitePopup()
 start()
+const showLargeComponent = ref(false)
 </script>
 
 <template>
@@ -71,6 +73,7 @@ start()
       </div>
     </div>
     <div class="space-x-2 text-white">
+      <button @click="showLargeComponent = !showLargeComponent">Toggle</button>
       <div class="mb-4 flex gap-4">
         <input type="radio" name="group" style="--c: var(--danger)" />
         <input type="radio" name="group" style="--c: var(--success)" />
@@ -263,43 +266,45 @@ start()
       </BaseCarousel>
     </div>
     <div>
-      <BaseCarousel>
-        <template #header="{ prev, next }">
-          <div class="flex justify-between">
-            <h2 class="text-lg font-bold text-primary">Top 100 hits</h2>
-            <div class="flex items-center space-x-2">
-              <button
-                class="inline-flex items-center p-1 focus:outline-none"
-                aria-label="Previous List"
-                @click="prev"
-              >
-                Prev
-              </button>
-              <button
-                class="inline-flex items-center p-1 focus:outline-none"
-                aria-label="Next List"
-                @click="next"
-              >
-                Next
-              </button>
+      <LazyLoad on-visible>
+        <BaseCarousel v-if="showLargeComponent">
+          <template #header="{ prev, next }">
+            <div class="flex justify-between">
+              <h2 class="text-lg font-bold text-primary">Top 100 hits</h2>
+              <div class="flex items-center space-x-2">
+                <button
+                  class="inline-flex items-center p-1 focus:outline-none"
+                  aria-label="Previous List"
+                  @click="prev"
+                >
+                  Prev
+                </button>
+                <button
+                  class="inline-flex items-center p-1 focus:outline-none"
+                  aria-label="Next List"
+                  @click="next"
+                >
+                  Next
+                </button>
+              </div>
             </div>
-          </div>
-        </template>
-        <template #default="{ activeIndex }">
-          <BaseCarouselItem
-            v-for="(item, index) in items"
-            :key="item.title"
-            class="relative w-1/4 basis-[25%] select-none"
-          >
-            <img :src="item.image" />
-            <span
-              class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-4xl font-bold text-red-500"
+          </template>
+          <template #default="{ activeIndex }">
+            <BaseCarouselItem
+              v-for="(item, index) in items"
+              :key="item.title"
+              class="relative w-1/4 basis-[25%] select-none"
             >
-              {{ `${index} - ${activeIndex}` }}
-            </span>
-          </BaseCarouselItem>
-        </template>
-      </BaseCarousel>
+              <img :src="item.image" />
+              <span
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-4xl font-bold text-red-500"
+              >
+                {{ `${index} - ${activeIndex}` }}
+              </span>
+            </BaseCarouselItem>
+          </template>
+        </BaseCarousel>
+      </LazyLoad>
     </div>
     <GlowingBackground />
     <ThreeDCard />
