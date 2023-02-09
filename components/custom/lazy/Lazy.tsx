@@ -1,50 +1,5 @@
 import type { UseIntersectionObserverOptions } from '@vueuse/core'
-import type { Ref } from 'vue'
-const isClient = typeof window !== 'undefined'
-
-/**
- * Load when a user scrolls to an element
- */
-const loadOnIntersect = (
-  containerRef: Ref<HTMLElement | undefined>,
-  loadComponent: () => void,
-  observerOptions?: UseIntersectionObserverOptions
-) => {
-  const targetIsVisible = ref(false)
-  useIntersectionObserver(
-    containerRef,
-    ([{ isIntersecting }]) => {
-      targetIsVisible.value = isIntersecting
-    },
-    observerOptions
-  )
-
-  // Trigger load on intersect
-  watch(targetIsVisible, (isIntersecting) => {
-    isIntersecting && loadComponent()
-  })
-}
-
-const loadOnIdle = (loadComponent: () => void, idleTimeout: number) => {
-  // Load component immediately if not in the browser environment
-  // or if one of the necessary APIs is not supported
-  if (
-    !isClient ||
-    !('requestIdleCallback' in window || !('requestAnimationFrame' in window))
-  ) {
-    loadComponent()
-    return
-  }
-
-  // Load the component when the browser is free or schedule it
-  // after the timeout is reached
-  requestIdleCallback(
-    () => {
-      requestAnimationFrame(loadComponent)
-    },
-    { timeout: idleTimeout }
-  )
-}
+import type { PropType, Ref } from 'vue'
 
 export default defineComponent({
   props: {
@@ -57,7 +12,9 @@ export default defineComponent({
       default: false,
     },
     onVisible: {
-      type: [Object, Boolean],
+      type: [Object, Boolean] as PropType<
+        UseIntersectionObserverOptions | boolean
+      >,
       default: null,
     },
   },
@@ -69,6 +26,55 @@ export default defineComponent({
     const loadComponent = () => {
       isComponentLoaded.value = true
       emit('loaded')
+    }
+
+    const isClient = typeof window !== 'undefined'
+
+    /**
+     * Load when a user scrolls to an element
+     */
+    const loadOnIntersect = (
+      containerRef: Ref<HTMLElement | undefined>,
+      loadComponent: () => void,
+      observerOptions?: UseIntersectionObserverOptions
+    ) => {
+      const targetIsVisible = ref(false)
+      useIntersectionObserver(
+        containerRef,
+        ([{ isIntersecting }]) => {
+          targetIsVisible.value = isIntersecting
+        },
+        observerOptions
+      )
+
+      // Trigger load on intersect
+      watchOnce(targetIsVisible, (isIntersecting) => {
+        isIntersecting && loadComponent()
+      })
+    }
+
+    const loadOnIdle = (loadComponent: () => void, idleTimeout: number) => {
+      // Load component immediately if not in the browser environment
+      // or if one of the necessary APIs is not supported
+      if (
+        !isClient ||
+        !(
+          'requestIdleCallback' in window ||
+          !('requestAnimationFrame' in window)
+        )
+      ) {
+        loadComponent()
+        return
+      }
+
+      // Load the component when the browser is free or schedule it
+      // after the timeout is reached
+      requestIdleCallback(
+        () => {
+          requestAnimationFrame(loadComponent)
+        },
+        { timeout: idleTimeout }
+      )
     }
 
     // Call appropriate handler
