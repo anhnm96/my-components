@@ -7,6 +7,7 @@ defineProps<{ list: any[] }>()
     <div class="marquee-group">
       <slot v-for="(item, index) in list" :index="index" :item="item" />
     </div>
+    <!-- set aria-hidden to hide the duplicated list for screen readers -->
     <div aria-hidden="true" class="marquee-group">
       <slot v-for="item in list" :item="item" />
     </div>
