@@ -4,6 +4,7 @@ import { HstNuxt } from '@histoire/plugin-nuxt'
 
 export default defineConfig({
   plugins: [HstVue(), HstNuxt()],
+  routerMode: 'hash',
   vite: {
     base: '/my-components/',
     server: {
