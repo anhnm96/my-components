@@ -1,10 +1,11 @@
-<script setup lang="ts">
+<script setup lang="tsx">
 import GlowingBackground from '~~/components/tailwind/backgrounds/GlowingBackground.vue'
 import ThreeDCard from '~~/components/tailwind/cards/3d-card.vue'
 import Bubble from '~~/components/tailwind/cards/Bubble.vue'
 import AutocompleteStory from '~~/components/custom/autocomplete/Autocomplete.story.vue'
 import DropzoneStory from '~~/components/custom/dropzone/Dropzone.story.vue'
 import ModalStory from '~~/components/custom/modal/Modal.story.vue'
+import MarqueeStory from '~~/components/custom/marquee/Marquee.story.vue'
 import LazyLoad from '~~/components/custom/lazy/Lazy'
 const loading = ref(false)
 function click() {
@@ -58,6 +59,7 @@ const showLargeComponent = ref(false)
 
 <template>
   <div class="pt-20">
+    <MarqueeStory />
     <div
       v-if="visible"
       class="fixed right-0 bottom-0 z-50 rounded-md bg-gray-300 p-4 shadow-lg shadow-lg md:right-5 md:bottom-5"
