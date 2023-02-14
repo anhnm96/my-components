@@ -17,7 +17,11 @@ defineProps<{ list: any[] }>()
 <style scoped>
 .marquee {
   --gap: 2rem;
-  --duration: 10s;
+  --duration: 15s;
+  --start: translateX(0);
+  --end: translateX(calc(-100% - var(--gap)));
+  --from: var(--start);
+  --to: var(--end);
 
   @apply flex overflow-hidden;
   gap: var(--gap);
@@ -26,21 +30,31 @@ defineProps<{ list: any[] }>()
   @apply flex flex-shrink-0 items-center justify-around;
   min-width: 100%;
   gap: var(--gap);
-  animation: scroll-left var(--duration) linear infinite;
+  animation: scroll-x var(--duration) linear infinite;
 }
 
 .marquee:hover .marquee-group {
   animation-play-state: paused;
 }
 
-@keyframes scroll-left {
+*[dir='rtl'] {
+  --end: translateX(calc(100% + var(--gap)));
+}
+
+.marquee.reverse {
+  --from: var(--end);
+  --to: var(--start);
+}
+
+@keyframes scroll-x {
   from {
-    transform: translateX(0);
+    transform: var(--from);
   }
   to {
-    transform: translateX(calc(-100% - var(--gap)));
+    transform: var(--to);
   }
 }
+
 @media (prefers-reduced-motion: reduce) {
   .marquee-group {
     animation-play-state: paused;
