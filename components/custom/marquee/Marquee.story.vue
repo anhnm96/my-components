@@ -9,7 +9,7 @@ const marqueeList = ref([
 </script>
 
 <template>
-  <Story title="Marquee" :layout="{ type: 'grid', width: '100%' }">
+  <Story title="Marquee" :layout="{ type: 'grid', width: '700px' }">
     <Variant title="no gap, custom animation">
       <Marquee
         v-slot="{ item }"
