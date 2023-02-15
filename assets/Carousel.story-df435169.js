@@ -99,7 +99,8 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
       scrollTimeout = setTimeout(() => {
         const newIndex = Math.round(elRef.value.scrollLeft / itemWidth.value);
         activeIndex.value = newIndex;
-        elRef.value.classList.add("scroll-snap");
+        if (!dragging.value)
+          elRef.value.classList.add("scroll-snap");
       }, 100);
     }
     onMounted(() => {

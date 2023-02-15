@@ -6339,6 +6339,22 @@ input.image-input[data-v-da88257b] {
   text-align: center;
 }
 
+*[data-v-3ec9d6eb] {
+  will-change: var(--3ec9d6eb-dimensionKeys\[0\]);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  perspective: 1000px;
+}
+.expand-enter-active[data-v-3ec9d6eb],
+.expand-leave-active[data-v-3ec9d6eb] {
+  overflow: hidden;
+}
+.expand-enter-from[data-v-3ec9d6eb],
+.expand-leave-to[data-v-3ec9d6eb] {
+  opacity: 0;
+}
+
 .marquee[data-v-228459f0] {
   --gap: 2rem;
   --duration: 15s;
@@ -6384,22 +6400,6 @@ to {
 }
 }
 
-*[data-v-3ec9d6eb] {
-  will-change: var(--3ec9d6eb-dimensionKeys\[0\]);
-  transform: translateZ(0);
-  -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
-  perspective: 1000px;
-}
-.expand-enter-active[data-v-3ec9d6eb],
-.expand-leave-active[data-v-3ec9d6eb] {
-  overflow: hidden;
-}
-.expand-enter-from[data-v-3ec9d6eb],
-.expand-leave-to[data-v-3ec9d6eb] {
-  opacity: 0;
-}
-
 .shimmer[data-v-5b88712a] {
   transform: translateX(-100%);
   animation: shimmer-5b88712a 1.4s infinite;
@@ -6407,84 +6407,6 @@ to {
 @keyframes shimmer-5b88712a {
 100% {
     transform: translateX(100%);
-}
-}
-
-.tweetbox {
-  position: relative;
-}
-.tweetbox__htmlarea,
-.tweetbox__textarea {
-  padding: 1rem;
-  padding-right: 3.75rem;
-  width: 100%;
-  line-height: 1.25;
-  border: 2px solid transparent;
-  border-radius: 0.5rem;
-}
-.tweetbox__htmlarea {
-  position: absolute;
-  height: 100%;
-  background-color: #fff;
-  color: transparent;
-  /* word breaks behave exactly like in a textarea */
-  white-space: pre-wrap;
-  word-wrap: break-word;
-}
-.tweetbox__textarea {
-  display: block;
-  position: relative;
-  border-color: #99dde6;
-  outline: 0;
-  background-color: transparent;
-  resize: none;
-}
-.tweetbox__textarea:focus {
-  border-color: #47c2d2;
-}
-.tweetbox .text-excess {
-  background: #ffb8c2;
-}
-.tweetbox__limit {
-  display: flex;
-  position: absolute;
-  right: 0.75rem;
-  bottom: 0.75rem;
-  align-items: center;
-}
-.tweetbox__remainingCharacters {
-  margin-right: 0.5rem;
-  color: #657786;
-  font-size: 0.75rem;
-}
-.has-exceeded-limit .tweetbox__remainingCharacters {
-  color: #e0245e;
-}
-.tweetbox__counter {
-  overflow: visible;
-  transform: rotate(-90deg);
-  transform-origin: center;
-}
-.tweetbox__counterUnderlay {
-  stroke: #ccd6dd;
-}
-.tweetbox__counterProgress {
-  stroke: #1da1f2;
-}
-.has-exceeded-limit .tweetbox__counterProgress {
-  stroke: #e0245e;
-  animation: counterPulse 0.3s ease-in-out;
-  animation-iteration-count: 1;
-}
-@keyframes counterPulse {
-0% {
-    stroke-width: 4;
-}
-50% {
-    stroke-width: 6;
-}
-100% {
-    stroke-width: 4;
 }
 }
 
@@ -6589,6 +6511,84 @@ to {
 *[dir='rtl'] .toggle-button[aria-pressed='true'] span[data-v-1d1a5bb9] {
   right: 10px;
   left: auto;
+}
+
+.tweetbox {
+  position: relative;
+}
+.tweetbox__htmlarea,
+.tweetbox__textarea {
+  padding: 1rem;
+  padding-right: 3.75rem;
+  width: 100%;
+  line-height: 1.25;
+  border: 2px solid transparent;
+  border-radius: 0.5rem;
+}
+.tweetbox__htmlarea {
+  position: absolute;
+  height: 100%;
+  background-color: #fff;
+  color: transparent;
+  /* word breaks behave exactly like in a textarea */
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.tweetbox__textarea {
+  display: block;
+  position: relative;
+  border-color: #99dde6;
+  outline: 0;
+  background-color: transparent;
+  resize: none;
+}
+.tweetbox__textarea:focus {
+  border-color: #47c2d2;
+}
+.tweetbox .text-excess {
+  background: #ffb8c2;
+}
+.tweetbox__limit {
+  display: flex;
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.75rem;
+  align-items: center;
+}
+.tweetbox__remainingCharacters {
+  margin-right: 0.5rem;
+  color: #657786;
+  font-size: 0.75rem;
+}
+.has-exceeded-limit .tweetbox__remainingCharacters {
+  color: #e0245e;
+}
+.tweetbox__counter {
+  overflow: visible;
+  transform: rotate(-90deg);
+  transform-origin: center;
+}
+.tweetbox__counterUnderlay {
+  stroke: #ccd6dd;
+}
+.tweetbox__counterProgress {
+  stroke: #1da1f2;
+}
+.has-exceeded-limit .tweetbox__counterProgress {
+  stroke: #e0245e;
+  animation: counterPulse 0.3s ease-in-out;
+  animation-iteration-count: 1;
+}
+@keyframes counterPulse {
+0% {
+    stroke-width: 4;
+}
+50% {
+    stroke-width: 6;
+}
+100% {
+    stroke-width: 4;
+}
 }
 
 .card[data-v-68c0d066] {
