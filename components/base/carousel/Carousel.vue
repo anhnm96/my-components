@@ -105,9 +105,15 @@ function onScrollFinished() {
   scrollTimeout = setTimeout(() => {
     const newIndex = Math.round(elRef.value!.scrollLeft / itemWidth.value)
     activeIndex.value = newIndex
-    // scroll-snap breaks animation
-    // so we need to wait until animation end
-    elRef.value!.classList.add('scroll-snap')
+    /**
+     * scroll-snap breaks animation
+     * so we need to wait until animation end
+     */
+    /**
+     * we still need to check for dragging in case of
+     * @pointerup then @pointerdown immediately
+     */
+    if (!dragging.value) elRef.value!.classList.add('scroll-snap')
   }, 100)
 }
 
