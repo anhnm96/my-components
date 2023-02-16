@@ -52,7 +52,9 @@ function pointerStart(e: PointerEvent) {
     eventEndType.value = 'touchend'
   }
   elRef.value?.classList.remove('scroll-snap')
-  slideX.value = elRef.value?.scrollLeft
+  // stop animation
+  elRef.value!.scrollLeft = elRef.value!.scrollLeft
+  slideX.value = elRef.value!.scrollLeft
   startX.value = e.clientX
   window.addEventListener(eventMoveType.value, pointerMove)
   window.addEventListener(eventEndType.value, pointerUp)
@@ -79,7 +81,6 @@ function pointerUp() {
   } else {
     /**
      * make sure to finish scroll because
-     * firefox will hang animation
      * if click while sliding
      */
     scrollTo(activeIndex.value)
