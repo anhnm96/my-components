@@ -76,6 +76,13 @@ function pointerUp() {
     const results = Math.round(Math.abs(delta.value / itemWidth.value) + 0.15) // Hack
     scrollTo(activeIndex.value + signCheck * results)
     delta.value = 0
+  } else {
+    /**
+     * make sure to finish scroll because
+     * firefox will hang animation
+     * if click while sliding
+     */
+    scrollTo(activeIndex.value)
   }
 }
 
