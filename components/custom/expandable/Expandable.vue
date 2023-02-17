@@ -97,7 +97,7 @@ function leave(element: HTMLElement) {
 
 <style scoped>
 * {
-  will-change: v-bind(dimensionKeys[0]);
+  will-change: v-bind('dimensionKeys[0]');
   transform: translateZ(0);
   backface-visibility: hidden;
   perspective: 1000px;
@@ -106,10 +106,5 @@ function leave(element: HTMLElement) {
 .expand-enter-active,
 .expand-leave-active {
   overflow: hidden;
-}
-
-.expand-enter-from,
-.expand-leave-to {
-  opacity: 0;
 }
 </style>
