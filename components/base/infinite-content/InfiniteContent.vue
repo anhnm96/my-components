@@ -4,13 +4,14 @@ const { list, containerProps, wrapperProps } = useVirtualList(data, {
   // Keep `itemHeight` in sync with the item's row.
   itemHeight: 96,
 })
-useInfiniteScroll(
-  containerProps.ref,
+const infinite = ref()
+useIntersectionObs(
+  infinite,
   () => {
     // load more
     data.value.push(...Array.from(Array(10).keys(), () => 'More lorem Ipsum'))
   },
-  { distance: 10 } // in pixels
+  { root: containerProps.ref, rootMargin: '0px 0px 10px 0px' }
 )
 </script>
 
@@ -31,6 +32,7 @@ useInfiniteScroll(
           <h2 class="mb-2 text-2xl">Item #{{ index }}</h2>
           <p class="text-sm">{{ dt }}</p>
         </div>
+        <div ref="infinite"></div>
       </div>
     </div>
   </div>

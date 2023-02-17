@@ -54,7 +54,6 @@ const names = ref([])
 const customCheckboxValue = ref('Yes')
 const { start, setClosed, visible } = usePolitePopup()
 start()
-const showLargeComponent = ref(false)
 </script>
 
 <template>
@@ -75,7 +74,6 @@ const showLargeComponent = ref(false)
       </div>
     </div>
     <div class="space-x-2 text-white">
-      <button @click="showLargeComponent = !showLargeComponent">Toggle</button>
       <div class="mb-4 flex gap-4">
         <input type="radio" name="group" style="--c: var(--danger)" />
         <input type="radio" name="group" style="--c: var(--success)" />
@@ -212,7 +210,6 @@ const showLargeComponent = ref(false)
       />
       <label id="lb" dir="rtl">
         <Switch
-          id="btn"
           v-model="switchState"
           aria-labelledby="lb btn"
           active-color="#fe877b"
@@ -269,7 +266,7 @@ const showLargeComponent = ref(false)
     </div>
     <div>
       <LazyLoad on-visible>
-        <BaseCarousel v-if="showLargeComponent">
+        <BaseCarousel>
           <template #header="{ prev, next }">
             <div class="flex justify-between">
               <h2 class="text-lg font-bold text-primary">Top 100 hits</h2>
