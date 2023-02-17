@@ -1,5 +1,5 @@
 import type { UseIntersectionObserverOptions } from '@vueuse/core'
-import type { PropType, Ref } from 'vue'
+import type { PropType } from 'vue'
 
 export default defineComponent({
   props: {
@@ -30,29 +30,6 @@ export default defineComponent({
 
     const isClient = typeof window !== 'undefined'
 
-    /**
-     * Load when a user scrolls to an element
-     */
-    const loadOnIntersect = (
-      containerRef: Ref<HTMLElement | undefined>,
-      loadComponent: () => void,
-      observerOptions?: UseIntersectionObserverOptions
-    ) => {
-      const targetIsVisible = ref(false)
-      useIntersectionObserver(
-        containerRef,
-        ([{ isIntersecting }]) => {
-          targetIsVisible.value = isIntersecting
-        },
-        observerOptions
-      )
-
-      // Trigger load on intersect
-      watchOnce(targetIsVisible, (isIntersecting) => {
-        isIntersecting && loadComponent()
-      })
-    }
-
     const loadOnIdle = (loadComponent: () => void, idleTimeout: number) => {
       // Load component immediately if not in the browser environment
       // or if one of the necessary APIs is not supported
@@ -80,9 +57,9 @@ export default defineComponent({
     // Call appropriate handler
     if (props.onIdle) loadOnIdle(loadComponent, props.idleTimeout)
     else
-      loadOnIntersect(
+      useIntersectionObs(
         containerRef,
-        loadComponent,
+        () => loadComponent(),
         typeof props.onVisible === 'object' ? props.onVisible : {}
       )
 
