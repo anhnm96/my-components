@@ -54,7 +54,9 @@ function setProgress(e: MouseEvent) {
     startPoint.value = right
     return
   }
-  const delta = ((e.clientX - startPoint.value) / elWidth) * props.max
+  const deltaInPercent = (e.clientX - startPoint.value) / elWidth
+  const scalingFactor = 1 + Math.abs(deltaInPercent) * 6
+  const delta = deltaInPercent * scalingFactor * props.max
   progress.value = clamp(progress.value + delta, props.min, props.max)
   startPoint.value = e.clientX
 }
