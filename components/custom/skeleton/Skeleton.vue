@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { hexToRgb, isHexColor } from '@/helpers/color'
-
 interface RandomRange {
   min: number
   max: number

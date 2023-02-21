@@ -5,7 +5,6 @@ import CellSelectingRegion from './CellSelectingRegion.vue'
 import { Cursor } from './useCursor'
 import ContextMenu from '@/components/custom/menu/Menu.vue'
 import DragList from '@/components/custom/drag/DragList.vue'
-import { getCsvFromClipboardData } from '@/helpers/csv'
 // import Tracker from '@/hooks/useTracker'
 // import useTrackRef from '@/hooks/useTrackRef'
 

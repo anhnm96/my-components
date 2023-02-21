@@ -1,6 +1,4 @@
-import { defineComponent, h } from 'vue'
 import { useModal } from './Modal.vue'
-import { getRandomUUID } from '@/helpers/utils'
 
 // eslint-disable-next-line vue/one-component-per-file
 export const ModalTitle = defineComponent({
