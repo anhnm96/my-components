@@ -40,6 +40,13 @@ function forceRepaint(element: HTMLElement) {
   getComputedStyle(element).height
 }
 
+const el = ref()
+onMounted(() => {
+  if (el.value && el.value.nodeType === 1) {
+    el.value.style.transition = props.transition
+  }
+})
+
 function enter(element: HTMLElement) {
   const computedStyles = pick(getComputedStyle(element), dimensionKeys)
 
@@ -86,6 +93,7 @@ function leave(element: HTMLElement) {
 
 <template>
   <transition
+    ref="el"
     name="expand"
     @enter="enter"
     @after-enter="afterEnter"
