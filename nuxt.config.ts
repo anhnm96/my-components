@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   ssr: false,
   typescript: { shim: false },
-  modules: ['@nuxtjs/tailwindcss', '@vueuse/nuxt'],
+  modules: ['nuxt-icon', '@nuxtjs/tailwindcss', '@vueuse/nuxt'],
   components: {
     dirs: [
       {
