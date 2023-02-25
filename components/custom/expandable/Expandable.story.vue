@@ -1,6 +1,17 @@
 <script lang="ts" setup>
-const expanded = ref(false)
+const expanded = ref(true)
 const expanded2 = ref(false)
+
+const status = ref('idle')
+async function submit() {
+  status.value = 'saving'
+  await sleep(1500)
+  status.value = 'success'
+  await sleep(1250)
+  status.value = ''
+}
+
+const r = ref(true)
 </script>
 
 <template>
@@ -63,6 +74,73 @@ const expanded2 = ref(false)
             </p>
           </div>
         </Expandable>
+      </div>
+    </Variant>
+    <Variant title="Resizable Panel">
+      <div class="flex min-h-[500px] flex-col items-start bg-zinc-900 pt-28">
+        <div class="mx-auto w-full max-w-md">
+          <button class="text-white" @click="status = 'idle'">Refresh</button>
+          <div
+            class="overflow-hidden rounded-2xl border border-zinc-700 bg-zinc-800"
+          >
+            <div class="px-8 pt-8">
+              <p class="text-lg text-white">Reset password</p>
+            </div>
+            <Expandable
+              multiple
+              transition="height 600ms cubic-bezier(0.33, 1.01, 0.49, 1.04), opacity 200ms 200ms ease-in"
+            >
+              <div v-if="status !== ''">
+                <div>
+                  <form class="p-8" @submit.prevent="submit">
+                    <p class="text-sm text-zinc-400">
+                      Enter your email to get a password reset link:
+                    </p>
+                    <div class="mt-3">
+                      <input
+                        class="block w-full rounded border-none text-slate-900"
+                        type="email"
+                        required
+                        defaultValue="sam@buildui.com"
+                      />
+                    </div>
+                    <div class="mt-8 text-right">
+                      <BaseButton
+                        :loading="status === 'saving'"
+                        :success="status === 'success'"
+                        class="rounded bg-indigo-500 px-5 py-2 text-sm font-medium text-white"
+                      >
+                        Email me my link
+                      </BaseButton>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div v-else>
+                <div>
+                  <p class="p-8 text-sm text-zinc-400">
+                    Email sent! Check your inbox to continue.
+                  </p>
+                </div>
+              </div>
+            </Expandable>
+          </div>
+          <p class="mt-8 text-sm text-zinc-500">
+            <span class="underline">Reach out</span> to us if you need more
+            help.
+          </p>
+        </div>
+      </div>
+    </Variant>
+    <Variant title="Resizable Test">
+      <div class="p-2">
+        <button class="text-white" @click="r = !r">Toggle</button>
+        <div class="rounded border border-green-500 bg-blue-400">
+          <Expandable multiple>
+            <div v-if="r" class="h-[200px] bg-red-400"></div>
+            <div v-else class="h-[400px] bg-green-400"></div>
+          </Expandable>
+        </div>
       </div>
     </Variant>
   </Story>
