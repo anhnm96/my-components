@@ -36,7 +36,7 @@ function click(event: MouseEvent) {
     @click="click"
   >
     <slot />
-    <Transition name="fade" mode="out-in">
+    <Transition v-if="loading || success" name="fade" mode="out-in">
       <div
         v-if="loading"
         class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
@@ -55,7 +55,6 @@ function click(event: MouseEvent) {
         </span>
         <Icon name="ic:baseline-check" class="text-white" />
       </div>
-      <div v-else></div>
     </Transition>
   </button>
 </template>
