@@ -2,7 +2,11 @@
 import { pick } from 'lodash-es'
 
 const props = withDefaults(
-  defineProps<{ dimension?: 'vertical' | 'horizontal'; transition?: string }>(),
+  defineProps<{
+    dimension?: 'vertical' | 'horizontal'
+    multiple?: boolean
+    transition?: string
+  }>(),
   {
     dimension: 'vertical',
     transition: 'all 300ms ease-in-out',
@@ -26,10 +30,12 @@ const dimensions = {
   ] as const,
 }
 
+const currentHeight = ref(0)
 const dimensionKeys = dimensions[props.dimension]
 function setClosedDimensions(element: HTMLElement) {
   dimensionKeys.forEach((key) => {
-    element.style[key] = '0'
+    if (key === 'height') element.style[key] = `${currentHeight.value}px`
+    else element.style[key] = '0'
   })
 }
 
@@ -44,6 +50,7 @@ const el = ref()
 onMounted(() => {
   if (el.value && el.value.nodeType === 1) {
     el.value.style.transition = props.transition
+    currentHeight.value = el.value.offsetHeight
   }
 })
 
@@ -69,6 +76,7 @@ function enter(element: HTMLElement) {
 }
 
 function afterEnter(element: HTMLElement) {
+  currentHeight.value = element.offsetHeight
   dimensionKeys.forEach((key) => {
     element.style[key] = ''
   })
@@ -83,11 +91,16 @@ function leave(element: HTMLElement) {
   if (props.dimension === 'horizontal') {
     element.style.whiteSpace = 'nowrap'
   }
-  forceRepaint(element)
-
-  requestAnimationFrame(() => {
-    setClosedDimensions(element)
-  })
+  if (props.multiple) {
+    element.style.position = 'absolute'
+    element.style.visibility = 'hidden'
+  } else {
+    forceRepaint(element)
+    requestAnimationFrame(() => {
+      currentHeight.value = 0
+      setClosedDimensions(element)
+    })
+  }
 }
 </script>
 
@@ -114,5 +127,10 @@ function leave(element: HTMLElement) {
 .expand-enter-active,
 .expand-leave-active {
   overflow: hidden;
+}
+
+.expand-enter-from,
+.expand-leave-to {
+  opacity: 0;
 }
 </style>
