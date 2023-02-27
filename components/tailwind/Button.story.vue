@@ -26,6 +26,42 @@
         </BaseButton>
       </div>
     </Variant>
+    <Variant title="Grid Track">
+      <div class="p-4">
+        <button class="grid-btn">
+          <span>
+            <span aria-hidden="true">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                viewBox="0 0 10 15"
+              >
+                <path
+                  d="M 10 0 L 10 5 L 5 5 L 0 0 Z M 0 5 L 5 5 L 10 10 L 5 10 L 5 15 L 0 10 Z"
+                  fill="currentColor"
+                ></path>
+              </svg>
+            </span>
+            <span>Framer Button</span>
+            <span aria-hidden="true">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
+                />
+              </svg>
+            </span>
+          </span>
+        </button>
+      </div>
+    </Variant>
   </Story>
 </template>
 
@@ -71,5 +107,93 @@
 
 .before\:transition-animation:before {
   transition: opacity 1s ease-in-out, filter 1s ease-in-out;
+}
+
+.grid-btn {
+  --dark: 0;
+  --transition: 0.28s;
+  --font-size: 1rem;
+  --bg: hsl(0 0% calc((100 - (var(--dark, 0) * 100)) * 1%));
+  --color: hsl(0 0% calc(var(--dark) * 100%));
+
+  outline-color: hsl(0 0% calc(var(--dark) * 100%));
+  --padding: calc(var(--font-size) * 0.75);
+  cursor: pointer;
+  letter-spacing: calc(var(--font-size) * 0.02);
+  font-family: sans-serif;
+  font-weight: bold;
+  background: var(--bg);
+  font-size: var(--font-size);
+  border-radius: calc(var(--font-size) * 0.5);
+  border: 4px solid
+    hsl(
+      0 0% calc((40 + (var(--dark) * 20)) * 1%) /
+        calc(0.3 + (var(--hovered, 0) * 0.8))
+    );
+  color: var(--color);
+  position: relative;
+  transition: border-color var(--transition);
+}
+
+.grid-btn > span {
+  background: var(--bg);
+  border-radius: calc(var(--font-size) * 0.5);
+  padding: calc(var(--font-size) * 0.9) calc(var(--font-size) * 1.36);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns:
+    calc((var(--font-size) * 1.75) * (1 - var(--hovered, 0)))
+    1fr
+    calc((var(--font-size) * 1.75) * var(--hovered, 0));
+  align-items: center;
+  transition: grid-template-columns var(--transition);
+}
+
+.grid-btn:after {
+  content: '';
+  position: absolute;
+  inset: calc(var(--font-size) * -0.025);
+  background: hsl(0 0% calc(var(--dark) * 100%) / 0.45);
+  filter: blur(calc(var(--font-size) * 0.75));
+  scale: var(--hovered, 0);
+  z-index: -1;
+  transition: scale var(--transition);
+}
+
+.grid-btn:hover {
+  --hovered: 1;
+}
+
+.grid-btn span span:nth-of-type(1) {
+  padding-right: var(--padding);
+  width: var(--font-size);
+}
+
+.grid-btn span span:nth-of-type(3) {
+  padding-left: var(--padding);
+  width: var(--font-size);
+}
+
+.grid-btn svg {
+  display: inline-block;
+  transition: translate var(--transition) ease-in-out,
+    opacity var(--transition) ease-in-out;
+}
+
+.grid-btn:is(:focus-visible, :hover) {
+  --hovered: 1;
+}
+
+.grid-btn span span:nth-of-type(3) svg {
+  stroke-width: 3;
+  translate: calc((1 - var(--hovered, 0)) * (var(--font-size) * 3)) 8%;
+  width: calc(var(--font-size) * 1);
+  opacity: var(--hovered, 0);
+}
+
+.grid-btn span span:nth-of-type(1) svg {
+  stroke-width: 3;
+  translate: calc(((var(--hovered, 0) * var(--font-size)) * -3) + 10%) 8%;
+  width: calc(var(--font-size) * 0.8);
 }
 </style>
