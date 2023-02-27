@@ -1,4 +1,0 @@
-const resolved__virtual_storySource_componentsTailwindTextStoryVue = '<script lang="ts" setup><\/script>\n\n<template>\n  <Story title="Text">\n    <Variant title="Gradient">\n      <p\n        style="--color-one: #42d392; --color-two: #647eff"\n        class="gradient-text text-5xl font-bold"\n      >\n        The Progressive JavaScript Framework\n      </p>\n    </Variant>\n    <Variant title="Animated Gradient">\n      <p\n        style="\n          --animated-gradient-color-one: #42d392;\n          --animated-gradient-color-two: #647eff;\n        "\n        class="animated-gradient-text text-5xl font-bold"\n      >\n        The Progressive JavaScript Framework\n      </p>\n    </Variant>\n  </Story>\n</template>\n';
-export {
-  resolved__virtual_storySource_componentsTailwindTextStoryVue as default
-};
