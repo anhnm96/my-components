@@ -24,6 +24,46 @@ const _hoisted_2 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ createBase
   /* HOISTED */
 ));
 const _hoisted_3 = { class: "p-14" };
+const _hoisted_4 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ createBaseVNode(
+  "div",
+  { class: "p-4" },
+  [
+    /* @__PURE__ */ createBaseVNode("button", { class: "grid-btn" }, [
+      /* @__PURE__ */ createBaseVNode("span", null, [
+        /* @__PURE__ */ createBaseVNode("span", { "aria-hidden": "true" }, [
+          /* @__PURE__ */ createBaseVNode("svg", {
+            xmlns: "http://www.w3.org/2000/svg",
+            "xmlns:xlink": "http://www.w3.org/1999/xlink",
+            viewBox: "0 0 10 15"
+          }, [
+            /* @__PURE__ */ createBaseVNode("path", {
+              d: "M 10 0 L 10 5 L 5 5 L 0 0 Z M 0 5 L 5 5 L 10 10 L 5 10 L 5 15 L 0 10 Z",
+              fill: "currentColor"
+            })
+          ])
+        ]),
+        /* @__PURE__ */ createBaseVNode("span", null, "Framer Button"),
+        /* @__PURE__ */ createBaseVNode("span", { "aria-hidden": "true" }, [
+          /* @__PURE__ */ createBaseVNode("svg", {
+            xmlns: "http://www.w3.org/2000/svg",
+            fill: "none",
+            viewBox: "0 0 24 24",
+            "stroke-width": "1.5",
+            stroke: "currentColor"
+          }, [
+            /* @__PURE__ */ createBaseVNode("path", {
+              "stroke-linecap": "round",
+              "stroke-linejoin": "round",
+              d: "M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
+            })
+          ])
+        ])
+      ])
+    ])
+  ],
+  -1
+  /* HOISTED */
+));
 function _sfc_render(_ctx, _cache) {
   const _component_Variant = resolveComponent("Variant");
   const _component_BaseButton = __nuxt_component_0;
@@ -58,6 +98,13 @@ function _sfc_render(_ctx, _cache) {
               /* STABLE */
             })
           ])
+        ]),
+        _: 1
+        /* STABLE */
+      }),
+      createVNode(_component_Variant, { title: "Grid Track" }, {
+        default: withCtx(() => [
+          _hoisted_4
         ]),
         _: 1
         /* STABLE */

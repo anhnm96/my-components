@@ -6124,6 +6124,105 @@ body {
 .before\:transition-animation[data-v-d87d186e]:before {
   transition: opacity 1s ease-in-out, filter 1s ease-in-out;
 }
+.grid-btn[data-v-d87d186e] {
+  --dark: 0;
+  --transition: 0.28s;
+  --font-size: 1rem;
+  --bg: hsl(0 0% calc((100 - (var(--dark, 0) * 100)) * 1%));
+  --color: hsl(0 0% calc(var(--dark) * 100%));
+
+  outline-color: hsl(0 0% calc(0 * 100%));
+
+  outline-color: hsl(0 0% calc(var(--dark) * 100%));
+  --padding: calc(var(--font-size) * 0.75);
+  cursor: pointer;
+  letter-spacing: calc(1rem * 0.02);
+  letter-spacing: calc(var(--font-size) * 0.02);
+  font-family: sans-serif;
+  font-weight: bold;
+  background: hsl(0 0% calc((100 - (0 * 100)) * 1%));
+  background: var(--bg);
+  font-size: 1rem;
+  font-size: var(--font-size);
+  border-radius: calc(1rem * 0.5);
+  border-radius: calc(var(--font-size) * 0.5);
+  border: 4px solid
+    hsl(
+      0 0% calc((40 + (0 * 20)) * 1%) /
+        calc(0.3 + (0 * 0.8))
+    );
+  border: 4px solid
+    hsl(
+      0 0% calc((40 + (var(--dark) * 20)) * 1%) /
+        calc(0.3 + (var(--hovered, 0) * 0.8))
+    );
+  color: hsl(0 0% calc(0 * 100%));
+  color: var(--color);
+  position: relative;
+  transition: border-color 0.28s;
+  transition: border-color var(--transition);
+}
+.grid-btn > span[data-v-d87d186e] {
+  background: var(--bg);
+  border-radius: calc(var(--font-size) * 0.5);
+  padding: calc(var(--font-size) * 0.9) calc(var(--font-size) * 1.36);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns:
+    calc((var(--font-size) * 1.75) * (1 - 0))
+    1fr
+    calc((var(--font-size) * 1.75) * 0);
+  grid-template-columns:
+    calc((var(--font-size) * 1.75) * (1 - var(--hovered, 0)))
+    1fr
+    calc((var(--font-size) * 1.75) * var(--hovered, 0));
+  align-items: center;
+  transition: grid-template-columns var(--transition);
+}
+.grid-btn[data-v-d87d186e]:after {
+  content: '';
+  position: absolute;
+  inset: calc(var(--font-size) * -0.025);
+  background: hsl(0 0% calc(var(--dark) * 100%) / 0.45);
+  filter: blur(calc(var(--font-size) * 0.75));
+  scale: 0;
+  scale: var(--hovered, 0);
+  z-index: -1;
+  transition: scale var(--transition);
+}
+.grid-btn[data-v-d87d186e]:hover {
+  --hovered: 1;
+}
+.grid-btn span span[data-v-d87d186e]:nth-of-type(1) {
+  padding-right: var(--padding);
+  width: var(--font-size);
+}
+.grid-btn span span[data-v-d87d186e]:nth-of-type(3) {
+  padding-left: var(--padding);
+  width: var(--font-size);
+}
+.grid-btn svg[data-v-d87d186e] {
+  display: inline-block;
+  transition: translate var(--transition) ease-in-out,
+    opacity var(--transition) ease-in-out;
+}
+.grid-btn[data-v-d87d186e]:is(:focus-visible, :hover) {
+  --hovered: 1;
+}
+.grid-btn span span:nth-of-type(3) svg[data-v-d87d186e] {
+  stroke-width: 3;
+  translate: calc((1 - 0) * (var(--font-size) * 3)) 8%;
+  translate: calc((1 - var(--hovered, 0)) * (var(--font-size) * 3)) 8%;
+  width: calc(var(--font-size) * 1);
+  opacity: 0;
+  opacity: var(--hovered, 0);
+}
+.grid-btn span span:nth-of-type(1) svg[data-v-d87d186e] {
+  stroke-width: 3;
+  translate: calc(((0 * var(--font-size)) * -3) + 10%) 8%;
+  translate: calc(((var(--hovered, 0) * var(--font-size)) * -3) + 10%) 8%;
+  width: calc(var(--font-size) * 0.8);
+}
 
 button[data-v-b4ce9510] {
 
@@ -6652,6 +6751,303 @@ to {
 *[dir='rtl'] .toggle-button[aria-pressed='true'] span[data-v-1d1a5bb9] {
   right: 10px;
   left: auto;
+}
+
+@property --hue {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+@property --rotate {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+@property --bg-y {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+@property --bg-x {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+@property --glow-translate-y {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+@property --bg-size {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+@property --glow-opacity {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+@property --glow-blur {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+@property --glow-scale {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 2;
+}
+@property --glow-radius {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 2;
+}
+@property --white-shadow {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+.glow-btn[data-v-c12e63ee] {
+  --debug: 0;
+  --supported: 0;
+  --not-supported: 0;
+
+  --card-color: hsl(260deg 100% 3%);
+  --text-color: hsl(260deg 10% 55%);
+  --card-radius: 3.6vw;
+  --card-width: 35vw;
+  --border-width: 3px;
+  --bg-size: 1;
+
+  --hue: 0;
+  --hue-speed: 1;
+
+  --rotate: 0;
+  --animation-speed: 4s;
+
+  --interaction-speed: 0.55s;
+  --glow-scale: 1.5;
+  --scale-factor: 1;
+  --glow-blur: 6;
+  --glow-opacity: 1;
+  --glow-radius: 100;
+  --glow-rotate-unit: 1deg;
+  width: 35vw;
+  width: var(--card-width);
+  width: min(480px, 35vw);
+  width: min(480px, var(--card-width));
+  aspect-ratio: 1.5/1;
+  color: white;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  border-radius: 3.6vw;
+  border-radius: var(--card-radius);
+  cursor: pointer;
+}
+.glow-btn:hover > div[data-v-c12e63ee] {
+      mix-blend-mode: darken;
+      --text-color: white;
+      box-shadow: 0 0 calc(var(--white-shadow) * 1vw)
+        calc(var(--white-shadow) * 0.15vw) rgb(255 255 255 / 20%);
+      animation: shadow-pulse-c12e63ee calc(var(--animation-speed) * 2) linear infinite;
+}
+.glow-btn:hover > div[data-v-c12e63ee]:before {
+        --bg-size: 15;
+        animation-play-state: paused;
+        transition: --bg-size var(--interaction-speed) ease;
+}
+.glow-btn:hover .glow[data-v-c12e63ee] {
+      --glow-blur: 1.5;
+      --glow-opacity: 0.6;
+      --glow-scale: 2.5;
+      --glow-radius: 0;
+      --rotate: 900;
+      --glow-rotate-unit: 0;
+      --scale-factor: 1.25;
+      animation-play-state: paused;
+}
+.glow-btn:hover .glow[data-v-c12e63ee]:after {
+        --glow-translate-y: 0;
+        animation-play-state: paused;
+        transition: --glow-translate-y 0s ease, --glow-blur 0.05s ease,
+          --glow-opacity 0.05s ease, --glow-scale 0.05s ease,
+          --glow-radius 0.05s ease;
+}
+.glow-btn[data-v-c12e63ee]:before,
+  .glow-btn[data-v-c12e63ee]:after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--card-radius);
+}
+.glow-btn > div[data-v-c12e63ee] {
+    position: absolute;
+    background: var(--card-color);
+    border-radius: calc(calc(var(--card-radius) * 0.9));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-stretch: 150%;
+    font-size: 18px;
+    font-size: clamp(1.5vw, 1.5vmin, 32px);
+    color: var(--text-color);
+    padding: calc(var(--card-width) / 8);
+}
+.glow-btn > div span[data-v-c12e63ee] {
+      display: inline-block;
+      padding: 0.25em;
+      border-radius: 4px;
+      background: var(--text-color);
+      color: black;
+      margin-right: 8px;
+      font-weight: 900;
+}
+.glow-btn > div[data-v-c12e63ee]:before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: calc(calc(var(--card-radius) * 0.9));
+      box-shadow: 0 0 20px black;
+      mix-blend-mode: color-burn;
+      z-index: -1;
+      background: hsl(0deg 0% 16%)
+        radial-gradient(
+          30% 30% at calc(var(--bg-x) * 1%) calc(var(--bg-y) * 1%),
+          hsl(calc(calc(var(--hue) * var(--hue-speed)) * 1deg) 100% 90%)
+            calc(0% * var(--bg-size)),
+          hsl(calc(calc(var(--hue) * var(--hue-speed)) * 1deg) 100% 80%)
+            calc(20% * var(--bg-size)),
+          hsl(calc(calc(var(--hue) * var(--hue-speed)) * 1deg) 100% 60%)
+            calc(40% * var(--bg-size)),
+          transparent 100%
+        );
+      width: calc(100% + var(--border-width));
+      height: calc(100% + var(--border-width));
+      animation: hue-animation-c12e63ee var(--animation-speed) linear infinite,rotate-bg-c12e63ee var(--animation-speed) linear infinite;
+      transition: --bg-size var(--interaction-speed) ease;
+}
+.glow-btn .glow[data-v-c12e63ee] {
+    --glow-translate-y: 0;
+    display: block;
+    position: absolute;
+    width: calc(var(--card-width) / 5);
+    height: calc(var(--card-width) / 5);
+    animation: rotate-c12e63ee var(--animation-speed) linear infinite;
+    transform: rotateZ(calc(var(--rotate) * var(--glow-rotate-unit)));
+    transform-origin: center;
+    border-radius: calc(var(--glow-radius) * 10vw);
+}
+.glow-btn .glow[data-v-c12e63ee]:after {
+      content: '';
+      display: block;
+      z-index: -2;
+      filter: blur(calc(var(--glow-blur) * 10px));
+      width: 130%;
+      height: 130%;
+      left: -15%;
+      top: -15%;
+      background: hsl(
+        calc(calc(var(--hue) * var(--hue-speed)) * 1deg) 100% 60%
+      );
+      position: relative;
+      border-radius: calc(var(--glow-radius) * 10vw);
+      animation: hue-animation-c12e63ee var(--animation-speed) linear infinite;
+      transform: scaleY(calc(var(--glow-scale) * var(--scale-factor) / 1.1))
+        scaleX(calc(var(--glow-scale) * var(--scale-factor) * 1.2))
+        translateY(calc(var(--glow-translate-y) * 1%));
+      opacity: var(--glow-opacity);
+}
+@keyframes shadow-pulse-c12e63ee {
+0%,
+  24%,
+  46%,
+  73%,
+  96% {
+    --white-shadow: 0.5;
+}
+12%,
+  28%,
+  41%,
+  63%,
+  75%,
+  82%,
+  98% {
+    --white-shadow: 2.5;
+}
+6%,
+  32%,
+  57% {
+    --white-shadow: 1.3;
+}
+18%,
+  52%,
+  88% {
+    --white-shadow: 3.5;
+}
+}
+@keyframes rotate-bg-c12e63ee {
+0% {
+    --bg-x: 0;
+    --bg-y: 0;
+}
+25% {
+    --bg-x: 100;
+    --bg-y: 0;
+}
+50% {
+    --bg-x: 100;
+    --bg-y: 100;
+}
+75% {
+    --bg-x: 0;
+    --bg-y: 100;
+}
+100% {
+    --bg-x: 0;
+    --bg-y: 0;
+}
+}
+@keyframes rotate-c12e63ee {
+from {
+    --rotate: -70;
+    --glow-translate-y: -65;
+}
+25% {
+    --glow-translate-y: -65;
+}
+50% {
+    --glow-translate-y: -65;
+}
+60%,
+  75% {
+    --glow-translate-y: -65;
+}
+85% {
+    --glow-translate-y: -65;
+}
+to {
+    --rotate: calc(360 - 70);
+    --glow-translate-y: -65;
+}
+}
+@keyframes hue-animation-c12e63ee {
+0% {
+    --hue: 0;
+}
+100% {
+    --hue: 360;
+}
 }
 
 .tweetbox {
