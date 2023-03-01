@@ -5,7 +5,7 @@
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="postcss">
 @property --hue {
   syntax: '<number>';
   inherits: true;
