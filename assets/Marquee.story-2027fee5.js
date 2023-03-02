@@ -13,15 +13,15 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
     return __returned__;
   }
 });
-const _hoisted_1 = { class: "marquee" };
-const _hoisted_2 = { class: "marquee-group" };
-const _hoisted_3 = {
+const _hoisted_1$1 = { class: "marquee" };
+const _hoisted_2$1 = { class: "marquee-group" };
+const _hoisted_3$1 = {
   "aria-hidden": "true",
   class: "marquee-group"
 };
 function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createElementBlock("div", _hoisted_1, [
-    createBaseVNode("div", _hoisted_2, [
+  return openBlock(), createElementBlock("div", _hoisted_1$1, [
+    createBaseVNode("div", _hoisted_2$1, [
       (openBlock(true), createElementBlock(
         Fragment,
         null,
@@ -36,7 +36,7 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
       ))
     ]),
     createCommentVNode(" set aria-hidden to hide the duplicated list for screen readers "),
-    createBaseVNode("div", _hoisted_3, [
+    createBaseVNode("div", _hoisted_3$1, [
       (openBlock(true), createElementBlock(
         Fragment,
         null,
@@ -62,11 +62,52 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       { text: 4, color: "green" },
       { text: 5, color: "yellow" }
     ]);
-    const __returned__ = { marqueeList };
+    const list1 = [
+      "Custom attributes",
+      "Chat",
+      "Subtasks",
+      "Dark theme",
+      "Filters",
+      "Inbox",
+      "Smart lists",
+      "Public API"
+    ];
+    const list2 = [
+      "Customizable shortcuts",
+      "Private tasks",
+      "Kanban",
+      "Gantt charts",
+      "Group mentions",
+      "Powerful search",
+      "Trash"
+    ];
+    const list3 = [
+      "Task forms",
+      "macOS & Windows apps",
+      "Command-K",
+      "Spreadsheet",
+      "Calendar",
+      "Webhooks"
+    ];
+    const __returned__ = { marqueeList, list1, list2, list3 };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
 });
+const _hoisted_1 = { class: "relative flex flex-col gap-[2px] bg-[#f7f7f8] py-4" };
+const _hoisted_2 = { class: "h-7 rounded-md bg-[rgba(199,199,199,.57)] px-2 text-[15px] font-medium leading-7 text-[#001834a6]" };
+const _hoisted_3 = { class: "h-7 rounded-md bg-[rgba(199,199,199,.57)] px-2 text-[15px] font-medium leading-7 text-[#001834a6]" };
+const _hoisted_4 = { class: "h-7 rounded-md bg-[rgba(199,199,199,.57)] px-2 text-[15px] font-medium leading-7 text-[#001834a6]" };
+const _hoisted_5 = /* @__PURE__ */ createBaseVNode(
+  "div",
+  {
+    class: "absolute inset-0 mix-blend-overlay",
+    style: { "background": "radial-gradient(\n              138% 2376.3% at 3.75% 80%,\n              #d55ffe 0%,\n              #2f8dff 53.65%,\n              #15ada1 100%\n            )" }
+  },
+  null,
+  -1
+  /* HOISTED */
+);
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_Marquee = __nuxt_component_0;
   const _component_Variant = resolveComponent("Variant");
@@ -76,6 +117,64 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     layout: { type: "grid", width: "700px" }
   }, {
     default: withCtx(() => [
+      createVNode(_component_Variant, { title: "Features" }, {
+        default: withCtx(() => [
+          createBaseVNode("div", _hoisted_1, [
+            createVNode(_component_Marquee, {
+              list: $setup.list1,
+              style: { "--gap": "2px", "--duration": "36s" }
+            }, {
+              default: withCtx(({ item }) => [
+                createBaseVNode(
+                  "div",
+                  _hoisted_2,
+                  toDisplayString(item),
+                  1
+                  /* TEXT */
+                )
+              ]),
+              _: 1
+              /* STABLE */
+            }),
+            createVNode(_component_Marquee, {
+              list: $setup.list2,
+              style: { "--gap": "2px", "--duration": "48s" },
+              dir: "rtl"
+            }, {
+              default: withCtx(({ item }) => [
+                createBaseVNode(
+                  "div",
+                  _hoisted_3,
+                  toDisplayString(item),
+                  1
+                  /* TEXT */
+                )
+              ]),
+              _: 1
+              /* STABLE */
+            }),
+            createVNode(_component_Marquee, {
+              list: $setup.list3,
+              style: { "--gap": "2px", "--duration": "56s" }
+            }, {
+              default: withCtx(({ item }) => [
+                createBaseVNode(
+                  "div",
+                  _hoisted_4,
+                  toDisplayString(item),
+                  1
+                  /* TEXT */
+                )
+              ]),
+              _: 1
+              /* STABLE */
+            }),
+            _hoisted_5
+          ])
+        ]),
+        _: 1
+        /* STABLE */
+      }),
       createVNode(_component_Variant, { title: "no gap, custom animation" }, {
         default: withCtx(() => [
           createVNode(_component_Marquee, {

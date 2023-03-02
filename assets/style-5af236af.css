@@ -4301,6 +4301,9 @@ label {
 .h-\[400px\] {
   height: 400px;
 }
+.h-7 {
+  height: 1.75rem;
+}
 .h-1 {
   height: 0.25rem;
 }
@@ -4655,6 +4658,9 @@ label {
 .gap-2 {
   gap: 0.5rem;
 }
+.gap-\[2px\] {
+  gap: 2px;
+}
 .gap-1 {
   gap: 0.25rem;
 }
@@ -4925,6 +4931,14 @@ label {
   --tw-bg-opacity: 1;
   background-color: rgb(99 102 241 / 1);
   background-color: rgb(99 102 241 / var(--tw-bg-opacity));
+}
+.bg-\[\#f7f7f8\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(247 247 248 / 1);
+  background-color: rgb(247 247 248 / var(--tw-bg-opacity));
+}
+.bg-\[rgba\(199\2c 199\2c 199\2c \.57\)\] {
+  background-color: rgba(199,199,199,.57);
 }
 .bg-red-300 {
   --tw-bg-opacity: 1;
@@ -5269,6 +5283,9 @@ label {
   font-size: 1.5rem;
   line-height: 2rem;
 }
+.text-\[15px\] {
+  font-size: 15px;
+}
 .text-5xl {
   font-size: 3rem;
   line-height: 1;
@@ -5383,6 +5400,9 @@ label {
   color: rgb(113 113 122 / 1);
   color: rgb(113 113 122 / var(--tw-text-opacity));
 }
+.text-\[\#001834a6\] {
+  color: #001834a6;
+}
 .text-gray-900 {
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / 1);
@@ -5491,6 +5511,9 @@ label {
 }
 .opacity-75 {
   opacity: 0.75;
+}
+.mix-blend-overlay {
+  mix-blend-mode: overlay;
 }
 .shadow-lg {
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
@@ -6753,6 +6776,84 @@ to {
   left: auto;
 }
 
+.tweetbox {
+  position: relative;
+}
+.tweetbox__htmlarea,
+.tweetbox__textarea {
+  padding: 1rem;
+  padding-right: 3.75rem;
+  width: 100%;
+  line-height: 1.25;
+  border: 2px solid transparent;
+  border-radius: 0.5rem;
+}
+.tweetbox__htmlarea {
+  position: absolute;
+  height: 100%;
+  background-color: #fff;
+  color: transparent;
+  /* word breaks behave exactly like in a textarea */
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.tweetbox__textarea {
+  display: block;
+  position: relative;
+  border-color: #99dde6;
+  outline: 0;
+  background-color: transparent;
+  resize: none;
+}
+.tweetbox__textarea:focus {
+  border-color: #47c2d2;
+}
+.tweetbox .text-excess {
+  background: #ffb8c2;
+}
+.tweetbox__limit {
+  display: flex;
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.75rem;
+  align-items: center;
+}
+.tweetbox__remainingCharacters {
+  margin-right: 0.5rem;
+  color: #657786;
+  font-size: 0.75rem;
+}
+.has-exceeded-limit .tweetbox__remainingCharacters {
+  color: #e0245e;
+}
+.tweetbox__counter {
+  overflow: visible;
+  transform: rotate(-90deg);
+  transform-origin: center;
+}
+.tweetbox__counterUnderlay {
+  stroke: #ccd6dd;
+}
+.tweetbox__counterProgress {
+  stroke: #1da1f2;
+}
+.has-exceeded-limit .tweetbox__counterProgress {
+  stroke: #e0245e;
+  animation: counterPulse 0.3s ease-in-out;
+  animation-iteration-count: 1;
+}
+@keyframes counterPulse {
+0% {
+    stroke-width: 4;
+}
+50% {
+    stroke-width: 6;
+}
+100% {
+    stroke-width: 4;
+}
+}
+
 @property --hue {
   syntax: '<number>';
   inherits: true;
@@ -7047,84 +7148,6 @@ to {
 }
 100% {
     --hue: 360;
-}
-}
-
-.tweetbox {
-  position: relative;
-}
-.tweetbox__htmlarea,
-.tweetbox__textarea {
-  padding: 1rem;
-  padding-right: 3.75rem;
-  width: 100%;
-  line-height: 1.25;
-  border: 2px solid transparent;
-  border-radius: 0.5rem;
-}
-.tweetbox__htmlarea {
-  position: absolute;
-  height: 100%;
-  background-color: #fff;
-  color: transparent;
-  /* word breaks behave exactly like in a textarea */
-  white-space: pre-wrap;
-  word-wrap: break-word;
-}
-.tweetbox__textarea {
-  display: block;
-  position: relative;
-  border-color: #99dde6;
-  outline: 0;
-  background-color: transparent;
-  resize: none;
-}
-.tweetbox__textarea:focus {
-  border-color: #47c2d2;
-}
-.tweetbox .text-excess {
-  background: #ffb8c2;
-}
-.tweetbox__limit {
-  display: flex;
-  position: absolute;
-  right: 0.75rem;
-  bottom: 0.75rem;
-  align-items: center;
-}
-.tweetbox__remainingCharacters {
-  margin-right: 0.5rem;
-  color: #657786;
-  font-size: 0.75rem;
-}
-.has-exceeded-limit .tweetbox__remainingCharacters {
-  color: #e0245e;
-}
-.tweetbox__counter {
-  overflow: visible;
-  transform: rotate(-90deg);
-  transform-origin: center;
-}
-.tweetbox__counterUnderlay {
-  stroke: #ccd6dd;
-}
-.tweetbox__counterProgress {
-  stroke: #1da1f2;
-}
-.has-exceeded-limit .tweetbox__counterProgress {
-  stroke: #e0245e;
-  animation: counterPulse 0.3s ease-in-out;
-  animation-iteration-count: 1;
-}
-@keyframes counterPulse {
-0% {
-    stroke-width: 4;
-}
-50% {
-    stroke-width: 6;
-}
-100% {
-    stroke-width: 4;
 }
 }
 
