@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import SlideUp from './SlideUp.vue'
+import Magic from './Magic.vue'
 </script>
 
 <template>
@@ -25,6 +26,9 @@ import SlideUp from './SlideUp.vue'
     </Variant>
     <Variant title="Slide Up">
       <SlideUp />
+    </Variant>
+    <Variant title="Magic">
+      <Magic />
     </Variant>
   </Story>
 </template>
