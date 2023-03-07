@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import SlideUp from './SlideUp.vue'
 import Magic from './Magic.vue'
+import Rotate from './Rotate.vue'
 </script>
 
 <template>
@@ -29,6 +30,11 @@ import Magic from './Magic.vue'
     </Variant>
     <Variant title="Magic">
       <Magic />
+    </Variant>
+    <Variant title="Rotate">
+      <div class="py-2">
+        <Rotate />
+      </div>
     </Variant>
   </Story>
 </template>
