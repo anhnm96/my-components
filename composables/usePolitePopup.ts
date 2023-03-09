@@ -3,7 +3,7 @@ const config = {
   contentScrollThresholdInPercentage: 35,
 } as const
 
-export default function usePolitePopup() {
+export function usePolitePopup() {
   const visible = ref(false)
   const readTimeElapsed = ref(false)
 
