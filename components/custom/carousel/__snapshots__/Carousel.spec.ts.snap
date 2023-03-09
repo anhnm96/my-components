@@ -1,10 +1,10 @@
 // Vitest Snapshot v1
 
 exports[`Carousel.vue > render correctly 1`] = `
-"<div data-v-f9ce7289=\\"\\">
-  <div class=\\"carousel scroll-snap\\" data-v-f9ce7289=\\"\\">
-    <div class=\\"carousel-item\\" data-v-3e74529a=\\"\\"></div>
-    <div class=\\"carousel-item\\" data-v-3e74529a=\\"\\"></div>
+"<div data-v-aaedb532=\\"\\">
+  <div class=\\"carousel scroll-snap\\" data-v-aaedb532=\\"\\">
+    <div class=\\"carousel-item\\" data-v-f78923cf=\\"\\"></div>
+    <div class=\\"carousel-item\\" data-v-f78923cf=\\"\\"></div>
   </div>
 </div>"
 `;
