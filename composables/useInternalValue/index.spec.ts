@@ -1,4 +1,4 @@
-import useInternalValue from '.'
+import { useInternalValue } from '.'
 
 describe('useInternalValue', () => {
   const defaultProps = () => ({ modelValue: 'default' })

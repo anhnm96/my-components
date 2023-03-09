@@ -2,7 +2,7 @@ interface UseInternaValueOptions {
   eventName?: string
 }
 
-export default function useInternalValue<
+export function useInternalValue<
   P extends Record<string, any>,
   K extends keyof P,
   Name extends string
