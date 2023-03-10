@@ -65,9 +65,87 @@ const variants = {
 </script>
 
 <template>
-  <div class="relative h-full bg-black">
+  <div class="relative h-screen bg-black">
     <div class="mx-auto flex h-full max-w-7xl flex-col justify-center">
-      <div class="relative overflow-hidden">
+      <Carousel v-slot="{ scrollTo, activeIndex }">
+        <CarouselItem v-for="image in images" :key="image" class="w-full">
+          <img class="aspect-[3/2] object-cover" :src="image" />
+        </CarouselItem>
+        <Transition name="custom-fade">
+          <button
+            v-if="activeIndex > 0"
+            class="absolute left-2 top-1/2 -mt-4 flex h-8 w-8 items-center justify-center rounded-full bg-white opacity-70 transition-opacity duration-300 hover:opacity-100"
+            @click="scrollTo(activeIndex - 1)"
+          >
+            <svg
+              class="h-6 w-6"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15.75 19.5L8.25 12l7.5-7.5"
+              />
+            </svg>
+          </button>
+        </Transition>
+        <Transition name="custom-fade">
+          <button
+            v-if="activeIndex + 1 < images.length"
+            class="absolute right-2 top-1/2 -mt-4 flex h-8 w-8 items-center justify-center rounded-full bg-white opacity-70 transition-opacity duration-300 hover:opacity-100"
+            @click="scrollTo(activeIndex + 1)"
+          >
+            <svg
+              class="h-6 w-6"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M8.25 4.5l7.5 7.5-7.5 7.5"
+              />
+            </svg>
+          </button>
+        </Transition>
+        <div
+          class="absolute inset-x-0 bottom-6 flex h-14 justify-center overflow-hidden"
+        >
+          <div
+            :style="{
+              aspectRatio: fullAspectRatio,
+              gap: `${gap}%`,
+              transform: `translateX(-${
+                activeIndex * 100 * (collapsedAspectRatio / fullAspectRatio) +
+                margin +
+                activeIndex * gap
+              }%) translateZ(0px)`,
+            }"
+            class="flex transition-all"
+          >
+            <VMotion
+              v-for="(image, i) in images"
+              :key="image"
+              :animate="
+                i === activeIndex ? variants3.active : variants3.inactive
+              "
+              class="shrink-0 hover:!opacity-100"
+              as="button"
+              @click="scrollTo(i)"
+            >
+              <img :src="image" class="h-full object-cover" />
+            </VMotion>
+          </div>
+        </div>
+      </Carousel>
+      <div v-if="false" class="relative overflow-hidden">
         <div
           :style="{ transform: `translateX(-${index * 100}%)` }"
           class="linear flex transition-transform duration-[400ms]"
@@ -152,6 +230,7 @@ const variants = {
       </div>
 
       <div
+        v-if="false"
         class="absolute inset-x-0 bottom-6 flex h-14 justify-center overflow-hidden"
       >
         <div

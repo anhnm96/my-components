@@ -144,6 +144,9 @@ const items = [
         </template>
       </Carousel>
     </Variant>
+    <Variant title="gallery">
+      <Gallery />
+    </Variant>
   </Story>
 </template>
 
