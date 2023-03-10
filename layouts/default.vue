@@ -35,7 +35,8 @@ useEventListener('scroll', throttle(onScroll, 20))
           <div
             class="mx-auto flex w-full max-w-3xl items-center justify-between px-8"
           >
-            <p
+            <NuxtLink
+              to="/"
               class="flex origin-left items-center text-xl font-semibold uppercase"
             >
               <span
@@ -46,12 +47,12 @@ useEventListener('scroll', throttle(onScroll, 20))
               <span class="-ml-1 text-2xl tracking-[-.075em]">
                 Daily Bugle
               </span>
-            </p>
+            </NuxtLink>
             <nav
               :style="{ opacity }"
               class="flex space-x-4 text-xs font-medium text-slate-400 transition-opacity"
             >
-              <a href="#">News</a>
+              <NuxtLink to="table">Table</NuxtLink>
               <a href="#">Sports</a>
               <a href="#">Culture</a>
             </nav>

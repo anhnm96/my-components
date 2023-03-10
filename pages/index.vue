@@ -5,8 +5,8 @@ import Bubble from '~~/components/tailwind/cards/Bubble.vue'
 import AutocompleteStory from '~~/components/custom/autocomplete/Autocomplete.story.vue'
 import DropzoneStory from '~~/components/custom/dropzone/Dropzone.story.vue'
 import ModalStory from '~~/components/custom/modal/Modal.story.vue'
-import MarqueeStory from '~~/components/custom/marquee/Marquee.story.vue'
 import LazyLoad from '~~/components/custom/lazy/Lazy'
+import CheckboxStory from '~~/components/base/checkbox/Checkbox.story.vue'
 const loading = ref(false)
 function click() {
   loading.value = true
@@ -58,10 +58,13 @@ start()
 
 <template>
   <div class="pt-20">
-    <MarqueeStory />
+    <div>
+      <Gallery />
+    </div>
+    <CheckboxStory v-if="false" />
     <div
       v-if="visible"
-      class="fixed right-0 bottom-0 z-50 rounded-md bg-gray-300 p-4 shadow-lg shadow-lg md:right-5 md:bottom-5"
+      class="fixed right-0 bottom-0 z-50 rounded-md bg-gray-300 p-4 shadow-lg md:right-5 md:bottom-5"
     >
       <span>May I show you something cool?</span>
       <div class="mt-4 flex gap-4">
@@ -232,12 +235,12 @@ start()
       <Switch v-model="switchState" disabled />
     </div>
     <div>
-      <BaseCarousel
+      <Carousel
         v-slot="{ scrollTo, activeIndex }"
         :initial-index="2"
         class="relative"
       >
-        <BaseCarouselItem
+        <CarouselItem
           v-for="(color, index) in colors"
           :key="color"
           :class="[
@@ -245,7 +248,7 @@ start()
           ]"
         >
           {{ index }} - {{ activeIndex }}
-        </BaseCarouselItem>
+        </CarouselItem>
         <div
           class="pointer-events-none absolute top-1/2 flex w-full -translate-y-1/2 justify-between"
         >
@@ -262,11 +265,11 @@ start()
             >
           </button>
         </div>
-      </BaseCarousel>
+      </Carousel>
     </div>
     <div>
       <LazyLoad on-visible>
-        <BaseCarousel>
+        <Carousel>
           <template #header="{ prev, next }">
             <div class="flex justify-between">
               <h2 class="text-lg font-bold text-primary">Top 100 hits</h2>
@@ -289,7 +292,7 @@ start()
             </div>
           </template>
           <template #default="{ activeIndex }">
-            <BaseCarouselItem
+            <CarouselItem
               v-for="(item, index) in items"
               :key="item.title"
               class="relative w-1/4 basis-[25%] select-none"
@@ -300,9 +303,9 @@ start()
               >
                 {{ `${index} - ${activeIndex}` }}
               </span>
-            </BaseCarouselItem>
+            </CarouselItem>
           </template>
-        </BaseCarousel>
+        </Carousel>
       </LazyLoad>
     </div>
     <GlowingBackground />
