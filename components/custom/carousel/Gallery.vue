@@ -76,6 +76,7 @@ const variants = {
             v-if="activeIndex > 0"
             class="absolute left-2 top-1/2 -mt-4 flex h-8 w-8 items-center justify-center rounded-full bg-white opacity-70 transition-opacity duration-300 hover:opacity-100"
             @click="scrollTo(activeIndex - 1)"
+            @pointerdown.stop
           >
             <svg
               class="h-6 w-6"
@@ -98,6 +99,7 @@ const variants = {
             v-if="activeIndex + 1 < images.length"
             class="absolute right-2 top-1/2 -mt-4 flex h-8 w-8 items-center justify-center rounded-full bg-white opacity-70 transition-opacity duration-300 hover:opacity-100"
             @click="scrollTo(activeIndex + 1)"
+            @pointerdown.stop
           >
             <svg
               class="h-6 w-6"
@@ -117,6 +119,7 @@ const variants = {
         </Transition>
         <div
           class="absolute inset-x-0 bottom-6 flex h-14 justify-center overflow-hidden"
+          @pointerdown.stop
         >
           <div
             :style="{
@@ -140,7 +143,10 @@ const variants = {
               as="button"
               @click="scrollTo(i)"
             >
-              <img :src="image" class="h-full object-cover" />
+              <img
+                :src="image"
+                class="pointer-events-none h-full object-cover"
+              />
             </VMotion>
           </div>
         </div>
