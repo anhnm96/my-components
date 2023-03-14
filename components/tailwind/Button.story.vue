@@ -1,3 +1,18 @@
+<script setup lang="ts">
+function download(e: MouseEvent) {
+  const btn = e.target as HTMLButtonElement
+  btn.classList.add('clicked')
+  btn.textContent = ''
+
+  setTimeout(() => {
+    btn.classList.remove('clicked')
+    setTimeout(() => {
+      btn.textContent = 'Download'
+    }, 200)
+  }, 3000)
+}
+</script>
+
 <template>
   <Story title="Button" :layout="{ type: 'grid', width: '300px' }">
     <Variant title="Pulse">
@@ -60,6 +75,11 @@
             </span>
           </span>
         </button>
+      </div>
+    </Variant>
+    <Variant title="Download">
+      <div class="pb-2 pt-4 text-center">
+        <button class="download-btn" @click="download">Download</button>
       </div>
     </Variant>
   </Story>
@@ -195,5 +215,68 @@
   stroke-width: 3;
   translate: calc(((var(--hovered, 0) * var(--font-size)) * -3) + 10%) 8%;
   width: calc(var(--font-size) * 0.8);
+}
+
+/* download */
+.download-btn {
+  position: relative;
+  font-size: 1rem;
+  width: 8em;
+  height: 3em;
+  font-weight: 700;
+  border: 0;
+  border-radius: 100vmax;
+  color: #fff;
+  background-color: rgb(29, 155, 240);
+  transition: all 300ms ease-in;
+}
+
+.download-btn::before {
+  content: 'Done';
+  position: absolute;
+  color: rgb(29, 165, 29);
+  left: 50%;
+  top: -2em;
+  transform: translateX(-50%);
+  opacity: 0;
+}
+
+.download-btn.clicked {
+  width: 15em;
+  height: 0.5em;
+  background-color: rgb(206, 224, 237);
+  animation: fill 1.5s ease-out 1 forwards;
+  animation-delay: 450ms;
+}
+
+.download-btn.clicked::before {
+  animation: show 250ms ease-in 1 forwards;
+  animation-delay: 2s;
+}
+
+@keyframes fill {
+  0% {
+    box-shadow: 0 0 0 rgb(29, 155, 240) inset;
+  }
+
+  95% {
+    box-shadow: 20em 0 0 rgb(29, 155, 240) inset;
+  }
+
+  100% {
+    box-shadow: 20em 0 0 rgb(29, 165, 29) inset;
+  }
+}
+
+@keyframes show {
+  100% {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 576px) {
+  .download-btn {
+    font-size: 0.85rem;
+  }
 }
 </style>
