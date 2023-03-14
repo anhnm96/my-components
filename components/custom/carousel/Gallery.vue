@@ -1,30 +1,36 @@
 <script lang="ts" setup>
+import img1 from '/images/1.jpeg'
+import img2 from '/images/2.jpeg'
+import img3 from '/images/3.jpeg'
+import img4 from '/images/4.jpeg'
+import img5 from '/images/5.jpeg'
+import img6 from '/images/6.jpeg'
 const index = ref(0)
 const images = [
-  '/images/1.jpeg',
-  '/images/2.jpeg',
-  '/images/3.jpeg',
-  '/images/4.jpeg',
-  '/images/5.jpeg',
-  '/images/6.jpeg',
-  '/images/1.jpeg?1',
-  '/images/2.jpeg?1',
-  '/images/3.jpeg?1',
-  '/images/4.jpeg?1',
-  '/images/5.jpeg?1',
-  '/images/6.jpeg?1',
-  '/images/1.jpeg?2',
-  '/images/2.jpeg?2',
-  '/images/3.jpeg?2',
-  '/images/4.jpeg?2',
-  '/images/5.jpeg?2',
-  '/images/6.jpeg?2',
-  '/images/1.jpeg?3',
-  '/images/2.jpeg?3',
-  '/images/3.jpeg?3',
-  '/images/4.jpeg?3',
-  '/images/5.jpeg?3',
-  '/images/6.jpeg?3',
+  img1,
+  img2,
+  img3,
+  img4,
+  img5,
+  img6,
+  `${img1}?1`,
+  `${img2}?1`,
+  `${img3}?1`,
+  `${img4}?1`,
+  `${img5}?1`,
+  `${img6}?1`,
+  `${img1}?2`,
+  `${img2}?2`,
+  `${img3}?2`,
+  `${img4}?2`,
+  `${img5}?2`,
+  `${img6}?2`,
+  `${img1}?3`,
+  `${img2}?3`,
+  `${img3}?3`,
+  `${img4}?3`,
+  `${img5}?3`,
+  `${img6}?3`,
 ]
 
 const transition = { duration: 0.7, easing: [0.4, 0, 0.2, 1] }
