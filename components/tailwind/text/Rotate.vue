@@ -2,10 +2,11 @@
 let words: HTMLSpanElement[]
 const wordArray: Array<Array<HTMLSpanElement>> = []
 let currentWord = 0
+const classes = useCssModule('classes')
 
 onMounted(() => {
   // @ts-expect-error type
-  words = document.getElementsByClassName('word')
+  words = document.getElementsByClassName(classes.word)
   words[currentWord].style.opacity = '1'
   for (let i = 0; i < words.length; i++) {
     splitLetters(words[i])
@@ -23,7 +24,7 @@ function changeWord() {
   }
 
   for (let i = 0; i < nw.length; i++) {
-    nw[i].className = 'letter behind'
+    nw[i].className = `${classes.letter} ${classes.behind}`
     nw[0].parentElement!.style.opacity = '1'
     animateLetterIn(nw, i)
   }
@@ -33,13 +34,13 @@ function changeWord() {
 
 function animateLetterOut(cw: HTMLSpanElement[], i: number) {
   setTimeout(function () {
-    cw[i].className = 'letter out'
+    cw[i].className = `${classes.letter} ${classes.out}`
   }, i * 80)
 }
 
 function animateLetterIn(nw: HTMLSpanElement[], i: number) {
   setTimeout(function () {
-    nw[i].className = 'letter in'
+    nw[i].className = `${classes.letter} ${classes.in}`
   }, 340 + i * 80)
 }
 
@@ -49,7 +50,7 @@ function splitLetters(word: Element) {
   const letters = []
   for (let i = 0; i < content.length; i++) {
     const letter = document.createElement('span')
-    letter.className = 'letter'
+    letter.className = `${classes.letter}`
     letter.innerHTML = content.charAt(i)
     word.appendChild(letter)
     letters.push(letter)
@@ -63,16 +64,16 @@ function splitLetters(word: Element) {
   <div class="text-4xl font-bold text-white">
     <p class="inline-block">You are&nbsp;</p>
     <p class="inline-block align-top">
-      <span class="word wisteria">wonderful.</span>
-      <span class="word pomegranate">magical.</span>
-      <span class="word belize">bold.</span>
-      <span class="word green">beautiful.</span>
-      <span class="word midnight">fun.</span>
+      <span :class="[classes.word, classes.wisteria]">wonderful.</span>
+      <span :class="[classes.word, classes.pomegranate]">magical.</span>
+      <span :class="[classes.word, classes.belize]">bold.</span>
+      <span :class="[classes.word, classes.green]">beautiful.</span>
+      <span :class="[classes.word, classes.midnight]">fun.</span>
     </p>
   </div>
 </template>
 
-<style>
+<style module="classes">
 .word {
   position: absolute;
   opacity: 0;

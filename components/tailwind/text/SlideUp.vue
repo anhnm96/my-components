@@ -11,8 +11,8 @@
 .word {
   color: transparent;
   font-weight: 900;
-  text-shadow: 0 1.5em 0.25px var(--slate-700);
-  animation: moveUp 250ms ease-in-out 1 both;
+  text-shadow: 0 1.5em 0.25px #3f3f46;
+  animation: moveUp 250ms ease-in-out 1 forwards;
 
   /* CSS variable for text-color */
   --text-color: #de3163;
