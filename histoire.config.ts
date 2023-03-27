@@ -23,6 +23,10 @@ export default defineConfig({
         include: (file) => file.path.includes('custom'),
       },
       {
+        title: 'Composables',
+        include: (file) => file.path.includes('compose'),
+      },
+      {
         title: 'Tailwind',
         include: (file) => file.path.includes('tailwind'),
       },

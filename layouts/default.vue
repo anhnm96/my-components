@@ -23,7 +23,7 @@ useEventListener('scroll', throttle(onScroll, 20))
 
 <template>
   <div class="bg-slate-700">
-    <div class="mx-auto flex w-full flex-1 overflow-hidden text-slate-600">
+    <div class="mx-auto flex w-full flex-1 text-slate-600">
       <div class="z-0 flex-1">
         <header
           class="fixed inset-x-0 z-10 flex h-20 shadow backdrop-blur-md transition-all"
