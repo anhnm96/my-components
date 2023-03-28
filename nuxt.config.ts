@@ -1,8 +1,7 @@
-// https://v3.nuxtjs.org/api/configuration/nuxt.config
+// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   ssr: false,
-  typescript: { shim: false },
-  modules: ['nuxt-icon', '@nuxtjs/tailwindcss', '@vueuse/nuxt'],
+  modules: ['@nuxtjs/tailwindcss', '@vueuse/nuxt'],
   components: {
     dirs: [
       {
