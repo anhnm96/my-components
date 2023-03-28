@@ -17,6 +17,11 @@ export default defineNuxtConfig({
         ignore: ['**/stories/**', '**/*.story.vue'],
         pathPrefix: false,
       },
+      {
+        path: '~/components/compose',
+        extensions: ['vue'],
+        ignore: ['**/stories/**', '**/*.story.vue'],
+      },
     ],
   },
   imports: {
