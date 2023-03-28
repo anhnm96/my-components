@@ -2,6 +2,7 @@
 import SlideUp from './SlideUp.vue'
 import Magic from './Magic.vue'
 import Rotate from './Rotate.vue'
+import Circle from './Circle.vue'
 </script>
 
 <template>
@@ -34,6 +35,11 @@ import Rotate from './Rotate.vue'
     <Variant title="Rotate">
       <div class="py-2">
         <Rotate />
+      </div>
+    </Variant>
+    <Variant title="Circle">
+      <div class="py-2">
+        <Circle />
       </div>
     </Variant>
   </Story>
