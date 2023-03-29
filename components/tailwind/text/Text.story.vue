@@ -3,6 +3,7 @@ import SlideUp from './SlideUp.vue'
 import Magic from './Magic.vue'
 import Rotate from './Rotate.vue'
 import Circle from './Circle.vue'
+import Typewriter from './Typewriter.vue'
 </script>
 
 <template>
@@ -38,9 +39,13 @@ import Circle from './Circle.vue'
       </div>
     </Variant>
     <Variant title="Circle">
-      <div class="py-2">
-        <Circle />
-      </div>
+      <Circle />
+    </Variant>
+    <Variant title="Typewriter">
+      <Typewriter
+        text="Hello, my name is Kevin."
+        class="text-xl font-semibold text-white"
+      />
     </Variant>
   </Story>
 </template>
