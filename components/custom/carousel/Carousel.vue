@@ -153,6 +153,7 @@ function scrollTo(index: number) {
     if (props.repeat || props.autoplay) index = items.value.length - 1
     else return
   }
+  clearTimeout(scrollTimeout)
   elRef.value?.scrollTo({
     left: index * itemWidth.value,
     behavior: 'smooth',
