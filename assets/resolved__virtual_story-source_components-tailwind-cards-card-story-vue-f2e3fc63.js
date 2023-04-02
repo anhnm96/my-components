@@ -2,6 +2,7 @@ const resolved__virtual_storySource_componentsTailwindCardsCardStoryVue = `<scri
 import ThreeDCard from './3d-card.vue'
 import LineClamp from './LineClamp.vue'
 import Bubble from './Bubble.vue'
+// import Magic from './Magic.vue'
 <\/script>
 
 <template>
@@ -15,6 +16,9 @@ import Bubble from './Bubble.vue'
     <Variant title="Hover bubble">
       <Bubble />
     </Variant>
+    <!-- <Variant title="Magic hover">
+      <Magic />
+    </Variant> -->
   </Story>
 </template>
 `;

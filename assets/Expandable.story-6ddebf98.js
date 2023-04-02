@@ -1,6 +1,6 @@
 import { ar as defineComponent, bd as useCssVars, aC as ref, aS as onMounted, be as unref, bf as pick, av as openBlock, at as createBlock, au as withCtx, aD as renderSlot, aG as Transition, as as resolveComponent, aw as createVNode, ax as createBaseVNode, aB as createElementBlock, aF as createCommentVNode, aM as withModifiers, ay as createTextVNode } from "./vendor-979af273.js";
 import { _ as _export_sfc } from "./plugin-vue_export-helper-cc2b3d55.js";
-import { _ as __nuxt_component_0$1 } from "./Button-cd2cc398.js";
+import { _ as __nuxt_component_0$1 } from "./Button-acfebd9f.js";
 const Expandable_vue_vue_type_style_index_0_scoped_3ec9d6eb_lang = "";
 const _sfc_main$1 = /* @__PURE__ */ defineComponent({
   __name: "Expandable",

@@ -1,4 +1,4 @@
-import { ar as defineComponent, bd as useCssVars, aC as ref, bl as useMouseInElement, aN as computed, be as unref, av as openBlock, aB as createElementBlock, aV as createStaticVNode, as as resolveComponent, at as createBlock, au as withCtx, aw as createVNode } from "./vendor-979af273.js";
+import { ar as defineComponent, bd as useCssVars, aC as ref, bl as useMouseInElement, aN as computed, be as unref, av as openBlock, aB as createElementBlock, aV as createStaticVNode, as as resolveComponent, at as createBlock, au as withCtx, aw as createVNode, aF as createCommentVNode } from "./vendor-979af273.js";
 import { _ as _export_sfc } from "./plugin-vue_export-helper-cc2b3d55.js";
 const _3dCard_vue_vue_type_style_index_0_scoped_68c0d066_lang = "";
 const _sfc_main$3 = /* @__PURE__ */ defineComponent({
@@ -105,7 +105,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         ]),
         _: 1
         /* STABLE */
-      })
+      }),
+      createCommentVNode(' <Variant title="Magic hover">\n      <Magic />\n    </Variant> ')
     ]),
     _: 1
     /* STABLE */

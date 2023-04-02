@@ -77,8 +77,8 @@ const _hoisted_5 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ createBase
   {
     class: "text-white",
     xmlns: "http://www.w3.org/2000/svg",
-    width: "32",
-    height: "32",
+    width: "20",
+    height: "20",
     viewBox: "0 0 24 24"
   },
   [
