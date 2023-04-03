@@ -6,7 +6,6 @@ import AutocompleteStory from '~~/components/custom/autocomplete/Autocomplete.st
 import DropzoneStory from '~~/components/custom/dropzone/Dropzone.story.vue'
 import ModalStory from '~~/components/custom/modal/Modal.story.vue'
 import LazyLoad from '~~/components/custom/lazy/Lazy'
-import CheckboxStory from '~~/components/base/checkbox/Checkbox.story.vue'
 const loading = ref(false)
 function click() {
   loading.value = true
@@ -61,7 +60,32 @@ start()
     <div>
       <Gallery />
     </div>
-    <CheckboxStory v-if="false" />
+    <div class="flex gap-2 text-white">
+      <BaseCheckboxMotion
+        v-model="names"
+        value="jack"
+        root-class="flex space-x-2"
+      >
+        jack
+      </BaseCheckboxMotion>
+      <BaseCheckboxMotion
+        v-model="names"
+        value="john"
+        root-class="flex space-x-2"
+        root-style="--background: var(--purple-500)"
+      >
+        john
+      </BaseCheckboxMotion>
+      <BaseCheckboxMotion
+        v-model="names"
+        value="mike"
+        root-class="flex space-x-2"
+        root-style="--background: var(--green-500)"
+      >
+        mike
+      </BaseCheckboxMotion>
+      <span>{{ names }}</span>
+    </div>
     <div
       v-if="visible"
       class="fixed right-0 bottom-0 z-50 rounded-md bg-gray-300 p-4 shadow-lg md:right-5 md:bottom-5"

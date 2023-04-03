@@ -5,6 +5,7 @@ type DynamicStyle = {
 const props = withDefaults(
   defineProps<{
     as?: string
+    initial?: DynamicStyle
     animate: DynamicStyle
   }>(),
   {
@@ -12,7 +13,6 @@ const props = withDefaults(
   }
 )
 
-const stateArr = ref<number[]>([])
 function objectToVector(obj: Record<string, string | number>): number[] {
   const values = Object.values(obj)
   const vector = values.map((value) =>
@@ -20,14 +20,25 @@ function objectToVector(obj: Record<string, string | number>): number[] {
   )
   return vector
 }
+
+const stateArr = ref<number[]>(
+  props.initial ? objectToVector(props.initial) : []
+)
+
 watch(
   () => props.animate,
   (val) => {
-    if (!val) return
     stateArr.value = objectToVector(val)
   },
-  { immediate: true }
+  { immediate: !props.initial }
 )
+
+onMounted(async () => {
+  if (props.initial) {
+    await nextTick()
+    stateArr.value = objectToVector(props.animate)
+  }
+})
 
 const transition = useTransition(stateArr, {
   duration: 400,

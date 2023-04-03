@@ -278,5 +278,148 @@ const customCheckboxValue = ref('Yes')
         </table>
       </div>
     </Variant>
+    <Variant title="Base ChecboxMotion">
+      <div class="p-4 text-white">
+        <div class="flex gap-2">
+          <BaseCheckboxMotion
+            v-model="names"
+            value="jack"
+            root-class="flex space-x-2"
+          >
+            jack
+          </BaseCheckboxMotion>
+          <BaseCheckboxMotion
+            v-model="names"
+            value="john"
+            root-class="flex space-x-2"
+            root-style="--background: var(--purple-500)"
+          >
+            john
+          </BaseCheckboxMotion>
+          <BaseCheckboxMotion
+            v-model="names"
+            value="mike"
+            root-class="flex space-x-2"
+            root-style="--background: var(--green-500)"
+          >
+            mike
+          </BaseCheckboxMotion>
+          <span>{{ names }}</span>
+        </div>
+        <div class="space-x-4">
+          <BaseCheckboxMotion indeterminate>Indeterminate</BaseCheckboxMotion>
+          <BaseCheckboxMotion disabled>Disabled</BaseCheckboxMotion>
+          <BaseCheckboxMotion :model-value="true"
+            >Default true</BaseCheckboxMotion
+          >
+          <BaseCheckboxMotion
+            v-model="customCheckboxValue"
+            true-value="Yes"
+            false-value="No"
+            root-style="--background: var(--teal-500)"
+          >
+            Custom value: {{ customCheckboxValue }}
+          </BaseCheckboxMotion>
+        </div>
+      </div>
+    </Variant>
+    <Variant title="Table Selection Motion">
+      <div class="rounded-lg text-white">
+        <table class="w-full text-sm" style="table-layout: auto">
+          <thead>
+            <tr>
+              <th class="pl-6 pr-4">
+                <BaseCheckboxMotion
+                  class="inline-block h-[18px] w-[18px]"
+                  type="checkbox"
+                  :indeterminate="hasSelected && !isAllChecked"
+                  :model-value="isAllChecked"
+                  @change="checkAll"
+                />
+              </th>
+              <th
+                v-for="column in columns"
+                :key="column.name"
+                class="px-[18px] py-[15px] text-left font-normal last:text-right first-of-type:!pl-6 last-of-type:!pr-6"
+                :class="column.width"
+              >
+                {{ column.name }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(scholar, index) in scholars" :key="scholar.id">
+              <td class="pl-6 pr-4 text-center">
+                <BaseCheckboxMotion
+                  class="h-[18px] w-[18px]"
+                  type="checkbox"
+                  :model-value="isRowChecked(scholar)"
+                  @click="checkRow(scholar, index, $event)"
+                />
+              </td>
+              <td class="px-6 py-[21px]">
+                <div class="flex space-x-4">
+                  <div
+                    v-if="!scholar.photoURL"
+                    class="grid h-12 w-12 place-items-center rounded-full bg-green-400"
+                  >
+                    <span class="text-lg font-semibold text-white">{{
+                      scholar.displayName.slice(0, 1)
+                    }}</span>
+                  </div>
+                  <img
+                    v-else
+                    :src="scholar.photoURL"
+                    class="h-12 w-12 rounded-full"
+                    aria-hidden="true"
+                  />
+                  <p
+                    class="flex max-w-[25ch] items-center truncate text-lg font-medium"
+                  >
+                    {{ scholar.displayName }}
+                  </p>
+                </div>
+              </td>
+              <td class="px-4.5">Mike. JAK#0812</td>
+              <td class="px-4.5 w-[136px]">
+                {{ scholar.game }}
+              </td>
+              <td class="px-4.5 w-[88px]">Jan 01, 1997</td>
+              <td class="px-4.5 w-[269px]">
+                <p>Played time</p>
+                <p>2310</p>
+              </td>
+              <td class="px-4.5 w-[141px]">0933423847</td>
+              <td class="pr-6">
+                <button
+                  type="button"
+                  class="ml-auto grid h-9 w-9 place-items-center rounded-xl border-2"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="h-4 w-4"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"
+                    />
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                  </svg>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </Variant>
   </Story>
 </template>

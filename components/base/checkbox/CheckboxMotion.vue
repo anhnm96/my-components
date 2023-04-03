@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { Motion } from 'motion/vue'
-import { spring } from 'motion'
 const props = withDefaults(
   defineProps<{
     rootClass?: string
@@ -45,11 +43,6 @@ const isIndeterminated = computed(() => {
   const _v = value.value
   return inputRef.value?.indeterminate
 })
-
-const draw = (progress: number) => ({
-  // This property makes the line "draw" in when animated
-  strokeDashoffset: 1 - progress,
-})
 </script>
 
 <script lang="ts">
@@ -87,19 +80,12 @@ export default {
         stroke="currentColor"
         stroke-width="3"
       >
-        <Motion
-          tag="path"
-          :initial="{ strokeDasharray: 1, strokeDashoffset: 1 }"
-          :animate="draw(1)"
-          :transition="{
-            delay: 0.2,
-            easing: spring({
-              stiffness: 400,
-              damping: 90,
-            }),
-            duration: 0.3,
-          }"
+        <VMotion
+          :initial="{ strokeDashoffset: 1 }"
+          :animate="{ strokeDashoffset: 0 }"
+          as="path"
           pathLength="1"
+          stroke-dasharray="1"
           stroke-linecap="round"
           stroke-linejoin="round"
           d="M5 13l4 4L19 7"

@@ -80,8 +80,8 @@ function pointerUp() {
     delta.value = 0
   } else {
     /**
-     * make sure to finish scroll because
-     * if click while sliding
+     * make sure to finish scrolling in case of
+     * clicking while sliding
      */
     scrollTo(activeIndex.value)
   }

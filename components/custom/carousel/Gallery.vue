@@ -40,14 +40,14 @@ const gap = 2
 const variants = {
   active: {
     aspectRatio: fullAspectRatio,
-    marginLeft: margin,
-    marginRight: margin,
+    marginLeft: `${margin}%`,
+    marginRight: `${margin}%`,
     opacity: 1,
   },
   inactive: {
     aspectRatio: collapsedAspectRatio,
-    marginLeft: 0,
-    marginRight: 0,
+    marginLeft: '0%',
+    marginRight: '0%',
     opacity: 0.5,
   },
 }
