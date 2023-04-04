@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { UseTransitionOptions } from '@vueuse/core'
+
 type DynamicStyle = {
   [K in keyof CSSStyleDeclaration]: { [K2 in K]: string | number }
 }[keyof CSSStyleDeclaration]
@@ -7,6 +9,7 @@ const props = withDefaults(
     as?: string
     initial?: DynamicStyle
     animate: DynamicStyle
+    transitionOptions?: UseTransitionOptions
   }>(),
   {
     as: 'div',
@@ -40,10 +43,14 @@ onMounted(async () => {
   }
 })
 
-const transition = useTransition(stateArr, {
-  duration: 400,
-  transition: [0.4, 0, 0.2, 1],
-})
+const transitionOptions = Object.assign(
+  {
+    duration: 400,
+    transition: [0.4, 0, 0.2, 1],
+  },
+  props.transitionOptions
+)
+const transition = useTransition(stateArr, transitionOptions)
 
 function getSuffix(str: string): string {
   const match = str.match(/^(.*?)([^\d]*)$/)

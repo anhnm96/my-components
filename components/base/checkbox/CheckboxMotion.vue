@@ -83,6 +83,7 @@ export default {
         <VMotion
           :initial="{ strokeDashoffset: 1 }"
           :animate="{ strokeDashoffset: 0 }"
+          :transition-options="{ delay: 125 }"
           as="path"
           pathLength="1"
           stroke-dasharray="1"
