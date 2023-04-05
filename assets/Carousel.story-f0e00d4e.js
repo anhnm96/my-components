@@ -1,6 +1,6 @@
 import { ar as defineComponent, aZ as inject, aC as ref, aO as onMounted, av as openBlock, aB as createElementBlock, aD as renderSlot, a_ as provide, a$ as useIntervalFn, b0 as onBeforeUnmount, aN as computed, ax as createBaseVNode, aH as normalizeClass, aw as createVNode, au as withCtx, aS as Fragment, aR as renderList, aG as Transition, aM as withModifiers, aF as createCommentVNode, aQ as normalizeStyle, az as pushScopeId, aA as popScopeId, as as resolveComponent, at as createBlock, ay as createTextVNode, aE as toDisplayString } from "./vendor-444c1cf7.js";
 import { _ as _export_sfc } from "./plugin-vue_export-helper-cc2b3d55.js";
-import { _ as __nuxt_component_1 } from "./VMotion-c9a3f265.js";
+import { _ as __nuxt_component_1 } from "./VMotion-b3892185.js";
 const CarouselKey = Symbol("Carousel");
 const CarouselItem_vue_vue_type_style_index_0_scoped_f78923cf_lang = "";
 const _sfc_main$3 = /* @__PURE__ */ defineComponent({

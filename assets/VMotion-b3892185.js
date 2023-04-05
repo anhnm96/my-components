@@ -5,7 +5,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   props: {
     as: { type: String, required: false, default: "div" },
     initial: { type: null, required: false },
-    animate: { type: null, required: true }
+    animate: { type: null, required: true },
+    transitionOptions: { type: null, required: false }
   },
   setup(__props, { expose }) {
     expose();
@@ -33,10 +34,14 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         stateArr.value = objectToVector(props.animate);
       }
     });
-    const transition = useTransition(stateArr, {
-      duration: 400,
-      transition: [0.4, 0, 0.2, 1]
-    });
+    const transitionOptions = Object.assign(
+      {
+        duration: 400,
+        transition: [0.4, 0, 0.2, 1]
+      },
+      props.transitionOptions
+    );
+    const transition = useTransition(stateArr, transitionOptions);
     function getSuffix(str) {
       const match = str.match(/^(.*?)([^\d]*)$/);
       return match ? match[2] : "";
@@ -60,7 +65,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     const style = computed(() => {
       return vectorToObject(transition.value, props.animate);
     });
-    const __returned__ = { props, objectToVector, stateArr, transition, getSuffix, vectorToObject, style };
+    const __returned__ = { props, objectToVector, stateArr, transitionOptions, transition, getSuffix, vectorToObject, style };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }

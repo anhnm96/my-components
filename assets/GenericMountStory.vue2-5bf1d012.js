@@ -59,16 +59,16 @@ const Comp2 = defineAsyncComponent(() => __vitePreload(() => import(
 ), true ? ["assets/Button.story-868a50b7.js","assets/Button-0eddca00.js","assets/vendor-444c1cf7.js","assets/plugin-vue_export-helper-cc2b3d55.js"] : void 0));
 const Comp3 = defineAsyncComponent(() => __vitePreload(() => import(
   /* @vite-ignore */
-  "./Checkbox.story-5916cb10.js"
-), true ? ["assets/Checkbox.story-5916cb10.js","assets/index-9150d473.js","assets/vendor-444c1cf7.js","assets/plugin-vue_export-helper-cc2b3d55.js","assets/VMotion-c9a3f265.js"] : void 0));
+  "./Checkbox.story-4e75e969.js"
+), true ? ["assets/Checkbox.story-4e75e969.js","assets/index-9150d473.js","assets/vendor-444c1cf7.js","assets/plugin-vue_export-helper-cc2b3d55.js","assets/VMotion-b3892185.js"] : void 0));
 const Comp4 = defineAsyncComponent(() => __vitePreload(() => import(
   /* @vite-ignore */
   "./index.story-dbb54630.js"
 ), true ? ["assets/index.story-dbb54630.js","assets/vendor-444c1cf7.js","assets/plugin-vue_export-helper-cc2b3d55.js"] : void 0));
 const Comp5 = defineAsyncComponent(() => __vitePreload(() => import(
   /* @vite-ignore */
-  "./Carousel.story-e8542cef.js"
-), true ? ["assets/Carousel.story-e8542cef.js","assets/vendor-444c1cf7.js","assets/plugin-vue_export-helper-cc2b3d55.js","assets/VMotion-c9a3f265.js"] : void 0));
+  "./Carousel.story-f0e00d4e.js"
+), true ? ["assets/Carousel.story-f0e00d4e.js","assets/vendor-444c1cf7.js","assets/plugin-vue_export-helper-cc2b3d55.js","assets/VMotion-b3892185.js"] : void 0));
 const Comp6 = defineAsyncComponent(() => __vitePreload(() => import(
   /* @vite-ignore */
   "./DataTable.story-3bade0db.js"

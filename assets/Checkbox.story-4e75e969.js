@@ -1,7 +1,7 @@
 import { u as useInternalValue } from "./index-9150d473.js";
 import { ar as defineComponent, aC as ref, av as openBlock, aB as createElementBlock, aJ as withDirectives, aK as vModelCheckbox, ax as createBaseVNode, aL as mergeProps, aD as renderSlot, aF as createCommentVNode, aH as normalizeClass, aM as withModifiers, aN as computed, aO as onMounted, aP as watch, aw as createVNode, aQ as normalizeStyle, az as pushScopeId, aA as popScopeId, as as resolveComponent, at as createBlock, au as withCtx, ay as createTextVNode, aE as toDisplayString, aR as renderList, aS as Fragment } from "./vendor-444c1cf7.js";
 import { _ as _export_sfc } from "./plugin-vue_export-helper-cc2b3d55.js";
-import { _ as __nuxt_component_1$1 } from "./VMotion-c9a3f265.js";
+import { _ as __nuxt_component_1$1 } from "./VMotion-b3892185.js";
 const __default__$1 = {
   inheritAttrs: false
 };
@@ -172,6 +172,7 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
           createVNode(_component_VMotion, {
             initial: { strokeDashoffset: 1 },
             animate: { strokeDashoffset: 0 },
+            "transition-options": { delay: 125 },
             as: "path",
             pathLength: "1",
             "stroke-dasharray": "1",

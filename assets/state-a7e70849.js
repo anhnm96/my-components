@@ -1,4 +1,4 @@
-import { d as clientSupportPlugins, h as histoireConfig } from "./GenericMountStory.vue2-7ec8ec31.js";
+import { d as clientSupportPlugins, h as histoireConfig } from "./GenericMountStory.vue2-5bf1d012.js";
 import { d as defineComponent, k as ref, a0 as watchEffect, o as openBlock, c as createBlock, m as mergeProps, a1 as resolveDynamicComponent, q as createCommentVNode, $ as markRaw, R as reactive, H as isRef, h as unref } from "./vendor-444c1cf7.js";
 const __default__ = {
   inheritAttrs: false

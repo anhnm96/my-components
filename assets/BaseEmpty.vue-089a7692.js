@@ -1,4 +1,4 @@
-import { _ as _export_sfc } from "./bundle-main-007aba6d.js";
+import { _ as _export_sfc } from "./bundle-main-c852888e.js";
 import { o as openBlock, l as createElementBlock, e as renderSlot } from "./vendor-444c1cf7.js";
 const _sfc_main = {};
 const _hoisted_1 = { class: "histoire-base-empty htw-base-empty htw-flex htw-flex-col htw-items-center htw-justify-center htw-space-y-4 htw-py-12 htw-h-full htw-text-center htw-text-gray-400 htw-text-lg" };
