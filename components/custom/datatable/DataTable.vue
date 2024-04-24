@@ -5,6 +5,7 @@ import CellSelectingRegion from './CellSelectingRegion.vue'
 import { Cursor } from './useCursor'
 import ContextMenu from '@/components/custom/menu/Menu.vue'
 import DragList from '@/components/custom/drag/DragList.vue'
+
 // import Tracker from '@/hooks/useTracker'
 // import useTrackRef from '@/hooks/useTrackRef'
 
@@ -61,7 +62,7 @@ export default {
       (val) => {
         emit('update:items', val)
       },
-      { deep: true }
+      { deep: true },
     )
     const itemsTracker = useRefHistory(clonedItems, { deep: true })
     const undo = (e) => {
@@ -144,19 +145,19 @@ export default {
       else end = cursor.selectedRegion.end
       const topIndex = Math.min(
         cursor.selectedRegion.start.rowIndex,
-        end.rowIndex
+        end.rowIndex,
       )
       const bottomIndex = Math.max(
         cursor.selectedRegion.start.rowIndex,
-        end.rowIndex
+        end.rowIndex,
       )
       const leftIndex = Math.min(
         cursor.selectedRegion.start.columnIndex,
-        end.columnIndex
+        end.columnIndex,
       )
       const rightIndex = Math.max(
         cursor.selectedRegion.start.columnIndex,
-        end.columnIndex
+        end.columnIndex,
       )
 
       // Get the data to copy into clipboard
@@ -191,11 +192,14 @@ export default {
           if (cursor.selectedCell.columnIndex + j >= props.columns.length) {
             break
           }
-          emit('onInput', {
-            rowIndex: cursor.selectedCell.rowIndex + i,
-            column: props.columns[cursor.selectedCell.columnIndex + j],
-            value: pastedItems[i][j],
-          })
+          clonedItems.value[cursor.selectedCell.rowIndex + i][
+            props.columns[cursor.selectedCell.columnIndex + j].name
+          ] = pastedItems[i][j]
+          // emit('onInput', {
+          //   rowIndex: cursor.selectedCell.rowIndex + i,
+          //   column: props.columns[cursor.selectedCell.columnIndex + j],
+          //   value: pastedItems[i][j],
+          // })
         }
       }
     }
