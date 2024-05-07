@@ -100,7 +100,7 @@ const items = [
       </Carousel>
     </Variant>
     <Variant title="list">
-      <Carousel items-class="mt-3 -mx-3">
+      <Carousel items-class="mt-3 -mx-3 overflow-x-auto w-full flex">
         <template #header="{ prev, next }">
           <div class="flex justify-between text-white">
             <h2 class="text-lg font-bold">Top 100 hits</h2>
@@ -135,7 +135,7 @@ const items = [
                 :alt="item.title"
               />
               <span
-                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-xl font-bold text-red-500"
+                class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-xl font-bold text-red-500"
               >
                 {{ `${index} - ${activeIndex}` }}
               </span>

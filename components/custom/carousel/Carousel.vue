@@ -1,6 +1,7 @@
 <script lang="ts" setup>
-import type { Pausable } from '@vueuse/core'
+import type { Pausable, Position } from '@vueuse/core'
 import { CarouselKey } from './keys'
+
 const props = defineProps({
   initialIndex: {
     type: Number,
@@ -17,7 +18,10 @@ const props = defineProps({
       return value >= 0
     },
   },
-  itemsClass: String,
+  itemsClass: {
+    type: String,
+    default: 'overflow-x-auto w-full flex',
+  },
   itemsToList: {
     type: Number,
     default: -1,
@@ -42,6 +46,8 @@ provide(CarouselKey, { addItem })
 // functions
 const eventMoveType = ref('')
 const eventEndType = ref('')
+let startPosition: Position
+let endPosition: Position
 function pointerStart(e: PointerEvent) {
   dragging.value = true
   if (e.pointerType === 'mouse') {
@@ -51,6 +57,8 @@ function pointerStart(e: PointerEvent) {
     eventMoveType.value = 'touchmove'
     eventEndType.value = 'touchend'
   }
+  if (eventEndType.value === 'pointerup')
+    startPosition = { x: e.clientX, y: e.clientY }
   elRef.value?.classList.remove('scroll-snap')
   // stop animation
   elRef.value!.scrollLeft = elRef.value!.scrollLeft
@@ -69,7 +77,9 @@ function pointerMove(e: any) {
   elRef.value!.scrollLeft = slideX.value + delta.value
 }
 
-function pointerUp() {
+function pointerUp(e: any) {
+  if (eventEndType.value === 'pointerup')
+    endPosition = { x: e.clientX, y: e.clientY }
   dragging.value = false
   window.removeEventListener(eventMoveType.value, pointerMove)
   window.removeEventListener(eventEndType.value, pointerUp)
@@ -223,18 +233,42 @@ onMounted(() => {
 onBeforeUnmount(() => {
   observer.disconnect()
 })
+
+function clickCarousel(e: Event) {
+  // Prevent click event on <a> tag if we dragged carousel
+  if (
+    startPosition?.x !== endPosition?.x ||
+    startPosition?.y !== endPosition?.y
+  ) {
+    e.preventDefault()
+    e.stopImmediatePropagation()
+  }
+}
 </script>
 
 <template>
   <div @mouseenter="mouseEnter" @mouseleave="mouseLeave">
-    <slot name="header" :prev="prev" :next="next" />
+    <slot
+      name="header"
+      :active-index="activeIndex"
+      :prev="prev"
+      :next="next"
+      :has-prev="hasPrev"
+      :has-next="hasNext"
+    />
     <div
       ref="elRef"
       class="carousel scroll-snap"
       :class="itemsClass"
       @pointerdown="pointerStart"
+      @click.capture="clickCarousel"
     >
-      <slot :active-index="activeIndex" :scroll-to="scrollTo" />
+      <slot
+        :active-index="activeIndex"
+        :scroll-to="scrollTo"
+        :prev="prev"
+        :next="next"
+      />
     </div>
   </div>
 </template>
@@ -244,7 +278,6 @@ onBeforeUnmount(() => {
   overflow-x: auto;
   width: 100%;
   display: flex;
-
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }

@@ -5,6 +5,7 @@ import img3 from '/images/3.jpeg'
 import img4 from '/images/4.jpeg'
 import img5 from '/images/5.jpeg'
 import img6 from '/images/6.jpeg'
+
 const images = [
   img1,
   img2,
