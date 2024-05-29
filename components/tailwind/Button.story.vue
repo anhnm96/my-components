@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import GlowEffect from '~/components/tailwind/buttons/GlowEffect.vue'
+import RainbowGradient from '~/components/tailwind/buttons/RainbowGradient.vue'
+
 function download(e: MouseEvent) {
   const btn = e.target as HTMLButtonElement
   btn.classList.add('clicked')
@@ -82,6 +85,14 @@ function download(e: MouseEvent) {
         <button class="download-btn" @click="download">Download</button>
       </div>
     </Variant>
+    <Variant title="Glow Effect">
+      <div class="p-4">
+        <GlowEffect />
+      </div>
+    </Variant>
+    <Variant title="Rainbow Gradient" responsive-disabled>
+      <RainbowGradient />
+    </Variant>
   </Story>
 </template>
 
@@ -126,7 +137,9 @@ function download(e: MouseEvent) {
 }
 
 .before\:transition-animation:before {
-  transition: opacity 1s ease-in-out, filter 1s ease-in-out;
+  transition:
+    opacity 1s ease-in-out,
+    filter 1s ease-in-out;
 }
 
 .grid-btn {
@@ -196,7 +209,8 @@ function download(e: MouseEvent) {
 
 .grid-btn svg {
   display: inline-block;
-  transition: translate var(--transition) ease-in-out,
+  transition:
+    translate var(--transition) ease-in-out,
     opacity var(--transition) ease-in-out;
 }
 
