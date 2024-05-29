@@ -5,13 +5,18 @@ import { HstNuxt } from '@histoire/plugin-nuxt'
 export default defineConfig({
   plugins: [HstVue(), HstNuxt()],
   routerMode: 'hash',
+  theme: {
+    defaultColorScheme: 'dark',
+  },
   vite: {
     base: '/my-components/',
+    publicDir: './public',
     server: {
       port: 4000,
     },
     mode: 'histoire',
   },
+  storyIgnored: ['**/node_modules/**', '**/dist/**'],
   tree: {
     groups: [
       {

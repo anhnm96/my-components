@@ -2,6 +2,7 @@
 import ThreeDCard from './3d-card.vue'
 import LineClamp from './LineClamp.vue'
 import Bubble from './Bubble.vue'
+import Linear from './Linear.vue'
 </script>
 
 <template>
@@ -14,6 +15,9 @@ import Bubble from './Bubble.vue'
     </Variant>
     <Variant title="Hover bubble">
       <Bubble />
+    </Variant>
+    <Variant title="Linear hover">
+      <Linear />
     </Variant>
   </Story>
 </template>
