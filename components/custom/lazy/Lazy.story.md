@@ -11,5 +11,3 @@ Next, we have onIdle prop. If it sets to true, then the component will be loaded
   </Lazy>
 </template>
 ```
-
-***Credits: Vue The Road to Enterprise***

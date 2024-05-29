@@ -2,14 +2,8 @@
   <div
     class="relative flex flex-col justify-center overflow-hidden bg-gray-50 py-6 sm:py-12"
   >
-    <img
-      src="/img/beams.jpg"
-      alt=""
-      class="absolute top-1/2 left-1/2 max-w-none -translate-x-1/2 -translate-y-1/2"
-      width="1308"
-    />
     <div
-      class="group relative mx-auto max-w-sm cursor-pointer overflow-hidden rounded-lg bg-white px-10 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
+      class="group relative mx-auto max-w-sm cursor-pointer overflow-hidden rounded-lg bg-white px-10 pb-8 pt-10 shadow-xl ring-1 ring-gray-900/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
     >
       <span
         class="absolute top-10 z-0 h-20 w-20 rounded-full bg-sky-500 transition-all duration-300 group-hover:scale-[10]"

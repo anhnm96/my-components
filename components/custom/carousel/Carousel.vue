@@ -123,6 +123,8 @@ function onScrollFinished() {
   scrollTimeout = setTimeout(() => {
     const newIndex = Math.round(elRef.value!.scrollLeft / itemWidth.value)
     activeIndex.value = newIndex
+    startPosition = { x: 0, y: 0 }
+    endPosition = { x: 0, y: 0 }
     /**
      * scroll-snap breaks animation
      * so we need to wait until animation end

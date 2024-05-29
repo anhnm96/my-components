@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import Spinner from '../Spinner.vue'
-
 const props = withDefaults(
   defineProps<{
     loading?: boolean
@@ -12,7 +10,7 @@ const props = withDefaults(
     loading: false,
     loadingMsg: 'processing, wait...',
     success: false,
-  }
+  },
 )
 const emit = defineEmits<{
   (e: 'click', ev: MouseEvent): void
@@ -39,16 +37,16 @@ function click(event: MouseEvent) {
     <Transition v-if="loading || success" name="fade" mode="out-in">
       <div
         v-if="loading"
-        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+        class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
       >
         <span v-if="loadingMsg" class="sr-only" aria-live="assertive">
           {{ loadingMsg }}
         </span>
-        <Spinner />
+        <BaseSpinner />
       </div>
       <div
         v-else-if="success"
-        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+        class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
       >
         <span v-if="successMsg" class="sr-only" aria-live="assertive">
           {{ successMsg }}

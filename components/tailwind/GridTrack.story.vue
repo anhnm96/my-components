@@ -19,7 +19,7 @@ const variant = 'Variant'
           --color-avatars-background: #f8f9fa;
         "
       >
-        <a href="https://twitter.com/bramus/" title="Bramus on Twitter"
+        <a href="https://x.com/bramus/" title="Bramus on Twitter"
           ><img
             alt="Profile image for Bramus"
             class="avatar"
@@ -27,10 +27,10 @@ const variant = 'Variant'
             height="96"
             loading="lazy"
             sizes="(min-width: 96px) 96px, calc(100vw - 48px)"
-            src="https://web-dev.imgix.net/image/AeNB0cHNDkYPUYzDuv8gInYA9rY2/CQMqvg5UkY4weDnJij3b.jpeg?auto=format"
+            src="https://pbs.twimg.com/profile_images/1276240813333401600/brd0hSfW_400x400.jpg"
             width="96"
         /></a>
-        <a href="https://twitter.com/jh3yy/" title="Jhey on Twitter"
+        <a href="https://x.com/jh3yy/" title="Jhey on Twitter"
           ><img
             alt="Profile image for Jhey Tompkins"
             class="avatar"
@@ -38,10 +38,10 @@ const variant = 'Variant'
             height="96"
             loading="lazy"
             sizes="(min-width: 96px) 96px, calc(100vw - 48px)"
-            src="https://web-dev.imgix.net/image/Dyx9FwYgMyNqy1kMGx8Orz6q0qC3/JjwUlxDMTmjyFEvBC8wG.jpeg?auto=format"
+            src="https://pbs.twimg.com/profile_images/1534700564810018816/anAuSfkp_400x400.jpg"
             width="96"
         /></a>
-        <a href="https://twitter.com/una/" title="Una on Twitter"
+        <a href="https://x.com/una/" title="Una on Twitter"
           ><img
             alt="Profile image for Una Kravets"
             class="avatar"
@@ -49,10 +49,10 @@ const variant = 'Variant'
             height="96"
             loading="lazy"
             sizes="(min-width: 96px) 96px, calc(100vw - 48px)"
-            src="https://web-dev.imgix.net/image/admin/c4bzyDkOZ9MhBaqp0HfW.jpg?auto=format"
+            src="https://pbs.twimg.com/profile_images/1587634978308997121/u7009cGe_400x400.jpg"
             width="96"
         /></a>
-        <a href="https://twitter.com/argyleink/" title="Adam on Twitter"
+        <a href="https://x.com/argyleink/" title="Adam on Twitter"
           ><img
             alt="Profile image for Adam Argyle"
             class="avatar"
@@ -60,13 +60,13 @@ const variant = 'Variant'
             height="96"
             loading="lazy"
             sizes="(min-width: 96px) 96px, calc(100vw - 48px)"
-            src="https://web-dev.imgix.net/image/admin/jdQIxAJrGuFOtwmuDfIn.jpg?auto=format"
+            src="https://pbs.twimg.com/profile_images/1720589781476982784/P9Ld4vC5_400x400.jpg"
             width="96"
         /></a>
       </div>
     </component>
     <component :is="variant" title="Right to left">
-      <div class="bg-[#030507] py-2 px-4">
+      <div class="bg-[#030507] px-4 py-2">
         <ul class="track-list" style="--count: 4">
           <li style="--index: 1" class="track-item">
             <button class="track-btn">
@@ -99,9 +99,11 @@ const variant = 'Variant'
   --gap: 0.35em;
   --avatar-size: 5em;
   --overlap-size: 2em;
-  --hover-overlap-size: 4em; /* Best to keep lower than --avatar-size so that there is still some overlap on hover */
+  --hover-overlap-size: 4em;
+  /* Best to keep lower than --avatar-size so that there is still some overlap on hover */
   --border-size: 0.4em;
-  --num-children: 4; /* Value is automatically updated based on the number of children. See :has() below. Does not work in Firefox though. */
+  --num-children: 4;
+  /* Value is automatically updated based on the number of children. See :has() below. Does not work in Firefox though. */
   --num-children-1: calc(var(--num-children) - 1);
 
   background: var(--color-avatars-background);
@@ -131,9 +133,12 @@ const variant = 'Variant'
   --grid-cell-size-to-use: var(--overlap-size);
 }
 
-:is( /* Wrapped in an :is() to not break Firefox which does not support :has() */
+:is(
+  /* Wrapped in an :is() to not break Firefox which does not support :has() */
   .avatars:hover,
-  .avatars:not(hover):has(> :focus) /* Also grow when tabbing into the list */
+  .avatars:not(hover):has(> :focus)
+
+  /* Also grow when tabbing into the list */
 ) {
   --grid-cell-size-to-use: var(--hover-overlap-size, var(--avatar-size));
 }
@@ -153,9 +158,8 @@ const variant = 'Variant'
 
   --border-color: var(--color-core-primary);
   outline: var(--border-size) solid var(--border-color);
-  outline-offset: calc(
-    var(--border-size) * -2 + 1px
-  ); /* 1px extra to cater for rounding errors */
+  outline-offset: calc(var(--border-size) * -2 + 1px);
+  /* 1px extra to cater for rounding errors */
 
   border: var(--border-size) solid var(--color-avatars-background);
   border-radius: var(--avatar-size);
@@ -172,15 +176,19 @@ const variant = 'Variant'
 .avatars:where(:has(> *:nth-of-type(1):last-child)) {
   --num-children: 1;
 }
+
 .avatars:where(:has(> *:nth-of-type(2):last-child)) {
   --num-children: 2;
 }
+
 .avatars:where(:has(> *:nth-of-type(3):last-child)) {
   --num-children: 3;
 }
+
 .avatars:where(:has(> *:nth-of-type(4):last-child)) {
   --num-children: 4;
 }
+
 .avatars:where(:has(> *:nth-of-type(5):last-child)) {
   --num-children: 5;
 }
@@ -207,7 +215,9 @@ const variant = 'Variant'
 .track-btn {
   background: hsl(0 0% 60% / 0.18);
   @apply inline-block rounded-full px-5 py-2 backdrop-blur-2xl;
-  transition: color 0.2s, background 0.2s;
+  transition:
+    color 0.2s,
+    background 0.2s;
   color: #f8f9fa;
 }
 

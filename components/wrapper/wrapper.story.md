@@ -23,4 +23,3 @@ Though it works, but what happens if you need to move away from vue-multiselect 
   </vue-multiselect>
 </template>
 ```
-***Credits: Vue The Road to Enterprise***

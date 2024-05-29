@@ -32,7 +32,7 @@ const r = ref(true)
       <Expandable>
         <div
           v-if="expanded"
-          class="my-2 rounded-[1.125rem] bg-[#1B1829] px-4 pt-2 pb-[0.8125rem] leading-7 text-gray-400"
+          class="my-2 rounded-[1.125rem] bg-[#1B1829] px-4 pb-[0.8125rem] pt-2 leading-7 text-gray-400"
         >
           <p>
             🔥 Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -61,7 +61,7 @@ const r = ref(true)
         <Expandable dimension="horizontal">
           <div
             v-if="expanded2"
-            class="rounded-[1.125rem] bg-[#1B1829] px-4 pt-2 pb-[0.8125rem] leading-7 text-gray-400"
+            class="rounded-[1.125rem] bg-[#1B1829] px-4 pb-[0.8125rem] pt-2 leading-7 text-gray-400"
           >
             <p>
               🔥 Lorem ipsum dolor sit amet consectetur adipisicing elit.
