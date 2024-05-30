@@ -3,22 +3,42 @@ export default {
   props: {
     items: Array,
   },
-  emits: ['on-input'],
-  setup(props) {
+  emits: ['input'],
+  setup(props, { emit }) {
     const $columns = inject('$columns')
     const $cursor = inject('$cursor')
     const item = computed(() => props.items[$cursor.selectedCell.rowIndex])
     const column = computed(() => $columns[$cursor.selectedCell.columnIndex])
-    const instance = getCurrentInstance()
     const cell = computed(() => item.value[column.value.name])
+    const internalValue = ref(item.value[column.value.name])
+    watch(
+      $cursor.selectedCell,
+      () => {
+        internalValue.value = item.value[column.value.name]
+      },
+      { flush: 'post' },
+    )
+    function updateInternalValue(value) {
+      internalValue.value = value
+    }
 
-    // make table emit on-input event to the wrapper
-    const onInput = (value) =>
-      instance.proxy.$parent.$emit('onInput', {
-        rowIndex: $cursor.selectedCell.rowIndex,
-        column: column.value,
-        value,
-      })
+    const editingCell = reactive({
+      rowIndex: $cursor.selectedCell.rowIndex,
+      columnIndex: $cursor.selectedCell.columnIndex,
+    })
+
+    watch($cursor.editing, (newVal) => {
+      if (newVal) {
+        editingCell.rowIndex = $cursor.selectedCell.rowIndex
+        editingCell.columnIndex = $cursor.selectedCell.columnIndex
+      } else {
+        emit('input', {
+          rowIndex: editingCell.rowIndex,
+          column: $columns[editingCell.columnIndex],
+          value: internalValue.value,
+        })
+      }
+    })
 
     // Re-focus CellCursor if cursor updated. This is to allow interact with keyboard
     const cursorRef = ref(null)
@@ -49,7 +69,7 @@ export default {
     // style
     const td = computed(() => {
       return $cursor.containerElementRef.value?.querySelector(
-        `.cell-${$cursor.selectedCell.rowIndex}-${$cursor.selectedCell.columnIndex}`
+        `.cell-${$cursor.selectedCell.rowIndex}-${$cursor.selectedCell.columnIndex}`,
       )
     })
     const cursorStyle = computed(() => {
@@ -100,7 +120,6 @@ export default {
 
     // handle keyboard
     function setEditMode(state) {
-      console.log('setEdit', state)
       $cursor.editing.value = state
     }
 
@@ -251,7 +270,7 @@ export default {
     }
     const { onKeyDown } = setupNavigation(
       { items: props.items, columns: $columns },
-      setEditMode
+      setEditMode,
     )
     // Chrome cannot perform @paste event on element has `user-select: none`
     // so we need to manually select element to enable @paste event
@@ -267,7 +286,6 @@ export default {
       setEditMode,
       clickOutSide,
       blur,
-      onInput,
       item,
       column,
       cell,
@@ -276,6 +294,8 @@ export default {
       editing: $cursor.editing,
       onKeyDown,
       rowIndex: $cursor.selectedCell.rowIndex,
+      internalValue,
+      updateInternalValue,
     }
   },
 }
@@ -297,14 +317,14 @@ export default {
       :item="item"
       :column="column"
       :row-index="rowIndex"
-      :cell="cell"
-      :on-input="onInput"
+      :cell="internalValue"
+      :on-input="updateInternalValue"
     >
       <input
         type="text"
         class="cell-input"
-        :value="cell"
-        @input="onInput($event.target.value)"
+        :value="internalValue"
+        @input="updateInternalValue($event.target.value)"
       />
     </slot>
   </div>

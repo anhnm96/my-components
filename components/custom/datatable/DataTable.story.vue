@@ -1,10 +1,11 @@
 <script>
 import { countries, items as dataItems } from './items'
 import DataTable from './DataTable.vue'
+
 export default {
   components: { DataTable },
   setup() {
-    const columns = ref([
+    const columns = reactive([
       { name: 'cutpot' },
       { name: 'origin' },
       { name: 'family', required: true, rules: 'required' },
@@ -24,7 +25,6 @@ export default {
     ])
     const items = ref(dataItems)
     const onTableInput = ({ rowIndex, column, value }) => {
-      console.log('update', items.value.length, rowIndex)
       items.value[rowIndex][column.name] = value
     }
 

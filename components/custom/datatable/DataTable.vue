@@ -70,6 +70,7 @@ export default {
       if ((os === 'Mac OS' && e.ctrlKey) || (os !== 'Mac OS' && e.metaKey))
         return
       itemsTracker.undo()
+      emit('update:items', clonedItems.value)
     }
 
     const redo = (e) => {
@@ -77,6 +78,7 @@ export default {
       if ((os === 'Mac OS' && e.ctrlKey) || (os !== 'Mac OS' && e.metaKey))
         return
       itemsTracker.redo()
+      emit('update:items', clonedItems.value)
     }
 
     const actions = [{ label: 'Add above' }]
@@ -86,7 +88,6 @@ export default {
 
       // eslint-disable-next-line @typescript-eslint/no-use-before-define
       newArr.splice(posInsert, 0, { ...dumpItem })
-      console.log(newArr.length)
       emit('update:items', newArr)
 
       // update focusing cursor if add row above
@@ -138,6 +139,17 @@ export default {
         })
       }
     }
+
+    function updateData({ rowIndex, column, value }) {
+      console.info('updateData', { rowIndex, column, value })
+      clonedItems.value[rowIndex][column.name] = value
+      emit('onInput', {
+        rowIndex,
+        column,
+        value,
+      })
+    }
+
     const copy = (event) => {
       event.preventDefault()
       let end = null
@@ -192,14 +204,11 @@ export default {
           if (cursor.selectedCell.columnIndex + j >= props.columns.length) {
             break
           }
-          clonedItems.value[cursor.selectedCell.rowIndex + i][
-            props.columns[cursor.selectedCell.columnIndex + j].name
-          ] = pastedItems[i][j]
-          // emit('onInput', {
-          //   rowIndex: cursor.selectedCell.rowIndex + i,
-          //   column: props.columns[cursor.selectedCell.columnIndex + j],
-          //   value: pastedItems[i][j],
-          // })
+          updateData({
+            rowIndex: cursor.selectedCell.rowIndex + i,
+            column: props.columns[cursor.selectedCell.columnIndex + j],
+            value: pastedItems[i][j],
+          })
         }
       }
     }
@@ -217,6 +226,7 @@ export default {
       insertRow,
       insertColumn,
       clonedItems,
+      updateData,
     }
   },
 }
@@ -309,7 +319,7 @@ const dumpItem = {
       </tr>
     </tbody> -->
     <CellSelectingRegion />
-    <CellCursor :items="items">
+    <CellCursor :items="items" @input="updateData">
       <!-- Pass-through all slots to cell-input component. -->
       <!-- May filter later to only pass cell-input* slots -->
       <template v-for="name of Object.keys($slots)" #[name]="scope">

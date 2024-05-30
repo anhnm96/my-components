@@ -1,4 +1,5 @@
 import type { Ref } from 'vue'
+
 interface Cell {
   rowIndex: number
   columnIndex: number
@@ -16,7 +17,7 @@ export class Cursor {
   constructor(containerElementRef: HTMLElement) {
     this.containerElementRef = containerElementRef
     this.editing = ref(false)
-    this.selectedCell = reactive({ rowIndex: -1, columnIndex: -1 })
+    this.selectedCell = reactive({ rowIndex: 0, columnIndex: 0 })
     this.selectedRegion = reactive({
       start: this.selectedCell,
       end: { rowIndex: -1, columnIndex: -1 },

@@ -6,7 +6,7 @@ const props = defineProps<{
   columnIndex: number
 }>()
 const $cursor = inject('$cursor') as Cursor
-const onSelectCell = () => {
+function onSelectCell() {
   $cursor.selectedCell.rowIndex = props.rowIndex
   $cursor.selectedCell.columnIndex = props.columnIndex
 }

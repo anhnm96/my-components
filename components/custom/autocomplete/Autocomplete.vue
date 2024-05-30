@@ -141,7 +141,7 @@ export default defineComponent({
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-expect-error
       return props.selected.map((selectedOpt) =>
-        props.optionAdapter(selectedOpt)
+        props.optionAdapter(selectedOpt),
       )
     })
 
@@ -151,7 +151,7 @@ export default defineComponent({
       return props.options.map((option) => {
         const adaptedOption = props.optionAdapter(option)
         adaptedOption.selected = adaptedSelects.value.some(
-          (i) => i.id === adaptedOption.id
+          (i) => i.id === adaptedOption.id,
         )
         return adaptedOption
       })
@@ -160,7 +160,7 @@ export default defineComponent({
     const filteredOptions = computed<AdaptedOption[]>(() => {
       if (!props.useFilter || !isDirty.value) return adaptedOptions.value
       return adaptedOptions.value.filter((i) =>
-        props.filter(inputValue.value, i)
+        props.filter(inputValue.value, i),
       )
     })
 
@@ -193,7 +193,7 @@ export default defineComponent({
     }
 
     function safeSalect(item: AdaptedOption) {
-      if (show.value) {
+      if (show.value && item) {
         select(item)
       }
     }
