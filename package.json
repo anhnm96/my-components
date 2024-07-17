@@ -22,6 +22,7 @@
     "@histoire/plugin-nuxt": "^0.17.17",
     "@histoire/plugin-vue": "^0.17.17",
     "@nuxtjs/tailwindcss": "^6.11.4",
+    "@types/d3": "^7.4.3",
     "@types/lodash-es": "^4.17.7",
     "@vue/eslint-config-prettier": "^8.0.0",
     "@vue/test-utils": "^2.3.2",
@@ -44,6 +45,7 @@
     "vitest": "^0.30.1"
   },
   "dependencies": {
+    "d3": "7.6.1",
     "lodash-es": "^4.17.21",
     "motion": "^10.15.3"
   }
