@@ -4,7 +4,7 @@ function click() {
   loading.value = true
   setTimeout(() => {
     loading.value = false
-  }, 1000)
+  }, 1500)
 }
 </script>
 
@@ -48,6 +48,18 @@ function click() {
       >
         <span>Normal</span>
         <Icon class="ml-0.5 mt-px" name="ph:house-line-duotone" />
+      </BaseButton>
+    </Variant>
+    <Variant title="Hide status content">
+      <BaseButton
+        class="rounded bg-indigo-600 px-2 py-1 text-white"
+        :loading="loading"
+        hide-status-content
+        @click="click"
+      >
+        <span>Icon</span>
+        <BaseSpinner v-if="loading" class="ml-0.5 mt-px" />
+        <Icon v-else class="ml-0.5 mt-px" name="ph:house-line-duotone" />
       </BaseButton>
     </Variant>
     <Variant title="others">

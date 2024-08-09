@@ -2,10 +2,10 @@
 import GlowingBackground from '~~/components/tailwind/backgrounds/GlowingBackground.vue'
 import ThreeDCard from '~~/components/tailwind/cards/3d-card.vue'
 import Bubble from '~~/components/tailwind/cards/Bubble.vue'
-import AutocompleteStory from '~~/components/custom/autocomplete/Autocomplete.story.vue'
-import DropzoneStory from '~~/components/custom/dropzone/Dropzone.story.vue'
-import ModalStory from '~~/components/custom/modal/Modal.story.vue'
 import LazyLoad from '~~/components/custom/lazy/Lazy'
+import GlowEffect from '~/components/tailwind/buttons/GlowEffect.vue'
+import RainbowGradient from '~/components/tailwind/buttons/RainbowGradient.vue'
+
 const loading = ref(false)
 function click() {
   loading.value = true
@@ -58,6 +58,14 @@ start()
 <template>
   <div class="pt-20">
     <div>
+      <BorderedTabs />
+      <RainbowGradient />
+      <!-- <StripeSessions /> -->
+    </div>
+    <div class="p-2">
+      <GlowEffect />
+    </div>
+    <div>
       <Gallery />
     </div>
     <div class="flex gap-2 text-white">
@@ -88,7 +96,7 @@ start()
     </div>
     <div
       v-if="visible"
-      class="fixed right-0 bottom-0 z-50 rounded-md bg-gray-300 p-4 shadow-lg md:right-5 md:bottom-5"
+      class="fixed bottom-0 right-0 z-50 rounded-md bg-gray-300 p-4 shadow-lg md:bottom-5 md:right-5"
     >
       <span>May I show you something cool?</span>
       <div class="mt-4 flex gap-4">
@@ -184,17 +192,22 @@ start()
         Normal
       </BaseButton>
       <BaseButton
-        class="items-center justify-between rounded bg-purple-600 px-2 py-1 text-white"
+        class="rounded bg-purple-600 px-2 py-1 text-white"
         :loading="loading"
         @click="click"
       >
         <span>Normal</span>
-        <svg class="flex" width="1em" height="1em" viewBox="0 0 24 24">
-          <path
-            fill="currentColor"
-            d="M10 20v-6h4v6h5v-8h3L12 3L2 12h3v8h5Z"
-          ></path>
-        </svg>
+        <Icon class="ml-0.5 mt-px" name="ph:house-line-duotone" />
+      </BaseButton>
+      <BaseButton
+        class="rounded bg-purple-600 px-2 py-1 text-white"
+        :loading="loading"
+        hide-status-content
+        @click="click"
+      >
+        <span>Normal</span>
+        <BaseSpinner v-if="loading" class="ml-0.5 mt-px" />
+        <Icon v-else class="ml-0.5 mt-px" name="ph:house-line-duotone" />
       </BaseButton>
     </div>
     <div class="mt-5 space-x-2">
@@ -210,9 +223,9 @@ start()
       <BaseBadge icon>Badge</BaseBadge>
       <BaseBadge class="badge-success" icon>Badge</BaseBadge>
     </div>
-    <ModalStory />
+    <!-- <ModalStory />
     <AutocompleteStory />
-    <DropzoneStory />
+    <DropzoneStory /> -->
     <Bubble />
     <Steps />
     <div>
@@ -323,7 +336,7 @@ start()
             >
               <img :src="item.image" />
               <span
-                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-4xl font-bold text-red-500"
+                class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-4xl font-bold text-red-500"
               >
                 {{ `${index} - ${activeIndex}` }}
               </span>

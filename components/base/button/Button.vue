@@ -6,11 +6,13 @@ const props = withDefaults(
     success?: boolean
     successMsg?: string
     contentClass?: string
+    hideStatusContent?: boolean
   }>(),
   {
     loading: false,
     loadingMsg: 'processing, wait...',
     success: false,
+    hideStatusContent: false,
   },
 )
 const emit = defineEmits<{
@@ -33,13 +35,23 @@ function click(event: MouseEvent) {
     :class="[isBtnUninteractive && '!pointer-events-none']"
     @click="click"
   >
-    <span :class="['inline-flex items-center', contentClass, isBtnUninteractive && 'invisible']">
+    <span
+      class="inline-flex items-center"
+      :class="[
+        contentClass,
+        !hideStatusContent && isBtnUninteractive && 'invisible',
+      ]"
+    >
       <slot />
     </span>
-    <Transition v-if="isBtnUninteractive" name="fade" mode="out-in">
+    <Transition
+      v-if="!hideStatusContent && isBtnUninteractive"
+      name="fade"
+      mode="out-in"
+    >
       <div
         v-if="loading"
-        class="flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+        class="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2"
       >
         <span v-if="loadingMsg" class="sr-only" aria-live="assertive">
           {{ loadingMsg }}
@@ -48,7 +60,7 @@ function click(event: MouseEvent) {
       </div>
       <div
         v-else-if="success"
-        class="flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+        class="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2"
       >
         <span v-if="successMsg" class="sr-only" aria-live="assertive">
           {{ successMsg }}
