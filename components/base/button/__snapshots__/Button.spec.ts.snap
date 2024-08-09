@@ -1,7 +1,7 @@
-// Vitest Snapshot v1
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Button.vue > render correctly 1`] = `
-"<button class=\\"btn\\" data-v-b4ce9510=\\"\\">
+"<button data-v-b4ce9510="" class="btn relative"><span data-v-b4ce9510="" class="inline-flex items-center"></span>
   <!--v-if-->
 </button>"
 `;

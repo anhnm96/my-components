@@ -16,7 +16,7 @@
 
 @layer components {
   .btn {
-    @apply inline-flex select-none items-center border border-transparent text-white shadow-sm transition focus:outline-none;
+    @apply inline-flex select-none border border-transparent text-white shadow-sm transition focus:outline-none;
     &:focus-visible {
       @apply focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1;
     }

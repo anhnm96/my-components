@@ -42,17 +42,12 @@ function click() {
     </Variant>
     <Variant title="Normal">
       <BaseButton
-        class="space-x-1 rounded bg-red-600 px-2 py-1 text-white"
+        class="rounded bg-red-600 px-2 py-1 text-white"
         :loading="loading"
         @click="click"
       >
         <span>Normal</span>
-        <svg class="flex" width="1em" height="1em" viewBox="0 0 24 24">
-          <path
-            fill="currentColor"
-            d="M10 20v-6h4v6h5v-8h3L12 3L2 12h3v8h5Z"
-          ></path>
-        </svg>
+        <Icon class="ml-0.5 mt-px" name="ph:house-line-duotone" />
       </BaseButton>
     </Variant>
     <Variant title="others">
