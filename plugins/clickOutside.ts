@@ -9,14 +9,16 @@ export default defineNuxtPlugin((nuxtApp) => {
           binding.value(event)
         }
       }
-      document.body.addEventListener('click', targetEl.__ClickOutsideHandler__)
+      requestAnimationFrame(() => {
+        document.body.addEventListener('click', targetEl.__ClickOutsideHandler__)
+      })
     },
     beforeUnmount(el, binding) {
       let targetEl = el
       if (binding.arg === 'parent') targetEl = el.parentElement
       document.body.removeEventListener(
         'click',
-        targetEl.__ClickOutsideHandler__
+        targetEl.__ClickOutsideHandler__,
       )
     },
   })

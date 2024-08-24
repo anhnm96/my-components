@@ -1,4 +1,4 @@
-const findFocusable = (element: HTMLElement, programmatic = false) => {
+function findFocusable(element: HTMLElement, programmatic = false) {
   if (!element) {
     return null
   }
@@ -21,7 +21,7 @@ const findFocusable = (element: HTMLElement, programmatic = false) => {
 let initialFocusedElement: HTMLElement
 let onKeyDown: (event: KeyboardEvent) => void
 
-const beforeMount = (el: HTMLElement, { value = true }) => {
+function beforeMount(el: HTMLElement, { value = true }) {
   if (value) {
     initialFocusedElement = document.activeElement as HTMLElement
     let focusable = findFocusable(el)
@@ -47,7 +47,7 @@ const beforeMount = (el: HTMLElement, { value = true }) => {
         } else if (
           (event.target === lastFocusable ||
             Array.from(focusableProg || []).includes(
-              event.target as HTMLElement
+              event.target as HTMLElement,
             )) &&
           !event.shiftKey &&
           event.key === 'Tab'
@@ -61,11 +61,11 @@ const beforeMount = (el: HTMLElement, { value = true }) => {
   }
 }
 
-const mounted = (el: HTMLElement) => {
+function mounted(el: HTMLElement) {
   el.focus()
 }
 
-const beforeUnmount = (el: HTMLElement) => {
+function beforeUnmount(el: HTMLElement) {
   initialFocusedElement.focus()
   el.removeEventListener('keydown', onKeyDown)
 }
