@@ -4,7 +4,7 @@ import type { Node } from '~/types/FileTree'
 const props = withDefaults(
   defineProps<{
     selected: Node
-    tree: Node
+    node: Node
     depth?: number
     selectDir?: boolean
     disabled?: boolean
@@ -13,25 +13,25 @@ const props = withDefaults(
 )
 const emit = defineEmits(['update:selected'])
 const isFileSelected = computed(
-  () => props.tree.filepath === props.selected.filepath,
+  () => props.node.filepath === props.selected.filepath,
 )
-const isDirectory = computed(() => !!props.tree.nodes)
+const isDirectory = computed(() => !!props.node.nodes)
 // TODO: config default open from templates
 const isDirectoryOpen = ref(true)
-const isDisabled = computed(() => props.disabled || props.tree.disabled)
+const isDisabled = computed(() => props.disabled || props.node.disabled)
 function handleClick() {
   if (isDisabled.value) return
   if (isDirectory.value) {
     isDirectoryOpen.value = !isDirectoryOpen.value
-    if (props.selectDir) emit('update:selected', props.tree)
-  } else if (props.tree) emit('update:selected', props.tree)
+    if (props.selectDir) emit('update:selected', props.node)
+  } else if (props.node) emit('update:selected', props.node)
 }
 </script>
 
 <template>
   <div>
     <button
-      v-if="tree.name"
+      v-if="node.name"
       class="flex w-full items-center gap-1 rounded px-2 py-1 text-left text-sm"
       :style="{
         paddingLeft: `${0.2 + 0.8 * props.depth}rem`,
@@ -44,6 +44,8 @@ function handleClick() {
           ? 'bg-gray-500 bg-opacity-50 text-gray-300'
           : 'text-gray-500',
       ]"
+      role="treeitem"
+      :aria-expanded="isDirectory ? isDirectoryOpen : undefined"
       @click="handleClick"
     >
       <Icon
@@ -55,19 +57,19 @@ function handleClick() {
       <div v-else class="h-4 w-4"></div>
       <FileIcon
         class="h-4 w-4"
-        :path="tree.name"
+        :path="node.name"
         :is-directory="isDirectory"
         :is-directory-open="isDirectoryOpen"
       />
-      <span class="ml-1">{{ tree.name }}</span>
+      <span class="ml-1">{{ node.name }}</span>
     </button>
     <div v-if="isDirectory" v-show="isDirectoryOpen">
       <FileTree
-        v-for="(child, index) in tree.nodes"
+        v-for="(child, index) in node.nodes"
         :key="index"
         :selected="selected"
         :select-dir="selectDir"
-        :tree="child"
+        :node="child"
         :depth="depth + 1"
         :disabled="isDisabled"
         @update:selected="emit('update:selected', $event)"

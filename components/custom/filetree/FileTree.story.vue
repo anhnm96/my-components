@@ -102,13 +102,13 @@ const selectedFile2 = shallowRef({ ...tree2 })
     <Variant title="Example 1">
       <FileTree
         v-model:selected="selectedFile"
-        :tree="filetree"
+        :node="filetree"
         :depth="-1"
         select-dir
       />
     </Variant>
     <Variant title="Example 2">
-      <FileTree v-model:selected="selectedFile2" :tree="tree2" select-dir />
+      <FileTree v-model:selected="selectedFile2" :node="tree2" select-dir />
     </Variant>
   </Story>
 </template>
