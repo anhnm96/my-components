@@ -46,6 +46,7 @@ function handleClick() {
       ]"
       role="treeitem"
       :aria-expanded="isDirectory ? isDirectoryOpen : undefined"
+      :aria-disabled="isDisabled"
       @click="handleClick"
     >
       <Icon
