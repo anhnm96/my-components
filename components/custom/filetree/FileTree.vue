@@ -1,9 +1,5 @@
 <script setup lang="ts">
-interface Node {
-  name: string
-  filepath: string
-  nodes?: Node[]
-}
+import type { Node } from '~/types/FileTree'
 
 const props = withDefaults(
   defineProps<{
@@ -11,6 +7,7 @@ const props = withDefaults(
     tree: Node
     depth?: number
     selectDir?: boolean
+    disabled?: boolean
   }>(),
   { depth: 0 },
 )
@@ -21,7 +18,9 @@ const isFileSelected = computed(
 const isDirectory = computed(() => !!props.tree.nodes)
 // TODO: config default open from templates
 const isDirectoryOpen = ref(true)
+const isDisabled = computed(() => props.disabled || props.tree.disabled)
 function handleClick() {
+  if (isDisabled.value) return
   if (isDirectory.value) {
     isDirectoryOpen.value = !isDirectoryOpen.value
     if (props.selectDir) emit('update:selected', props.tree)
@@ -33,15 +32,18 @@ function handleClick() {
   <div>
     <button
       v-if="tree.name"
-      class="flex w-full items-center gap-1 rounded px-2 py-1 text-left text-sm hover:bg-gray-500 hover:bg-opacity-50"
+      class="flex w-full items-center gap-1 rounded px-2 py-1 text-left text-sm"
       :style="{
         paddingLeft: `${0.2 + 0.8 * props.depth}rem`,
       }"
-      :class="
+      :class="[
+        isDisabled
+          ? 'cursor-default text-gray-600'
+          : 'hover:bg-gray-500 hover:bg-opacity-50',
         isFileSelected
           ? 'bg-gray-500 bg-opacity-50 text-gray-300'
-          : 'text-gray-500'
-      "
+          : 'text-gray-500',
+      ]"
       @click="handleClick"
     >
       <Icon
@@ -61,12 +63,13 @@ function handleClick() {
     </button>
     <div v-if="isDirectory" v-show="isDirectoryOpen">
       <FileTree
-        v-for="(child, chileName) in tree.nodes"
-        :key="chileName"
+        v-for="(child, index) in tree.nodes"
+        :key="index"
         :selected="selected"
         :select-dir="selectDir"
         :tree="child"
         :depth="depth + 1"
+        :disabled="isDisabled"
         @update:selected="emit('update:selected', $event)"
       />
     </div>

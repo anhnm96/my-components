@@ -60,7 +60,7 @@ const tree2 = {
             {
               name: '2000s',
               nodes: [
-                { name: 'Gladiator.mp4' },
+                { name: 'Gladiator.mp4', disabled: true },
                 { name: 'The-Dark-Knight.mp4' },
               ],
             },
@@ -69,6 +69,7 @@ const tree2 = {
         },
         {
           name: 'Comedy',
+          disabled: true,
           nodes: [{ name: '2000s', nodes: [{ name: 'Superbad.mp4' }] }],
         },
       ],
