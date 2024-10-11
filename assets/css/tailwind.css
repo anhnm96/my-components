@@ -4,10 +4,15 @@
 
 :root {
   --info: #1890ff;
+  --info-active: #0a73eb;
   --success: #52c41a;
+  --success-active: #3d9f11;
   --warning: #faad14;
+  --warning-active: #dd7f02;
   --danger: #ff4d4f;
-  --primary: #3a21ba;
+  --danger-active: #ed1517;
+  --primary: #7C3AED;
+  --primary-active: #6928d9;
 }
 
 [data-theme='light'] {
@@ -36,9 +41,13 @@
     /* btn variants */
     &-ghost {
       @apply bg-transparent text-neutral-500 shadow-none focus:ring-current;
-      &:hover,
-      &.btn-active {
-        @apply bg-neutral-500 bg-opacity-20;
+      &:not([disabled]):not([aria-disabled="true"]) {
+        &:hover {
+          @apply bg-neutral-500 bg-opacity-20;
+        }
+        &:active {
+          @apply text-neutral-400 bg-neutral-500 bg-opacity-40;
+        }
       }
     }
 
@@ -46,30 +55,65 @@
       @apply bg-transparent text-indigo-500 shadow-none hover:underline;
     }
 
-    &-outline {
+    &-outline, &-toggle {
       @apply border-current bg-transparent text-neutral-400 focus:ring-current;
-      &:hover {
-        @apply border-neutral-400 bg-neutral-400 text-white;
+
+      &:not([disabled]):not([aria-disabled="true"]):active {
+        @apply border-neutral-500 bg-neutral-500 text-neutral-800;
+      }
+    }
+
+    &-outline {
+      &:not([disabled]):not([aria-disabled="true"]):hover {
+        @apply border-neutral-400 bg-neutral-400 text-neutral-800;
       }
 
       &.btn-primary {
         @apply text-primary;
-        &:hover {
-          @apply border-primary bg-primary text-white;
+        &:not([disabled]):not([aria-disabled="true"]) {
+          &:hover {
+            @apply border-primary bg-primary text-neutral-800;
+          }
+          &:active {
+            @apply border-[--primary-active] bg-[--primary-active] text-neutral-800;
+          }
         }
       }
 
       &.btn-info {
         @apply text-info;
-        &:hover {
-          @apply border-info bg-info text-white;
+        &:not([disabled]):not([aria-disabled="true"]) {
+          &:hover {
+            @apply border-info bg-info text-neutral-800;
+          }
+          &:active {
+            @apply border-[--info-active] bg-[--info-active] text-neutral-800;
+          }
         }
       }
 
       &.btn-success {
         @apply text-success;
+        &:not([disabled]):not([aria-disabled="true"]) {
+          &:hover {
+            @apply border-success bg-success text-neutral-800;
+          }
+          &:active:not([disabled]):not([aria-disabled="true"]) {
+            @apply border-[--success-active] bg-[--success-active] text-neutral-800;
+          }
+        }
+      }
+    }
+
+    &-toggle[aria-pressed="true"] {
+      @apply border-[--primary] bg-[--primary] text-neutral-100;
+
+      &:not([disabled]):not([aria-disabled="true"]) {
         &:hover {
-          @apply border-success bg-success text-white;
+          @apply border-[--primary] bg-[--primary] text-neutral-100;
+        }
+        &:active {
+          @apply border-[--primary-active] bg-[--primary-active] text-neutral-100;
         }
       }
     }

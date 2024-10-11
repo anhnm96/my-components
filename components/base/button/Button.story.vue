@@ -62,6 +62,9 @@ function click() {
         <Icon v-else class="ml-0.5 mt-px" name="ph:house-line-duotone" />
       </BaseButton>
     </Variant>
+    <Variant title="toggle">
+      <ToggleButton :selected="false">Pin</ToggleButton>
+    </Variant>
     <Variant title="others">
       <div class="space-x-2 space-y-2">
         <button class="btn btn-link">Link</button>

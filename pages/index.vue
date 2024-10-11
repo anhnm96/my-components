@@ -60,6 +60,11 @@ start()
     <div>
       <BorderedTabs />
       <RainbowGradient />
+      <ToggleButton :selected="true">Pin</ToggleButton>
+      <ToggleButton :selected="true" aria-disabled="true">Pin</ToggleButton>
+      <BaseButton class="btn btn-outline btn-info"> Test </BaseButton>
+      <button class="btn btn-outline btn-success">Test</button>
+      <button class="btn btn-ghost">Ghost</button>
       <!-- <StripeSessions /> -->
     </div>
     <div class="p-2">
