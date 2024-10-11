@@ -16,21 +16,21 @@ const props = withDefaults(
     max: 100,
     updateOnTouch: true,
     buffer: 12,
-  }
+  },
 )
 const emit = defineEmits<{
   (e: 'update:modelValue', payload: number): void
 }>()
 
 const transition = { type: 'spring', bounce: 0, duration: 0.3 }
-const progress = useInternalValue(props, 'modelValue', emit)
+const progress = useInternalValue(props, emit)
 const height = 12
 const width = computed(() => `${(progress.value / props.max) * 100}%`)
 
 const hovered = ref(false)
 const panning = ref(false)
 const state = computed(() =>
-  panning.value ? 'panning' : hovered.value ? 'hovered' : 'idle'
+  panning.value ? 'panning' : hovered.value ? 'hovered' : 'idle',
 )
 const widthVariants = {
   idle: { width: 'calc(95% - 48px)' },

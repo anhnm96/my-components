@@ -5,12 +5,12 @@ interface UseInternaValueOptions {
 export function useInternalValue<
   P extends Record<string, any>,
   K extends keyof P,
-  Name extends string
+  Name extends string,
 >(
   props: P,
-  key: K = 'modelValue' as K,
   emit?: (e: Name, payload: any) => void,
-  options: UseInternaValueOptions = {}
+  key: K = 'modelValue' as K,
+  options: UseInternaValueOptions = {},
 ) {
   const { eventName } = options
   const _modelValue = ref(props[key])
@@ -19,7 +19,7 @@ export function useInternalValue<
     () => props[key],
     (val) => {
       _modelValue.value = val
-    }
+    },
   )
 
   const event = (eventName || `update:${key.toString()}`) as Name

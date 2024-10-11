@@ -8,19 +8,19 @@ describe('useInternalValue', () => {
   })
 
   it('should work with custom key', () => {
-    const data = useInternalValue({ data: 'data' }, 'data', emitMock)
+    const data = useInternalValue({ data: 'data' }, emitMock, 'data')
     expect(data.value).toBe('data')
   })
 
   it('should emit on value change', () => {
-    const data = useInternalValue(defaultProps(), undefined, emitMock)
+    const data = useInternalValue(defaultProps(), emitMock)
     data.value = 'changed'
 
     expect(emitMock).toHaveBeenCalledWith('update:modelValue', 'changed')
   })
 
   it('should use eventName if set', async () => {
-    const data = useInternalValue(defaultProps(), undefined, emitMock, {
+    const data = useInternalValue(defaultProps(), emitMock, undefined, {
       eventName: 'onChange',
     })
     data.value = 'changed'

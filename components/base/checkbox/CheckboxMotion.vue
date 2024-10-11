@@ -9,11 +9,11 @@ const props = withDefaults(
   {
     rootClass: 'inline-flex gap-2',
     modelValue: false,
-  }
+  },
 )
 
 const emit = defineEmits(['update:modelValue'])
-const value = useInternalValue(props, 'modelValue', emit)
+const value = useInternalValue(props, emit)
 const inputRef = ref()
 
 function focus() {
@@ -36,7 +36,7 @@ watch(
   () => props.indeterminate,
   (val) => {
     if (inputRef.value) inputRef.value.indeterminate = val
-  }
+  },
 )
 
 const isIndeterminated = computed(() => {

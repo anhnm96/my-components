@@ -7,11 +7,11 @@ const props = withDefaults(
   {
     rootClass: 'inline-flex space-x-2',
     modelValue: false,
-  }
+  },
 )
 
 const emit = defineEmits(['update:modelValue'])
-const value = useInternalValue(props, 'modelValue', emit)
+const value = useInternalValue(props, emit)
 
 const inputRef = ref()
 function focus() {

@@ -21,15 +21,17 @@ const props = withDefaults(
     width: '50px',
     height: '24px',
     margin: '3px',
-  }
+  },
 )
 
 const emit = defineEmits<{
   (e: 'update:modelValue', payload: boolean): void
 }>()
 
-const internalValue = useInternalValue(props, 'modelValue', emit)
-const toggle = () => (internalValue.value = !internalValue.value)
+const internalValue = useInternalValue(props, emit)
+function toggle() {
+  return (internalValue.value = !internalValue.value)
+}
 
 const styleVars = reactive({
   sWidth: props.width,
