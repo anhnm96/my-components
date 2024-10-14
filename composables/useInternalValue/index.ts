@@ -1,5 +1,6 @@
 interface UseInternaValueOptions {
   eventName?: string
+  defaultValue?: any
 }
 
 export function useInternalValue<
@@ -12,8 +13,8 @@ export function useInternalValue<
   key: K = 'modelValue' as K,
   options: UseInternaValueOptions = {},
 ) {
-  const { eventName } = options
-  const _modelValue = ref(props[key])
+  const { eventName, defaultValue } = options
+  const _modelValue = ref(props[key] || defaultValue)
 
   watch(
     () => props[key],

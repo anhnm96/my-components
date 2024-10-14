@@ -45,7 +45,7 @@ function sortNodes(node: Node): Node {
 }
 
 sortNodes(filetree)
-const selectedFile = shallowRef(filetree)
+const selectedFile = shallowRef({ ...filetree })
 
 // example 2
 const tree2 = {
