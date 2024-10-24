@@ -15,7 +15,6 @@
     "deploy": "gh-pages -d .histoire/dist"
   },
   "devDependencies": {
-    "@4tw/cypress-drag-drop": "^2.2.3",
     "@antfu/eslint-config": "^0.38.4",
     "@commitlint/cli": "^17.6.1",
     "@commitlint/config-conventional": "^17.6.1",
@@ -29,14 +28,12 @@
     "@vueuse/core": "^10.0.2",
     "@vueuse/nuxt": "^10.0.2",
     "@vueuse/router": "^10.0.2",
-    "cypress": "^12.9.0",
     "eslint": "^8.38.0",
-    "eslint-plugin-cypress": "^2.13.2",
     "gh-pages": "^5.0.0",
     "happy-dom": "^9.6.1",
     "histoire": "^0.17.17",
     "husky": "^8.0.3",
-    "nuxt": "^3.11.2",
+    "nuxt": "^3.13.2",
     "nuxt-icon": "^0.6.10",
     "prettier": "^3.1.0",
     "prettier-plugin-tailwindcss": "^0.5.7",
@@ -47,6 +44,7 @@
   "dependencies": {
     "d3": "7.6.1",
     "lodash-es": "^4.17.21",
-    "motion": "^10.15.3"
+    "motion": "^10.15.3",
+    "vue": "^3.5.12"
   }
 }
