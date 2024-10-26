@@ -68,30 +68,62 @@ start()
       <!-- <StripeSessions /> -->
     </div>
     <div>
-      <PanelGroup class="flex bg-gray-200">
-        <div class="w-1/3 bg-green-400">Fix</div>
-        <Panel class="w-1/3">TT</Panel>
+      <PanelGroup class="relative flex bg-gray-200">
+        <Panel class="flex-grow">Fixasdasdsa</Panel>
+        <PanelHandle />
+        <Panel class="flex-grow">TT</Panel>
+        <PanelHandle />
         <Panel class="flex-grow">Hi</Panel>
       </PanelGroup>
       <table class="mt-4 w-full bg-white">
         <colgroup>
           <col span="3" class="border border-red-400" />
         </colgroup>
-        <PanelGroup as="tr">
-          <Panel as="th">Company</Panel>
-          <Panel as="th">Contact</Panel>
-          <Panel as="th">Country</Panel>
-        </PanelGroup>
-        <tr>
-          <td>Alfreds Futterkiste</td>
-          <td>Maria Anders</td>
-          <td>Germany</td>
-        </tr>
-        <tr>
-          <td>Centro comercial Moctezuma</td>
-          <td>Francisco Chang</td>
-          <td>Mexico</td>
-        </tr>
+        <thead>
+          <PanelGroup as="tr">
+            <Panel as="th" style="width: 200px">Company</Panel>
+            <PanelHandle />
+            <Panel as="th" style="width: 300px">Contact</Panel>
+            <PanelHandle />
+            <Panel as="th">Country</Panel>
+          </PanelGroup>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Alfreds Futterkiste</td>
+            <td>Maria Anders</td>
+            <td>Germany</td>
+          </tr>
+          <tr>
+            <td>Centro comercial Moctezuma</td>
+            <td>Francisco Chang</td>
+            <td>Mexico</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="mt-4 w-full bg-white">
+        <colgroup>
+          <col span="3" class="border border-red-400" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th style="width: 200px">Company</th>
+            <th style="width: 300px">Contact</th>
+            <th>Country</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Alfreds Futterkiste</td>
+            <td>Maria Anders</td>
+            <td>Germany</td>
+          </tr>
+          <tr>
+            <td>Centro comercial Moctezuma</td>
+            <td>Francisco Chang</td>
+            <td>Mexico</td>
+          </tr>
+        </tbody>
       </table>
     </div>
     <div class="p-2">

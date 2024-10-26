@@ -1,42 +1,114 @@
 <script lang="ts">
 interface PanelGroupContext {
+  direction: Direction
+  startDragging: (handleEl: HTMLElement) => void
+  stopDragging: () => void
   addItem: (item: HTMLDivElement) => void
-  update: (srcEl: HTMLElement, delta: number) => void
+  getResizeHandlePanelIds: (handleEl?: HTMLElement) => HTMLElement[]
 }
 
+type Direction = 'vertical' | 'horizontal'
+
 export const PanelGroupKey: InjectionKey<PanelGroupContext> =
-  Symbol('PanelGrop')
+  Symbol('PanelGroup')
 </script>
 
 <script lang="ts" setup>
-withDefaults(
-  defineProps<{
-    as?: string
-  }>(),
-  { as: 'div' },
-)
+const { direction = 'horizontal', as = 'div' } = defineProps<{
+  as?: string
+  direction?: Direction
+}>()
 
 const items = ref<HTMLElement[]>([])
 function addItem(item: HTMLElement) {
   items.value.push(item)
 }
 
-function update(srcEl: HTMLElement, newWidth: number) {
-  const index = items.value.indexOf(srcEl)
-  srcEl.style.width = `${newWidth}px`
-  const nextEl = items.value[index + 1]
-  nextEl.style.width = ''
-  requestAnimationFrame(() => {
-    srcEl.style.width = `${srcEl.getBoundingClientRect().width}px`
-    nextEl.style.width = `${nextEl.getBoundingClientRect().width}px`
-  })
+function getHandlesForGroup(): HTMLElement[] {
+  return Array.from(
+    document.querySelectorAll(
+      `[data-panel-group-id="${groupId}"] [data-panel-handle-id]`,
+    ),
+  )
 }
 
-provide(PanelGroupKey, { addItem, update })
+function getResizeHandlePanelIds(
+  handleEl?: HTMLElement,
+): [idBefore: HTMLElement, idAfter: HTMLElement] {
+  const handles = getHandlesForGroup()
+  const index = handles.indexOf(handleEl || activeHandleEl!)
+
+  const idBefore = items.value[index]
+  const idAfter = items.value[index + 1]
+  return [idBefore, idAfter]
+}
+
+const startX = ref()
+const delta = ref(0)
+let activeHandleEl: HTMLElement | null
+function startDragging(handleEl: HTMLElement) {
+  activeHandleEl = handleEl
+  const [itemBefore] = getResizeHandlePanelIds()
+  startX.value = itemBefore.getBoundingClientRect().right
+  window.addEventListener('pointermove', pointerMove)
+  window.addEventListener('pointerup', stopDragging)
+}
+
+function pointerMove(e: any) {
+  delta.value = e.clientX - startX.value
+  activeHandleEl!.style.transform = `translateX(${delta.value}px)`
+}
+
+function stopDragging() {
+  window.removeEventListener('pointermove', pointerMove)
+  window.removeEventListener('pointerup', stopDragging)
+  if (delta.value === 0) return
+  update()
+  // reset
+  activeHandleEl!.style.transform = `translateX(0px)`
+  activeHandleEl = null
+  delta.value = 0
+}
+
+function update() {
+  const [itemBefore, itemAfter] = getResizeHandlePanelIds()
+
+  const initWidth = itemBefore.getBoundingClientRect().width
+  const newWidth = initWidth + delta.value
+  // if (props.minWidth !== undefined && newWidth <= props.minWidth)
+  //   newWidth = props.minWidth
+
+  const initWidth2 = itemAfter.getBoundingClientRect().width
+  const sum = initWidth + initWidth2
+  itemBefore.style.width = `${newWidth}px`
+  itemAfter.style.width = `${sum - newWidth}px`
+}
+
+const groupId = useId()
+provide(PanelGroupKey, {
+  direction,
+  startDragging,
+  stopDragging,
+  addItem,
+  getResizeHandlePanelIds,
+})
+
+onMounted(() => {
+  const widths: string[] = []
+  requestAnimationFrame(() => {
+    items.value.forEach((item) => {
+      const width = `${item.getBoundingClientRect().width}px`
+      widths.push(width)
+    })
+    items.value.forEach((item, index) => {
+      item.style.width = widths[index]
+    })
+  })
+})
 </script>
 
 <template>
-  <component :is="as">
+  <component :is="as" :data-panel-group-id="groupId">
     <slot />
   </component>
 </template>
