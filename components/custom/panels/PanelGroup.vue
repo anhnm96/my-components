@@ -75,16 +75,26 @@ function stopDragging() {
 
 function update() {
   const [itemBefore, itemAfter] = getHandlePanelElements()
+  const itemBeforeWidth = itemBefore.getBoundingClientRect().width
+  let newWidth = itemBeforeWidth + delta.value
+  const itemBeforeMinSize = itemBefore.getAttribute('data-panel-item-min')
+  if (itemBeforeMinSize !== undefined && newWidth <= Number(itemBeforeMinSize))
+    newWidth = Number(itemBeforeMinSize)
 
-  const initWidth = itemBefore.getBoundingClientRect().width
-  const newWidth = initWidth + delta.value
-  // if (props.minWidth !== undefined && newWidth <= props.minWidth)
-  //   newWidth = props.minWidth
+  const itemAfterMinSize = itemAfter.getAttribute('data-panel-item-min')
+  const itemAfterWidth = itemAfter.getBoundingClientRect().width
+  const totalWidth = itemBeforeWidth + itemAfterWidth
+  let itemAfterNewWidth = totalWidth - newWidth
+  if (
+    itemAfterMinSize !== undefined &&
+    itemAfterNewWidth <= Number(itemAfterMinSize)
+  ) {
+    itemAfterNewWidth = Number(itemAfterMinSize)
+    newWidth = totalWidth - itemAfterNewWidth
+  }
 
-  const initWidth2 = itemAfter.getBoundingClientRect().width
-  const sum = initWidth + initWidth2
   itemBefore.style.width = `${newWidth}px`
-  itemAfter.style.width = `${sum - newWidth}px`
+  itemAfter.style.width = `${itemAfterNewWidth}px`
 }
 
 const groupId = useId()

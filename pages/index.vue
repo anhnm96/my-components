@@ -69,9 +69,9 @@ start()
     </div>
     <div>
       <PanelGroup class="relative flex bg-gray-200">
-        <Panel class="flex-grow">Fixasdasdsa</Panel>
+        <Panel :min="150" class="flex-grow">Fixasdasdsa</Panel>
         <PanelHandle />
-        <Panel class="flex-grow">TT</Panel>
+        <Panel :min="150" class="flex-grow">TT</Panel>
         <PanelHandle />
         <Panel class="flex-grow">Hi</Panel>
       </PanelGroup>
@@ -81,9 +81,9 @@ start()
         </colgroup>
         <thead>
           <PanelGroup as="tr">
-            <Panel as="th" style="width: 200px">Company</Panel>
+            <Panel as="th" :min="150" style="width: 200px">Company</Panel>
             <PanelHandle />
-            <Panel as="th" style="width: 300px">Contact</Panel>
+            <Panel as="th" :min="150" style="width: 300px">Contact</Panel>
             <PanelHandle />
             <Panel as="th">Country</Panel>
           </PanelGroup>

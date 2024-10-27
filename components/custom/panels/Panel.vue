@@ -3,7 +3,7 @@ import { PanelGroupKey } from './PanelGroup.vue'
 
 const { as = 'div' } = defineProps<{
   as?: string
-  minWidth?: number
+  min?: number
 }>()
 
 const { addItem } = inject(PanelGroupKey)!
@@ -21,6 +21,7 @@ const panelId = useId()
     :is="as"
     ref="panelRef"
     :data-panel-item-id="panelId"
+    :data-panel-item-min="min"
     class="relative select-none"
   >
     <slot />
