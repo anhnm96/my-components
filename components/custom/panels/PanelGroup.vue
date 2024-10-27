@@ -24,26 +24,22 @@ function addItem(item: HTMLElement) {
   items.value.push(item)
 }
 
-function getHandlesForGroup(): HTMLElement[] {
-  return Array.from(
+function getHandlePanelElements(
+  handleEl?: HTMLElement,
+): [itemBefore: HTMLElement, itemAfter: HTMLElement] {
+  const handles = Array.from(
     document.querySelectorAll(
       `[data-panel-group-id="${groupId}"] [data-panel-handle-id]`,
     ),
   )
-}
-
-function getHandlePanelElements(
-  handleEl?: HTMLElement,
-): [idBefore: HTMLElement, idAfter: HTMLElement] {
-  const handles = getHandlesForGroup()
   const index = handles.indexOf(handleEl || activeHandleEl!)
 
-  const idBefore = items.value[index]
-  const idAfter = items.value[index + 1]
-  return [idBefore, idAfter]
+  const itemBefore = items.value[index]
+  const itemAfter = items.value[index + 1]
+  return [itemBefore, itemAfter]
 }
 
-const startX = ref()
+let startX: number
 const delta = ref(0)
 let activeHandleEl: HTMLElement | null
 let handleOffset: number
@@ -51,13 +47,13 @@ function startDragging(handleEl: HTMLElement) {
   activeHandleEl = handleEl
   handleOffset = activeHandleEl.getBoundingClientRect().width / 2
   const [itemBefore] = getHandlePanelElements()
-  startX.value = itemBefore.getBoundingClientRect().right
+  startX = itemBefore.getBoundingClientRect().right
   window.addEventListener('pointermove', pointerMove)
   window.addEventListener('pointerup', stopDragging)
 }
 
 function pointerMove(e: any) {
-  delta.value = e.clientX - startX.value
+  delta.value = e.clientX - startX
   activeHandleEl!.style.transform = `translateX(${delta.value + handleOffset}px)`
 }
 
