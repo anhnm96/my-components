@@ -22,9 +22,8 @@ const panelId = useId()
     ref="panelRef"
     :data-panel-item-id="panelId"
     :data-panel-item-min="min"
-    class="relative select-none"
+    class="relative"
   >
     <slot />
-    <div class="absolute right-0 top-0 w-1 bg-red-500">&nbsp;</div>
   </component>
 </template>

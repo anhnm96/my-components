@@ -2,7 +2,9 @@
 interface PanelGroupContext {
   addItem: (item: HTMLDivElement) => void
   direction: Direction
-  startDragging: (handleEl: HTMLElement) => void
+  teleportHandle: boolean
+  activeHandleId: Ref<string>
+  startDragging: (handleEl: HTMLElement, handleId: string) => void
   stopDragging: () => void
   getHandlePanelElements: (handleEl?: HTMLElement) => HTMLElement[]
 }
@@ -14,9 +16,14 @@ export const PanelGroupKey: InjectionKey<PanelGroupContext> =
 </script>
 
 <script lang="ts" setup>
-const { direction = 'horizontal', as = 'div' } = defineProps<{
+const {
+  direction = 'horizontal',
+  as = 'div',
+  teleportHandle,
+} = defineProps<{
   as?: string
   direction?: Direction
+  teleportHandle?: boolean
 }>()
 
 const items = ref<HTMLElement[]>([])
@@ -42,10 +49,13 @@ function getHandlePanelElements(
 let startX: number
 const delta = ref(0)
 let activeHandleEl: HTMLElement | null
-let handleOffset: number
-function startDragging(handleEl: HTMLElement) {
+const activeHandleId = ref()
+let handleOffset = 0
+function startDragging(handleEl: HTMLElement, handleId: string) {
   activeHandleEl = handleEl
-  handleOffset = activeHandleEl.getBoundingClientRect().width / 2
+  activeHandleId.value = handleId
+  if (teleportHandle)
+    handleOffset = activeHandleEl.getBoundingClientRect().width / 2
   const [itemBefore] = getHandlePanelElements()
   startX = itemBefore.getBoundingClientRect().right
   window.addEventListener('pointermove', pointerMove)
@@ -60,11 +70,16 @@ function pointerMove(e: any) {
 function stopDragging() {
   window.removeEventListener('pointermove', pointerMove)
   window.removeEventListener('pointerup', stopDragging)
+  activeHandleId.value = ''
   if (delta.value === 0) return
   update()
   // reset
-  activeHandleEl!.style.transform =
-    direction === 'horizontal' ? 'translateX(50%)' : 'translateY(50%)'
+  if (teleportHandle)
+    activeHandleEl!.style.transform =
+      direction === 'horizontal' ? 'translateX(50%)' : 'translateY(50%)'
+  else
+    activeHandleEl!.style.transform =
+      direction === 'horizontal' ? 'translateX(0)' : 'translateY(0)'
   activeHandleEl = null
   delta.value = 0
 }
@@ -95,10 +110,12 @@ function update() {
 
 const groupId = useId()
 provide(PanelGroupKey, {
+  addItem,
   direction,
+  teleportHandle,
+  activeHandleId,
   startDragging,
   stopDragging,
-  addItem,
   getHandlePanelElements,
 })
 

@@ -1,11 +1,24 @@
 <script lang="ts" setup>
 import { PanelGroupKey } from './PanelGroup.vue'
 
+const { draggingCls = 'bg-gray-400' } = defineProps<{
+  draggingCls?: string
+}>()
+
+defineOptions({
+  inheritAttrs: false,
+})
+
 const handleId = useId()
 const handleRef = ref()
 
-const { direction, startDragging, getHandlePanelElements } =
-  inject(PanelGroupKey)!
+const {
+  teleportHandle,
+  direction,
+  activeHandleId,
+  startDragging,
+  getHandlePanelElements,
+} = inject(PanelGroupKey)!
 
 const targetPanel = ref<string>()
 onMounted(() => {
@@ -14,18 +27,28 @@ onMounted(() => {
 })
 
 function pointerStart() {
-  startDragging(handleRef.value)
+  startDragging(handleRef.value, handleId)
 }
+
+const isActive = computed(() => handleId === activeHandleId.value)
 </script>
 
 <template>
-  <Teleport :disabled="!targetPanel" :to="targetPanel">
+  <Teleport :disabled="!targetPanel || !teleportHandle" :to="targetPanel">
     <div
+      v-bind="$attrs"
       ref="handleRef"
-      class="absolute right-0 top-0 z-10 w-2 select-none bg-gray-500 [[data-panel-direction='horizontal']_&]:cursor-col-resize [[data-panel-direction='vertial']_&]:cursor-row-resize"
+      class="z-10 select-none [[data-panel-direction='horizontal']_&]:cursor-col-resize [[data-panel-direction='vertial']_&]:cursor-row-resize"
+      :class="[
+        teleportHandle && 'absolute right-0 top-0',
+        isActive && draggingCls,
+      ]"
       :style="{
-        transform:
-          direction === 'horizontal' ? 'translateX(50%)' : 'translateY(50%)',
+        transform: teleportHandle
+          ? direction === 'horizontal'
+            ? 'translateX(50%)'
+            : 'translateY(50%)'
+          : '',
       }"
       :data-panel-handle-id="handleId"
       @pointerdown="pointerStart"

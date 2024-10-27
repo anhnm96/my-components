@@ -68,11 +68,24 @@ start()
       <!-- <StripeSessions /> -->
     </div>
     <div>
-      <PanelGroup class="relative flex bg-gray-200">
+      <PanelGroup class="flex h-40 text-gray-100">
+        <Panel class="grid flex-grow place-items-center rounded bg-slate-600">
+          left
+        </Panel>
+        <PanelHandle class="w-1" />
+        <Panel class="grid flex-grow place-items-center rounded bg-slate-600">
+          middle
+        </Panel>
+        <PanelHandle class="w-1" />
+        <Panel class="grid flex-grow place-items-center rounded bg-slate-600">
+          right
+        </Panel>
+      </PanelGroup>
+      <PanelGroup teleport-handle class="relative flex bg-gray-200">
         <Panel :min="150" class="flex-grow">Fixasdasdsa</Panel>
-        <PanelHandle />
+        <PanelHandle class="bg-red-500" />
         <Panel :min="150" class="flex-grow">TT</Panel>
-        <PanelHandle />
+        <PanelHandle class="bg-red-500" />
         <Panel class="flex-grow">Hi</Panel>
       </PanelGroup>
       <table class="mt-4 w-full bg-white">
@@ -80,11 +93,11 @@ start()
           <col span="3" class="border border-red-400" />
         </colgroup>
         <thead>
-          <PanelGroup as="tr">
+          <PanelGroup teleport-handle as="tr">
             <Panel as="th" :min="150" style="width: 200px">Company</Panel>
-            <PanelHandle />
+            <PanelHandle class="bg-red-500" />
             <Panel as="th" :min="150" style="width: 300px">Contact</Panel>
-            <PanelHandle />
+            <PanelHandle class="bg-red-500" />
             <Panel as="th">Country</Panel>
           </PanelGroup>
         </thead>
