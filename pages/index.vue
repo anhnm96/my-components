@@ -68,16 +68,28 @@ start()
       <!-- <StripeSessions /> -->
     </div>
     <div>
-      <PanelGroup class="flex h-40 text-gray-100">
-        <Panel class="grid flex-grow place-items-center rounded bg-slate-600">
+      <PanelGroup
+        auto-save-id="panel-horizontal"
+        class="flex h-40 text-gray-100"
+      >
+        <Panel
+          default-size="20%"
+          class="grid flex-grow place-items-center rounded bg-slate-600"
+        >
           left
         </Panel>
-        <PanelHandle class="w-1" />
-        <Panel class="grid flex-grow place-items-center rounded bg-slate-600">
+        <PanelHandle class="w-2" />
+        <Panel
+          default-size="40%"
+          class="grid flex-grow place-items-center rounded bg-slate-600"
+        >
           middle
         </Panel>
-        <PanelHandle class="w-1" />
-        <Panel class="grid flex-grow place-items-center rounded bg-slate-600">
+        <PanelHandle class="w-2" />
+        <Panel
+          default-size="40%"
+          class="grid flex-grow place-items-center rounded bg-slate-600"
+        >
           right
         </Panel>
       </PanelGroup>

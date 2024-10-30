@@ -6,7 +6,9 @@ interface PanelGroupContext {
   activeHandleId: Ref<string>
   startDragging: (handleEl: HTMLElement, handleId: string) => void
   stopDragging: () => void
-  getHandlePanelElements: (handleEl?: HTMLElement) => HTMLElement[]
+  getHandlePanelElements: (
+    handleEl?: HTMLElement,
+  ) => [HTMLElement, HTMLElement, number]
 }
 
 type Direction = 'vertical' | 'horizontal'
@@ -20,10 +22,12 @@ const {
   direction = 'horizontal',
   as = 'div',
   teleportHandle,
+  autoSaveId,
 } = defineProps<{
   as?: string
   direction?: Direction
   teleportHandle?: boolean
+  autoSaveId?: string
 }>()
 
 const items = ref<HTMLElement[]>([])
@@ -33,17 +37,17 @@ function addItem(item: HTMLElement) {
 
 function getHandlePanelElements(
   handleEl?: HTMLElement,
-): [itemBefore: HTMLElement, itemAfter: HTMLElement] {
+): [HTMLElement, HTMLElement, number] {
   const handles = Array.from(
     document.querySelectorAll(
       `[data-panel-group-id="${groupId}"] [data-panel-handle-id]`,
     ),
   )
-  const index = handles.indexOf(handleEl || activeHandleEl!)
+  const handleIndex = handles.indexOf(handleEl || activeHandleEl!)
 
-  const itemBefore = items.value[index]
-  const itemAfter = items.value[index + 1]
-  return [itemBefore, itemAfter]
+  const itemBefore = items.value[handleIndex]
+  const itemAfter = items.value[handleIndex + 1]
+  return [itemBefore, itemAfter, handleIndex]
 }
 
 let startX: number
@@ -85,7 +89,7 @@ function stopDragging() {
 }
 
 function update() {
-  const [itemBefore, itemAfter] = getHandlePanelElements()
+  const [itemBefore, itemAfter, handleIndex] = getHandlePanelElements()
   const itemBeforeWidth = itemBefore.getBoundingClientRect().width
   let newWidth = itemBeforeWidth + delta.value
   const itemBeforeMinSize = itemBefore.getAttribute('data-panel-item-min')
@@ -106,6 +110,10 @@ function update() {
 
   itemBefore.style.width = `${newWidth}px`
   itemAfter.style.width = `${itemAfterNewWidth}px`
+  if (autoSaveId) {
+    sizes.value[handleIndex] = `${newWidth}px`
+    sizes.value[handleIndex + 1] = `${itemAfterNewWidth}px`
+  }
 }
 
 const groupId = useId()
@@ -119,17 +127,23 @@ provide(PanelGroupKey, {
   getHandlePanelElements,
 })
 
+let sizes = ref<string[]>([])
+if (autoSaveId) sizes = useLocalStorage(autoSaveId, [], { initOnMounted: true })
 onMounted(() => {
-  const widths: string[] = []
-  requestAnimationFrame(() => {
-    items.value.forEach((item) => {
-      const width = `${item.getBoundingClientRect().width}px`
-      widths.push(width)
-    })
+  if (sizes.value.length)
     items.value.forEach((item, index) => {
-      item.style.width = widths[index]
+      item.style.width = sizes.value[index]
     })
-  })
+  else
+    requestAnimationFrame(() => {
+      items.value.forEach((item) => {
+        const width = `${item.getBoundingClientRect().width}px`
+        sizes.value.push(width)
+      })
+      items.value.forEach((item, index) => {
+        item.style.width = sizes.value[index]
+      })
+    })
 })
 </script>
 

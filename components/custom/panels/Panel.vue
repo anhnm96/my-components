@@ -4,6 +4,7 @@ import { PanelGroupKey } from './PanelGroup.vue'
 const { as = 'div' } = defineProps<{
   as?: string
   min?: number
+  defaultSize?: string
 }>()
 
 const { addItem } = inject(PanelGroupKey)!
@@ -23,6 +24,7 @@ const panelId = useId()
     :data-panel-item-id="panelId"
     :data-panel-item-min="min"
     class="relative"
+    :style="{ width: defaultSize }"
   >
     <slot />
   </component>
