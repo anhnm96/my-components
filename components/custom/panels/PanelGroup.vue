@@ -27,11 +27,13 @@ const {
   as = 'div',
   teleportHandle,
   autoSaveId,
+  lazy,
 } = defineProps<{
   as?: string
   direction?: Direction
   teleportHandle?: boolean
   autoSaveId?: string
+  lazy?: boolean
 }>()
 
 const items = ref<HTMLElement[]>([])
@@ -59,6 +61,8 @@ const delta = ref(0)
 let activeHandleEl: HTMLElement | null
 const activeHandleId = ref()
 let handleOffset = 0
+let initialSizeItemBefore: number
+let initialSizeItemAfter: number
 function startDragging(
   e: PointerEvent,
   handleEl: HTMLElement,
@@ -66,6 +70,9 @@ function startDragging(
 ) {
   activeHandleEl = handleEl
   activeHandleId.value = handleId
+  const [itemBefore, itemAfter] = getHandlePanelElements()
+  initialSizeItemBefore = itemBefore.getBoundingClientRect().width
+  initialSizeItemAfter = itemAfter.getBoundingClientRect().width
   startX = e.clientX
   if (teleportHandle) {
     handleOffset = activeHandleEl.getBoundingClientRect().width / 2
@@ -76,7 +83,9 @@ function startDragging(
 
 function pointerMove(e: any) {
   delta.value = e.clientX - startX
-  activeHandleEl!.style.transform = `translateX(${delta.value + handleOffset}px)`
+  if (lazy)
+    activeHandleEl!.style.transform = `translateX(${delta.value + handleOffset}px)`
+  else update()
 }
 
 function stopDragging() {
@@ -84,7 +93,7 @@ function stopDragging() {
   window.removeEventListener('pointerup', stopDragging)
   activeHandleId.value = ''
   if (delta.value === 0) return
-  update()
+  if (lazy) update()
   // reset
   if (teleportHandle)
     activeHandleEl!.style.transform =
@@ -98,28 +107,29 @@ function stopDragging() {
 
 function update() {
   const [itemBefore, itemAfter, handleIndex] = getHandlePanelElements()
-  const itemBeforeWidth = itemBefore.getBoundingClientRect().width
-  let newWidth = itemBeforeWidth + delta.value
+  let itemBeforeNewWidth = initialSizeItemBefore + delta.value
   const itemBeforeMinSize = itemBefore.getAttribute('data-panel-item-min')
-  if (itemBeforeMinSize !== undefined && newWidth <= Number(itemBeforeMinSize))
-    newWidth = Number(itemBeforeMinSize)
+  if (
+    itemBeforeMinSize !== undefined &&
+    itemBeforeNewWidth <= Number(itemBeforeMinSize)
+  )
+    itemBeforeNewWidth = Number(itemBeforeMinSize)
 
   const itemAfterMinSize = itemAfter.getAttribute('data-panel-item-min')
-  const itemAfterWidth = itemAfter.getBoundingClientRect().width
-  const totalWidth = itemBeforeWidth + itemAfterWidth
-  let itemAfterNewWidth = totalWidth - newWidth
+  const totalWidth = initialSizeItemBefore + initialSizeItemAfter
+  let itemAfterNewWidth = totalWidth - itemBeforeNewWidth
   if (
     itemAfterMinSize !== undefined &&
     itemAfterNewWidth <= Number(itemAfterMinSize)
   ) {
     itemAfterNewWidth = Number(itemAfterMinSize)
-    newWidth = totalWidth - itemAfterNewWidth
+    itemBeforeNewWidth = totalWidth - itemAfterNewWidth
   }
 
-  itemBefore.style.width = `${newWidth}px`
+  itemBefore.style.width = `${itemBeforeNewWidth}px`
   itemAfter.style.width = `${itemAfterNewWidth}px`
   if (autoSaveId) {
-    sizes.value[handleIndex] = `${newWidth}px`
+    sizes.value[handleIndex] = `${itemBeforeNewWidth}px`
     sizes.value[handleIndex + 1] = `${itemAfterNewWidth}px`
   }
 }
