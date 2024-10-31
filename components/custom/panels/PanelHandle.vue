@@ -26,8 +26,8 @@ onMounted(() => {
   targetPanel.value = `[data-panel-item-id="${itemBefore.getAttribute('data-panel-item-id')}"]`
 })
 
-function pointerStart() {
-  startDragging(handleRef.value, handleId)
+function pointerStart(e: PointerEvent) {
+  startDragging(e, handleRef.value, handleId)
 }
 
 const isActive = computed(() => handleId === activeHandleId.value)

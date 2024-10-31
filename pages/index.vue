@@ -107,9 +107,9 @@ start()
         <thead>
           <PanelGroup teleport-handle as="tr">
             <Panel as="th" :min="150" style="width: 200px">Company</Panel>
-            <PanelHandle class="bg-red-500" />
+            <PanelHandle class="w-2 bg-red-500" />
             <Panel as="th" :min="150" style="width: 300px">Contact</Panel>
-            <PanelHandle class="bg-red-500" />
+            <PanelHandle class="w-2 bg-red-500" />
             <Panel as="th">Country</Panel>
           </PanelGroup>
         </thead>

@@ -4,7 +4,11 @@ interface PanelGroupContext {
   direction: Direction
   teleportHandle: boolean
   activeHandleId: Ref<string>
-  startDragging: (handleEl: HTMLElement, handleId: string) => void
+  startDragging: (
+    e: PointerEvent,
+    handleEl: HTMLElement,
+    handleId: string,
+  ) => void
   stopDragging: () => void
   getHandlePanelElements: (
     handleEl?: HTMLElement,
@@ -55,13 +59,17 @@ const delta = ref(0)
 let activeHandleEl: HTMLElement | null
 const activeHandleId = ref()
 let handleOffset = 0
-function startDragging(handleEl: HTMLElement, handleId: string) {
+function startDragging(
+  e: PointerEvent,
+  handleEl: HTMLElement,
+  handleId: string,
+) {
   activeHandleEl = handleEl
   activeHandleId.value = handleId
-  if (teleportHandle)
+  startX = e.clientX
+  if (teleportHandle) {
     handleOffset = activeHandleEl.getBoundingClientRect().width / 2
-  const [itemBefore] = getHandlePanelElements()
-  startX = itemBefore.getBoundingClientRect().right
+  }
   window.addEventListener('pointermove', pointerMove)
   window.addEventListener('pointerup', stopDragging)
 }
