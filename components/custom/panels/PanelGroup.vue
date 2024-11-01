@@ -11,7 +11,7 @@ interface PanelGroupContext {
   ) => void
   stopDragging: () => void
   getHandlePanelElements: (
-    handleEl?: HTMLElement,
+    handleEl: HTMLElement,
   ) => [HTMLElement, HTMLElement, number]
 }
 
@@ -42,49 +42,58 @@ function addItem(item: HTMLElement) {
 }
 
 function getHandlePanelElements(
-  handleEl?: HTMLElement,
+  handleEl: HTMLElement,
 ): [HTMLElement, HTMLElement, number] {
   const handles = Array.from(
     document.querySelectorAll(
       `[data-panel-group-id="${groupId}"] [data-panel-handle-id]`,
     ),
   )
-  const handleIndex = handles.indexOf(handleEl || activeHandleEl!)
+  const handleIndex = handles.indexOf(handleEl)
 
   const itemBefore = items.value[handleIndex]
   const itemAfter = items.value[handleIndex + 1]
   return [itemBefore, itemAfter, handleIndex]
 }
 
-let startX: number
-const delta = ref(0)
-let activeHandleEl: HTMLElement | null
 const activeHandleId = ref()
-let handleOffset = 0
-let initialSizeItemBefore: number
-let initialSizeItemAfter: number
+
+const dragState = {
+  startX: 0,
+  delta: 0,
+  itemBefore: undefined as HTMLElement | undefined,
+  itemAfter: undefined as HTMLElement | undefined,
+  initialSizeItemBefore: 0,
+  initialSizeItemAfter: 0,
+  handleIndex: -1,
+  handleOffset: 0,
+  handleEl: null as HTMLElement | null,
+}
 function startDragging(
   e: PointerEvent,
   handleEl: HTMLElement,
   handleId: string,
 ) {
-  activeHandleEl = handleEl
+  dragState.startX = e.clientX
+  dragState.handleEl = handleEl
   activeHandleId.value = handleId
-  const [itemBefore, itemAfter] = getHandlePanelElements()
-  initialSizeItemBefore = itemBefore.getBoundingClientRect().width
-  initialSizeItemAfter = itemAfter.getBoundingClientRect().width
-  startX = e.clientX
+  const [itemBefore, itemAfter, handleIndex] = getHandlePanelElements(handleEl)
+  dragState.itemBefore = itemBefore
+  dragState.itemAfter = itemAfter
+  dragState.handleIndex = handleIndex
+  dragState.initialSizeItemBefore = itemBefore.getBoundingClientRect().width
+  dragState.initialSizeItemAfter = itemAfter.getBoundingClientRect().width
   if (teleportHandle) {
-    handleOffset = activeHandleEl.getBoundingClientRect().width / 2
+    dragState.handleOffset = handleEl.getBoundingClientRect().width / 2
   }
   window.addEventListener('pointermove', pointerMove)
   window.addEventListener('pointerup', stopDragging)
 }
 
 function pointerMove(e: any) {
-  delta.value = e.clientX - startX
+  dragState.delta = e.clientX - dragState.startX
   if (lazy)
-    activeHandleEl!.style.transform = `translateX(${delta.value + handleOffset}px)`
+    dragState.handleEl!.style.transform = `translateX(${dragState.delta + dragState.handleOffset}px)`
   else update()
 }
 
@@ -92,45 +101,44 @@ function stopDragging() {
   window.removeEventListener('pointermove', pointerMove)
   window.removeEventListener('pointerup', stopDragging)
   activeHandleId.value = ''
-  if (delta.value === 0) return
-  if (lazy) update()
-  // reset
-  if (teleportHandle)
-    activeHandleEl!.style.transform =
-      direction === 'horizontal' ? 'translateX(50%)' : 'translateY(50%)'
-  else
-    activeHandleEl!.style.transform =
-      direction === 'horizontal' ? 'translateX(0)' : 'translateY(0)'
-  activeHandleEl = null
-  delta.value = 0
+  if (lazy) {
+    update()
+    if (teleportHandle)
+      dragState.handleEl!.style.transform =
+        direction === 'horizontal' ? 'translateX(50%)' : 'translateY(50%)'
+    else
+      dragState.handleEl!.style.transform =
+        direction === 'horizontal' ? 'translateX(0)' : 'translateY(0)'
+  }
+  dragState.delta = 0
 }
 
 function update() {
-  const [itemBefore, itemAfter, handleIndex] = getHandlePanelElements()
-  let itemBeforeNewWidth = initialSizeItemBefore + delta.value
-  const itemBeforeMinSize = itemBefore.getAttribute('data-panel-item-min')
-  if (
-    itemBeforeMinSize !== undefined &&
-    itemBeforeNewWidth <= Number(itemBeforeMinSize)
-  )
-    itemBeforeNewWidth = Number(itemBeforeMinSize)
+  if (!dragState.itemBefore || !dragState.itemAfter) return
 
-  const itemAfterMinSize = itemAfter.getAttribute('data-panel-item-min')
-  const totalWidth = initialSizeItemBefore + initialSizeItemAfter
+  const itemBeforeMinSize = Number(
+    dragState.itemBefore.getAttribute('data-panel-item-min'),
+  )
+  let itemBeforeNewWidth = dragState.initialSizeItemBefore + dragState.delta
+  if (!isNaN(itemBeforeMinSize) && itemBeforeNewWidth <= itemBeforeMinSize)
+    itemBeforeNewWidth = itemBeforeMinSize
+
+  const itemAfterMinSize = Number(
+    dragState.itemAfter.getAttribute('data-panel-item-min'),
+  )
+  const totalWidth =
+    dragState.initialSizeItemBefore + dragState.initialSizeItemAfter
   let itemAfterNewWidth = totalWidth - itemBeforeNewWidth
-  if (
-    itemAfterMinSize !== undefined &&
-    itemAfterNewWidth <= Number(itemAfterMinSize)
-  ) {
-    itemAfterNewWidth = Number(itemAfterMinSize)
+  if (!isNaN(itemAfterMinSize) && itemAfterNewWidth <= itemAfterMinSize) {
+    itemAfterNewWidth = itemAfterMinSize
     itemBeforeNewWidth = totalWidth - itemAfterNewWidth
   }
 
-  itemBefore.style.width = `${itemBeforeNewWidth}px`
-  itemAfter.style.width = `${itemAfterNewWidth}px`
+  dragState.itemBefore.style.width = `${itemBeforeNewWidth}px`
+  dragState.itemAfter.style.width = `${itemAfterNewWidth}px`
   if (autoSaveId) {
-    sizes.value[handleIndex] = `${itemBeforeNewWidth}px`
-    sizes.value[handleIndex + 1] = `${itemAfterNewWidth}px`
+    sizes.value[dragState.handleIndex] = `${itemBeforeNewWidth}px`
+    sizes.value[dragState.handleIndex + 1] = `${itemAfterNewWidth}px`
   }
 }
 
