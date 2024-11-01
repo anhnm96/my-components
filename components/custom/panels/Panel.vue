@@ -1,20 +1,24 @@
 <script lang="ts" setup>
 import { PanelGroupKey } from './PanelGroup.vue'
 
-const { as = 'div' } = defineProps<{
+const { as = 'div', defaultSize } = defineProps<{
   as?: string
   min?: number
   defaultSize?: string
 }>()
 
-const { addItem } = inject(PanelGroupKey)!
+const { addItem, state, directionValue } = inject(PanelGroupKey)!
 
 const panelRef = ref()
 onMounted(() => {
+  panelRef.value.style.width = defaultSize
   addItem(panelRef.value)
 })
 
 const panelId = useId()
+const isActive = computed(
+  () => state.itemBeforeId === panelId || state.itemAfterId === panelId,
+)
 </script>
 
 <template>
@@ -23,9 +27,24 @@ const panelId = useId()
     ref="panelRef"
     :data-panel-item-id="panelId"
     :data-panel-item-min="min"
-    class="relative"
-    :style="{ width: defaultSize }"
+    class="panel-item relative"
+    :class="isActive && 'panel-item--resizing'"
+    :style="{
+      '--direction-value': directionValue,
+    }"
   >
     <slot />
   </component>
 </template>
+
+<style scoped>
+.panel-item {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.panel-item--resizing {
+  will-change: var(--direction-value);
+}
+</style>

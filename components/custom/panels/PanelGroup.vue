@@ -2,8 +2,14 @@
 interface PanelGroupContext {
   addItem: (item: HTMLDivElement) => void
   direction: Direction
+  directionValue: DirectionValue
   teleportHandle: boolean
-  activeHandleId: Ref<string>
+  state: {
+    dragging: boolean
+    itemBeforeId: string
+    itemAfterId: string
+    activeHandleId: string
+  }
   startDragging: (
     e: PointerEvent,
     handleEl: HTMLElement,
@@ -16,6 +22,7 @@ interface PanelGroupContext {
 }
 
 type Direction = 'vertical' | 'horizontal'
+type DirectionValue = 'height' | 'width'
 
 export const PanelGroupKey: InjectionKey<PanelGroupContext> =
   Symbol('PanelGroup')
@@ -35,6 +42,12 @@ const {
   autoSaveId?: string
   lazy?: boolean
 }>()
+
+const directionMap = {
+  vertical: 'height',
+  horizontal: 'width',
+} as const
+const directionValue = directionMap[direction]
 
 const items = ref<HTMLElement[]>([])
 function addItem(item: HTMLElement) {
@@ -56,7 +69,12 @@ function getHandlePanelElements(
   return [itemBefore, itemAfter, handleIndex]
 }
 
-const activeHandleId = ref()
+const reactiveState = reactive({
+  dragging: false,
+  itemBeforeId: '',
+  itemAfterId: '',
+  activeHandleId: '',
+})
 
 const dragState = {
   startX: 0,
@@ -74,15 +92,18 @@ function startDragging(
   handleEl: HTMLElement,
   handleId: string,
 ) {
+  reactiveState.dragging = true
   dragState.startX = e.clientX
   dragState.handleEl = handleEl
-  activeHandleId.value = handleId
+  reactiveState.activeHandleId = handleId
   const [itemBefore, itemAfter, handleIndex] = getHandlePanelElements(handleEl)
   dragState.itemBefore = itemBefore
   dragState.itemAfter = itemAfter
   dragState.handleIndex = handleIndex
   dragState.initialSizeItemBefore = itemBefore.getBoundingClientRect().width
   dragState.initialSizeItemAfter = itemAfter.getBoundingClientRect().width
+  reactiveState.itemBeforeId = itemBefore.dataset.panelItemId!
+  reactiveState.itemAfterId = itemAfter.dataset.panelItemId!
   if (teleportHandle) {
     dragState.handleOffset = handleEl.getBoundingClientRect().width / 2
   }
@@ -98,34 +119,23 @@ function pointerMove(e: any) {
 }
 
 function stopDragging() {
+  reactiveState.dragging = false
   window.removeEventListener('pointermove', pointerMove)
   window.removeEventListener('pointerup', stopDragging)
-  activeHandleId.value = ''
-  if (lazy) {
-    update()
-    if (teleportHandle)
-      dragState.handleEl!.style.transform =
-        direction === 'horizontal' ? 'translateX(50%)' : 'translateY(50%)'
-    else
-      dragState.handleEl!.style.transform =
-        direction === 'horizontal' ? 'translateX(0)' : 'translateY(0)'
-  }
+  reactiveState.activeHandleId = ''
+  if (lazy) update()
   dragState.delta = 0
 }
 
 function update() {
   if (!dragState.itemBefore || !dragState.itemAfter) return
 
-  const itemBeforeMinSize = Number(
-    dragState.itemBefore.getAttribute('data-panel-item-min'),
-  )
+  const itemBeforeMinSize = Number(dragState.itemBefore.dataset.panelItemMin)
   let itemBeforeNewWidth = dragState.initialSizeItemBefore + dragState.delta
   if (!isNaN(itemBeforeMinSize) && itemBeforeNewWidth <= itemBeforeMinSize)
     itemBeforeNewWidth = itemBeforeMinSize
 
-  const itemAfterMinSize = Number(
-    dragState.itemAfter.getAttribute('data-panel-item-min'),
-  )
+  const itemAfterMinSize = Number(dragState.itemAfter.dataset.panelItemMin)
   const totalWidth =
     dragState.initialSizeItemBefore + dragState.initialSizeItemAfter
   let itemAfterNewWidth = totalWidth - itemBeforeNewWidth
@@ -146,8 +156,9 @@ const groupId = useId()
 provide(PanelGroupKey, {
   addItem,
   direction,
+  directionValue,
   teleportHandle,
-  activeHandleId,
+  state: reactiveState,
   startDragging,
   stopDragging,
   getHandlePanelElements,

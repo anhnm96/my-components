@@ -15,7 +15,7 @@ const handleRef = ref()
 const {
   teleportHandle,
   direction,
-  activeHandleId,
+  state,
   startDragging,
   getHandlePanelElements,
 } = inject(PanelGroupKey)!
@@ -30,7 +30,7 @@ function pointerStart(e: PointerEvent) {
   startDragging(e, handleRef.value, handleId)
 }
 
-const isActive = computed(() => handleId === activeHandleId.value)
+const isActive = computed(() => handleId === state.activeHandleId)
 </script>
 
 <template>
@@ -38,7 +38,7 @@ const isActive = computed(() => handleId === activeHandleId.value)
     <div
       v-bind="$attrs"
       ref="handleRef"
-      class="z-10 select-none [[data-panel-direction='horizontal']_&]:cursor-col-resize [[data-panel-direction='vertial']_&]:cursor-row-resize"
+      class="touch-action-none z-10 select-none [[data-panel-direction='horizontal']_&]:cursor-col-resize [[data-panel-direction='vertical']_&]:cursor-row-resize"
       :class="[
         teleportHandle && 'absolute right-0 top-0',
         isActive && draggingCls,
