@@ -3,7 +3,8 @@ import { PanelGroupKey } from './PanelGroup.vue'
 
 const { as = 'div', defaultSize } = defineProps<{
   as?: string
-  min?: number
+  minSize?: number
+  maxSize?: number
   defaultSize?: string
 }>()
 
@@ -26,7 +27,8 @@ const isActive = computed(
     :is="as"
     ref="panelRef"
     :data-panel-item-id="panelId"
-    :data-panel-item-min="min"
+    :data-panel-item-min-size="minSize"
+    :data-panel-item-max-size="maxSize"
     class="panel-item relative"
     :class="isActive && 'panel-item--active'"
     :style="{

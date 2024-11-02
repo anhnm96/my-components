@@ -138,17 +138,32 @@ function stopDragging() {
 function update() {
   if (!dragState.itemBefore || !dragState.itemAfter) return
 
-  const itemBeforeMinSize = Number(dragState.itemBefore.dataset.panelItemMin)
+  const itemBeforeMinSize = Number(
+    dragState.itemBefore.dataset.panelItemMinSize,
+  )
+  const itemBeforeMaxSize = Number(
+    dragState.itemBefore.dataset.panelItemMaxSize,
+  )
   let itemBeforeNewSize = dragState.initialSizeItemBefore + dragState.delta
   if (!isNaN(itemBeforeMinSize) && itemBeforeNewSize <= itemBeforeMinSize)
     itemBeforeNewSize = itemBeforeMinSize
+  else if (
+    !isNaN(itemBeforeMaxSize) &&
+    itemBeforeNewSize >= itemBeforeMaxSize
+  ) {
+    itemBeforeNewSize = itemBeforeMaxSize
+  }
 
   const totalSize =
     dragState.initialSizeItemBefore + dragState.initialSizeItemAfter
-  const itemAfterMinSize = Number(dragState.itemAfter.dataset.panelItemMin)
+  const itemAfterMinSize = Number(dragState.itemAfter.dataset.panelItemMinSize)
+  const itemAfterMaxSize = Number(dragState.itemAfter.dataset.panelItemMaxSize)
   let itemAfterNewSize = totalSize - itemBeforeNewSize
   if (!isNaN(itemAfterMinSize) && itemAfterNewSize <= itemAfterMinSize) {
     itemAfterNewSize = itemAfterMinSize
+    itemBeforeNewSize = totalSize - itemAfterNewSize
+  } else if (!isNaN(itemAfterMaxSize) && itemAfterNewSize >= itemAfterMaxSize) {
+    itemAfterNewSize = itemAfterMaxSize
     itemBeforeNewSize = totalSize - itemAfterNewSize
   }
 
