@@ -68,10 +68,7 @@ start()
       <!-- <StripeSessions /> -->
     </div>
     <div>
-      <PanelGroup
-        auto-save-id="panel-horizontal"
-        class="flex h-40 text-gray-100"
-      >
+      <PanelGroup class="flex h-40 text-gray-100">
         <Panel
           default-size="20%"
           class="grid flex-grow place-items-center rounded bg-slate-600"
@@ -93,6 +90,107 @@ start()
           right
         </Panel>
       </PanelGroup>
+      <div class="flex h-40 text-gray-100">
+        <div
+          class="grid w-[20%] flex-grow place-items-center rounded bg-slate-600"
+        >
+          left
+        </div>
+        <div class="w-2" />
+        <div
+          class="grid w-[40%] flex-grow place-items-center rounded bg-slate-600"
+        >
+          middle
+        </div>
+        <div class="w-2" />
+        <div
+          class="grid w-[40%] flex-grow place-items-center rounded bg-slate-600"
+        >
+          right
+        </div>
+      </div>
+
+      <div class="mt-4 flex gap-2">
+        <PanelGroup
+          direction="vertical"
+          class="flex h-60 flex-grow flex-col text-gray-100"
+        >
+          <Panel
+            default-size="20%"
+            class="grid flex-grow place-items-center rounded bg-slate-600"
+          >
+            top
+          </Panel>
+          <PanelHandle class="h-2 flex-shrink-0" />
+          <Panel
+            default-size="40%"
+            class="grid flex-grow place-items-center rounded bg-slate-600"
+          >
+            middle
+          </Panel>
+          <PanelHandle class="h-2 flex-shrink-0" />
+          <Panel
+            default-size="40%"
+            class="grid flex-grow place-items-center rounded bg-slate-600"
+          >
+            bottom
+          </Panel>
+        </PanelGroup>
+        <div class="flex h-60 flex-grow flex-col text-gray-100">
+          <div
+            class="grid h-[20%] flex-grow place-items-center rounded bg-slate-600"
+          >
+            top
+          </div>
+          <div class="h-2 flex-shrink-0" />
+          <div
+            class="grid h-[40%] flex-grow place-items-center rounded bg-slate-600"
+          >
+            middle
+          </div>
+          <div class="h-2 flex-shrink-0" />
+          <div
+            class="grid h-[40%] flex-grow place-items-center rounded bg-slate-600"
+          >
+            bottom
+          </div>
+        </div>
+      </div>
+      <PanelGroup class="mt-4 flex h-40 text-gray-100">
+        <Panel class="grid flex-grow place-items-center rounded bg-slate-600">
+          left
+        </Panel>
+        <PanelHandle class="w-2" />
+        <Panel class="flex-grow">
+          <PanelGroup direction="vertical" class="flex h-full flex-col">
+            <Panel
+              class="grid flex-grow place-items-center rounded bg-slate-600"
+            >
+              top
+            </Panel>
+            <PanelHandle class="h-2 flex-shrink-0" />
+            <Panel class="flex-grow rounded bg-slate-600">
+              <PanelGroup direction="horizontal" class="flex h-full">
+                <Panel
+                  class="grid flex-grow place-items-center rounded bg-slate-600"
+                >
+                  left
+                </Panel>
+                <PanelHandle class="w-2 bg-slate-700" />
+                <Panel
+                  class="grid flex-grow place-items-center rounded bg-slate-600"
+                >
+                  right
+                </Panel>
+              </PanelGroup>
+            </Panel>
+          </PanelGroup>
+        </Panel>
+        <PanelHandle class="w-2" />
+        <Panel class="grid flex-grow place-items-center rounded bg-slate-600">
+          right
+        </Panel>
+      </PanelGroup>
       <PanelGroup teleport-handle class="relative flex bg-gray-200">
         <Panel :min="150" class="flex-grow">Fixasdasdsa</Panel>
         <PanelHandle class="bg-red-500" />
@@ -105,7 +203,7 @@ start()
           <col span="3" class="border border-red-400" />
         </colgroup>
         <thead>
-          <PanelGroup teleport-handle as="tr">
+          <PanelGroup teleport-handle as="tr" lazy>
             <Panel as="th" :min="150" style="width: 200px">Company</Panel>
             <PanelHandle class="w-2 bg-red-500" />
             <Panel as="th" :min="150" style="width: 300px">Contact</Panel>

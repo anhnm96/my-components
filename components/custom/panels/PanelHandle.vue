@@ -38,10 +38,11 @@ const isActive = computed(() => handleId === state.activeHandleId)
     <div
       v-bind="$attrs"
       ref="handleRef"
-      class="touch-action-none z-10 select-none [[data-panel-direction='horizontal']_&]:cursor-col-resize [[data-panel-direction='vertical']_&]:cursor-row-resize"
+      class="touch-action-none z-10 select-none"
       :class="[
         teleportHandle && 'absolute right-0 top-0',
         isActive && draggingCls,
+        direction === 'horizontal' ? 'cursor-col-resize' : 'cursor-row-resize',
       ]"
       :style="{
         transform: teleportHandle

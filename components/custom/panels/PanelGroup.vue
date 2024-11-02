@@ -64,7 +64,7 @@ function getHandlePanelElements(
 ): [HTMLElement, HTMLElement, number] {
   const handles = Array.from(
     document.querySelectorAll(
-      `[data-panel-group-id="${groupId}"] [data-panel-handle-id]`,
+      `[data-panel-group-id="${groupId}"] > [data-panel-handle-id]`,
     ),
   )
   const handleIndex = handles.indexOf(handleEl)
