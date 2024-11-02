@@ -48,6 +48,11 @@ const directionMap = {
   horizontal: 'width',
 } as const
 const directionValue = directionMap[direction]
+const axisMap = {
+  vertical: 'Y',
+  horizontal: 'X',
+} as const
+const axis = axisMap[direction]
 
 const items = ref<HTMLElement[]>([])
 function addItem(item: HTMLElement) {
@@ -77,7 +82,7 @@ const reactiveState = reactive({
 })
 
 const dragState = {
-  startX: 0,
+  startPos: 0,
   delta: 0,
   itemBefore: undefined as HTMLElement | undefined,
   itemAfter: undefined as HTMLElement | undefined,
@@ -93,28 +98,31 @@ function startDragging(
   handleId: string,
 ) {
   reactiveState.dragging = true
-  dragState.startX = e.clientX
+  dragState.startPos = e[`client${axis}`]
   dragState.handleEl = handleEl
   reactiveState.activeHandleId = handleId
   const [itemBefore, itemAfter, handleIndex] = getHandlePanelElements(handleEl)
   dragState.itemBefore = itemBefore
   dragState.itemAfter = itemAfter
   dragState.handleIndex = handleIndex
-  dragState.initialSizeItemBefore = itemBefore.getBoundingClientRect().width
-  dragState.initialSizeItemAfter = itemAfter.getBoundingClientRect().width
+  dragState.initialSizeItemBefore =
+    itemBefore.getBoundingClientRect()[directionValue]
+  dragState.initialSizeItemAfter =
+    itemAfter.getBoundingClientRect()[directionValue]
   reactiveState.itemBeforeId = itemBefore.dataset.panelItemId!
   reactiveState.itemAfterId = itemAfter.dataset.panelItemId!
   if (teleportHandle) {
-    dragState.handleOffset = handleEl.getBoundingClientRect().width / 2
+    dragState.handleOffset =
+      handleEl.getBoundingClientRect()[directionValue] / 2
   }
   window.addEventListener('pointermove', pointerMove)
   window.addEventListener('pointerup', stopDragging)
 }
 
 function pointerMove(e: any) {
-  dragState.delta = e.clientX - dragState.startX
+  dragState.delta = e[`client${axis}`] - dragState.startPos
   if (lazy)
-    dragState.handleEl!.style.transform = `translateX(${dragState.delta + dragState.handleOffset}px)`
+    dragState.handleEl!.style.transform = `translate${axis}(${dragState.delta + dragState.handleOffset}px)`
   else update()
 }
 
@@ -131,24 +139,24 @@ function update() {
   if (!dragState.itemBefore || !dragState.itemAfter) return
 
   const itemBeforeMinSize = Number(dragState.itemBefore.dataset.panelItemMin)
-  let itemBeforeNewWidth = dragState.initialSizeItemBefore + dragState.delta
-  if (!isNaN(itemBeforeMinSize) && itemBeforeNewWidth <= itemBeforeMinSize)
-    itemBeforeNewWidth = itemBeforeMinSize
+  let itemBeforeNewSize = dragState.initialSizeItemBefore + dragState.delta
+  if (!isNaN(itemBeforeMinSize) && itemBeforeNewSize <= itemBeforeMinSize)
+    itemBeforeNewSize = itemBeforeMinSize
 
-  const itemAfterMinSize = Number(dragState.itemAfter.dataset.panelItemMin)
-  const totalWidth =
+  const totalSize =
     dragState.initialSizeItemBefore + dragState.initialSizeItemAfter
-  let itemAfterNewWidth = totalWidth - itemBeforeNewWidth
-  if (!isNaN(itemAfterMinSize) && itemAfterNewWidth <= itemAfterMinSize) {
-    itemAfterNewWidth = itemAfterMinSize
-    itemBeforeNewWidth = totalWidth - itemAfterNewWidth
+  const itemAfterMinSize = Number(dragState.itemAfter.dataset.panelItemMin)
+  let itemAfterNewSize = totalSize - itemBeforeNewSize
+  if (!isNaN(itemAfterMinSize) && itemAfterNewSize <= itemAfterMinSize) {
+    itemAfterNewSize = itemAfterMinSize
+    itemBeforeNewSize = totalSize - itemAfterNewSize
   }
 
-  dragState.itemBefore.style.width = `${itemBeforeNewWidth}px`
-  dragState.itemAfter.style.width = `${itemAfterNewWidth}px`
+  dragState.itemBefore.style[directionValue] = `${itemBeforeNewSize}px`
+  dragState.itemAfter.style[directionValue] = `${itemAfterNewSize}px`
   if (autoSaveId) {
-    sizes.value[dragState.handleIndex] = `${itemBeforeNewWidth}px`
-    sizes.value[dragState.handleIndex + 1] = `${itemAfterNewWidth}px`
+    sizes.value[dragState.handleIndex] = `${itemBeforeNewSize}px`
+    sizes.value[dragState.handleIndex + 1] = `${itemAfterNewSize}px`
   }
 }
 
@@ -169,16 +177,16 @@ if (autoSaveId) sizes = useLocalStorage(autoSaveId, [], { initOnMounted: true })
 onMounted(() => {
   if (sizes.value.length)
     items.value.forEach((item, index) => {
-      item.style.width = sizes.value[index]
+      item.style[directionValue] = sizes.value[index]
     })
   else
     requestAnimationFrame(() => {
       items.value.forEach((item) => {
-        const width = `${item.getBoundingClientRect().width}px`
-        sizes.value.push(width)
+        const size = `${item.getBoundingClientRect()[directionValue]}px`
+        sizes.value.push(size)
       })
       items.value.forEach((item, index) => {
-        item.style.width = sizes.value[index]
+        item.style[directionValue] = sizes.value[index]
       })
     })
 })

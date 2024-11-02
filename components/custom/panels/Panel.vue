@@ -11,7 +11,7 @@ const { addItem, state, directionValue } = inject(PanelGroupKey)!
 
 const panelRef = ref()
 onMounted(() => {
-  panelRef.value.style.width = defaultSize
+  panelRef.value.style[directionValue] = defaultSize
   addItem(panelRef.value)
 })
 
@@ -28,7 +28,7 @@ const isActive = computed(
     :data-panel-item-id="panelId"
     :data-panel-item-min="min"
     class="panel-item relative"
-    :class="isActive && 'panel-item--resizing'"
+    :class="isActive && 'panel-item--active'"
     :style="{
       '--direction-value': directionValue,
     }"
@@ -44,7 +44,7 @@ const isActive = computed(
   perspective: 1000px;
 }
 
-.panel-item--resizing {
+.panel-item--active {
   will-change: var(--direction-value);
 }
 </style>
