@@ -99,6 +99,28 @@
       "markdownFile": null
     },
     {
+      "id": "components-compose-active-anchor-index-story-vue",
+      "title": "useActiveAnchor",
+      "layout": {
+        "type": "single",
+        "iframe": true
+      },
+      "docsOnly": false,
+      "variants": [
+        {
+          "id": "_default",
+          "title": "default"
+        }
+      ],
+      "relativePath": "components/compose/active-anchor/index.story.vue",
+      "supportPluginId": "vue3",
+      "treePath": [
+        "useActiveAnchor"
+      ],
+      "virtual": false,
+      "markdownFile": null
+    },
+    {
       "id": "components-base-button-button-story-vue",
       "title": "Button",
       "layout": {
@@ -125,6 +147,14 @@
         },
         {
           "id": "components-base-button-button-story-vue-4",
+          "title": "Hide status content"
+        },
+        {
+          "id": "components-base-button-button-story-vue-5",
+          "title": "toggle"
+        },
+        {
+          "id": "components-base-button-button-story-vue-6",
           "title": "others"
         }
       ],
@@ -170,28 +200,6 @@
       "supportPluginId": "vue3",
       "treePath": [
         "Checkbox"
-      ],
-      "virtual": false,
-      "markdownFile": null
-    },
-    {
-      "id": "components-compose-active-anchor-index-story-vue",
-      "title": "useActiveAnchor",
-      "layout": {
-        "type": "single",
-        "iframe": true
-      },
-      "docsOnly": false,
-      "variants": [
-        {
-          "id": "_default",
-          "title": "default"
-        }
-      ],
-      "relativePath": "components/compose/active-anchor/index.story.vue",
-      "supportPluginId": "vue3",
-      "treePath": [
-        "useActiveAnchor"
       ],
       "virtual": false,
       "markdownFile": null
@@ -305,6 +313,32 @@
       "markdownFile": null
     },
     {
+      "id": "components-custom-filetree-filetree-story-vue",
+      "title": "FileTree",
+      "layout": {
+        "type": "single",
+        "iframe": true
+      },
+      "docsOnly": false,
+      "variants": [
+        {
+          "id": "components-custom-filetree-filetree-story-vue-0",
+          "title": "Example 1"
+        },
+        {
+          "id": "components-custom-filetree-filetree-story-vue-1",
+          "title": "Example 2"
+        }
+      ],
+      "relativePath": "components/custom/filetree/FileTree.story.vue",
+      "supportPluginId": "vue3",
+      "treePath": [
+        "FileTree"
+      ],
+      "virtual": false,
+      "markdownFile": null
+    },
+    {
       "id": "components-custom-infinite-content-infinitecontent-story-vue",
       "title": "Infinite Content",
       "layout": {
@@ -386,6 +420,40 @@
       "supportPluginId": "vue3",
       "treePath": [
         "Modal"
+      ],
+      "virtual": false,
+      "markdownFile": null
+    },
+    {
+      "id": "components-custom-panels-panel-story-vue",
+      "title": "Resizable Panels",
+      "layout": {
+        "type": "single",
+        "iframe": true
+      },
+      "docsOnly": false,
+      "variants": [
+        {
+          "id": "components-custom-panels-panel-story-vue-0",
+          "title": "Horizontal"
+        },
+        {
+          "id": "components-custom-panels-panel-story-vue-1",
+          "title": "Vertical"
+        },
+        {
+          "id": "components-custom-panels-panel-story-vue-2",
+          "title": "Nested layout"
+        },
+        {
+          "id": "components-custom-panels-panel-story-vue-3",
+          "title": "Table columns / lazy update"
+        }
+      ],
+      "relativePath": "components/custom/panels/Panel.story.vue",
+      "supportPluginId": "vue3",
+      "treePath": [
+        "Resizable Panels"
       ],
       "virtual": false,
       "markdownFile": null
@@ -538,6 +606,32 @@
       "supportPluginId": "vue3",
       "treePath": [
         "Tab"
+      ],
+      "virtual": false,
+      "markdownFile": null
+    },
+    {
+      "id": "components-custom-toggle-button-togglebutton-story-vue",
+      "title": "Toggle|Swap Button",
+      "layout": {
+        "type": "grid",
+        "width": "300px"
+      },
+      "docsOnly": false,
+      "variants": [
+        {
+          "id": "components-custom-toggle-button-togglebutton-story-vue-0",
+          "title": "Toggle"
+        },
+        {
+          "id": "components-custom-toggle-button-togglebutton-story-vue-1",
+          "title": "Swap Button"
+        }
+      ],
+      "relativePath": "components/custom/toggle-button/ToggleButton.story.vue",
+      "supportPluginId": "vue3",
+      "treePath": [
+        "Toggle|Swap Button"
       ],
       "virtual": false,
       "markdownFile": null
