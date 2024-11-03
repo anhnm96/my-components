@@ -1,6 +1,7 @@
 <script lang="ts">
 interface PanelGroupContext {
   addItem: (item: HTMLDivElement) => void
+  groupId: string
   direction: Direction
   directionValue: DirectionValue
   teleportHandle: boolean
@@ -64,7 +65,7 @@ function getHandlePanelElements(
 ): [HTMLElement, HTMLElement, number] {
   const handles = Array.from(
     document.querySelectorAll(
-      `[data-panel-group-id="${groupId}"] > [data-panel-handle-id]`,
+      `[data-panel-group-id="${groupId}"][data-panel-handle-id]`,
     ),
   )
   const handleIndex = handles.indexOf(handleEl)
@@ -178,6 +179,7 @@ function update() {
 const groupId = useId()
 provide(PanelGroupKey, {
   addItem,
+  groupId,
   direction,
   directionValue,
   teleportHandle,

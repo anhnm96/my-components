@@ -13,6 +13,7 @@ const handleId = useId()
 const handleRef = ref()
 
 const {
+  groupId,
   teleportHandle,
   direction,
   state,
@@ -23,7 +24,7 @@ const {
 const targetPanel = ref<string>()
 onMounted(() => {
   const [itemBefore] = getHandlePanelElements(handleRef.value)
-  targetPanel.value = `[data-panel-item-id="${itemBefore.getAttribute('data-panel-item-id')}"]`
+  targetPanel.value = `[data-panel-item-id="${itemBefore.dataset.panelItemId}"]`
 })
 
 function pointerStart(e: PointerEvent) {
@@ -51,6 +52,7 @@ const isActive = computed(() => handleId === state.activeHandleId)
             : 'translateY(50%)'
           : '',
       }"
+      :data-panel-group-id="groupId"
       :data-panel-handle-id="handleId"
       @pointerdown="pointerStart"
     >
