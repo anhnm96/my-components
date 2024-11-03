@@ -13,13 +13,13 @@ interface PanelGroupContext {
   }
   startDragging: (
     e: PointerEvent,
-    handleEl: HTMLElement,
+    handleEl: HTMLDivElement,
     handleId: string,
   ) => void
   stopDragging: () => void
   getHandlePanelElements: (
-    handleEl: HTMLElement,
-  ) => [HTMLElement, HTMLElement, number]
+    handleEl: HTMLDivElement,
+  ) => [HTMLDivElement, HTMLDivElement, number, HTMLDivElement | undefined]
 }
 
 type Direction = 'vertical' | 'horizontal'
@@ -55,24 +55,25 @@ const axisMap = {
 } as const
 const axis = axisMap[direction]
 
-const items = ref<HTMLElement[]>([])
-function addItem(item: HTMLElement) {
+const items = ref<HTMLDivElement[]>([])
+function addItem(item: HTMLDivElement) {
   items.value.push(item)
 }
 
 function getHandlePanelElements(
-  handleEl: HTMLElement,
-): [HTMLElement, HTMLElement, number] {
+  handleEl: HTMLDivElement,
+): [HTMLDivElement, HTMLDivElement, number, HTMLDivElement | undefined] {
   const handles = Array.from(
-    document.querySelectorAll(
+    document.querySelectorAll<HTMLDivElement>(
       `[data-panel-group-id="${groupId}"][data-panel-handle-id]`,
     ),
   )
   const handleIndex = handles.indexOf(handleEl)
+  const nextHandleEl = handles[handleIndex + 1]
 
   const itemBefore = items.value[handleIndex]
   const itemAfter = items.value[handleIndex + 1]
-  return [itemBefore, itemAfter, handleIndex]
+  return [itemBefore, itemAfter, handleIndex, nextHandleEl]
 }
 
 const reactiveState = reactive({
@@ -92,20 +93,23 @@ const dragState = {
   handleIndex: -1,
   handleOffset: 0,
   handleEl: null as HTMLElement | null,
+  nextHandleEl: undefined as HTMLElement | undefined,
 }
 function startDragging(
   e: PointerEvent,
-  handleEl: HTMLElement,
+  handleEl: HTMLDivElement,
   handleId: string,
 ) {
   reactiveState.dragging = true
   dragState.startPos = e[`client${axis}`]
   dragState.handleEl = handleEl
   reactiveState.activeHandleId = handleId
-  const [itemBefore, itemAfter, handleIndex] = getHandlePanelElements(handleEl)
+  const [itemBefore, itemAfter, handleIndex, nextHandleEl] =
+    getHandlePanelElements(handleEl)
   dragState.itemBefore = itemBefore
   dragState.itemAfter = itemAfter
   dragState.handleIndex = handleIndex
+  dragState.nextHandleEl = nextHandleEl
   dragState.initialSizeItemBefore =
     itemBefore.getBoundingClientRect()[directionValue]
   dragState.initialSizeItemAfter =
@@ -170,6 +174,9 @@ function update() {
 
   dragState.itemBefore.style[directionValue] = `${itemBeforeNewSize}px`
   dragState.itemAfter.style[directionValue] = `${itemAfterNewSize}px`
+  dragState.handleEl!.ariaValueNow = `${itemBeforeNewSize}px`
+  if (dragState.nextHandleEl)
+    dragState.nextHandleEl.ariaValueNow = `${itemAfterNewSize}px`
   if (autoSaveId) {
     sizes.value[dragState.handleIndex] = `${itemBeforeNewSize}px`
     sizes.value[dragState.handleIndex + 1] = `${itemAfterNewSize}px`
@@ -192,9 +199,16 @@ provide(PanelGroupKey, {
 let sizes = ref<string[]>([])
 if (autoSaveId) sizes = useLocalStorage(autoSaveId, [], { initOnMounted: true })
 onMounted(() => {
+  const handles = Array.from(
+    document.querySelectorAll(
+      `[data-panel-group-id="${groupId}"][data-panel-handle-id]`,
+    ),
+  )
   if (sizes.value.length)
     items.value.forEach((item, index) => {
       item.style[directionValue] = sizes.value[index]
+      if (handles[index])
+        handles[index].ariaValueNow = `${sizes.value[index]}px`
     })
   else
     requestAnimationFrame(() => {
@@ -204,6 +218,8 @@ onMounted(() => {
       })
       items.value.forEach((item, index) => {
         item.style[directionValue] = sizes.value[index]
+        if (handles[index])
+          handles[index].ariaValueNow = `${sizes.value[index]}px`
       })
     })
 })

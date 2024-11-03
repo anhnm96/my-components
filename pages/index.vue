@@ -71,23 +71,31 @@ start()
       <PanelGroup class="flex h-40 text-gray-100">
         <Panel
           default-size="20%"
-          class="grid flex-grow place-items-center rounded bg-slate-600"
+          :min-size="150"
+          :max-size="300"
+          class="flex flex-grow flex-col items-center justify-center rounded bg-slate-600"
         >
-          left
+          <p>left</p>
+          <p>(min 150, max 300)</p>
         </Panel>
         <PanelHandle class="w-2" />
         <Panel
           default-size="40%"
-          class="grid flex-grow place-items-center rounded bg-slate-600"
+          :min-size="150"
+          class="flex flex-grow flex-col items-center justify-center rounded bg-slate-600"
         >
-          middle
+          <p>middle</p>
+          <p>(min 150)</p>
         </Panel>
         <PanelHandle class="w-2" />
         <Panel
           default-size="40%"
-          class="grid flex-grow place-items-center rounded bg-slate-600"
+          :min-size="150"
+          :max-size="300"
+          class="flex flex-grow flex-col items-center justify-center rounded bg-slate-600"
         >
-          right
+          <p>right</p>
+          <p>(min 150, max 300)</p>
         </Panel>
       </PanelGroup>
       <div class="flex h-40 text-gray-100">
@@ -117,23 +125,26 @@ start()
         >
           <Panel
             default-size="20%"
+            :min-size="50"
             class="grid flex-grow place-items-center rounded bg-slate-600"
           >
-            top
+            top (min 50)
           </Panel>
           <PanelHandle class="h-2 flex-shrink-0" />
           <Panel
             default-size="40%"
+            :min-size="50"
             class="grid flex-grow place-items-center rounded bg-slate-600"
           >
-            middle
+            middle (min 50)
           </Panel>
           <PanelHandle class="h-2 flex-shrink-0" />
           <Panel
             default-size="40%"
+            :min-size="50"
             class="grid flex-grow place-items-center rounded bg-slate-600"
           >
-            bottom
+            bottom (min 50)
           </Panel>
         </PanelGroup>
         <div class="flex h-60 flex-grow flex-col text-gray-100">
@@ -192,9 +203,9 @@ start()
         </Panel>
       </PanelGroup>
       <PanelGroup teleport-handle class="relative flex bg-gray-200">
-        <Panel :min="150" class="flex-grow">Fixasdasdsa</Panel>
+        <Panel :min-size="150" class="flex-grow">Fixasdasdsa</Panel>
         <PanelHandle class="bg-red-500" />
-        <Panel :min="150" class="flex-grow">TT</Panel>
+        <Panel :min-size="150" class="flex-grow">TT</Panel>
         <PanelHandle class="bg-red-500" />
         <Panel class="flex-grow">Hi</Panel>
       </PanelGroup>
@@ -204,9 +215,9 @@ start()
         </colgroup>
         <thead>
           <PanelGroup teleport-handle as="tr" lazy>
-            <Panel as="th" :min="150" style="width: 200px">Company</Panel>
+            <Panel as="th" :min-size="150" style="width: 200px">Company</Panel>
             <PanelHandle class="w-2 bg-red-500" />
-            <Panel as="th" :min="150" style="width: 300px">Contact</Panel>
+            <Panel as="th" :min-size="150" style="width: 300px">Contact</Panel>
             <PanelHandle class="w-2 bg-red-500" />
             <Panel as="th">Country</Panel>
           </PanelGroup>

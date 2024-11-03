@@ -10,7 +10,7 @@ defineOptions({
 })
 
 const handleId = useId()
-const handleRef = ref()
+const handleRef = useTemplateRef<HTMLDivElement>('handle')
 
 const {
   groupId,
@@ -23,12 +23,22 @@ const {
 
 const targetPanel = ref<string>()
 onMounted(() => {
+  if (!handleRef.value) {
+    throw new Error(
+      `Could not init PanelHandle onMounted in PanelGroup ${groupId}`,
+    )
+  }
   const [itemBefore] = getHandlePanelElements(handleRef.value)
   targetPanel.value = `[data-panel-item-id="${itemBefore.dataset.panelItemId}"]`
+  // TODO: handle hover state; resize by keyboard; touch event
+  // TODO: collapsible
+  handleRef.value.setAttribute('aria-controls', itemBefore.id)
+  handleRef.value.ariaValueMin = itemBefore.dataset.panelItemMinSize || null
+  handleRef.value.ariaValueMax = itemBefore.dataset.panelItemMaxSize || null
 })
 
 function pointerStart(e: PointerEvent) {
-  startDragging(e, handleRef.value, handleId)
+  startDragging(e, handleRef.value!, handleId)
 }
 
 const isActive = computed(() => handleId === state.activeHandleId)
@@ -38,7 +48,9 @@ const isActive = computed(() => handleId === state.activeHandleId)
   <Teleport :disabled="!targetPanel || !teleportHandle" :to="targetPanel">
     <div
       v-bind="$attrs"
-      ref="handleRef"
+      ref="handle"
+      role="separator"
+      tabindex="0"
       class="touch-action-none z-10 select-none"
       :class="[
         teleportHandle && 'absolute right-0 top-0',

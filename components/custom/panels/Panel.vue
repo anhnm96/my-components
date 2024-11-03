@@ -25,6 +25,7 @@ const isActive = computed(
 <template>
   <component
     :is="as"
+    :id="panelId"
     ref="panelRef"
     :data-panel-item-id="panelId"
     :data-panel-item-min-size="minSize"
