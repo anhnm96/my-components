@@ -99,28 +99,6 @@
       "markdownFile": null
     },
     {
-      "id": "components-compose-active-anchor-index-story-vue",
-      "title": "useActiveAnchor",
-      "layout": {
-        "type": "single",
-        "iframe": true
-      },
-      "docsOnly": false,
-      "variants": [
-        {
-          "id": "_default",
-          "title": "default"
-        }
-      ],
-      "relativePath": "components/compose/active-anchor/index.story.vue",
-      "supportPluginId": "vue3",
-      "treePath": [
-        "useActiveAnchor"
-      ],
-      "virtual": false,
-      "markdownFile": null
-    },
-    {
       "id": "components-base-button-button-story-vue",
       "title": "Button",
       "layout": {
@@ -200,6 +178,28 @@
       "supportPluginId": "vue3",
       "treePath": [
         "Checkbox"
+      ],
+      "virtual": false,
+      "markdownFile": null
+    },
+    {
+      "id": "components-compose-active-anchor-index-story-vue",
+      "title": "useActiveAnchor",
+      "layout": {
+        "type": "single",
+        "iframe": true
+      },
+      "docsOnly": false,
+      "variants": [
+        {
+          "id": "_default",
+          "title": "default"
+        }
+      ],
+      "relativePath": "components/compose/active-anchor/index.story.vue",
+      "supportPluginId": "vue3",
+      "treePath": [
+        "useActiveAnchor"
       ],
       "virtual": false,
       "markdownFile": null
