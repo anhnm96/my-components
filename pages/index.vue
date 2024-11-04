@@ -168,27 +168,33 @@ start()
         </div>
       </div>
       <PanelGroup class="mt-4 flex h-40 text-gray-100">
-        <Panel class="grid flex-grow place-items-center rounded bg-slate-600">
+        <Panel
+          :min-size="150"
+          class="grid flex-grow place-items-center rounded bg-slate-600"
+        >
           left
         </Panel>
         <PanelHandle class="w-2" />
-        <Panel class="flex-grow">
+        <Panel :min-size="150" class="flex-grow">
           <PanelGroup direction="vertical" class="flex h-full flex-col">
             <Panel
+              :min-size="50"
               class="grid flex-grow place-items-center rounded bg-slate-600"
             >
               top
             </Panel>
             <PanelHandle class="h-2 flex-shrink-0" />
-            <Panel class="flex-grow rounded bg-slate-600">
+            <Panel :min-size="50" class="flex-grow rounded">
               <PanelGroup direction="horizontal" class="flex h-full">
                 <Panel
+                  :min-size="50"
                   class="grid flex-grow place-items-center rounded bg-slate-600"
                 >
                   left
                 </Panel>
-                <PanelHandle class="w-2 bg-slate-700" />
+                <PanelHandle class="w-2" />
                 <Panel
+                  :min-size="50"
                   class="grid flex-grow place-items-center rounded bg-slate-600"
                 >
                   right
@@ -198,7 +204,10 @@ start()
           </PanelGroup>
         </Panel>
         <PanelHandle class="w-2" />
-        <Panel class="grid flex-grow place-items-center rounded bg-slate-600">
+        <Panel
+          :min-size="150"
+          class="grid flex-grow place-items-center rounded bg-slate-600"
+        >
           right
         </Panel>
       </PanelGroup>

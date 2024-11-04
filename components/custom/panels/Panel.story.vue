@@ -2,27 +2,129 @@
 
 <template>
   <Story title="Resizable Panels">
-    <Variant title="basic">
-      <PanelGroup class="relative flex bg-gray-200">
-        <Panel :min="150" class="flex-grow">Osaka</Panel>
-        <PanelHandle />
-        <Panel :min="150" class="flex-grow">Kyoto</Panel>
-        <PanelHandle />
-        <Panel class="flex-grow">Fukuoka</Panel>
+    <Variant title="Horizontal">
+      <PanelGroup class="flex h-40 text-gray-100">
+        <Panel
+          default-size="20%"
+          :min-size="150"
+          :max-size="300"
+          class="flex flex-grow flex-col items-center justify-center rounded bg-slate-600"
+        >
+          <p>left</p>
+          <p>(min 150, max 300)</p>
+          <p>(default 20%)</p>
+        </Panel>
+        <PanelHandle class="w-2" />
+        <Panel
+          default-size="40%"
+          :min-size="150"
+          class="flex flex-grow flex-col items-center justify-center rounded bg-slate-600"
+        >
+          <p>middle</p>
+          <p>(min 150)</p>
+          <p>(default 40%)</p>
+        </Panel>
+        <PanelHandle class="w-2" />
+        <Panel
+          default-size="40%"
+          :min-size="150"
+          :max-size="300"
+          class="flex flex-grow flex-col items-center justify-center rounded bg-slate-600"
+        >
+          <p>right</p>
+          <p>(min 150, max 300)</p>
+          <p>(default 40%)</p>
+        </Panel>
       </PanelGroup>
     </Variant>
-    <Variant title="resizable table columns">
-      <table class="w-full bg-white">
+    <Variant title="Vertical">
+      <PanelGroup
+        direction="vertical"
+        class="flex h-60 flex-grow flex-col text-gray-100"
+      >
+        <Panel
+          default-size="20%"
+          :min-size="50"
+          class="grid flex-grow place-items-center rounded bg-slate-600"
+        >
+          top (min 50)
+        </Panel>
+        <PanelHandle class="h-2 flex-shrink-0" />
+        <Panel
+          default-size="40%"
+          :min-size="50"
+          class="grid flex-grow place-items-center rounded bg-slate-600"
+        >
+          middle (min 50)
+        </Panel>
+        <PanelHandle class="h-2 flex-shrink-0" />
+        <Panel
+          default-size="40%"
+          :min-size="50"
+          class="grid flex-grow place-items-center rounded bg-slate-600"
+        >
+          bottom (min 50)
+        </Panel>
+      </PanelGroup>
+    </Variant>
+    <Variant title="Nested layout">
+      <PanelGroup class="mt-4 flex h-40 text-gray-100">
+        <Panel
+          :min-size="150"
+          class="grid flex-grow place-items-center rounded bg-slate-600"
+        >
+          left
+        </Panel>
+        <PanelHandle class="w-2" />
+        <Panel :min-size="150" class="flex-grow">
+          <PanelGroup direction="vertical" class="flex h-full flex-col">
+            <Panel
+              :min-size="50"
+              class="grid flex-grow place-items-center rounded bg-slate-600"
+            >
+              top
+            </Panel>
+            <PanelHandle class="h-2 flex-shrink-0" />
+            <Panel :min-size="50" class="flex-grow rounded">
+              <PanelGroup direction="horizontal" class="flex h-full">
+                <Panel
+                  :min-size="50"
+                  class="grid flex-grow place-items-center rounded bg-slate-600"
+                >
+                  left
+                </Panel>
+                <PanelHandle class="w-2" />
+                <Panel
+                  :min-size="50"
+                  class="grid flex-grow place-items-center rounded bg-slate-600"
+                >
+                  right
+                </Panel>
+              </PanelGroup>
+            </Panel>
+          </PanelGroup>
+        </Panel>
+        <PanelHandle class="w-2" />
+        <Panel
+          :min-size="150"
+          class="grid flex-grow place-items-center rounded bg-slate-600"
+        >
+          right
+        </Panel>
+      </PanelGroup>
+    </Variant>
+    <Variant title="Table columns / lazy update">
+      <table class="w-full text-gray-100">
         <colgroup>
-          <col span="3" class="border border-red-400" />
+          <col span="3" class="border border-gray-400" />
         </colgroup>
         <thead>
-          <PanelGroup as="tr">
-            <Panel as="th" :min="150" style="width: 200px">Company</Panel>
-            <PanelHandle />
-            <Panel as="th" :min="150" style="width: 300px">Contact</Panel>
-            <PanelHandle />
-            <Panel as="th">Country</Panel>
+          <PanelGroup lazy teleport-handle as="tr">
+            <Panel as="th" :min-size="150" style="width: 200px">Company</Panel>
+            <PanelHandle class="w-2" />
+            <Panel as="th" :min-size="150" style="width: 300px">Contact</Panel>
+            <PanelHandle class="w-2" />
+            <Panel :min-size="100" as="th">Country</Panel>
           </PanelGroup>
         </thead>
         <tbody>

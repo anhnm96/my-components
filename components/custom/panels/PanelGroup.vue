@@ -136,6 +136,8 @@ function stopDragging() {
   window.removeEventListener('pointermove', pointerMove)
   window.removeEventListener('pointerup', stopDragging)
   reactiveState.activeHandleId = ''
+  reactiveState.itemBeforeId = ''
+  reactiveState.itemAfterId = ''
   if (lazy) update()
   dragState.delta = 0
 }

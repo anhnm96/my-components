@@ -17,8 +17,13 @@ onMounted(() => {
 })
 
 const panelId = useId()
-const isActive = computed(
-  () => state.itemBeforeId === panelId || state.itemAfterId === panelId,
+watch(
+  [() => state.itemBeforeId, () => state.itemAfterId],
+  ([itemBeforeId, itemAfterId]) => {
+    if (itemBeforeId === panelId || itemAfterId === panelId)
+      panelRef.value.classList.add('panel-item--active')
+    else panelRef.value.classList.remove('panel-item--active')
+  },
 )
 </script>
 
@@ -30,8 +35,7 @@ const isActive = computed(
     :data-panel-item-id="panelId"
     :data-panel-item-min-size="minSize"
     :data-panel-item-max-size="maxSize"
-    class="panel-item relative"
-    :class="isActive && 'panel-item--active'"
+    class="relative"
     :style="{
       '--direction-value': directionValue,
     }"
@@ -41,12 +45,6 @@ const isActive = computed(
 </template>
 
 <style scoped>
-.panel-item {
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  perspective: 1000px;
-}
-
 .panel-item--active {
   will-change: var(--direction-value);
 }
