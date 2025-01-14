@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { PanelGroupKey } from './PanelGroup.vue'
 
-const { draggingCls = 'bg-gray-400' } = defineProps<{
-  draggingCls?: string
+const { draggingClass = 'bg-slate-400' } = defineProps<{
+  draggingClass?: string
 }>()
 
 defineOptions({
@@ -31,7 +31,6 @@ onMounted(() => {
   const [itemBefore] = getHandlePanelElements(handleRef.value)
   targetPanel.value = `[data-panel-item-id="${itemBefore.dataset.panelItemId}"]`
   // TODO: handle hover state; resize by keyboard; touch event
-  // TODO: collapsible
   handleRef.value.setAttribute('aria-controls', itemBefore.id)
   handleRef.value.ariaValueMin = itemBefore.dataset.panelItemMinSize || null
   handleRef.value.ariaValueMax = itemBefore.dataset.panelItemMaxSize || null
@@ -54,7 +53,7 @@ const isActive = computed(() => handleId === state.activeHandleId)
       class="touch-action-none z-10 select-none"
       :class="[
         teleportHandle && 'absolute right-0 top-0',
-        isActive && draggingCls,
+        isActive && draggingClass,
         direction === 'horizontal' ? 'cursor-col-resize' : 'cursor-row-resize',
       ]"
       :style="{

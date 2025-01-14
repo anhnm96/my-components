@@ -5,10 +5,12 @@
     <Variant title="Horizontal">
       <PanelGroup class="flex h-40 text-gray-100">
         <Panel
+          collapsible
           default-size="20%"
           :min-size="150"
           :max-size="300"
-          class="flex flex-grow flex-col items-center justify-center rounded bg-slate-600"
+          class="flex-grow rounded bg-slate-600"
+          wrapper-class="flex flex-col items-center justify-center"
         >
           <p>left</p>
           <p>(min 150, max 300)</p>
@@ -16,9 +18,11 @@
         </Panel>
         <PanelHandle class="w-2" />
         <Panel
+          collapsible
           default-size="40%"
           :min-size="150"
-          class="flex flex-grow flex-col items-center justify-center rounded bg-slate-600"
+          class="flex-grow rounded bg-slate-600"
+          wrapper-class="flex flex-col items-center justify-center"
         >
           <p>middle</p>
           <p>(min 150)</p>
@@ -26,10 +30,12 @@
         </Panel>
         <PanelHandle class="w-2" />
         <Panel
+          collapsible
           default-size="40%"
           :min-size="150"
           :max-size="300"
-          class="flex flex-grow flex-col items-center justify-center rounded bg-slate-600"
+          class="flex-grow rounded bg-slate-600"
+          wrapper-class="flex flex-col items-center justify-center"
         >
           <p>right</p>
           <p>(min 150, max 300)</p>
@@ -43,25 +49,31 @@
         class="flex h-60 flex-grow flex-col text-gray-100"
       >
         <Panel
+          collapsible
           default-size="20%"
           :min-size="50"
-          class="grid flex-grow place-items-center rounded bg-slate-600"
+          class="flex-grow rounded bg-slate-600"
+          wrapper-class="grid place-items-center"
         >
           top (min 50)
         </Panel>
         <PanelHandle class="h-2 flex-shrink-0" />
         <Panel
+          collapsible
           default-size="40%"
           :min-size="50"
-          class="grid flex-grow place-items-center rounded bg-slate-600"
+          class="flex-grow rounded bg-slate-600"
+          wrapper-class="grid place-items-center"
         >
           middle (min 50)
         </Panel>
         <PanelHandle class="h-2 flex-shrink-0" />
         <Panel
+          collapsible
           default-size="40%"
           :min-size="50"
-          class="grid flex-grow place-items-center rounded bg-slate-600"
+          class="flex-grow rounded bg-slate-600"
+          wrapper-class="grid place-items-center"
         >
           bottom (min 50)
         </Panel>
@@ -71,7 +83,8 @@
       <PanelGroup class="mt-4 flex h-40 text-gray-100">
         <Panel
           :min-size="150"
-          class="grid flex-grow place-items-center rounded bg-slate-600"
+          class="flex-grow rounded bg-slate-600"
+          wrapper-class="grid place-items-center"
         >
           left
         </Panel>
@@ -80,7 +93,8 @@
           <PanelGroup direction="vertical" class="flex h-full flex-col">
             <Panel
               :min-size="50"
-              class="grid flex-grow place-items-center rounded bg-slate-600"
+              class="flex-grow rounded bg-slate-600"
+              wrapper-class="grid place-items-center"
             >
               top
             </Panel>
@@ -89,14 +103,16 @@
               <PanelGroup direction="horizontal" class="flex h-full">
                 <Panel
                   :min-size="50"
-                  class="grid flex-grow place-items-center rounded bg-slate-600"
+                  class="flex-grow rounded bg-slate-600"
+                  wrapper-class="grid place-items-center"
                 >
                   left
                 </Panel>
                 <PanelHandle class="w-2" />
                 <Panel
                   :min-size="50"
-                  class="grid flex-grow place-items-center rounded bg-slate-600"
+                  class="flex-grow rounded bg-slate-600"
+                  wrapper-class="grid place-items-center"
                 >
                   right
                 </Panel>
@@ -107,7 +123,8 @@
         <PanelHandle class="w-2" />
         <Panel
           :min-size="150"
-          class="grid flex-grow place-items-center rounded bg-slate-600"
+          class="flex-grow rounded bg-slate-600"
+          wrapper-class="grid place-items-center"
         >
           right
         </Panel>

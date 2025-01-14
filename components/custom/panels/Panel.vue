@@ -6,6 +6,9 @@ const { as = 'div', defaultSize } = defineProps<{
   minSize?: number
   maxSize?: number
   defaultSize?: string
+  collapsible?: boolean
+  collapsedSize?: number
+  wrapperClass?: string
 }>()
 
 const { addItem, state, directionValue } = inject(PanelGroupKey)!
@@ -33,6 +36,8 @@ watch(
     :id="panelId"
     ref="panelRef"
     :data-panel-item-id="panelId"
+    :data-panel-item-collapsible="collapsible"
+    :data-panel-item-collapsed-size="collapsedSize"
     :data-panel-item-min-size="minSize"
     :data-panel-item-max-size="maxSize"
     class="relative"
@@ -40,7 +45,9 @@ watch(
       '--direction-value': directionValue,
     }"
   >
-    <slot />
+    <div class="h-full w-full overflow-hidden" :class="wrapperClass">
+      <slot />
+    </div>
   </component>
 </template>
 

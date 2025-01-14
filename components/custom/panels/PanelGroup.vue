@@ -142,38 +142,161 @@ function stopDragging() {
   dragState.delta = 0
 }
 
-function update() {
-  if (!dragState.itemBefore || !dragState.itemAfter) return
+interface Panel {
+  maxWidth?: number
+  minWidth: number
+  width: number
+  collapsible: boolean
+  collapsedSize: number
+}
 
-  const itemBeforeMinSize = Number(
-    dragState.itemBefore.dataset.panelItemMinSize,
-  )
+function calculateSize(panel1: Panel, panel2: Panel, delta: number) {
+  let panelCollapsing
+  let panelExpanding
+  if (delta < 0) {
+    panelCollapsing = panel1
+    panelExpanding = panel2
+  } else {
+    panelCollapsing = panel2
+    panelExpanding = panel1
+  }
+
+  if (panelExpanding.width === panelExpanding.maxWidth) {
+    return [panel1.width, panel2.width]
+  }
+
+  const totalWidth = panel1.width + panel2.width
+  let newWidth1 = panelCollapsing.width - Math.abs(delta)
+  let newWidth2 = panelExpanding.width + Math.abs(delta)
+
+  if (panelExpanding.maxWidth && newWidth2 > panelExpanding.maxWidth) {
+    if (newWidth1 >= panelCollapsing.minWidth) {
+      newWidth2 = panelExpanding.maxWidth
+      newWidth1 =
+        panelCollapsing.width - (panelExpanding.maxWidth - panelExpanding.width)
+    } else {
+      const panelCollapsingDelta =
+        panelCollapsing.width - panelCollapsing.minWidth
+      const panelExpandingDelta = panelExpanding.maxWidth - panelExpanding.width
+      if (panelCollapsingDelta < panelExpandingDelta) {
+        if (panelCollapsing.collapsible) {
+          const halfwayPoint =
+            (panelCollapsing.collapsedSize + panelCollapsing.minWidth) / 2
+          if (newWidth1 < halfwayPoint) {
+            if (
+              !panelExpanding.maxWidth ||
+              panelExpanding.maxWidth >
+                totalWidth - panelCollapsing.collapsedSize
+            ) {
+              newWidth1 = panelCollapsing.collapsedSize
+              newWidth2 = totalWidth - newWidth1
+            } else {
+              newWidth1 = panelCollapsing.minWidth
+              newWidth2 = totalWidth - newWidth1
+            }
+          } else {
+            newWidth1 = panelCollapsing.minWidth
+            newWidth2 = totalWidth - newWidth1
+          }
+        } else {
+          newWidth1 = panelCollapsing.minWidth
+          newWidth2 = totalWidth - newWidth1
+        }
+      } else {
+        newWidth2 = panelExpanding.maxWidth
+        newWidth1 = totalWidth - newWidth2
+      }
+    }
+    panelCollapsing.width = newWidth1
+    panelExpanding.width = newWidth2
+    return delta < 0
+      ? [panelCollapsing.width, panelExpanding.width]
+      : [panelExpanding.width, panelCollapsing.width]
+  }
+
+  if (
+    panelExpanding.collapsible &&
+    panelExpanding.width === panelExpanding.collapsedSize
+  ) {
+    const halfwayPoint =
+      (panelExpanding.collapsedSize + panelExpanding.minWidth) / 2
+    if (newWidth2 >= halfwayPoint) {
+      if (newWidth2 < panelExpanding.minWidth) {
+        if (
+          !panelCollapsing.minWidth ||
+          panelCollapsing.minWidth <= totalWidth - panelExpanding.minWidth
+        ) {
+          newWidth2 = panelExpanding.minWidth
+        } else {
+          newWidth2 = panelExpanding.collapsedSize
+        }
+      }
+    } else {
+      newWidth2 = panelExpanding.collapsedSize
+    }
+    newWidth1 = totalWidth - newWidth2
+  }
+
+  if (newWidth1 < panelCollapsing.minWidth) {
+    if (panelCollapsing.collapsible) {
+      const halfwayPoint =
+        (panelCollapsing.collapsedSize + panelCollapsing.minWidth) / 2
+      if (newWidth1 < halfwayPoint) {
+        if (
+          !panelExpanding.maxWidth ||
+          panelExpanding.maxWidth > totalWidth - panelCollapsing.collapsedSize
+        ) {
+          newWidth1 = panelCollapsing.collapsedSize
+        } else {
+          newWidth1 = panelCollapsing.minWidth
+        }
+      } else {
+        newWidth1 = panelCollapsing.minWidth
+      }
+    } else {
+      newWidth1 = panelCollapsing.minWidth
+    }
+  }
+  newWidth2 = totalWidth - newWidth1
+  panelCollapsing.width = newWidth1
+  panelExpanding.width = newWidth2
+  return delta < 0
+    ? [panelCollapsing.width, panelExpanding.width]
+    : [panelExpanding.width, panelCollapsing.width]
+}
+
+function update() {
+  if (!dragState.itemBefore || !dragState.itemAfter || dragState.delta === 0)
+    return
+
+  const itemBeforeMinSize =
+    Number(dragState.itemBefore.dataset.panelItemMinSize) || 0
   const itemBeforeMaxSize = Number(
     dragState.itemBefore.dataset.panelItemMaxSize,
   )
-  let itemBeforeNewSize = dragState.initialSizeItemBefore + dragState.delta
-  if (!isNaN(itemBeforeMinSize) && itemBeforeNewSize <= itemBeforeMinSize)
-    itemBeforeNewSize = itemBeforeMinSize
-  else if (
-    !isNaN(itemBeforeMaxSize) &&
-    itemBeforeNewSize >= itemBeforeMaxSize
-  ) {
-    itemBeforeNewSize = itemBeforeMaxSize
-  }
 
-  const totalSize =
-    dragState.initialSizeItemBefore + dragState.initialSizeItemAfter
-  const itemAfterMinSize = Number(dragState.itemAfter.dataset.panelItemMinSize)
+  const itemAfterMinSize =
+    Number(dragState.itemAfter.dataset.panelItemMinSize) || 0
   const itemAfterMaxSize = Number(dragState.itemAfter.dataset.panelItemMaxSize)
-  let itemAfterNewSize = totalSize - itemBeforeNewSize
-  if (!isNaN(itemAfterMinSize) && itemAfterNewSize <= itemAfterMinSize) {
-    itemAfterNewSize = itemAfterMinSize
-    itemBeforeNewSize = totalSize - itemAfterNewSize
-  } else if (!isNaN(itemAfterMaxSize) && itemAfterNewSize >= itemAfterMaxSize) {
-    itemAfterNewSize = itemAfterMaxSize
-    itemBeforeNewSize = totalSize - itemAfterNewSize
-  }
-
+  const [itemBeforeNewSize, itemAfterNewSize] = calculateSize(
+    {
+      maxWidth: itemBeforeMaxSize,
+      minWidth: itemBeforeMinSize,
+      width: dragState.initialSizeItemBefore,
+      collapsible: dragState.itemBefore.dataset.panelItemCollapsible === 'true',
+      collapsedSize:
+        Number(dragState.itemBefore.dataset.panelItemCollapsedSize) || 0,
+    },
+    {
+      maxWidth: itemAfterMaxSize,
+      minWidth: itemAfterMinSize,
+      width: dragState.initialSizeItemAfter,
+      collapsible: dragState.itemAfter.dataset.panelItemCollapsible === 'true',
+      collapsedSize:
+        Number(dragState.itemAfter.dataset.panelItemCollapsedSize) || 0,
+    },
+    dragState.delta,
+  )
   dragState.itemBefore.style[directionValue] = `${itemBeforeNewSize}px`
   dragState.itemAfter.style[directionValue] = `${itemAfterNewSize}px`
   dragState.handleEl!.ariaValueNow = `${itemBeforeNewSize}px`
