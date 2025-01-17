@@ -257,28 +257,6 @@
       "markdownFile": null
     },
     {
-      "id": "components-custom-dropzone-dropzone-story-vue",
-      "title": "Dropzone",
-      "layout": {
-        "type": "single",
-        "iframe": true
-      },
-      "docsOnly": false,
-      "variants": [
-        {
-          "id": "_default",
-          "title": "default"
-        }
-      ],
-      "relativePath": "components/custom/dropzone/Dropzone.story.vue",
-      "supportPluginId": "vue3",
-      "treePath": [
-        "Dropzone"
-      ],
-      "virtual": false,
-      "markdownFile": null
-    },
-    {
       "id": "components-custom-expandable-expandable-story-vue",
       "title": "Expandable",
       "layout": {
@@ -308,6 +286,28 @@
       "supportPluginId": "vue3",
       "treePath": [
         "Expandable"
+      ],
+      "virtual": false,
+      "markdownFile": null
+    },
+    {
+      "id": "components-custom-dropzone-dropzone-story-vue",
+      "title": "Dropzone",
+      "layout": {
+        "type": "single",
+        "iframe": true
+      },
+      "docsOnly": false,
+      "variants": [
+        {
+          "id": "_default",
+          "title": "default"
+        }
+      ],
+      "relativePath": "components/custom/dropzone/Dropzone.story.vue",
+      "supportPluginId": "vue3",
+      "treePath": [
+        "Dropzone"
       ],
       "virtual": false,
       "markdownFile": null
