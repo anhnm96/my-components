@@ -20,6 +20,7 @@ interface PanelGroupContext {
   getHandlePanelElements: (
     handleEl: HTMLDivElement,
   ) => [HTMLDivElement, HTMLDivElement, number, HTMLDivElement | undefined]
+  adjustPanelSizes: (panel: HTMLDivElement, size?: number) => void
 }
 
 type Direction = 'vertical' | 'horizontal'
@@ -269,14 +270,14 @@ function update() {
   if (!dragState.itemBefore || !dragState.itemAfter || dragState.delta === 0)
     return
 
-  const itemBeforeMinSize =
-    Number(dragState.itemBefore.dataset.panelItemMinSize) || 0
+  const itemBeforeMinSize = Number(
+    dragState.itemBefore.dataset.panelItemMinSize,
+  )
   const itemBeforeMaxSize = Number(
     dragState.itemBefore.dataset.panelItemMaxSize,
   )
 
-  const itemAfterMinSize =
-    Number(dragState.itemAfter.dataset.panelItemMinSize) || 0
+  const itemAfterMinSize = Number(dragState.itemAfter.dataset.panelItemMinSize)
   const itemAfterMaxSize = Number(dragState.itemAfter.dataset.panelItemMaxSize)
   const [itemBeforeNewSize, itemAfterNewSize] = calculateSize(
     {
@@ -284,16 +285,16 @@ function update() {
       minWidth: itemBeforeMinSize,
       width: dragState.initialSizeItemBefore,
       collapsible: dragState.itemBefore.dataset.panelItemCollapsible === 'true',
-      collapsedSize:
-        Number(dragState.itemBefore.dataset.panelItemCollapsedSize) || 0,
+      collapsedSize: Number(
+        dragState.itemBefore.dataset.panelItemCollapsedSize,
+      ),
     },
     {
       maxWidth: itemAfterMaxSize,
       minWidth: itemAfterMinSize,
       width: dragState.initialSizeItemAfter,
       collapsible: dragState.itemAfter.dataset.panelItemCollapsible === 'true',
-      collapsedSize:
-        Number(dragState.itemAfter.dataset.panelItemCollapsedSize) || 0,
+      collapsedSize: Number(dragState.itemAfter.dataset.panelItemCollapsedSize),
     },
     dragState.delta,
   )
@@ -319,6 +320,7 @@ provide(PanelGroupKey, {
   startDragging,
   stopDragging,
   getHandlePanelElements,
+  adjustPanelSizes,
 })
 
 let sizes = ref<string[]>([])
@@ -347,6 +349,64 @@ onMounted(() => {
           handles[index].ariaValueNow = `${sizes.value[index]}px`
       })
     })
+})
+
+function getPanelData(panel: HTMLDivElement) {
+  const maxWidth = Number(panel.dataset.panelItemMaxSize) || undefined
+  const minWidth = Number(panel.dataset.panelItemMinSize)
+  const width = panel.getBoundingClientRect()[directionValue]
+  const collapsedSize = Number(panel.dataset.panelItemCollapsedSize)
+  return {
+    maxWidth,
+    minWidth,
+    width,
+    collapsible: true,
+    collapsedSize,
+  }
+}
+
+function adjustPanelSizes(panel: HTMLDivElement, size?: number) {
+  const index = items.value.findIndex(
+    (item) => item === panel || item.id === panel.id,
+  )
+  const isLastPanel = index === items.value.length - 1
+  const siblingIndex = isLastPanel ? index - 1 : index + 1
+  const panel1El = isLastPanel ? items.value[siblingIndex] : items.value[index]
+  const panel2El = isLastPanel ? items.value[index] : items.value[siblingIndex]
+  const panel1 = getPanelData(panel1El)
+  const panel2 = getPanelData(panel2El)
+  const delta = isLastPanel
+    ? panel2El.getBoundingClientRect()[directionValue] -
+      (size || panel2.collapsedSize)
+    : (size || panel1.collapsedSize) -
+      panel1El.getBoundingClientRect()[directionValue]
+  const [newWidth1, newWidth2] = calculateSize(panel1, panel2, delta)
+  panel1El.style[directionValue] = `${newWidth1}px`
+  panel2El.style[directionValue] = `${newWidth2}px`
+  const handles = Array.from(
+    document.querySelectorAll<HTMLDivElement>(
+      `[data-panel-group-id="${groupId}"][data-panel-handle-id]`,
+    ),
+  )
+  if (isLastPanel) {
+    handles[siblingIndex]!.ariaValueNow = `${newWidth1}px`
+    if (autoSaveId) {
+      sizes.value[siblingIndex] = `${newWidth1}px`
+      sizes.value[index] = `${newWidth2}px`
+    }
+  } else {
+    handles[index]!.ariaValueNow = `${newWidth1}px`
+    if (handles[siblingIndex])
+      handles[siblingIndex]!.ariaValueNow = `${newWidth2}px`
+    if (autoSaveId) {
+      sizes.value[index] = `${newWidth1}px`
+      sizes.value[siblingIndex] = `${newWidth2}px`
+    }
+  }
+}
+
+defineExpose({
+  adjustPanelSizes,
 })
 </script>
 

@@ -53,6 +53,7 @@ const names = ref([])
 const customCheckboxValue = ref('Yes')
 const { start, setClosed, visible } = usePolitePopup()
 start()
+const panelRefs = ref<any[]>([])
 </script>
 
 <template>
@@ -68,8 +69,74 @@ start()
       <!-- <StripeSessions /> -->
     </div>
     <div>
+      <div class="flex justify-between">
+        <div class="flex gap-2">
+          <button
+            class="px-2 text-lg text-white"
+            @click="panelRefs[0].toggle()"
+          >
+            <Icon
+              :name="
+                panelRefs[0]?.isCollapsed
+                  ? 'ri:expand-horizontal-line'
+                  : 'ri:collapse-horizontal-line'
+              "
+            />
+          </button>
+          <input
+            class="w-28"
+            type="number"
+            @keydown.enter="
+              panelRefs[0].resize(($event.target as HTMLInputElement)?.value)
+            "
+          />
+        </div>
+        <div class="flex gap-2">
+          <button
+            class="px-2 text-lg text-white"
+            @click="panelRefs[1].toggle()"
+          >
+            <Icon
+              :name="
+                panelRefs[1]?.isCollapsed
+                  ? 'ri:expand-horizontal-line'
+                  : 'ri:collapse-horizontal-line'
+              "
+            />
+          </button>
+          <input
+            class="w-28"
+            type="number"
+            @keydown.enter="
+              panelRefs[1].resize(($event.target as HTMLInputElement)?.value)
+            "
+          />
+        </div>
+        <div class="flex gap-2">
+          <button
+            class="px-2 text-lg text-white"
+            @click="panelRefs[2].toggle()"
+          >
+            <Icon
+              :name="
+                panelRefs[2]?.isCollapsed
+                  ? 'ri:expand-horizontal-line'
+                  : 'ri:collapse-horizontal-line'
+              "
+            />
+          </button>
+          <input
+            class="w-28"
+            type="number"
+            @keydown.enter="
+              panelRefs[2].resize(($event.target as HTMLInputElement)?.value)
+            "
+          />
+        </div>
+      </div>
       <PanelGroup class="flex h-40 text-gray-100">
         <Panel
+          :ref="(panel) => panelRefs.push(panel as ComponentPublicInstance)"
           collapsible
           default-size="20%"
           :min-size="100"
@@ -81,6 +148,7 @@ start()
         </Panel>
         <PanelHandle class="w-1 flex-shrink-0" />
         <Panel
+          :ref="(panel) => panelRefs.push(panel as ComponentPublicInstance)"
           collapsible
           default-size="20%"
           :min-size="100"
@@ -92,6 +160,7 @@ start()
         </Panel>
         <PanelHandle class="w-1 flex-shrink-0" />
         <Panel
+          :ref="(panel) => panelRefs.push(panel as ComponentPublicInstance)"
           collapsible
           default-size="20%"
           :min-size="100"
