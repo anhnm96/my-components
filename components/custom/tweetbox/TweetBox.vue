@@ -2,9 +2,12 @@
 interface PropsType {
   limit?: number
   modelValue: string
+  initialRows?: number
+  maxRows?: number
 }
 const props = withDefaults(defineProps<PropsType>(), {
   limit: 40,
+  initialRows: 1,
 })
 
 const emit = defineEmits<{ (e: 'update:modelValue', payload: string): void }>()
@@ -62,58 +65,46 @@ function textareaGrow() {
   // of rows needed to fit the currently entered text.
   const innerHeight =
     textareaRef.value.scrollHeight - paddingTop - paddingBottom
-  textareaRef.value.rows = innerHeight / lineHeight
+  textareaRef.value.rows = Math.max(props.initialRows, innerHeight / lineHeight)
+  if (props.maxRows && textareaRef.value.rows > props.maxRows) {
+    textareaRef.value.rows = props.maxRows;
+  }
+}
+
+let isSyncing = false;
+const htmlareaRef = useTemplateRef('htmlareaRef')
+function syncScroll() {
+  if (isSyncing) return;
+  isSyncing = true;
+  htmlareaRef.value!.scrollTop = textareaRef.value?.scrollTop;
+  htmlareaRef.value!.scrollLeft = textareaRef.value?.scrollLeft;
+  isSyncing = false;
 }
 </script>
 
 <template>
-  <div
-    class="tweetbox"
-    :class="[
-      {
-        'has-exceeded-limit': limitStatus > 100,
-      },
-    ]"
-  >
-    <div class="tweetbox__htmlarea" aria-hidden="true">
+  <div class="tweetbox" :class="[
+    {
+      'has-exceeded-limit': limitStatus > 100,
+    },
+  ]">
+    <textarea ref="textareaRef" class="tweetbox__textarea" :value="modelValue" rows="1" @input="updateValue"
+      @scroll="syncScroll" />
+    <div class="tweetbox__htmlarea" ref="htmlareaRef" aria-hidden="true">
       <span>{{ valueAllowed }}</span>
       <span class="text-excess">{{ valueExcess }}</span>
+      <br>
     </div>
-    <textarea
-      ref="textareaRef"
-      class="tweetbox__textarea"
-      :value="modelValue"
-      rows="1"
-      @input="updateValue"
-    />
-    <div class="tweetbox__limit">
+    <div class="tweetbox__limit cursor-pointer">
       <span class="tweetbox__remainingCharacters">{{
         remainingCharacters
       }}</span>
-      <svg
-        class="tweetbox__counter"
-        viewBox="0 0 33.83098862 33.83098862"
-        height="20"
-        width="20"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <circle
-          class="tweetbox__counterUnderlay"
-          cx="16.91549431"
-          cy="16.91549431"
-          r="15.91549431"
-          fill="none"
-          stroke-width="2"
-        />
-        <circle
-          class="tweetbox__counterProgress"
-          :stroke-dasharray="`${limitStatus},100`"
-          cx="16.91549431"
-          cy="16.91549431"
-          r="15.91549431"
-          fill="none"
-          stroke-width="4"
-        />
+      <svg class="tweetbox__counter" viewBox="0 0 33.83098862 33.83098862" height="20" width="20"
+        xmlns="http://www.w3.org/2000/svg">
+        <circle class="tweetbox__counterUnderlay" cx="16.91549431" cy="16.91549431" r="15.91549431" fill="none"
+          stroke-width="2" />
+        <circle class="tweetbox__counterProgress" :stroke-dasharray="`${limitStatus},100`" cx="16.91549431"
+          cy="16.91549431" r="15.91549431" fill="none" stroke-width="4" />
       </svg>
     </div>
   </div>
@@ -142,6 +133,13 @@ function textareaGrow() {
   /* word breaks behave exactly like in a textarea */
   white-space: pre-wrap;
   word-wrap: break-word;
+  top: 0;
+  left: 0;
+  background: transparent;
+  mix-blend-mode: lighten;
+  pointer-events: none;
+  user-select: none;
+  overflow: auto;
 }
 
 .tweetbox__textarea {
@@ -149,8 +147,8 @@ function textareaGrow() {
   position: relative;
   border-color: #99dde6;
   outline: 0;
-  background-color: transparent;
   resize: none;
+  transition: all 200ms ease;
 }
 
 .tweetbox__textarea:focus {
@@ -158,7 +156,9 @@ function textareaGrow() {
 }
 
 .tweetbox .text-excess {
-  background: #ffb8c2;
+  /* background: #ffb8c2; */
+  color: red;
+  text-shadow: 0 0 2px red;
 }
 
 .tweetbox__limit {
@@ -203,9 +203,11 @@ function textareaGrow() {
   0% {
     stroke-width: 4;
   }
+
   50% {
     stroke-width: 6;
   }
+
   100% {
     stroke-width: 4;
   }
