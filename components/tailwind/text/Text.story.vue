@@ -21,6 +21,7 @@ import Typewriter from './Typewriter.vue'
         style="
           --animated-gradient-color-one: #42d392;
           --animated-gradient-color-two: #647eff;
+          --bg-size: 400%;
         "
         class="animated-gradient-text py-2 text-5xl font-bold"
       >

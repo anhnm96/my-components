@@ -2,67 +2,65 @@
 import Carousel from './Carousel.vue'
 import CarouselItem from './CarouselItem.vue'
 
-const colors = ['red', 'green', 'blue', 'gray']
-
 const items = [
   {
     thumbnail:
-      'https://photo-zmp3.zadn.vn/cover/d/0/d/7/d0d772a6c3e35b3e768d5c3ebf644ecd.jpg',
-    title: 'Spa - Yoga',
+      'https://photo-resize-zmp3.zmdcdn.me/w320_r1x1_jpeg/cover/b/1/3/0/b130381bdaed5df3ddfff9549d859510.jpg',
+    title: 'Lofi Việt Gây Nghiện',
   },
   {
     thumbnail:
-      'https://photo-zmp3.zadn.vn/cover/2/e/9/6/2e966bf47b1989fdff7149c7a1b0f25e.jpg',
-    title: 'Driving',
+      'https://photo-resize-zmp3.zmdcdn.me/w320_r1x1_jpeg/cover/4/5/4/9/45493e859cde749c75fb4377c14d0db3.jpg',
+    title: 'Nhạc Lofi Chill Gây Nghiện',
   },
   {
     thumbnail:
-      'https://photo-zmp3.zadn.vn/cover/d/b/5/c/db5cf069b328c7858b2d9642cc6b4529.jpg',
-    title: 'Workout',
+      'https://photo-resize-zmp3.zmdcdn.me/w320_r1x1_jpeg/cover/9/b/e/6/9be6f892a7f95ef25632752dd2a319c2.jpg',
+    title: 'Nhạc Hoa Lời Việt Nhẹ Nhàng',
   },
   {
     thumbnail:
-      'https://photo-zmp3.zadn.vn/cover/4/a/3/b/4a3b5265ee2c9e2c84f5a88194382b5d.jpg',
-    title: 'Ngủ Ngon',
+      'https://photo-resize-zmp3.zmdcdn.me/w320_r1x1_jpeg/cover/e/6/1/e/e61e02571410b153d445067f22f39d36.jpg',
+    title: 'tâm tình lâu phai',
   },
   {
     thumbnail:
-      'https://photo-zmp3.zadn.vn/cover/0/a/e/f/0aef849d584c7e995073617f53b9ac24.jpg',
-    title: 'Tình Yêu',
+      'https://photo-resize-zmp3.zmdcdn.me/w320_r1x1_jpeg/cover/5/6/c/d/56cd9130ab4c54b3d3e74ec6d656ea04.jpg',
+    title: 'Nhạc Chill Tâm Trạng Buồn',
   },
   {
     thumbnail:
-      'https://photo-zmp3.zadn.vn/cover/e/6/8/0/e680570f74b3497c95d96f6ba6db7b07.jpg',
-    title: 'Giai Điệu Buồn',
+      'https://photo-resize-zmp3.zmdcdn.me/w320_r1x1_jpeg/cover/7/8/3/5/78355641f2001767ed62f29ef644e942.jpg',
+    title: 'Playlist Này Chill Phết',
   },
   {
     thumbnail:
-      'https://photo-zmp3.zadn.vn/cover/4/d/f/4/4df44f0a15edb254717c383cf256b193.jpg',
-    title: 'Chơi Game',
+      'https://photo-resize-zmp3.zmdcdn.me/w320_r1x1_jpeg/cover/a/d/8/a/ad8aded71985e32997c8d09b9078dfbe.jpg',
+    title: 'tổng đài nhạc chill',
   },
   {
     thumbnail:
-      'https://photo-zmp3.zadn.vn/cover/e/3/d/4/e3d43659c6dc756f87f4e44220313f92.jpg',
-    title: 'Du lịch',
+      'https://photo-resize-zmp3.zmdcdn.me/w320_r1x1_jpeg/cover/2/4/5/3/24538985249cd4d3b324b4a4a09ad288.jpg',
+    title: 'Lofi Một Chút Thôi',
   },
   {
     thumbnail:
-      'https://photo-zmp3.zadn.vn/cover/9/5/1/b/951bb18f468ea711a81a0dd28a8797d4.jpg',
-    title: 'Motivation',
+      'https://photo-resize-zmp3.zmdcdn.me/w320_r1x1_jpeg/cover/1/e/c/3/1ec302e3c8013ab990729953fb8cbf7f.jpg',
+    title: 'Ngày Lênh Đênh',
   },
   {
     thumbnail:
-      'https://photo-zmp3.zadn.vn/cover/9/d/0/4/9d045c7d3a111975bb6920d963046dd1.jpg',
-    title: 'Chill',
+      'https://photo-resize-zmp3.zmdcdn.me/w320_r1x1_jpeg/cover/f/e/2/9/fe2964f51f4e3ede798ded5258aac857.jpg',
+    title: 'Nhẹ Nhàng Cùng V-Pop',
   },
   {
     thumbnail:
-      'https://photo-zmp3.zadn.vn/cover/1/c/c/8/1cc8ae9704ae8fb7e34487ce744083a9.jpg',
-    title: 'Dinner',
+      'https://photo-resize-zmp3.zmdcdn.me/w320_r1x1_jpeg/cover/b/d/e/4/bde43aa51e575864730a5cabd3b40fbe.jpg',
+    title: 'Nhạc Chill Ngày Nay',
   },
   {
     thumbnail:
-      'https://photo-zmp3.zadn.vn/cover/0/f/d/1/0fd1da7445b21a752a1c4282b06f2cf0.jpg',
+      'https://photo-resize-zmp3.zmdcdn.me/w320_r1x1_jpeg/cover/6/0/7/e/607ec8b9a98aae380e3cdbcae275bcb0.jpg',
     title: 'Thư Giãn',
   },
 ]
@@ -71,28 +69,28 @@ const items = [
 <template>
   <Story title="Carousel">
     <Variant title="common">
-      <Carousel v-slot="{ scrollTo, activeIndex }" class="relative">
+      <Carousel v-slot="{ prev, next }" class="relative px-[100px]">
         <CarouselItem
-          v-for="(color, index) in colors"
-          :key="color"
-          :class="[
-            `item-${color} basis-full select-none py-4 text-center text-white`,
-          ]"
+          v-for="item in 6"
+          :key="item"
+          class="h-[500px] w-[500px] basis-full select-none overflow-hidden border bg-gray-500 text-center text-white"
         >
-          {{ index }} - {{ activeIndex }}
+          <div class="grid h-full place-items-center">
+            <span class="text-4xl font-semibold">{{ item }}</span>
+          </div>
         </CarouselItem>
         <div
-          class="pointer-events-none absolute top-1/2 flex w-full -translate-y-1/2 justify-between"
+          class="absolute left-0 right-0 top-1/2 flex w-full -translate-y-1/2 justify-between"
         >
           <button
-            class="pointer-events-auto h-10 w-10 rounded-full bg-gray-300 bg-opacity-50"
-            @click="scrollTo(activeIndex - 1)"
+            class="h-10 w-10 rounded-full bg-gray-300 bg-opacity-50 text-white"
+            @click="prev"
           >
             &lt;
           </button>
           <button
-            class="pointer-events-auto h-10 w-10 rounded-full bg-gray-300 bg-opacity-50"
-            @click="scrollTo(activeIndex + 1)"
+            class="h-10 w-10 rounded-full bg-gray-300 bg-opacity-50 text-white"
+            @click="next"
           >
             >
           </button>
@@ -100,9 +98,9 @@ const items = [
       </Carousel>
     </Variant>
     <Variant title="list">
-      <Carousel items-class="mt-3 -mx-3 overflow-x-auto w-full flex">
+      <Carousel items-class="mt-3 overflow-x-auto w-full flex h-[250px]">
         <template #header="{ prev, next }">
-          <div class="flex justify-between text-white">
+          <div class="flex justify-between px-3 text-white">
             <h2 class="text-lg font-bold">Top 100 hits</h2>
             <div class="flex items-center space-x-2">
               <button
@@ -122,23 +120,24 @@ const items = [
             </div>
           </div>
         </template>
-        <template #default="{ activeIndex }">
+        <template #default>
           <CarouselItem
-            v-for="(item, index) in items"
+            v-for="item in items"
             :key="item.title"
             class="w-1/3 select-none px-3 md:w-1/4 lg:w-1/5 xl:w-1/6"
+            items-class="overflow-x-auto w-full flex"
           >
-            <div class="relative bg-gray-400" style="padding-bottom: 56.25%">
+            <div class="relative h-full rounded bg-gray-400">
               <img
-                class="absolute inset-0 rounded"
+                class="absolute inset-0 h-full w-full"
                 :src="item.thumbnail"
                 :alt="item.title"
               />
-              <span
+              <!-- <span
                 class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-xl font-bold text-red-500"
               >
                 {{ `${index} - ${activeIndex}` }}
-              </span>
+              </span> -->
             </div>
           </CarouselItem>
         </template>
@@ -149,24 +148,6 @@ const items = [
     </Variant>
   </Story>
 </template>
-
-<style>
-.item-red {
-  background-color: red;
-}
-
-.item-green {
-  background-color: green;
-}
-
-.item-blue {
-  background-color: blue;
-}
-
-.item-gray {
-  background-color: gray;
-}
-</style>
 
 <docs lang="md">
 Carousel which supports horizontal scroll

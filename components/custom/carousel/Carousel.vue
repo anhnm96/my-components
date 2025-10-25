@@ -35,6 +35,7 @@ const startX = ref()
 const slideX = ref()
 const delta = ref(0)
 const itemWidth = ref(0)
+const itemGap = ref(0)
 // provide setup
 const items = ref<HTMLDivElement[]>([])
 function addItem(item: any) {
@@ -117,11 +118,14 @@ function mouseLeave() {
 }
 
 let scrollTimeout: NodeJS.Timeout
+let paused = false
 function onScrollFinished() {
-  if (dragging.value) return
+  if (dragging.value || paused) return
   clearTimeout(scrollTimeout)
   scrollTimeout = setTimeout(() => {
-    const newIndex = Math.round(elRef.value!.scrollLeft / itemWidth.value)
+    const newIndex = Math.round(
+      elRef.value!.scrollLeft / (itemWidth.value + itemGap.value),
+    )
     activeIndex.value = newIndex
     startPosition = { x: 0, y: 0 }
     endPosition = { x: 0, y: 0 }
@@ -151,10 +155,17 @@ onBeforeUnmount(() => {
 
 const itemsToShow = computed(() => {
   if (!elRef.value) return 0
-  return Math.round(elRef.value.getBoundingClientRect().width / itemWidth.value)
+  const { width, paddingLeft, paddingRight } = getComputedStyle(elRef.value)
+  const usesableWidth =
+    parseFloat(width) - parseFloat(paddingLeft) - parseFloat(paddingRight)
+  console.log('usesableWidth', usesableWidth)
+  return Math.round(
+    (usesableWidth + itemGap.value) / (itemWidth.value + itemGap.value),
+  )
 })
 
 function scrollTo(index: number) {
+  paused = true
   if (
     index === items.value.length ||
     (itemsToShow.value > 1 && index > items.value.length - itemsToShow.value)
@@ -166,11 +177,20 @@ function scrollTo(index: number) {
     else return
   }
   clearTimeout(scrollTimeout)
+  activeIndex.value = index
   elRef.value?.scrollTo({
-    left: index * itemWidth.value,
+    left: index * (itemWidth.value + itemGap.value),
     behavior: 'smooth',
   })
-  activeIndex.value = index
+  // Listen for the 'scrollend' event to know when the smooth scroll finishes
+  elRef.value?.addEventListener(
+    'scrollend',
+    () => {
+      if (!dragging.value) elRef.value!.classList.add('scroll-snap')
+      paused = false
+    },
+    { once: true },
+  )
 }
 
 const hasPrev = computed(() => {
@@ -218,7 +238,8 @@ function next() {
 
 function refresh() {
   // console.log('refresh', items.value[0])
-  itemWidth.value = items.value[0].getBoundingClientRect().width
+  itemWidth.value = items.value[0]?.getBoundingClientRect().width ?? 0
+  itemGap.value = parseFloat(getComputedStyle(elRef.value!).gap) || 0
   // make sure we don't over translateX
   if (activeIndex.value > items.value.length - itemsToShow.value)
     activeIndex.value = items.value.length - itemsToShow.value
@@ -255,6 +276,7 @@ function clickCarousel(e: Event) {
       :active-index="activeIndex"
       :prev="prev"
       :next="next"
+      :scroll-to="scrollTo"
       :has-prev="hasPrev"
       :has-next="hasNext"
     />
@@ -272,6 +294,15 @@ function clickCarousel(e: Event) {
         :next="next"
       />
     </div>
+    <slot
+      name="footer"
+      :active-index="activeIndex"
+      :prev="prev"
+      :next="next"
+      :scroll-to="scrollTo"
+      :has-prev="hasPrev"
+      :has-next="hasNext"
+    />
   </div>
 </template>
 
