@@ -145,6 +145,28 @@
       "markdownFile": null
     },
     {
+      "id": "components-compose-active-anchor-index-story-vue",
+      "title": "useActiveAnchor",
+      "layout": {
+        "type": "single",
+        "iframe": true
+      },
+      "docsOnly": false,
+      "variants": [
+        {
+          "id": "_default",
+          "title": "default"
+        }
+      ],
+      "relativePath": "components/compose/active-anchor/index.story.vue",
+      "supportPluginId": "vue3",
+      "treePath": [
+        "useActiveAnchor"
+      ],
+      "virtual": false,
+      "markdownFile": null
+    },
+    {
       "id": "components-base-checkbox-checkbox-story-vue",
       "title": "Checkbox",
       "layout": {
@@ -178,28 +200,6 @@
       "supportPluginId": "vue3",
       "treePath": [
         "Checkbox"
-      ],
-      "virtual": false,
-      "markdownFile": null
-    },
-    {
-      "id": "components-compose-active-anchor-index-story-vue",
-      "title": "useActiveAnchor",
-      "layout": {
-        "type": "single",
-        "iframe": true
-      },
-      "docsOnly": false,
-      "variants": [
-        {
-          "id": "_default",
-          "title": "default"
-        }
-      ],
-      "relativePath": "components/compose/active-anchor/index.story.vue",
-      "supportPluginId": "vue3",
-      "treePath": [
-        "useActiveAnchor"
       ],
       "virtual": false,
       "markdownFile": null
@@ -600,6 +600,10 @@
         {
           "id": "components-custom-tab-tab-story-vue-1",
           "title": "Navigation Tabs"
+        },
+        {
+          "id": "components-custom-tab-tab-story-vue-2",
+          "title": "Expandable Tabs"
         }
       ],
       "relativePath": "components/custom/tab/Tab.story.vue",
