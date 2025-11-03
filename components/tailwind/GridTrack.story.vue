@@ -1,6 +1,30 @@
 <script lang="ts" setup>
+// https://play.tailwindcss.com/PsQQVdkd5t
 const story = 'Story'
 const variant = 'Variant'
+
+const data = [
+  {
+    src: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=160',
+    name: 'Bramus',
+    link: 'https://x.com/bramus/',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1524159730786-4e74a1b78d7d?w=160',
+    name: 'Jhey Tompkins',
+    link: 'https://x.com/jh3yy/',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1540569014015-19a7be504e3a?w=160',
+    name: 'Una Kravets',
+    link: 'https://x.com/una/',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1542596594-649edbc13630?w=160',
+    name: 'Adam Argyle',
+    link: 'https://x.com/argyleink/',
+  },
+]
 </script>
 
 <template>
@@ -19,48 +43,19 @@ const variant = 'Variant'
           --color-avatars-background: #f8f9fa;
         "
       >
-        <a href="https://x.com/bramus/" title="Bramus on Twitter"
+        <a
+          v-for="item in data"
+          :key="item.link"
+          :href="item.link"
+          :title="`${item.name} on Twitter`"
           ><img
-            alt="Profile image for Bramus"
+            :alt="`Profile image for ${item.name}`"
             class="avatar"
             decoding="async"
             height="96"
             loading="lazy"
             sizes="(min-width: 96px) 96px, calc(100vw - 48px)"
-            src="https://pbs.twimg.com/profile_images/1276240813333401600/brd0hSfW_400x400.jpg"
-            width="96"
-        /></a>
-        <a href="https://x.com/jh3yy/" title="Jhey on Twitter"
-          ><img
-            alt="Profile image for Jhey Tompkins"
-            class="avatar"
-            decoding="async"
-            height="96"
-            loading="lazy"
-            sizes="(min-width: 96px) 96px, calc(100vw - 48px)"
-            src="https://pbs.twimg.com/profile_images/1534700564810018816/anAuSfkp_400x400.jpg"
-            width="96"
-        /></a>
-        <a href="https://x.com/una/" title="Una on Twitter"
-          ><img
-            alt="Profile image for Una Kravets"
-            class="avatar"
-            decoding="async"
-            height="96"
-            loading="lazy"
-            sizes="(min-width: 96px) 96px, calc(100vw - 48px)"
-            src="https://pbs.twimg.com/profile_images/1587634978308997121/u7009cGe_400x400.jpg"
-            width="96"
-        /></a>
-        <a href="https://x.com/argyleink/" title="Adam on Twitter"
-          ><img
-            alt="Profile image for Adam Argyle"
-            class="avatar"
-            decoding="async"
-            height="96"
-            loading="lazy"
-            sizes="(min-width: 96px) 96px, calc(100vw - 48px)"
-            src="https://pbs.twimg.com/profile_images/1720589781476982784/P9Ld4vC5_400x400.jpg"
+            :src="item.src"
             width="96"
         /></a>
       </div>
@@ -155,6 +150,8 @@ const variant = 'Variant'
 .avatars img {
   width: 100%;
   height: auto;
+  object-fit: cover;
+  aspect-ratio: 1/1;
 
   --border-color: var(--color-core-primary);
   outline: var(--border-size) solid var(--border-color);

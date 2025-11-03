@@ -1,3 +1,5 @@
+import { useScroll } from '@vueuse/core'
+
 const config = {
   timeoutInMs: 6000,
   contentScrollThresholdInPercentage: 35,
@@ -12,7 +14,7 @@ export function usePolitePopup() {
       readTimeElapsed.value = true
     },
     config.timeoutInMs,
-    { immediate: false }
+    { immediate: false },
   )
 
   const { height: windowHeight } = useWindowSize()
@@ -40,7 +42,7 @@ export function usePolitePopup() {
         visible.value = true
         unwatch()
       }
-    }
+    },
   )
 
   const setClosed = () => {

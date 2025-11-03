@@ -5,6 +5,15 @@ function initState() {
     duration: 300,
   }
 }
+
+const tabs = [
+  { title: 'Dashboard', icon: 'lucide:home', link: '/dashboard' },
+  { title: 'Notifications', icon: 'lucide:bell', link: '/notifications' },
+  { type: 'separator' as const },
+  { title: 'Settings', icon: 'lucide:settings', link: '/settings' },
+  { title: 'Support', icon: 'lucide:help-circle', link: '/support' },
+  { title: 'Security', icon: 'lucide:shield', link: '/security' },
+]
 </script>
 
 <template>
@@ -26,6 +35,11 @@ function initState() {
         <HstCheckbox v-model="state.fluid" title="Fluid" />
         <HstNumber v-model="state.duration" title="Duration" :step="100" />
       </template>
+    </Variant>
+    <Variant title="Expandable Tabs">
+      <div class="flex justify-center gap-4">
+        <ExpandableTabs :tabs="tabs" />
+      </div>
     </Variant>
   </Story>
 </template>

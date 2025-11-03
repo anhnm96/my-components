@@ -2,7 +2,12 @@
 export default defineNuxtConfig({
   ssr: false,
   devtools: { enabled: false },
-  modules: ['@nuxtjs/tailwindcss', '@vueuse/nuxt', 'nuxt-icon'],
+  modules: [
+    '@nuxtjs/tailwindcss',
+    '@vueuse/nuxt',
+    'nuxt-icon',
+    'motion-v/nuxt',
+  ],
 
   components: {
     dirs: [
